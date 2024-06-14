@@ -12,6 +12,7 @@ import { LeadsMainComponent } from './Leads/leads-main/leads-main.component';
 import { PipelinesMainComponent } from './Pipeline/pipelines-main/pipelines-main.component';
 import { ReportsMainComponent } from './Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './Settings/settings-main/settings-main.component';
+import { UserProfileComponent } from './Settings/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SettingsMainComponent } from './Settings/settings-main/settings-main.co
     LeadsMainComponent,
     PipelinesMainComponent,
     ReportsMainComponent,
-    SettingsMainComponent
+    SettingsMainComponent,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
