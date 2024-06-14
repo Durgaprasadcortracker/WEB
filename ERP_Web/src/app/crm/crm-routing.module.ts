@@ -8,6 +8,7 @@ import { CampaginsMainComponent } from './Campagins/campagins-main/campagins-mai
 import { PipelinesMainComponent } from './Pipeline/pipelines-main/pipelines-main.component';
 import { ReportsMainComponent } from './Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './Settings/settings-main/settings-main.component';
+import { AddCampaginComponent } from './Campagins/add-campagin/add-campagin.component';
 
 const routes: Routes = [
   { path: '', component: CrmMainComponent,
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'Companies', component: CompanyMainComponent },
       { path: 'Leads', component: LeadsMainComponent },
       { path: 'Campagins', component: CampaginsMainComponent },
+      { path: 'CampaginsAdd', component: AddCampaginComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Settings', component: SettingsMainComponent },

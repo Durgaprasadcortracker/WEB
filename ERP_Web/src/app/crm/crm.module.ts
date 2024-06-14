@@ -13,6 +13,7 @@ import { PipelinesMainComponent } from './Pipeline/pipelines-main/pipelines-main
 import { ReportsMainComponent } from './Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './Settings/settings-main/settings-main.component';
 import { UserProfileComponent } from './Settings/user-profile/user-profile.component';
+import { AddCampaginComponent } from './Campagins/add-campagin/add-campagin.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { UserProfileComponent } from './Settings/user-profile/user-profile.compo
     PipelinesMainComponent,
     ReportsMainComponent,
     SettingsMainComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AddCampaginComponent
   ],
   imports: [
     CommonModule,
