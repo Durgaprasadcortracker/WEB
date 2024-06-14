@@ -1,0 +1,7 @@
+section{
+    background: #f7f7f7;
+    height: 70px;
+    width: calc(100vw - 250px);
+    text-align: center;
+    border-bottom: 1px black solid;
+}

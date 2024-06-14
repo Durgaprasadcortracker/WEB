@@ -3,24 +3,22 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CampaignListComponent } from './CRM/Campaign/campaign-list/campaign-list.component';
-import { CompaniesListComponent } from './CRM/Companies/companies-list/companies-list.component';
-import { ContactsListComponent } from './CRM/Contacts/contacts-list/contacts-list.component';
-import { LeadListComponent } from './CRM/Lead/lead-list/lead-list.component';
-import { QuotationListComponent } from './CRM/Quotation/quotation-list/quotation-list.component';
+import { LoginPageComponent } from './loginPages/login-page/login-page.component';
+import { SignUpComponent } from './loginPages/sign-up/sign-up.component';
+import { CRMRoutingModule } from './crm/crm-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CampaignListComponent,
-    CompaniesListComponent,
-    ContactsListComponent,
-    LeadListComponent,
-    QuotationListComponent
+    LoginPageComponent,
+    SignUpComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CRMRoutingModule
+  ],
+  exports:[
+    BrowserModule 
   ],
   providers: [
     provideClientHydration()
