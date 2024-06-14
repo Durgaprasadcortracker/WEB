@@ -12,14 +12,15 @@ import { SettingsMainComponent } from './Settings/settings-main/settings-main.co
 const routes: Routes = [
   { path: '', component: CrmMainComponent,
     children: [
-      { path: '', component: DashboardMainComponent },
       { path: 'Home', component: DashboardMainComponent },
       { path: 'Companies', component: CompanyMainComponent },
       { path: 'Leads', component: LeadsMainComponent },
       { path: 'Campagins', component: CampaginsMainComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
-      { path: 'Settings', component: SettingsMainComponent }
+      { path: 'Settings', component: SettingsMainComponent },
+      { path: '**', redirectTo: '/CRM/Home' } 
+
     ]
    },
 ];

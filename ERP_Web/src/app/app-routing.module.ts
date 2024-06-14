@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'CRM', loadChildren: () => import('./crm/crm.module').then(m => m.CRMModule) },
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
+  { path: '**', redirectTo: '/CRM' } 
 ];
 
 @NgModule({
