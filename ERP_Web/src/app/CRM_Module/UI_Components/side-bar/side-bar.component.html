@@ -1,0 +1,48 @@
+<section>
+    side bar
+    <ul>
+        <li routerLink="Home">Home</li>
+        <li routerLink="Companies">Companies</li>
+        <li routerLink="Leads">Leads</li>
+        <li routerLink="Campagins">Campagins</li>
+        <li routerLink="Pipeline">Pipeline</li>
+        <li routerLink="Reports">Reports</li>
+        <li routerLink="Settings">Settings</li>
+    </ul>
+</section>
+<!-- <div class="sidebar widthfull">
+    <div routerLink="/" class="side-logo">
+        <img src="https://cortracker360.com/wp-content/uploads/2019/11/logo.png.789.png" alt="">
+    </div>
+
+
+    <ul class="user-routes">
+        <li *ngFor="let a of menuItems;let i = index">
+            <div [routerLink]="a.router" class="item" [ngClass]="{'active': currentIndex == i}"
+                (click)="currentIndex = i">
+                <div (click)="a.open=(a.open?false:true)" class="aligin-sb">
+                    <span>
+                        <i [class]="a.fontawesomeIcon"></i>
+                        <span *ngIf="sideBarvalue">{{a.menuName}}</span>
+                    </span>
+                    <span *ngIf="sideBarvalue">
+                        <i *ngIf="(a.submenus.length>0) && !(a.open)" class="fa-solid fa-angle-right"></i>
+                        <i *ngIf="(a.submenus.length>0) && (a.open)" class="fa-solid fa-angle-down"></i>
+                    </span>
+                </div>
+            </div>
+            <ul *ngIf="(a.open) && (sideBarvalue)" class="submenuclass">
+                <li *ngFor="let k of a.submenus;let m = index">
+                    <div [routerLink]="k.router" [ngClass]="{'activeSub': subCurrentIndex == m}">
+                        <span *ngIf="sideBarvalue">{{k.menuName}}</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div>
+
+
+    </div>
+
+</div> -->
