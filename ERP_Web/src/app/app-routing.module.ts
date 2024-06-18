@@ -11,11 +11,13 @@ import { PipelinesMainComponent } from './CRM_Module/Pipeline/pipelines-main/pip
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 import { ReportsMainComponent } from './CRM_Module/Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/settings-main.component';
-import {ChangePasswordComponent } from './loginPages/change-password/change-password.component';
+import { ChangePasswordComponent } from './loginPages/change-password/change-password.component';
+import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
 
 const routes: Routes = [
 
-  { path: 'CRM', component: CrmMainComponent,
+  {
+    path: 'CRM', component: CrmMainComponent,
     children: [
       { path: 'Home', component: DashboardMainComponent },
       { path: 'Companies', component: CompanyMainComponent },
@@ -24,14 +26,15 @@ const routes: Routes = [
       { path: 'CampaginsAdd', component: AddCampaginComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
-      { path: 'Settings', component: SettingsMainComponent },
-      { path: '**', redirectTo: '/CRM/Home' } 
+      { path: 'Addnewcompany', component: AddNewCompanyComponent },
+      { path: '**', redirectTo: '/CRM/Home' }
     ]
-   },
+  },
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
-  { path: 'Changepassword', component: ChangePasswordComponent},
-  { path: '**', redirectTo: '/login' } 
+  { path: 'Changepassword', component: ChangePasswordComponent },
+  { path: '**', redirectTo: '/CRM' },
+
 ];
 
 @NgModule({

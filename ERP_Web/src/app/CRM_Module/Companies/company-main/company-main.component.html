@@ -1,1 +1,52 @@
-<p>company-main works!</p>
+<div class="container mt-4">
+    <!-- Card Header -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Companies</h3>
+        </div>
+        <div class="card-body">
+            <!-- <h5>Total Records: {{ totalRecords }}</h5> -->
+            <div style="float: right;">
+                <button class="btn btn-danger mr-2" routerLink="/CRM/Addnewcompany">Add Company</button>
+                <button class="btn btn-danger button-gap">Bulk Upload</button>
+            </div>
+        </div>
+        <hr />
+        <!-- Table -->
+        <div class="table-responsive mt-4" style="padding: 20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Company Owner</th>
+                        <th>Industry</th>
+                        <th>Industry Type</th>
+                        <th>Head Count</th>
+                        <th>Annual Revenue</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of listOfCompanys 
+                let i = index">
+                        <td><a style="text-decoration: none;" routerLink="/CRM/companiesinfo"   [queryParams]="{ id: a.id }"> {{a.companyName}}</a></td>
+                        <td>{{a.companyOwner}}</td>
+                        <td>{{a.companyIndustry}}</td>
+                        <td>{{a.companyIndustryType}}</td>
+                        <td>{{a.headCount}}</td>
+                        <td>{{a.annualRevenue}}</td>
+                        <td>
+                            <span  routerLink="/CRM/EditCompany/{{a.id}}" class="material-symbols-outlined">
+                                edit
+                            </span>
+                            <span (click)="deleteCompany(a.id)" class="material-symbols-outlined" style="padding-left: 25px;">
+                                delete
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

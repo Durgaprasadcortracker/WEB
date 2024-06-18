@@ -20,9 +20,11 @@ import { UserProfileComponent } from './CRM_Module/Settings/user-profile/user-pr
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 import { CommonModule } from '@angular/common';
 import { ChangePasswordComponent } from './loginPages/change-password/change-password.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
 import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,13 +44,14 @@ import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-
     AddCampaginComponent,
     ChangePasswordComponent,
     AddContactsComponent,
-    ContactsMainComponent
+    ContactsMainComponent,
+    AddNewCompanyComponent
   ],
   imports: [
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports:[
     BrowserModule 

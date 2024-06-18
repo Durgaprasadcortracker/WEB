@@ -1,0 +1,111 @@
+<div class="card m-3">
+    <div class="card-header">
+        Form Registration
+    </div>
+    <div class="card-body">
+        <form  [formGroup]="myForm" (ngSubmit)="addcompany()">
+            <!--Inputs  -->
+            <div class="d-flex flex-wrap">
+                <div class="col-md-3">
+                    <label>Company Domain Name <span class="required">*</span></label>
+                    <input type="text" class="form-control" formControlName="domainName">
+                </div>
+                <div class="col-md-3">
+                    <label>Company Name <span class="required">*</span></label>
+                    <input type="text" class="form-control" formControlName="companyName">
+                </div>
+                <div class="col-md-3">
+                    <label>Company Owner<span class="required">*</span></label>
+                    <input type="text" class="form-control" formControlName="companyOwner">
+                </div>
+                <div class="col-md-3">
+                    <label>Industry<span class="required">*</span></label>
+                    <select class="form-select" formControlName="companyIndustry">
+                        <option value="null">--company Name-- </option>
+                        <!-- <option *ngFor="let CompanyIndustry of industrylist" value="{{CompanyIndustry.id}}">{{CompanyIndustry.description}}</option> -->
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Industry Type <span class="required">*</span></label>
+                    <select class="form-control" formControlName="companyIndustryType">
+                        <option value="null">--Select Industry Type--</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Head Count <span class="required">*</span> </label>
+                    <input type="number" class="form-control" formControlName="headCount" required>
+                </div>
+                <div class="col-md-3">
+                    <label>Annual Revenue </label>
+                    <input type="number" class="form-control" formControlName="annualRevenue">
+                </div>
+                <div class="col-md-3">
+                    <label>City <span class="required">*</span></label>
+                    <select class="form-control" formControlName="city">
+                        <option value="null">--Select City--</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>State <span class="required">*</span></label>
+                    <select class="form-control" formControlName="state">
+                        <option value="null">--Select State --</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Country <span class="required">*</span></label>
+                    <select class="form-control" formControlName="country">
+                        <option value="null">--Select Country--</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Postal Code <span class="required">*</span></label>
+                    <input type="number" class="form-control" formControlName="postalCode">
+                </div>
+                <div class="col-md-3">
+                    <label>Time Zone <span class="required">*</span></label>
+                    <input type="number" class="form-control" formControlName="timeZone">
+                </div>
+                <div class="col-md-3">
+                    <label>Website</label>
+                    <input type="url" class="form-control" formControlName="website">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Linkedin URL </label>
+                    <input type="url" class="form-control" formControlName="linkedinUrl">
+                </div>
+                <div class="col-md-3">
+                    <label>Business Email <span class="required">*</span></label>
+                    <input type="text" class="form-control" formControlName="businessEmail">
+                </div>
+            </div>
+            <!-- Text Area -->
+            <div class="d-flex flex-wrap">
+
+                <div class="col-md-6">
+                    <label>Address1 <span class="required">*</span> </label>
+                    <textarea class="form-control" rows="3" formControlName="companyAddress1"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label>Address2 </label>
+                    <textarea class="form-control" rows="3" formControlName="campanyAddress2"></textarea>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6 mt-3 d-flex g-1">
+                    <div class="mr-2">
+                        <!-- <div type="" class="btn btn-primary">Submit</div> -->
+                        <!-- <button  ></button> -->
+                        <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
+
+                        <div style="width: 200px;"  type="button" class="btn btn-danger">Close</div>
+    
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
