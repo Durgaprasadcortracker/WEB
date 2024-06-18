@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr *ngFor="let a of listOfContacts 
+                    <tr *ngFor="let a of listOfContacts 
                 let i = index">
                         <td>{{a.contactName}}</td>
                         <td>{{a.designation}}</td>
@@ -36,14 +36,14 @@
                         <td>{{a.companyName}}</td>
                         <td>{{a.source}}</td>
                         <td>
-                            <span  routerLink="/CRM/EditCompany/{{a.id}}" class="material-symbols-outlined">
+                            <span  routerLink="/CRM/EditContact/{{a.id}}" class="material-symbols-outlined">
                                 edit
                             </span>
-                            <span (click)="deleteCompany(a.id)" class="material-symbols-outlined" style="padding-left: 25px;">
+                            <span (click)="deleteContact(a.id)" class="material-symbols-outlined" style="padding-left: 25px;">
                                 delete
                             </span>
                         </td>
-                    </tr> -->
+                    </tr>
                 </tbody>
             </table>
         </div>

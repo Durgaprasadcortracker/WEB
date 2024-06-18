@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
   { path: 'Changepassword', component: ChangePasswordComponent},
-  { path: '**', redirectTo: '/CRM' } 
+  { path: '**', redirectTo: '/login' } 
 ];
 
 @NgModule({
