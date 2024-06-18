@@ -1,24 +1,11 @@
-<section>
-    side bar
-    <ul>
-        <li routerLink="Home">Home</li>
-        <li routerLink="Companies">Companies</li>
-        <li routerLink="Leads">Leads</li>
-        <li routerLink="Campagins">Campagins</li>
-        <li routerLink="Pipeline">Pipeline</li>
-        <li routerLink="Reports">Reports</li>
-        <li routerLink="Settings">Settings</li>
-    </ul>
-</section>
-<!-- <div class="sidebar widthfull">
+<div class="sidebar " [ngClass]="{'widthfull': sideBarvalue ,'widthshort': !sideBarvalue }">
     <div routerLink="/" class="side-logo">
-        <img src="https://cortracker360.com/wp-content/uploads/2019/11/logo.png.789.png" alt="">
+        <img *ngIf="sideBarvalue" src="logo/logo.png" alt="">
+        <img class="logo-short" *ngIf="!sideBarvalue" src="logo/logo_short.png" alt="">
     </div>
-
-
     <ul class="user-routes">
         <li *ngFor="let a of menuItems;let i = index">
-            <div [routerLink]="a.router" class="item" [ngClass]="{'active': currentIndex == i}"
+            <div [routerLink]="a.controllerName" class="item" [ngClass]="{'active': currentIndex == i}"
                 (click)="currentIndex = i">
                 <div (click)="a.open=(a.open?false:true)" class="aligin-sb">
                     <span>
@@ -45,4 +32,4 @@
 
     </div>
 
-</div> -->
+</div>

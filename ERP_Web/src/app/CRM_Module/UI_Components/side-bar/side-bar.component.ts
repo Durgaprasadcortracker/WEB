@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { BackendService } from '../../../Services/BackendConnection/backend.serv
 export class SideBarComponent {
 
   menuItems: any = []
-  sideBarvalue = true
+  @Input() sideBarvalue: any;
   currentIndex = 0
   subCurrentIndex=0
   constructor(private http: BackendService) {
@@ -36,5 +36,9 @@ export class SideBarComponent {
   }
 
   ngOnInit() {
+    console.log(this.sideBarvalue);
+  }
+  ngOnChanges() {
+    console.log(this.sideBarvalue);
   }
 }

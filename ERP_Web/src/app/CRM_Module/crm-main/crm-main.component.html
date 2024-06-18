@@ -1,7 +1,9 @@
 <section>
-    <app-side-bar></app-side-bar>
-    <div>
-        <app-header></app-header>
-        <router-outlet></router-outlet>
+    <app-side-bar [sideBarvalue]="sideBarvalue"></app-side-bar>
+    <div [ngClass]="{'main': sideBarvalue ,'main-short': !sideBarvalue }">
+        <app-header   (_sideBar)="sideBar($event)"></app-header>
+        <div class="main-body">
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </section>

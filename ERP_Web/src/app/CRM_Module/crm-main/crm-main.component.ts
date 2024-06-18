@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './crm-main.component.css'
 })
 export class CrmMainComponent {
+  sideBarvalue=true
+
+  sideBar(value: boolean){
+    this.sideBarvalue=(this.sideBarvalue?false:true)
+  }
+
 
 }
