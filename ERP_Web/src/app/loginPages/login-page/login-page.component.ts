@@ -26,16 +26,16 @@ export class LoginPageComponent {
   }
   errormsg:any;
   onSubmit(): void {
-  debugger;
+ 
    this.submitted = true;
 
     if (this.loginform.invalid) {
       return;
     }
-    debugger;
+ 
     console.log(this.loginform.getRawValue());
     this.backendservice.putapi('api/Login/authenticate',this.loginform.getRawValue()).subscribe(response=>{
-      debugger;
+    
       if(response.status==false){
          this.errormsg=response.message;
          return;

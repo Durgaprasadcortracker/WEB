@@ -1,3 +1,7 @@
 @import '../public/css/common.css';
 @import '../public/css/default.css';
 
+.required{
+    color: red;
+}
+

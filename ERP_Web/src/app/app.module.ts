@@ -23,6 +23,8 @@ import { ChangePasswordComponent } from './loginPages/change-password/change-pas
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
 import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
+import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +50,8 @@ import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   exports:[
     BrowserModule 

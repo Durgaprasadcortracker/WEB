@@ -12,6 +12,8 @@ import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-ca
 import { ReportsMainComponent } from './CRM_Module/Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/settings-main.component';
 import {ChangePasswordComponent } from './loginPages/change-password/change-password.component';
+import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
+import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
 
 const routes: Routes = [
 
@@ -19,12 +21,14 @@ const routes: Routes = [
     children: [
       { path: 'Home', component: DashboardMainComponent },
       { path: 'Companies', component: CompanyMainComponent },
+      { path: 'contacts', component: ContactsMainComponent },
       { path: 'Leads', component: LeadsMainComponent },
       { path: 'Campagins', component: CampaginsMainComponent },
       { path: 'CampaginsAdd', component: AddCampaginComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Settings', component: SettingsMainComponent },
+      { path: 'addcontacts', component: AddContactsComponent },
       { path: '**', redirectTo: '/CRM/Home' } 
     ]
    },
