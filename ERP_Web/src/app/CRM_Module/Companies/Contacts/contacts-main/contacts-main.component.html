@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <!-- Card Header -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Contacts</h3>
+        </div>
+        <div class="card-body">
+            <!-- <h5>Total Records: {{ totalRecords }}</h5> -->
+            <div style="float: right;">
+                <button class="btn btn-danger mr-2" routerLink="/CRM/AddContact">Add Company</button>
+                <button class="btn btn-danger button-gap">Bulk Upload</button>
+            </div>
+        </div>
+        <hr />
+        <!-- Table -->
+        <div class="table-responsive mt-4" style="padding: 20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Contact Name</th>
+                        <th>Designation</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Company Name</th>
+                        <th>Source</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr *ngFor="let a of listOfContacts 
+                let i = index">
+                        <td>{{a.contactName}}</td>
+                        <td>{{a.designation}}</td>
+                        <td>{{a.email}}</td>
+                        <td>{{a.phoneNumber}}</td>
+                        <td>{{a.companyName}}</td>
+                        <td>{{a.source}}</td>
+                        <td>
+                            <span  routerLink="/CRM/EditCompany/{{a.id}}" class="material-symbols-outlined">
+                                edit
+                            </span>
+                            <span (click)="deleteCompany(a.id)" class="material-symbols-outlined" style="padding-left: 25px;">
+                                delete
+                            </span>
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

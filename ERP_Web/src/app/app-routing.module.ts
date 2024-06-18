@@ -11,6 +11,7 @@ import { PipelinesMainComponent } from './CRM_Module/Pipeline/pipelines-main/pip
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 import { ReportsMainComponent } from './CRM_Module/Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/settings-main.component';
+import {ChangePasswordComponent } from './loginPages/change-password/change-password.component';
 
 const routes: Routes = [
 
@@ -29,6 +30,7 @@ const routes: Routes = [
    },
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
+  { path: 'Changepassword', component: ChangePasswordComponent},
   { path: '**', redirectTo: '/CRM' } 
 ];
 
