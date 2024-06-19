@@ -32,6 +32,8 @@ const routes: Routes = [
       { path: 'Home', component: DashboardMainComponent },
       { path: 'Companies', component: CompanyMainComponent },
       { path: 'contacts', component: ContactsMainComponent },
+      { path: 'add-contacts', component: AddContactsComponent },
+      { path: 'edit-contacts/:id', component: AddContactsComponent },
       { path: 'Leads', component: LeadsMainComponent },
       { path: 'Campagins', component: CampaginsMainComponent },
       { path: 'CampaginsAdd', component: AddCampaginComponent },
@@ -40,7 +42,6 @@ const routes: Routes = [
       { path: 'Addnewcompany', component: AddNewCompanyComponent },
       { path: 'editcompany/:id', component: AddNewCompanyComponent },
       { path: 'Settings', component: SettingsMainComponent },
-      { path: 'addcontacts', component: AddContactsComponent },
       { path: 'Profileview', component: ProfileComponent } ,
       { path: 'bulk-upload', component: BulkUploadMainComponent } ,
       {

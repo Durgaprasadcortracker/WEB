@@ -7,8 +7,8 @@
         <div class="card-body">
             <!-- <h5>Total Records: {{ totalRecords }}</h5> -->
             <div style="float: right;">
-                <button (click)="contactPage = 1" class="btn btn-primary">Add Contacts</button>
-                <button (click)="contactPage = 2" class="btn btn-warning">Bulk Upload</button>
+                <button routerLink="/CRM/add-contacts" class="btn btn-primary">Add Contacts</button>
+                <!-- <button (click)="contactPage = 2" class="btn btn-warning">Bulk Upload</button> -->
             </div>
         </div>
         <hr />
@@ -38,9 +38,9 @@
                         <td>{{a.email}}</td>
                         <td>{{a.mobileNumber}}</td>
                         <td>{{a.companyName}}</td>
-                        <td>{{a.source}}</td>
+                        <td>{{a.sourceName}}</td>
                         <td>
-                            <span  (click)="edit(a)" class="material-symbols-outlined">
+                            <span  routerLink="/CRM/edit-contacts/{{a.id}}" class="material-symbols-outlined">
                                 edit
                             </span>
                             <span (click)="deleteContact(a.id)" class="material-symbols-outlined" style="padding-left: 25px;">
@@ -58,15 +58,4 @@
         </pagination-controls>
     </div>
 </div>
-<div *ngIf="contactPage === 1">
-    <div>
-        <app-add-contacts [editData]="editData" (childEvent)="addContact($event)"></app-add-contacts>
-    </div>
-</div>
-
-<!-- <div *ngIf="contactPage === 2">
-    <div>
-        <app-contacts-bulk-upload (childEvent)="addContact($event)"></app-contacts-bulk-upload>
-    </div>
-</div> -->
 
