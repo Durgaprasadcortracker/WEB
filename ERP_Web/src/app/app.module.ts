@@ -24,7 +24,16 @@ import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contac
 import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
+import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
+import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
+import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads-view.component';
+import { ContactViewComponent } from './CRM_Module/Leads/leadView/contact-view/contact-view.component';
+import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conversion/email-conversion.component';
+import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
+import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
+import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,12 +55,20 @@ import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/a
     AddContactsComponent,
     ContactsMainComponent,
     AddNewCompanyComponent
+    LeadsViewComponent,
+    ContactViewComponent,
+    EmailConversionComponent,
+    CallLogsComponent,
+    EventsComponent,
+    RemindersComponent
   ],
   imports: [
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
+    FormsModule
   ],
   exports:[
     BrowserModule 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class ContactsMainComponent {
   data = {
     records: 0
   }
-  companyPage = 0
+  contactPage = 0
   listOfContacts:any
   editData:any
 
@@ -28,17 +29,16 @@ export class ContactsMainComponent {
     this.getData()
   }
 
-  addCompany(message: any) {
+  addContact(message: any) {
     console.log(message);
-    this.companyPage = 0;
+    this.contactPage = 0;
     this.editData = null;
     this.ngOnInit()
   }
   getData(){
-    this.http.getapi('api/Company/GetCompany').subscribe((res) => {
+    this.http.getapi('api/Contacts/GetContacts').subscribe((res) => {
         console.log(res);
-        console.log
-        this.listOfContacts=res.data
+        this.listOfContacts=res
       }
     );
   }
@@ -46,17 +46,22 @@ export class ContactsMainComponent {
     this.page = event;
     this.getData();
   }
+  
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
     this.getData();
   }
   deleteContact(ID:any){
-    this.http.deleteapi('api/Company/DeleteCompanies/'+ID).subscribe((res) => {
+    this.http.deleteapi('api/Contacts/DeleteContacts/'+ID).subscribe((res) => {
         console.log(res);
         this.listOfContacts=res
         this.ngOnInit()
       }
     );
+  }
+  edit(data:any){
+    this.contactPage=1;
+    this.editData=data
   }
 }

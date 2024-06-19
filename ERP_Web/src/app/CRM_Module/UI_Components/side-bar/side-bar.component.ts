@@ -13,11 +13,11 @@ export class SideBarComponent {
   currentIndex = 0
   subCurrentIndex=0
   constructor(private http: BackendService) {
+    console.log("object");
     this.http.getapi('api/Menu/GetMenus').subscribe((res) => {
-      if (res[0].status) {
-        this.menuItems = JSON.parse(JSON.stringify(res[0].data));
+      if (res.status) {
+        this.menuItems = JSON.parse(JSON.stringify(res.data));
         this.menuItems.forEach((a: any) => a.submenus = []);
-        console.log(this.menuItems);
         let _menuItems: any = []
         for (let i of this.menuItems) {
           if (i.parentId) {
@@ -36,9 +36,7 @@ export class SideBarComponent {
   }
 
   ngOnInit() {
-    console.log(this.sideBarvalue);
   }
   ngOnChanges() {
-    console.log(this.sideBarvalue);
   }
 }

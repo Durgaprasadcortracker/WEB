@@ -13,6 +13,15 @@ import { ReportsMainComponent } from './CRM_Module/Reports/reports-main/reports-
 import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/settings-main.component';
 import { ChangePasswordComponent } from './loginPages/change-password/change-password.component';
 import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
+import {ChangePasswordComponent } from './loginPages/change-password/change-password.component';
+import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
+import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
+import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads-view.component';
+import { ContactViewComponent } from './CRM_Module/Leads/leadView/contact-view/contact-view.component';
+import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conversion/email-conversion.component';
+import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
+import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
+import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 
 const routes: Routes = [
 
@@ -21,6 +30,7 @@ const routes: Routes = [
     children: [
       { path: 'Home', component: DashboardMainComponent },
       { path: 'Companies', component: CompanyMainComponent },
+      { path: 'contacts', component: ContactsMainComponent },
       { path: 'Leads', component: LeadsMainComponent },
       { path: 'Campagins', component: CampaginsMainComponent },
       { path: 'CampaginsAdd', component: AddCampaginComponent },
@@ -28,6 +38,19 @@ const routes: Routes = [
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Addnewcompany', component: AddNewCompanyComponent },
       { path: 'editcompany/:id', component: AddNewCompanyComponent },
+      { path: 'Settings', component: SettingsMainComponent },
+      { path: 'addcontacts', component: AddContactsComponent },
+      {
+        path: 'leadView/:id', 
+        component: LeadsViewComponent,
+        children: [
+          { path: 'ContactView/:id', component: ContactViewComponent },
+          { path: 'emailConversation/:id', component: EmailConversionComponent },
+          { path: 'callLogs/:id', component: CallLogsComponent },
+          { path: 'events/:id', component: EventsComponent },
+          { path: 'reminder/:id', component: RemindersComponent },
+        ] 
+      },
       { path: '**', redirectTo: '/CRM/Home' }
     ]
   },

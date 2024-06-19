@@ -1,0 +1,99 @@
+<div *ngIf="contactView">
+    <div class="d-flex" style="box-sizing: border-box; flex-wrap: wrap;">
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Name:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.firstName +" "+ contactView.lastName}}</label>
+        </div>    
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Designation:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.designation}}</label>
+        </div>
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Email:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.email}}</label>
+        </div>
+
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Industry:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.industry}}</label>
+        </div>
+    
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Phone Number:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.mobileNumber}}</label>
+        </div>
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Alternate Number:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.alternateNumber}}</label>
+        </div>
+    
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Company Name:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.company}}</label>
+        </div>
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Lead Owner :</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.createdBy}}</label>
+        </div>
+    
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Address1:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.address1}}</label>
+        </div>
+        <div class="col-md-2">
+            <label style="font-weight: bold;">Address2 :</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.address2}}</label>
+        </div>
+        <div class="col-md-2">
+            <label style="font-weight: bold;">City:</label>
+        </div>
+        <div class="col-md-2">
+            <label>{{contactView.city}}</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label for="">Lead Stage</label>
+            <select class="form-control" name="leadStage" [(ngModel)]="contactView.source">
+                <option *ngFor="let a of allstages" [value]="a.id">{{a.description}}</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="">Lead Status</label>
+            <select class="form-control" name="leadStatus" [(ngModel)]="contactView.source">
+                <option *ngFor="let a of allstatus" [value]="a.id">{{a.description}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="d-flex flex-wrap">
+        <div class="col-md-6 mt-3 d-flex g-1">
+            <div class="mr-2">
+                <button type="button" class="btn btn-primary">Primary</button>
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary">Secondary</button>
+            </div>
+        </div>
+    </div>
+
+</div>
