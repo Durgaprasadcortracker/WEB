@@ -38,7 +38,7 @@ export class ContactsMainComponent {
   getData(){
     this.http.getapi('api/Contacts/GetContacts').subscribe((res) => {
         console.log(res);
-        this.listOfContacts=res.data
+        this.listOfContacts=res
       }
     );
   }

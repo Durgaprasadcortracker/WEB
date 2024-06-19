@@ -78,7 +78,7 @@ sourcelist: any;
     });
   }
   getCompany(){
-    this.http.getapi('api/Contacts/GetCompanyDetails').subscribe((res) => {
+    this.http.getapi('api/Contacts/GetCompanies').subscribe((res) => {
         console.log(res);
         this.companylist=res
       }
@@ -86,14 +86,14 @@ sourcelist: any;
   }
 
   getCity(){
-    this.http.getapi('api/Contacts/GetCityDetails').subscribe((res) => {
+    this.http.getapi('api/Contacts/GetCities').subscribe((res) => {
         console.log(res);
         this.citylist=res
       }
     );
   }
   getState(){
-    this.http.getapi('api/Contacts/GetStateDetails').subscribe((res) => {
+    this.http.getapi('/api/Contacts/GetStateDetails').subscribe((res) => {
         console.log(res);
         this.statelist=res
       }
@@ -101,14 +101,14 @@ sourcelist: any;
   }
 
   getCountry(){
-    this.http.getapi('api/Contacts/GetCountryDetails').subscribe((res) => {
+    this.http.getapi('/api/Contacts/GetCountryDetails').subscribe((res) => {
         console.log(res);
         this.countrylist=res
       }
     );
   }
   getTimeZone(){
-    this.http.getapi('api/Contacts/GetTimeZone').subscribe((res) => {
+    this.http.getapi('api/Contacts/GetTimezone').subscribe((res) => {
         console.log(res);
         this.timeZonelist=res
       }

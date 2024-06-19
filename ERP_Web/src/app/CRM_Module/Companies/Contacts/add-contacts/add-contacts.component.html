@@ -38,9 +38,9 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label>City <span class="required">*</span></label>
+                    <label>City<span class="required">*</span>  </label>
                     <select class="form-control"  formControlName="city">
-                        <option value="null">--Select City--</option>
+                        <option value="null">--Select Company--</option>
                         <option *ngFor="let city of citylist" value="{{city.id}}">{{city.description}}</option>
                     </select>
                 </div>
@@ -98,7 +98,7 @@
                     <div class="mr-2">
                         <!-- <div type="" class="btn btn-primary">Submit</div> -->
                         <!-- <button  ></button> -->
-                        <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
+                        <button type="submit" style="width: 200px;margin-right: 10px;" class="btn btn-primary" >Submit</button>
 
                         <div style="width: 200px;" routerLink="/CRM/contacts"  type="button" class="btn btn-danger">Close</div>
     
