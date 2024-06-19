@@ -43,6 +43,7 @@ import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/t
 import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
 import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
 import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
+import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,8 +82,9 @@ import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/i
     TimezoneComponent,
     CityComponent,
     IndustrytypeComponent,
-    IndustryComponent
+    IndustryComponent,
    
+    ProbabilityComponent
   ],
   imports: [
     AppRoutingModule,

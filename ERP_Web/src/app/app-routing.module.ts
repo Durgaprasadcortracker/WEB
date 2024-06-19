@@ -44,6 +44,8 @@ const routes: Routes = [
       { path: 'Settings', component: SettingsMainComponent },
       { path: 'Profileview', component: ProfileComponent } ,
       { path: 'bulk-upload', component: BulkUploadMainComponent } ,
+      { path: 'addcontacts', component: AddContactsComponent },
+      { path: 'Profileview/:id', component: ProfileComponent },
       {
         path: 'leadView/:id', 
         component: LeadsViewComponent,

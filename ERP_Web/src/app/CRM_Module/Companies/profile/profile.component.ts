@@ -10,16 +10,22 @@ import { BackendService } from '../../../Services/BackendConnection/backend.serv
 })
 export class ProfileComponent implements OnInit {
   company: any;
+  id: any;
+
+  
 
   constructor(
     private route: ActivatedRoute,
-    private backendService: BackendService
-  ) {}
+    private backendService: BackendService,
+    private http: BackendService
+  ) { }
 
   ngOnInit(): void {
-    // const companyId = this.route.snapshot.paramMap.get('id');
-    // this.backendService.getCompanyDetails(companyId).subscribe(data => {
-    //   this.company = data;
-    // });
+    this.id = this.route.snapshot.params['id'];
+
+    this.http.getapi('api/Company/GetCompaniesby/' + this.id).subscribe((res) => {
+      console.log(res);
+      this.company=res.data
+    });
   }
 }

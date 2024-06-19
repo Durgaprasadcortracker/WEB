@@ -1,0 +1,41 @@
+<div class="container-fluid mt-5">
+    <div class="card">
+      <div class="card-header">
+        Probability
+      </div>
+      <div class="card-body">
+        <form [formGroup]="probabilityForm" (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" formControlName="description" id="description" placeholder="Enter description">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">Close</button>
+        </form>
+      </div>
+    </div>
+  
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Probability</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of Probabilitylist; let i = index">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{a.description}}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary" (click)="putapi(a.id)">
+              <i class="fa fa-pencil-alt"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteapi(a.id)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>  
