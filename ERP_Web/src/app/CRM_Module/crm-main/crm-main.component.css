@@ -1,6 +1,4 @@
-section{
-    display: flex;
-}
+
 .main{
     margin-top: 70px;
     margin-left: 250px;
@@ -11,4 +9,5 @@ section{
 }
 .main-body{
     padding-left: 10px;
+    width: 100% !important;
 }

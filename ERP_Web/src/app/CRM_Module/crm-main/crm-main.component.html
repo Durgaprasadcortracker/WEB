@@ -1,9 +1,10 @@
-<section>
+
     <app-side-bar [sideBarvalue]="sideBarvalue"></app-side-bar>
     <div [ngClass]="{'main': sideBarvalue ,'main-short': !sideBarvalue }">
         <app-header   (_sideBar)="sideBar($event)"></app-header>
         <div class="main-body">
+            <div class="container">
             <router-outlet></router-outlet>
         </div>
+        </div>
     </div>
-</section>

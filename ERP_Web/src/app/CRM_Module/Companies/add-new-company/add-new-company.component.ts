@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-new-company',
@@ -184,7 +185,8 @@ export class AddNewCompanyComponent {
     private fb: FormBuilder,
     private http: BackendService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) {
     this.Id = this.route.snapshot.paramMap.get('id');
   }
@@ -198,15 +200,15 @@ export class AddNewCompanyComponent {
       companyIndustry: ['0'],
       companyIndustryType: ['0'],
       headCount: [null, Validators.required],
-      annualRevenue: [null, Validators.required],
+      annualRevenue: [null],
       city: ['0'],
       state: ['0'],
       country: ['0'],
       postalCode: [null, Validators.required],
       timeZone: ['0'],
-      linkedinUrl: [null, [Validators.required, Validators.required]],
-      businessEmail: [null, [Validators.required, Validators.email]],
-      website: [null, [Validators.required, Validators.required]],
+      linkedinUrl: [null, Validators.required],
+      businessEmail: [null, Validators.email],
+      website: [null, Validators.required],
       companyAddress1: [null, Validators.required],
       companyAddress2: [null]
     });
@@ -225,21 +227,46 @@ export class AddNewCompanyComponent {
     this.getTimeZone();
   }
 
+  // addcompany() {
+  //   if (this.myForm.value.id == 0) {
+  //     console.log(this.myForm.value)
+  //     this.http.postapi('api/Company/AddCompanies', this.myForm.value).subscribe(() => {
+  //       this.snackBar.open('Company successfully added!', 'Close', {
+  //         duration: 3000, // Snackbar stays open for 3 seconds
+  //       });
+  //       this.router.navigate(['/CRM/Companies']);
+  //     });
+  //   }
+  //   else if (this.myForm.value.id > 0) {
+  //     console.log("edit")
+  //     this.http.putapi(`api/Company/UpdateCompanies`, this.myForm.getRawValue()).subscribe(() => {
+  //       this.snackBar.open('Company successfully updated!', 'Close', {
+  //         duration: 3000, // Snackbar stays open for 3 seconds
+  //       });
+  //       this.router.navigate(['/CRM/Companies']);
+  //     });
+  //   }
+  // }
+
   addcompany() {
     if (this.myForm.value.id == 0) {
-      console.log(this.myForm.value)
       this.http.postapi('api/Company/AddCompanies', this.myForm.value).subscribe(() => {
+        this.snackBar.open('Company successfully added!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.router.navigate(['/CRM/Companies']);
       });
-    }
-    else if(this.myForm.value.id > 0) {
-      console.log("edit")
-      this.http.putapi(`api/Company/UpdateCompanies/${this.Id}`, this.myForm.value).subscribe(() => {
+    } else if (this.myForm.value.id > 0) {
+      this.http.putapi(`api/Company/UpdateCompanies`, this.myForm.getRawValue()).subscribe(() => {
+        this.snackBar.open('Company successfully updated!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.router.navigate(['/CRM/Companies']);
       });
     }
   }
-  
+
+
 
   close() {
     this.myForm.reset();

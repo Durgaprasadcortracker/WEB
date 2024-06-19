@@ -20,11 +20,8 @@ import { UserProfileComponent } from './CRM_Module/Settings/user-profile/user-pr
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 import { CommonModule } from '@angular/common';
 import { ChangePasswordComponent } from './loginPages/change-password/change-password.component';
-import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
 import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
-import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
 import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads-view.component';
 import { ContactViewComponent } from './CRM_Module/Leads/leadView/contact-view/contact-view.component';
 import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conversion/email-conversion.component';
@@ -36,6 +33,12 @@ import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagede
 import { ConfigrationComponent } from './CRM_Module/Settings/Configration/configration/configration.component';
 import { StatusdesignComponent } from './CRM_Module/Settings/Configration/statusdesign/statusdesign.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +71,9 @@ import { ProfileComponent } from './CRM_Module/Companies/profile/profile.compone
     ConfigrationComponent,
     StagedesignComponent,
     StatusdesignComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddNewCompanyComponent
+    
   ],
   imports: [
     AppRoutingModule,
@@ -77,13 +82,16 @@ import { ProfileComponent } from './CRM_Module/Companies/profile/profile.compone
     ReactiveFormsModule,
     NgxPaginationModule,
     FormsModule,
-    BrowserModule
+    BrowserModule,
+    NgxPaginationModule,
+    MatSnackBarModule
   ],
   exports:[
     BrowserModule 
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

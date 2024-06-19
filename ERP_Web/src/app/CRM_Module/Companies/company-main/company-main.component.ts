@@ -12,21 +12,19 @@ export class CompanyMainComponent {
   page: number = 1;
   count: number = 0;
   tableSize: number = 5;
-  tableSizes: any = [3, 6, 9, 12];
+  tableSizes: any = [5, 10, 15, 20];
   p:number=1;
+
+  listOfCompanys:any;
+  editData:any;
   router: any;
-company: any;
+  company: any;
   
   constructor(private http: BackendService) { }
 
-
-  data = {
-    records: 0
-  }
   companyPage = 0
-  listOfCompanys:any;
-  editData:any;
 
+  
   ngOnInit() {
     this.getData()
   }

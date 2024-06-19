@@ -39,3 +39,26 @@ color: red;
   .card{
     width: calc(100vw - 300px) !important;
   }
+
+
+
+/* Style for the table header */
+.table thead th {
+    background-color: black;
+    color: white;
+}
+
+/* Style for the table body fields */
+.table tbody td {
+    background-color: white;
+    color: black;
+}
+
+
+/* Style for the Pagination code */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
