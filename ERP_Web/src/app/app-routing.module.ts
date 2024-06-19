@@ -14,10 +14,17 @@ import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/setti
 import {ChangePasswordComponent } from './loginPages/change-password/change-password.component';
 import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
 import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
+import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads-view.component';
+import { ContactViewComponent } from './CRM_Module/Leads/leadView/contact-view/contact-view.component';
+import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conversion/email-conversion.component';
+import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
+import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
+import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 
 const routes: Routes = [
 
-  { path: 'CRM', component: CrmMainComponent,
+  {
+    path: 'CRM', component: CrmMainComponent,
     children: [
       { path: 'Home', component: DashboardMainComponent },
       { path: 'Companies', component: CompanyMainComponent },
@@ -29,13 +36,24 @@ const routes: Routes = [
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Settings', component: SettingsMainComponent },
       { path: 'addcontacts', component: AddContactsComponent },
-      { path: '**', redirectTo: '/CRM/Home' } 
+      {
+        path: 'leadView/:id', 
+        component: LeadsViewComponent,
+        children: [
+          { path: 'ContactView/:id', component: ContactViewComponent },
+          { path: 'emailConversation/:id', component: EmailConversionComponent },
+          { path: 'callLogs/:id', component: CallLogsComponent },
+          { path: 'events/:id', component: EventsComponent },
+          { path: 'reminder/:id', component: RemindersComponent },
+        ] 
+      },
+      { path: '**', redirectTo: '/CRM/Home' }
     ]
-   },
+  },
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
-  { path: 'Changepassword', component: ChangePasswordComponent},
-  { path: '**', redirectTo: '/login' } 
+  { path: 'Changepassword', component: ChangePasswordComponent },
+  { path: '**', redirectTo: '/CRM' }
 ];
 
 @NgModule({
