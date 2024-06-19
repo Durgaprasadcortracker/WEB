@@ -1,63 +1,44 @@
-<div class="container-fluid">
+<!-- app.component.html -->
+<div class="container mt-5">
     <div class="card">
-<div class="card-header">
-    Add Stage
-</div>
-<div class="card-body">
-
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-        <div class="row">
-          <div class="col-md-6">
-            <label>Description</label>
-            <input type="text" class="form-control" formControlName="">
+      <div class="card-header">
+        Stage
+      </div>
+      <div class="card-body">
+        
+        <form>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" placeholder="Enter description">
           </div>
-               
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="row emp-buttons" style="margin-top: 20px;">
-                    <div class="col-md-3" >
-                        <button type="submit" style="width: 100px;" class="btn submit-btn">Submit</button>
-                     
-                </div>
-                <div class="col-md-2" style="margin-left: 60px;">
-                    <div (click)="close()" style="width: 100px;"  type="button" class="btn cancel-btn">Close</div>
-                </div> 
-                </div>
-            </div>
-                    </div>
-    </form>
-    
-    <div class="child2" style="padding-top: 40px;">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>S.No</th>
-                    <th>State</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Stage 1</td>
-                    <td>
-                        <span class="material-symbols-outlined">
-                            edit
-                        </span>
-                        <span  class="material-symbols-outlined">
-                            delete
-                        </span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-secondary ml-2">Close</button>
+        </form>
+      </div>
     </div>
-</div>
-</div>
-</div>
-
-
-
-
-
+  
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Stage</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of Stagelist">
+          <th scope="row">1</th>
+          <td>{{a.description}}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary">
+              <i class="fa fa-pencil-alt"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger ml-2">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

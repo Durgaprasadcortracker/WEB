@@ -1,0 +1,3 @@
+.enable-bullets li {
+    list-style-type: disc; /* You can use 'disc', 'circle', 'square', etc. */
+}

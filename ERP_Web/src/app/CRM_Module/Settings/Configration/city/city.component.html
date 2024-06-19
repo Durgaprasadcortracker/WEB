@@ -1,0 +1,55 @@
+<!-- app.component.html -->
+<div class="container mt-5">
+    <div class="card">
+      <div class="card-header">
+        City
+      </div>
+      <div class="card-body">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Country</label>
+                        <select class="form-select" formControlName="">
+                            <option value="null">Qualified</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="description">State</label>
+                        <input type="text" class="form-control" id="description" placeholder="Enter description">
+                    </div>
+                    <label for="description">City</label>
+                    <input type="text" class="form-control" id="description" placeholder="Enter description">
+                </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-secondary ml-2">Close</button>
+        </form>
+      </div>
+    </div>
+  
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">City</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of citylist">
+          <th scope="row">1</th>
+          <td>{{citylist.Description}}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary">
+              <i class="fa fa-pencil-alt"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger ml-2">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

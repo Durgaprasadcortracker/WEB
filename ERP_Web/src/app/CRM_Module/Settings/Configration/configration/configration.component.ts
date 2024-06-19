@@ -9,12 +9,12 @@ export class ConfigrationComponent {
   
   currenttab=0
 
-  list=["Status","Stage","Source",]
+  list=["Status","Stage","Source", "Time Zone","Industry Type","City","Industry",]
 
   selectedTab(i:any){
     this.currenttab = i
   }
 
-  
+
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 
 @Component({
   selector: 'app-statusdesign',
@@ -7,17 +8,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './statusdesign.component.css'
 })
 export class StatusdesignComponent {
-  
+  statuses : any;
   myForm: FormGroup;
+  Stagelist: any;
   
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: BackendService) {
     // Initialize the form group with form controls and validators
     this.myForm = this.fb.group({
       addcountry: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9.-]+$')]]
     });
   }
 
-  ngOnInit(): void {}
+  
 
   onSubmit() {
     if (this.myForm.valid) {
@@ -30,6 +32,20 @@ export class StatusdesignComponent {
 
   close() {
     console.log('field closed');
+    }
+
+   
+    ngOnInit(){
+      this.http.getapi('api/Common/GetStatus').subscribe((res) => {
+        console.log(res);
+        this.statuses = res
+      });
+    }
+
+    getSatage() {
+      this.http.getapi('api/Company/GetStage').subscribe((res) => {
+        this.Stagelist = res;
+      });
     }
 
 }

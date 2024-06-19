@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './loginPages/login-page/login-page.component';
@@ -38,7 +37,13 @@ import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/a
 import { NgxPaginationModule } from 'ngx-pagination';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
 
+import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
+import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
+import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
+import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
+import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,8 +77,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     StagedesignComponent,
     StatusdesignComponent,
     ProfileComponent,
-    AddNewCompanyComponent
-    
+    AddNewCompanyComponent,
+    BulkUploadMainComponent,
+    TimezoneComponent,
+    CityComponent,
+    IndustrytypeComponent,
+    IndustryComponent,
+   
+    ProbabilityComponent
   ],
   imports: [
     AppRoutingModule,

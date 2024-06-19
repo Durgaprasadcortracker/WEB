@@ -1,8 +1,18 @@
-.container {
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  .card {
-    margin-top: 20px;
-  }
+.company-details {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.company-details p {
+  flex: 1 1 50%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
+}
+
+.company-details h1 {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
+}
