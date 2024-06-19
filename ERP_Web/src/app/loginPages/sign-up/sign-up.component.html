@@ -1,1 +1,96 @@
-<p>sign-up works!</p>
+<section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-6 d-none d-xl-block">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp" alt="Sample photo" class="img-fluid"
+                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;"
+                  />
+              </div>
+              <div class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase">Signup Form</h3>
+                        <form [formGroup]="signupform" (ngSubmit)="onSubmit()">
+                              <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="firstname" class="form-label">First Name<span class="text-danger">*</span></label>
+                                  <div data-mdb-input-init class="form-outline"> 
+                                    <input type="text" class="form-control form-control-lg" formControlName="firstname" 
+                                    [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }" /> 
+                                      <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
+                                        <div *ngIf="f['firstname'].errors['required']">First name is required.</div>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                  <div data-mdb-input-init class="form-outline">
+                                    <label for="lastname" class="form-label">Last Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" formControlName="lastname"  [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }"/>
+                                     <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
+                                        <small *ngIf="f['lastname'].errors['required']">Last name is required.</small>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6 mb-4 pb-2">
+                                    <label for="company" class="form-label">Company<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" formControlName="company" [ngClass]="{ 'is-invalid': submitted && f['company'].errors }" />
+                                    
+                                </div>
+                                <div class="col-md-6 mb-4 pb-2">
+                                    <label for="designation" class="form-label">Designation<span class="text-danger">*</span> </label> 
+                                      <input type="text" class="form-control form-control-lg" formControlName="designation"  [ngClass]="{ 'is-invalid': submitted && f['designation'].errors }" />
+                                     
+                                  </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-6 mb-4 pb-2">
+                                  <div data-mdb-input-init class="form-outline">
+                                    <label class="form-label" for="phonenumber">Phone Number<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" formControlName="phonenumber" [ngClass]="{ 'is-invalid': submitted && f['phonenumber'].errors }"/>
+                                    <div *ngIf="submitted && f['phonenumber'].errors" class="invalid-feedback">
+                                        <small *ngIf="f['phonenumber'].errors['required']">Phone Number is required.</small>
+                                      </div>
+                                  </div>
+                                  </div>
+                                  <div class="col-md-6 mb-4">
+                                    <h6 class="mb-2 pb-1">Gender: </h6>
+                                    <div class="form-check form-check-inline">
+                                      <input class="square-radio" type="radio" name="gender" formControlName="gender" 
+                                        value="2" />
+                                      <label class="square-radio--content" for="gender">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="square-radio" type="radio" name="gender" formControlName="gender" 
+                                      value="1" />
+                                      <label class="square-radio--content" for="gender">Male</label>
+                                    </div>
+                               </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12 mb-4 pb-2">
+                                  <div data-mdb-input-init class="form-outline">
+                                    <label class="form-label" for="email">Email<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"/>
+                                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                                        <small *ngIf="f['email'].errors['required']">Email is required.</small>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                                <div class="d-flex justify-content-end pt-3">
+                                    <button  type="button" (click)="onReset()" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg">Reset all</button>
+                                    <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-lg ms-2">Submit form</button>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  </section>

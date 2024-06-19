@@ -1,0 +1,74 @@
+<nav>
+    <div class="header" [ngClass]="{'widthLong': _sideBarValue ,'widhtShort': !_sideBarValue }">
+        <div class="child1">
+            <div (click)="sideBar()">
+                <i class="fa-solid fa-bars fa-2x"></i>
+            </div>
+            <div class="child1">
+                <div class="text1">Welcome,</div>
+                <div class="text2"> {{username}}</div>
+            </div>
+        </div>
+        <div class="child2">
+            <div>
+                {{ currentTime | date:'h:mm:ss a' }} - 
+                {{ currentTime | date:'EEEE, MMMM d, yyyy' }}
+              </div>
+            <div class="hover-container">
+                <div class="notificarion">
+                    <div class="count"><span>5</span></div>
+                    <div>
+                        <i class="fa-regular fa-bell fa-2x"></i>
+                    </div>
+                </div>
+                <div class="hover-content notificarion-content" style="right: -540%;top: 45px;">
+                    <div class="notificarion-content">
+                        <div class="cls1">
+                            <div>Notificarions</div>
+                            <span>Clear all</span>
+                        </div>
+                        <hr style="margin: 0;">
+
+                        <div class="item">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>John Doe: Patient appointment booking</span>
+                        </div>
+                        <div class="item">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>Tarah Shropshire: Appointment booking </span>
+                        </div>
+                        <div class="item">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>Misty Tison: Doctor available module</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="hover-container">
+                <div class="side-user">
+                    <div class="side-img">
+                        <img src="https://p7.hiclipart.com/preview/954/328/914/computer-icons-user-profile-avatar.jpg"
+                            alt="">
+                    </div>
+                </div>
+                <div class="hover-content">
+                    <div class="item">
+                        <i class="fa-regular fa-user"></i>
+                        <span>My Profile</span>
+                    </div>
+                    <div routerLink="/settings" class="item">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </div>
+                    <div routerLink="/login" class="item">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</nav>

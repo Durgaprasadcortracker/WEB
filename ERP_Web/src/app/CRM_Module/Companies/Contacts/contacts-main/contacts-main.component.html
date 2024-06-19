@@ -1,0 +1,72 @@
+<div *ngIf="!contactPage " class="container mt-4">
+    <!-- Card Header -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Contacts</h3>
+        </div>
+        <div class="card-body">
+            <!-- <h5>Total Records: {{ totalRecords }}</h5> -->
+            <div style="float: right;">
+                <button (click)="contactPage = 1" class="btn btn-primary">Add Contacts</button>
+                <button (click)="contactPage = 2" class="btn btn-warning">Bulk Upload</button>
+            </div>
+        </div>
+        <hr />
+        <!-- Table -->
+        <div class="table-responsive mt-4" style="padding: 20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Contact Name</th>
+                        <th>Designation</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Company Name</th>
+                        <th>Source</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of listOfContacts | paginate: 
+                    { itemsPerPage: tableSize, 
+                    currentPage: page,
+                    totalItems: count }; 
+                    let i = index">
+            
+                        <td>{{a.firstName+''+a.lastName}}</td>
+                        <td>{{a.designation}}</td>
+                        <td>{{a.email}}</td>
+                        <td>{{a.mobileNumber}}</td>
+                        <td>{{a.companyName}}</td>
+                        <td>{{a.source}}</td>
+                        <td>
+                            <span  (click)="edit(a)" class="material-symbols-outlined">
+                                edit
+                            </span>
+                            <span (click)="deleteContact(a.id)" class="material-symbols-outlined" style="padding-left: 25px;">
+                                delete
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="d-flex justify-content-left mt-4">
+        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
+    </div>
+</div>
+<div *ngIf="contactPage === 1">
+    <div>
+        <app-add-contacts [editData]="editData" (childEvent)="addContact($event)"></app-add-contacts>
+    </div>
+</div>
+
+<!-- <div *ngIf="contactPage === 2">
+    <div>
+        <app-contacts-bulk-upload (childEvent)="addContact($event)"></app-contacts-bulk-upload>
+    </div>
+</div> -->
+

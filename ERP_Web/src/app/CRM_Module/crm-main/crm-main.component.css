@@ -1,0 +1,14 @@
+section{
+    display: flex;
+}
+.main{
+    margin-top: 70px;
+    margin-left: 250px;
+}
+.main-short{
+    margin-top: 70px;
+    margin-left: 70px;
+}
+.main-body{
+    padding-left: 10px;
+}

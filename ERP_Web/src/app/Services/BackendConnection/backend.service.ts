@@ -17,7 +17,6 @@ export class BackendService {
   getapi(url:any): Observable<any> {
     return this.http.get(`${this.baseUrl}${url}`);
   }
-
   postapi(url: any,body:any): Observable<any> {
     return this.http.post(`${this.baseUrl}${url}`, body);
   }

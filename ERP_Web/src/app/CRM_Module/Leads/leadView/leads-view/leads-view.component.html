@@ -1,0 +1,27 @@
+<div class="card m-3 w-100">
+    <div class="card-header">
+        Lead View
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <div class="tabs">
+                <div class="tab-header">
+                    <div class="tab" routerLink="/CRM/leadView/{{id}}/ContactView/{{id}}" routerLinkActive="active">Contact View</div>
+                    <div class="tab" routerLink="/CRM/leadView/{{id}}/emailConversation/{{id}}" routerLinkActive="active">Email Conversation</div>
+                    <div class="tab" routerLink="/CRM/leadView/{{id}}/callLogs/{{id}}" routerLinkActive="active">Call Logs</div>
+                    <div class="tab" routerLink="/CRM/leadView/{{id}}/events/{{id}}" routerLinkActive="active">Events</div>
+                    <div class="tab" routerLink="/CRM/leadView/{{id}}/reminder/{{id}}" routerLinkActive="active">Reminder</div>
+                    <!-- <div class="tab" *ngFor="let tab of tabs; let i = index" [routerLink]="tab.router"
+                        routerLinkActive="active">
+                        {{ tab.name }}
+                    </div> -->
+                </div>
+                <div class="tab-content">
+                    <div>
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

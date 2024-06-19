@@ -1,0 +1,35 @@
+<div class="sidebar " [ngClass]="{'widthfull': sideBarvalue ,'widthshort': !sideBarvalue }">
+    <div routerLink="/" class="side-logo">
+        <img *ngIf="sideBarvalue" src="logo/logo.png" alt="">
+        <img class="logo-short" *ngIf="!sideBarvalue" src="logo/logo_short.png" alt="">
+    </div>
+    <ul class="user-routes">
+        <li *ngFor="let a of menuItems;let i = index">
+            <div [routerLink]="a.controllerName" class="item" [ngClass]="{'active': currentIndex == i}"
+                (click)="currentIndex = i">
+                <div (click)="a.open=(a.open?false:true)" class="aligin-sb">
+                    <span>
+                        <i [class]="a.fontawesomeIcon"></i>
+                        <span *ngIf="sideBarvalue">{{a.menuName}}</span>
+                    </span>
+                    <span *ngIf="sideBarvalue">
+                        <i *ngIf="(a.submenus.length>0) && !(a.open)" class="fa-solid fa-angle-right"></i>
+                        <i *ngIf="(a.submenus.length>0) && (a.open)" class="fa-solid fa-angle-down"></i>
+                    </span>
+                </div>
+            </div>
+            <ul *ngIf="(a.open) && (sideBarvalue)" class="submenuclass">
+                <li *ngFor="let k of a.submenus;let m = index">
+                    <div [routerLink]="k.router" [ngClass]="{'activeSub': subCurrentIndex == m}">
+                        <span *ngIf="sideBarvalue">{{k.menuName}}</span>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div>
+
+
+    </div>
+
+</div>
