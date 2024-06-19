@@ -7,30 +7,60 @@
             <!--Inputs  -->
             <div class="d-flex flex-wrap">
                 <div class="col-md-3">
-                    <label>Company Domain Name <span class="required">*</span></label>
-                    <input type="text" class="form-control" formControlName="domainName">
+                    <label for="domainName" class="form-label">Company Domain Name<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="domainName" 
+                      [ngClass]="{ 'is-invalid': submitted && f['domainName'].errors }" /> 
+                        <div *ngIf="submitted && f['domainName'].errors" class="invalid-feedback">
+                          <div *ngIf="f['domainName'].errors['required']">domain Name is required.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Company Name <span class="required">*</span></label>
-                    <input type="text" class="form-control" formControlName="companyName">
+                    <label for="companyName" class="form-label">Company Name<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="companyName" 
+                      [ngClass]="{ 'is-invalid': submitted && f['companyName'].errors }" /> 
+                        <div *ngIf="submitted && f['companyName'].errors" class="invalid-feedback">
+                          <div *ngIf="f['companyName'].errors['required']">company Name is required.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Company Owner<span class="required">*</span></label>
-                    <input type="text" class="form-control" formControlName="companyOwner">
+                    <label for="companyOwner" class="form-label">Company Owner<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="companyOwner" 
+                      [ngClass]="{ 'is-invalid': submitted && f['companyOwner'].errors }" /> 
+                        <div *ngIf="submitted && f['companyOwner'].errors" class="invalid-feedback">
+                          <div *ngIf="f['companyOwner'].errors['required']">company Owner is required.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Industry<span class="required">*</span></label>
-                    <select class="form-select" formControlName="companyIndustry">
+                    <label for="companyIndustry" class="form-label">Company Industry<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <select type="text" class="form-control form-control-lg" formControlName="companyIndustry" 
+                      [ngClass]="{ 'is-invalid': submitted && f['companyIndustry'].errors }">
                         <option value="null">--company Name-- </option>
                         <option *ngFor="let CompanyIndustry of industrylist" value="{{CompanyIndustry.id}}">{{CompanyIndustry.description}}</option>
                     </select>
+                        <div *ngIf="submitted && f['companyIndustry'].errors" class="invalid-feedback">
+                          <div *ngIf="f['companyIndustry'].errors['required']">company Owner is required.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Industry Type <span class="required">*</span></label>
-                    <select class="form-control" formControlName="companyIndustryType">
-                        <option value="null">--Select Industry Type--</option>
-                        <option *ngFor="let CompanyIndustryType of industrytypelist" value="{{CompanyIndustryType.id}}">{{CompanyIndustryType.description}}</option>
+                    <label for="companyIndustryType" class="form-label">Company Industry Type<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <select type="text" class="form-control form-control-lg" formControlName="companyIndustryType" 
+                      [ngClass]="{ 'is-invalid': submitted && f['companyIndustryType'].errors }">
+                        <option value="null">--company Name-- </option>
+                        <option *ngFor="let companyIndustryType of industrytypelist" value="{{companyIndustryType.id}}">{{companyIndustryType.description}}</option>
                     </select>
+                        <div *ngIf="submitted && f['companyIndustryType'].errors" class="invalid-feedback">
+                          <div *ngIf="f['companyIndustryType'].errors['required']">company Owner is required.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label>Head Count <span class="required">*</span> </label>
@@ -62,12 +92,21 @@
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label>Postal Code <span class="required">*</span></label>
-                    <input type="number" class="form-control" formControlName="postalCode">
+                    <label for="postalCode" class="form-label">postal Code<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="postalCode" 
+                      [ngClass]="{ 'is-invalid': submitted && f['postalCode'].errors }" /> 
+                        <div *ngIf="submitted && f['postalCode'].errors" class="invalid-feedback">
+                          <div *ngIf="f['postalCode'].errors['required']">postal Code is required.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label>Time Zone <span class="required">*</span></label>
-                    <input type="number" class="form-control" formControlName="timeZone">
+                    <select class="form-control" formControlName="timeZone">
+                        <option value="null">--Select Time Zone--</option>
+                        <option *ngFor="let timeZone of timeZonelist" value="{{timeZone.id}}">{{timeZone.description}}</option>
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <label>Website</label>
@@ -75,12 +114,24 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label>Linkedin URL </label>
-                    <input type="url" class="form-control" formControlName="linkedinUrl">
+                    <label for="linkedinUrl" class="form-label">Linkedin URL<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="linkedinUrl" 
+                      [ngClass]="{ 'is-invalid': submitted && f['linkedinUrl'].errors }" /> 
+                        <div *ngIf="submitted && f['linkedinUrl'].errors" class="invalid-feedback">
+                          <div *ngIf="f['linkedinUrl'].errors['required']">First name is required.</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Business Email <span class="required">*</span></label>
-                    <input type="text" class="form-control" formControlName="businessEmail">
+                    <label for="businessEmail" class="form-label">Business Email<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="businessEmail" 
+                      [ngClass]="{ 'is-invalid': submitted && f['businessEmail'].errors }" /> 
+                        <div *ngIf="submitted && f['businessEmail'].errors" class="invalid-feedback">
+                          <div *ngIf="f['businessEmail'].errors['required']">business Email is required.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Text Area -->
@@ -99,11 +150,9 @@
             <div class="d-flex flex-wrap">
                 <div class="col-md-6 mt-3 d-flex g-1">
                     <div class="mr-2">
-                        <!-- <div type="" class="btn btn-primary">Submit</div> -->
-                        <!-- <button  ></button> -->
                         <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
 
-                        <div style="width: 200px;"  type="button" class="btn btn-danger">Close</div>
+                        <div style="width: 200px;"  type="button" class="btn btn-danger" (click)="close()">Close</div>
     
                     </div>
                 </div>

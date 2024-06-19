@@ -27,13 +27,14 @@ const routes: Routes = [
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Addnewcompany', component: AddNewCompanyComponent },
+      { path: 'editcompany/:id', component: AddNewCompanyComponent },
       { path: '**', redirectTo: '/CRM/Home' }
     ]
   },
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
   { path: 'Changepassword', component: ChangePasswordComponent},
-  { path: '**', redirectTo: '/login' } 
+  { path: '**', redirectTo: '/CRM' } 
 ];
 
 @NgModule({

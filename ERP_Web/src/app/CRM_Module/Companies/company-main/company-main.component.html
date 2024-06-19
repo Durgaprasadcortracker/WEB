@@ -36,7 +36,7 @@
                         <td>{{a.headCount}}</td>
                         <td>{{a.annualRevenue}}</td>
                         <td>
-                            <span  routerLink="/CRM/EditCompany/{{a.id}}" class="material-symbols-outlined">
+                            <span  (click)="edit(company.id)" routerLink="/CRM/editcompany/{{a.id}}" class="material-symbols-outlined">
                                 edit
                             </span>
                             <span (click)="deleteCompany(a.id)" class="material-symbols-outlined" style="padding-left: 25px;">
