@@ -31,6 +31,10 @@ import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conv
 import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
 import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
+import { SourcedesignComponent } from './CRM_Module/Settings/Configration/sourcedesign/sourcedesign.component';
+import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagedesign/stagedesign.component';
+import { ConfigrationComponent } from './CRM_Module/Settings/Configration/configration/configration.component';
+import { StatusdesignComponent } from './CRM_Module/Settings/Configration/statusdesign/statusdesign.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +61,13 @@ import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/remind
     EmailConversionComponent,
     CallLogsComponent,
     EventsComponent,
-    RemindersComponent
+    RemindersComponent,
+    SourcedesignComponent,
+    StagedesignComponent,
+    ConfigrationComponent,
+    StagedesignComponent,
+    StatusdesignComponent
+    
   ],
   imports: [
     AppRoutingModule,

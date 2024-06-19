@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="card">
+<div class="card-header">
+    Add Source
+</div>
+<div class="card-body">
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Description</label>
+            <input type="text" class="form-control" formControlName="">
+          </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row emp-buttons" style="margin-top: 20px;">
+                    <div class="col-md-3" >
+                        <button type="submit" style="width: 100px;" class="btn submit-btn">Submit</button>
+                     
+                </div>
+                <div class="col-md-2" style="margin-left: 60px;">
+                    <div (click)="close()" style="width: 100px;"  type="button" class="btn cancel-btn">Close</div>
+                </div> 
+                </div>
+            </div>
+                    </div>
+    </form>
+    
+    <div class="child2" style="padding-top: 40px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Source</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Source 1</td>
+                    <td>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                        <span  class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+

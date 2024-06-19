@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-2  px-sm-2 px-0 bg-dark">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <ul  class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li *ngFor="let a of list;let i = index" class="nav-item" >
+                        <a  (click)="selectedTab(i)"  class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">{{a}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="col py-3">
+            
+            <app-statusdesign *ngIf="currenttab==0"></app-statusdesign>
+            <app-stagedesign  *ngIf="currenttab==1"></app-stagedesign>
+            <app-sourcedesign *ngIf="currenttab==2"></app-sourcedesign>    
+        </div>
+    </div>
+</div>
