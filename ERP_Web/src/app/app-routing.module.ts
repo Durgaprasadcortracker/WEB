@@ -13,7 +13,6 @@ import { ReportsMainComponent } from './CRM_Module/Reports/reports-main/reports-
 import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/settings-main.component';
 import { ChangePasswordComponent } from './loginPages/change-password/change-password.component';
 import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
-import {ChangePasswordComponent } from './loginPages/change-password/change-password.component';
 import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
 import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
 import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads-view.component';
