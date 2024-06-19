@@ -22,6 +22,7 @@ import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-lo
 import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
+import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
 
 const routes: Routes = [
 
@@ -41,6 +42,7 @@ const routes: Routes = [
       { path: 'Settings', component: SettingsMainComponent },
       { path: 'addcontacts', component: AddContactsComponent },
       { path: 'Profileview', component: ProfileComponent } ,
+      { path: 'bulk-upload', component: BulkUploadMainComponent } ,
       {
         path: 'leadView/:id', 
         component: LeadsViewComponent,

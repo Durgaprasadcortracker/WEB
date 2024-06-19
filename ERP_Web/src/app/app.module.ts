@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './loginPages/login-page/login-page.component';
@@ -38,6 +37,7 @@ import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/a
 import { NgxPaginationModule } from 'ngx-pagination';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
 
 @NgModule({
   declarations: [
@@ -72,8 +72,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     StagedesignComponent,
     StatusdesignComponent,
     ProfileComponent,
-    AddNewCompanyComponent
-    
+    AddNewCompanyComponent,
+    BulkUploadMainComponent
   ],
   imports: [
     AppRoutingModule,

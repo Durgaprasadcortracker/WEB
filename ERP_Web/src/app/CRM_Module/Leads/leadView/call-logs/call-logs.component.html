@@ -1,1 +1,92 @@
-<p>call-logs works!</p>
+<form>
+    <div class="form first">
+        <h3>Calls Logs</h3>
+        <hr />
+        <div class="card-body">
+            <div>
+                <div class="mr-2 d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary">Create Call Log</button>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Contact</th>
+                            <th>Call Types </th>
+                            <th>Date</th>
+                            <th>Comments</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let a of calllogsList;let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{a.contactId}}</td>
+                            <td>{{a.callTypes}}</td>
+                            <td>{{a.callDate | date}}</td>
+                            <td>{{a.comments}}</td>
+                            <td>
+                                <span class="material-symbols-outlined">
+                                    edit
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- <div>
+
+            <div class="fields" style="display: flex; width: 600px; flex-wrap: wrap;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-field">
+                            <label>Contacts</label>
+                            <select class="form-select" formControlName="pipeline">
+                                <option value="null">Select Contacts</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-field">
+                            <label>Call types</label>
+                            <select class="form-select" formControlName="pipeline">
+                                <option value="null">Select types</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-field">
+                            <label>Date </label>
+                            <input type="date" class="form-control" formControlName="datetime-local">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-field">
+                            <label>Comments</label>
+                            <textarea class="form-control" rows="3" id=""></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="details ID">
+                <div class="emp-buttons">
+                    <button type="submit" style="width: 200px;" class="btn btn-danger">Submit</button>
+
+                    <div style="width: 200px;" type="button" class="btn cancel-btn">Cancel</div>
+
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+</form>
