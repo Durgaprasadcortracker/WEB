@@ -21,6 +21,7 @@ import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conv
 import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
 import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
+import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
 
 const routes: Routes = [
 
@@ -39,6 +40,7 @@ const routes: Routes = [
       { path: 'editcompany/:id', component: AddNewCompanyComponent },
       { path: 'Settings', component: SettingsMainComponent },
       { path: 'addcontacts', component: AddContactsComponent },
+      { path: 'Profileview', component: ProfileComponent } ,
       {
         path: 'leadView/:id', 
         component: LeadsViewComponent,

@@ -35,6 +35,7 @@ import { SourcedesignComponent } from './CRM_Module/Settings/Configration/source
 import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagedesign/stagedesign.component';
 import { ConfigrationComponent } from './CRM_Module/Settings/Configration/configration/configration.component';
 import { StatusdesignComponent } from './CRM_Module/Settings/Configration/statusdesign/statusdesign.component';
+import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,8 +67,8 @@ import { StatusdesignComponent } from './CRM_Module/Settings/Configration/status
     StagedesignComponent,
     ConfigrationComponent,
     StagedesignComponent,
-    StatusdesignComponent
-    
+    StatusdesignComponent,
+    ProfileComponent
   ],
   imports: [
     AppRoutingModule,
@@ -75,7 +76,8 @@ import { StatusdesignComponent } from './CRM_Module/Settings/Configration/status
     CommonModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    BrowserModule
   ],
   exports:[
     BrowserModule 
