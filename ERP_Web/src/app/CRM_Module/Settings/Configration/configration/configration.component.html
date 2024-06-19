@@ -14,10 +14,13 @@
 
 
         <div class="col py-3">
-            
             <app-statusdesign *ngIf="currenttab==0"></app-statusdesign>
             <app-stagedesign  *ngIf="currenttab==1"></app-stagedesign>
-            <app-sourcedesign *ngIf="currenttab==2"></app-sourcedesign>    
+            <app-sourcedesign *ngIf="currenttab==2"></app-sourcedesign>
+            <app-timezone *ngIf="currenttab==3"> </app-timezone>
+            <app-industrytype *ngIf="currenttab==4"></app-industrytype>
+            <app-city *ngIf="currenttab==5"></app-city>
+            <app-industry *ngIf="currenttab==6"></app-industry>
         </div>
     </div>
 </div>

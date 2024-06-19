@@ -39,6 +39,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
 
+import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
+import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
+import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
+import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +77,12 @@ import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-
     StatusdesignComponent,
     ProfileComponent,
     AddNewCompanyComponent,
-    BulkUploadMainComponent
+    BulkUploadMainComponent,
+    TimezoneComponent,
+    CityComponent,
+    IndustrytypeComponent,
+    IndustryComponent
+   
   ],
   imports: [
     AppRoutingModule,

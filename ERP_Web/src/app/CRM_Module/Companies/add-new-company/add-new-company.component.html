@@ -12,6 +12,11 @@
                     <div data-mdb-input-init class="form-outline">
                         <input type="text" class="form-control form-control-lg" formControlName="domainName"
                             [ngClass]="{ 'is-invalid': submitted && f['domainName'].errors }" />
+                    <label for="domainName" class="form-label">Company Domain Name<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="domainName" 
+                      [ngClass]="{ 'is-invalid': submitted && f['domainName'].errors }" /> 
+                      
                         <div *ngIf="submitted && f['domainName'].errors" class="invalid-feedback">
                             <div *ngIf="f['domainName'].errors['required']">domain Name is required.</div>
                         </div>

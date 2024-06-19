@@ -2,10 +2,9 @@
 <div class="container mt-5">
     <div class="card">
       <div class="card-header">
-        Stage
+        Industry Type
       </div>
       <div class="card-body">
-        
         <form>
           <div class="form-group">
             <label for="description">Description</label>
@@ -21,12 +20,12 @@
       <thead>
         <tr>
           <th scope="col">S.No</th>
-          <th scope="col">Stage</th>
+          <th scope="col">Industry Type</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let a of Stagelist">
+        <tr *ngFor="let a of Industrytypelist">
           <th scope="row">1</th>
           <td>{{a.description}}</td>
           <td>
