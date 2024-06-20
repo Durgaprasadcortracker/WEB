@@ -31,6 +31,14 @@ export class ConfigrationComponent {
     {
       name: "Industry",
       url: "/CRM/Settings/configuration/industry"
+    },
+    {
+      name: "Probability",
+      url: "/CRM/Settings/configuration/probability"
+    },
+    {
+      name: "State",
+      url: "/CRM/Settings/configuration/state"
     }
   ]
 }

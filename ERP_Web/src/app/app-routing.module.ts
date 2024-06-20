@@ -33,6 +33,8 @@ import { CityComponent } from './CRM_Module/Settings/Configration/city/city.comp
 import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
 import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
+import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
+import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 
 const routes: Routes = [
 
@@ -67,6 +69,8 @@ const routes: Routes = [
               { path: 'time-zone', component: TimezoneComponent },
               { path: 'city', component: CityComponent },
               { path: 'industry', component: IndustryComponent },
+              { path: 'probability', component: ProbabilityComponent },
+              { path: 'state', component: StateComponent },
               { path: '**', redirectTo: '/CRM/Settings/configuration/status' }
             ]
            },
