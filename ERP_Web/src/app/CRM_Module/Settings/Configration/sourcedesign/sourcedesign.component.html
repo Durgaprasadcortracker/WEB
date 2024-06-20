@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <div class="card">
+<<<<<<< Updated upstream
 <div class="card-header">
     Add Source
 </div>
@@ -61,3 +62,47 @@
 
 
 
+=======
+      <div class="card-header">
+        Source
+      </div>
+      <div class="card-body">
+
+        <form [formGroup]="sourceForm" (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" formControlName="description" id="description" placeholder="Enter description">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <!-- <button type="button" class="btn btn-secondary ml-2">Close</button> -->
+          <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">Close</button>
+        </form>
+      </div>
+    </div>
+  
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Source</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of SourceList">
+          <th scope="row">1</th>
+          <td>{{a.description}}</td>
+          <td>
+            <button routerLink="/CRM/Settings/configuration/source" [queryParams]="{sourceid:a.id}" class="btn btn-sm btn-outline-primary" (click)="edit(a.id)">
+              <i class="fa fa-pencil-alt"></i>
+            </button>
+            <button routerLink="/CRM/Settings/configuration/source" [queryParams]="{sourceid:a.id}" class="btn btn-sm btn-outline-danger ml-2" (click)="deleteSource(a.id)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+>>>>>>> Stashed changes

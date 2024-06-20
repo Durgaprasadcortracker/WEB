@@ -22,6 +22,21 @@ import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-lo
 import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
+<<<<<<< Updated upstream
+=======
+import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
+import { ConfigrationComponent } from './CRM_Module/Settings/Configration/configration/configration.component';
+import { UserProfileComponent } from './CRM_Module/Settings/user-profile/user-profile.component';
+import { StatusdesignComponent } from './CRM_Module/Settings/Configration/statusdesign/statusdesign.component';
+import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagedesign/stagedesign.component';
+import { SourcedesignComponent } from './CRM_Module/Settings/Configration/sourcedesign/sourcedesign.component';
+import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
+import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
+import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
+import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
+import { EventsComponent } from './CRM_Module/Leads/events/events.component';
+import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
+>>>>>>> Stashed changes
 
 const routes: Routes = [
 
@@ -38,7 +53,35 @@ const routes: Routes = [
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Addnewcompany', component: AddNewCompanyComponent },
       { path: 'editcompany/:id', component: AddNewCompanyComponent },
+<<<<<<< Updated upstream
       { path: 'Settings', component: SettingsMainComponent },
+=======
+      { path: 'events', component: EventsComponent },
+      { path: 'quoteslisting', component: QuoteslistingComponent },
+
+
+      {
+        path: 'Settings', component: SettingsMainComponent,
+        children: [
+          { path: 'user-view', component: UserProfileComponent },
+          { path: 'configuration', component: ConfigrationComponent,
+            children: [
+              { path: 'status', component: StatusdesignComponent },
+              { path: 'stage', component: StagedesignComponent },
+              { path: 'source', component: SourcedesignComponent },
+              { path: 'time-zone', component: TimezoneComponent },
+              { path: 'city', component: CityComponent },
+              { path: 'industry', component: IndustryComponent },
+              { path: 'industry-type', component: IndustrytypeComponent },
+              { path: '**', redirectTo: '/CRM/Settings/configuration/status' }
+            ]
+           },
+          { path: '**', redirectTo: '/CRM/Settings/user-view' }
+        ]
+      },
+      { path: 'Profileview', component: ProfileComponent },
+      { path: 'bulk-upload', component: BulkUploadMainComponent },
+>>>>>>> Stashed changes
       { path: 'addcontacts', component: AddContactsComponent },
       { path: 'Profileview', component: ProfileComponent } ,
       {
