@@ -48,19 +48,21 @@ export class StatusdesignComponent {
   
 
   onSubmit() {
-    if(this.statusId==0){
-    this.http.postapi('api/Common/AddStatus',this.myForm.getRawValue()).subscribe((res) => {
+    
+    if(this.statusId>0){
+      this.myForm.get("id")?.setValue(this.statusId);
+    this.http.putapi('api/Common/UpdateStatus',this.myForm.getRawValue()).subscribe((res) => {
       console.log(res);
      
     });
   }
   else{
-    debugger;
-    this.myForm.get("id")?.setValue(this.statusId);
-    this.http.putapi('api/Common/UpdateStatus',this.myForm.getRawValue()).subscribe((res) => {
+    this.http.postapi('api/Common/AddStatus',this.myForm.getRawValue()).subscribe((res) => {
       console.log(res);
      
     });
+    debugger;
+  
   }
   }
   getstatusbyId(){
