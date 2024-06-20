@@ -46,10 +46,10 @@
           <td>{{a.stageName}}</td>
           <td>{{a.description}}</td>
           <td>
-            <button routerLink="/CRM/Settings" [queryParams]="{statusid:a.id}" class="btn btn-sm btn-outline-primary">
+            <button routerLink="/CRM/Settings/configuration/status" [queryParams]="{statusid:a.id}" class="btn btn-sm btn-outline-primary">
               <i class="fa fa-pencil-alt"></i>
             </button>
-            <button routerLink="/CRM/Settings" [queryParams]="{statusid:a.id}" class="btn btn-sm btn-outline-danger ml-2">
+            <button routerLink="/CRM/Settings/configuration/status" [queryParams]="{statusid:a.id}" class="btn btn-sm btn-outline-danger ml-2">
               <i class="fa fa-trash"></i>
             </button>
           </td>

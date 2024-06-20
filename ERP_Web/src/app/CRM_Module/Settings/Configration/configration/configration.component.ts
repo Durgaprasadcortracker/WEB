@@ -6,15 +6,31 @@ import { Component } from '@angular/core';
   styleUrl: './configration.component.css'
 })
 export class ConfigrationComponent {
-  
-  currenttab=0
 
-  list=["Status","Stage","Source", "Time Zone","Industry Type","City","Industry",]
-
-  selectedTab(i:any){
-    this.currenttab = i
-  }
-
-
-
+  list = [
+    {
+      name: "Status",
+      url: "/CRM/Settings/configuration/status"
+    },
+    {
+      name: "Stage",
+      url: "/CRM/Settings/configuration/stage"
+    },
+    {
+      name: "Source",
+      url: "/CRM/Settings/configuration/source"
+    },
+    {
+      name: "Time zone",
+      url: "/CRM/Settings/configuration/time-zone"
+    },
+    {
+      name: "City",
+      url: "/CRM/Settings/configuration/city"
+    },
+    {
+      name: "Industry",
+      url: "/CRM/Settings/configuration/industry"
+    }
+  ]
 }
