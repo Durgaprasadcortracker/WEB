@@ -45,7 +45,7 @@
                         <option *ngFor="let CompanyIndustry of industrylist" value="{{CompanyIndustry.id}}">{{CompanyIndustry.description}}</option>
                     </select>
                         <div *ngIf="submitted && f['companyIndustry'].errors" class="invalid-feedback">
-                          <div *ngIf="f['companyIndustry'].errors['required']">company Owner is required.</div>
+                          <div *ngIf="f['companyIndustry'].errors['required']">Company Industry is required.</div>
                         </div>
                     </div>
                 </div>
@@ -58,13 +58,16 @@
                         <option *ngFor="let companyIndustryType of industrytypelist" value="{{companyIndustryType.id}}">{{companyIndustryType.description}}</option>
                     </select>
                         <div *ngIf="submitted && f['companyIndustryType'].errors" class="invalid-feedback">
-                          <div *ngIf="f['companyIndustryType'].errors['required']">company Owner is required.</div>
+                          <div *ngIf="f['companyIndustryType'].errors['required']">Company Industry Type is required.</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label>Head Count <span class="required">*</span> </label>
-                    <input type="number" class="form-control" formControlName="headCount" required>
+                    <input type="number" class="form-control" formControlName="headCount"  [ngClass]="{ 'is-invalid': submitted && f['headCount'].errors }">
+                    <div *ngIf="submitted && f['headCount'].errors" class="invalid-feedback">
+                        <div *ngIf="f['headCount'].errors['required']">Head Count is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-3">
                     <label>Annual Revenue </label>
@@ -72,31 +75,40 @@
                 </div>
                 <div class="col-md-3">
                     <label>Country <span class="required">*</span></label>
-                    <select class="form-select" formControlName="country" (change)="getCitybycountry()">
+                    <select class="form-select" formControlName="country" (change)="getCitybycountry()"  [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
                         <option value="null">--Select Country--</option>
                         <option *ngFor="let country of countrylist" value="{{country.id}}">{{country.description}}</option>
                     </select>
+                    <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                        <div *ngIf="f['country'].errors['required']">Country is required.</div>
+                      </div>
                 </div>                
                 <div class="col-md-3">
                     <label>City <span class="required">*</span></label>
-                    <select class="form-select" formControlName="city" (change)="getstatesbycountrycity()">
+                    <select class="form-select" formControlName="city" (change)="getstatesbycountrycity()"  [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
                         <option value="null">--Select City--</option>
                         <option *ngFor="let city of citylist" value="{{city.id}}">{{city.description}}</option>
                     </select>
+                    <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                        <div *ngIf="f['city'].errors['required']">City is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-3">
                     <label>State <span class="required">*</span></label>
-                    <select class="form-select" formControlName="state">
+                    <select class="form-select" formControlName="state"  [ngClass]="{ 'is-invalid': submitted && f['state'].errors }">
                         <option value="null">--Select State --</option>
                         <option *ngFor="let state of statelist" value="{{state.id}}">{{state.description}}</option>
                     </select>
+                    <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
+                        <div *ngIf="f['state'].errors['required']">State is required.</div>
+                      </div>
                 </div>
               
                
                 <div class="col-md-3">
                     <label for="postalCode" class="form-label">postal Code<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline"> 
-                      <input type="text" class="form-select form-control-lg" formControlName="postalCode" 
+                      <input type="text" class="form-control form-control-lg" formControlName="postalCode" 
                       [ngClass]="{ 'is-invalid': submitted && f['postalCode'].errors }" /> 
                         <div *ngIf="submitted && f['postalCode'].errors" class="invalid-feedback">
                           <div *ngIf="f['postalCode'].errors['required']">postal Code is required.</div>
@@ -105,10 +117,13 @@
                 </div>
                 <div class="col-md-3">
                     <label>Time Zone <span class="required">*</span></label>
-                    <select class="form-select" formControlName="timeZone">
+                    <select class="form-select" formControlName="timeZone" [ngClass]="{ 'is-invalid': submitted && f['timeZone'].errors }">
                         <option value="0">--Select Time Zone--</option>
                         <option *ngFor="let timeZone of timeZonelist" value="{{timeZone.id}}">{{timeZone.description}}</option>
                     </select>
+                    <div *ngIf="submitted && f['timeZone'].errors" class="invalid-feedback">
+                        <div *ngIf="f['timeZone'].errors['required']">domain Name is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-3">
                     <label>Website</label>
@@ -141,7 +156,10 @@
 
                 <div class="col-md-6">
                     <label>Address1 <span class="required">*</span> </label>
-                    <textarea class="form-control" rows="3" formControlName="companyAddress1"></textarea>
+                    <textarea class="form-control" rows="3" formControlName="companyAddress1" [ngClass]="{ 'is-invalid': submitted && f['companyAddress1'].errors }"></textarea>
+                    <div *ngIf="submitted && f['companyAddress1'].errors" class="invalid-feedback">
+                        <div *ngIf="f['companyAddress1'].errors['required']">Company Address is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-6">
                     <label>Address2 </label>

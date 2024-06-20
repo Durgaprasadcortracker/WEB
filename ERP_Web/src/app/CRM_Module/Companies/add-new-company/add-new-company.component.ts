@@ -150,7 +150,7 @@ export class AddNewCompanyComponent {
   countrylist: any;
   timeZonelist: any;
   submitted: any;
-  f: any;
+ 
   Id: any;
 
   @Output() childEvent = new EventEmitter<string>();
@@ -195,18 +195,18 @@ export class AddNewCompanyComponent {
       domainName: [null, Validators.required],
       companyName: [null, Validators.required],
       companyOwner: [null, Validators.required],
-      companyIndustry: ['0'],
-      companyIndustryType: ['0'],
+      companyIndustry: [null, Validators.required],
+      companyIndustryType: [null, Validators.required],
       headCount: [null, Validators.required],
       annualRevenue: [null, Validators.required],
-      city: ['0'],
-      state: ['0'],
-      country: ['0'],
+      city: [null, Validators.required],
+      state: [null, Validators.required],
+      country: [null, Validators.required],
       postalCode: [null, Validators.required],
-      timeZone: ['0'],
-      linkedinUrl: [null, [Validators.required, Validators.required]],
+      timeZone: [null, Validators.required],
+      linkedinUrl: [null, [Validators.required]],
       businessEmail: [null, [Validators.required, Validators.email]],
-      website: [null, [Validators.required, Validators.required]],
+      website: [null, [Validators.required]],
       companyAddress1: [null, Validators.required],
       companyAddress2: [null]
     });
@@ -231,6 +231,11 @@ export class AddNewCompanyComponent {
   }
 
   addcompany() {
+    debugger;
+    this.submitted=true;
+    if(this.myForm.invalid){
+      return;
+    }
     if (this.myForm.value.id == 0) {
       console.log(this.myForm.value)
       this.http.postapi('api/Company/AddCompanies', this.myForm.value).subscribe(() => {
@@ -304,6 +309,9 @@ export class AddNewCompanyComponent {
       debugger;
       this.statelist = res.data;
     });
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.myForm.controls;
   }
   onSubmit() {
     //if (this.myForm.valid) {

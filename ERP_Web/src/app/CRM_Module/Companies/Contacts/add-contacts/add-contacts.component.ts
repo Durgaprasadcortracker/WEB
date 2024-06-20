@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, RequiredValidator } from '@angular/forms';
+import { FormControl, FormGroup, RequiredValidator,AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-contacts',
@@ -92,7 +92,7 @@ export class AddContactsComponent {
    
   }
   cityId:any;
-
+  submitted: any;
   getstatesbycountrycity(){
     debugger;
     this.countryId= this.myForm.get("country")?.value;
@@ -133,7 +133,9 @@ export class AddContactsComponent {
       console.log('Form is invalid');
     }
   }
-
+  get f(): { [key: string]: AbstractControl } {
+    return this.myForm.controls;
+  }
  
 
 

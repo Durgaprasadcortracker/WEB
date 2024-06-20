@@ -8,7 +8,10 @@
             <div class="d-flex flex-wrap">
                 <div class="col-md-3">
                     <label>First Name <span class="required">*</span></label>
-                    <input type="text" class="form-control" formControlName="firstName">
+                    <input type="text" class="form-control" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
+                    <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['firstName'].errors['required']">First Name is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-3">
                     <label>Last Name <span class="required">*</span></label>
