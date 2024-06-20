@@ -111,6 +111,7 @@ export class AddContactsComponent {
     });
   }
   addcontact(): void {
+    debugger;
     console.log(this.myForm.value)
     if (this.myForm.valid) {
       if (this.myForm.value.id === 0) {
@@ -122,7 +123,7 @@ export class AddContactsComponent {
         });
       } else if (this.myForm.value.id > 0) {
         console.log('Editing contact:', this.myForm.value);
-        this.http.putapi('/api/Contacts/UpdateContacts', this.myForm.getRawValue()).subscribe(() => {
+        this.http.putapi('api/Contacts/UpdateContacts', this.myForm.getRawValue()).subscribe(() => {
           this.router.navigate(['/CRM/contacts']);
         }, error => {
           console.error('Error updating contact:', error);

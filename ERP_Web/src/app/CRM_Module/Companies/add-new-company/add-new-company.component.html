@@ -73,21 +73,21 @@
                 <div class="col-md-3">
                     <label>Country <span class="required">*</span></label>
                     <select class="form-select" formControlName="country" (change)="getCitybycountry()">
-                        <option value="0">--Select Country--</option>
+                        <option value="null">--Select Country--</option>
                         <option *ngFor="let country of countrylist" value="{{country.id}}">{{country.description}}</option>
                     </select>
                 </div>                
                 <div class="col-md-3">
                     <label>City <span class="required">*</span></label>
-                    <select class="form-control" formControlName="city" (change)="getstatesbycountrycity()">
-                        <option value="0">--Select City--</option>
+                    <select class="form-select" formControlName="city" (change)="getstatesbycountrycity()">
+                        <option value="null">--Select City--</option>
                         <option *ngFor="let city of citylist" value="{{city.id}}">{{city.description}}</option>
                     </select>
                 </div>
                 <div class="col-md-3">
                     <label>State <span class="required">*</span></label>
                     <select class="form-select" formControlName="state">
-                        <option value="0">--Select State --</option>
+                        <option value="null">--Select State --</option>
                         <option *ngFor="let state of statelist" value="{{state.id}}">{{state.description}}</option>
                     </select>
                 </div>
