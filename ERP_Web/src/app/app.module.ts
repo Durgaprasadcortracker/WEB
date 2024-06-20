@@ -25,7 +25,7 @@ import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads
 import { ContactViewComponent } from './CRM_Module/Leads/leadView/contact-view/contact-view.component';
 import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conversion/email-conversion.component';
 import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
-import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
+
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 import { SourcedesignComponent } from './CRM_Module/Settings/Configration/sourcedesign/sourcedesign.component';
 import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagedesign/stagedesign.component';
@@ -44,6 +44,9 @@ import { CityComponent } from './CRM_Module/Settings/Configration/city/city.comp
 import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
 import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
 import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
+import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
+import { EventsComponent } from './CRM_Module/Leads/events/events.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +69,7 @@ import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probabi
     ContactsMainComponent,
     AddNewCompanyComponent,
     LeadsViewComponent,
+    QuoteslistingComponent,
     ContactViewComponent,
     EmailConversionComponent,
     CallLogsComponent,
