@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, RequiredValidator,AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, RequiredValidator,AbstractControl,Validators, FormBuilder } from '@angular/forms';
+import { privateDecrypt } from 'crypto';
 
 @Component({
   selector: 'app-add-contacts',
@@ -22,12 +23,14 @@ export class AddContactsComponent {
   companylist:any;
   timeZonelist: any;
   sourcelist: any;
-  fb: any;
+  
 
   constructor(private http: BackendService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,private fb:FormBuilder) {
     this.Id = this.route.snapshot.paramMap.get('id');
+    
+
   }
   @Output() childEvent = new EventEmitter<string>();
   @Input() editData: any;
@@ -53,6 +56,21 @@ export class AddContactsComponent {
   });
 
   ngOnInit() {
+    this.myForm = this.fb.group({
+      id: [0],
+      firstName: [null, Validators.required],
+      lastName: [null, Validators.required],
+      email: [null, Validators.required],
+      designation: [null, Validators.required],
+      mobileNumber: [null, Validators.required],
+      CompanyId: [null, Validators.required],
+      country: [null, Validators.required],
+      city: [null, Validators.required],
+      state: [null, Validators.required],
+      postalCode:[null, Validators.required],
+      source:[null, Validators.required],
+      address1:[null, Validators.required],
+    });
     this.getCompany();
     this.getCity();
     this.getState();
@@ -60,27 +78,7 @@ export class AddContactsComponent {
     this.getTimeZone();
     this.getSource();  
     console.log(this.Id)
-    this.myForm=new FormGroup({
-      id:new FormControl(<Number>(0)),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
-      email: new FormControl(''),
-      mobileNumber: new FormControl(''),
-      alternateNumber: new FormControl(''),
-      designation: new FormControl(''),
-      CompanyId: new FormControl(''),
-      city: new FormControl(''),
-      state: new FormControl(''),
-      country: new FormControl(''),
-      postalCode: new FormControl(''),
-      timeZone: new FormControl(''),
-      source: new FormControl(''),
-      address1: new FormControl(''),
-      address2: new FormControl('')
-      
-
-
-    });
+   
     
     if (this.Id) {
 
@@ -112,6 +110,10 @@ export class AddContactsComponent {
   }
   addcontact(): void {
     debugger;
+    this.submitted=true;
+    if(this.myForm.invalid){
+      return;
+    }
     console.log(this.myForm.value)
     if (this.myForm.valid) {
       if (this.myForm.value.id === 0) {
