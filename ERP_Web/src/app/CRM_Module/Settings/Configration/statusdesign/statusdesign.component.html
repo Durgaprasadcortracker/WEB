@@ -6,18 +6,18 @@
       </div>
       <div class="card-body">
 
-        <form>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
             <div class="row">
             <div class="col-md-6">
                 <label>Stage</label>
-                <select type="text" class="form-control form-control-lg" formControlName="Status" >
-                    <option value="null">Select</option>
+                <select type="text" class="form-control form-control-lg" formControlName="stageId" >
+                    <option value="">--Select Stage--</option>
                     <option *ngFor="let Stage of Stagelist" value="{{Stage.id}}">{{Stage.description}}</option>
                 </select>
                 </div>
                 <div class="col-md-6">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" placeholder="Enter description">
+                    <input type="text" class="form-control" formControlName="description" id="description" placeholder="Enter description">
                 </div>
             </div>
           <button type="submit" class="btn btn-primary m-2">Submit</button>
@@ -29,20 +29,27 @@
     <table class="table mt-4">
       <thead>
         <tr>
-          <th scope="col">SNo</th>
-          <th scope="col">Status</th>
+          <th scope="col">S.No</th>
+          <th scope="col">Stage</th>
+          <th scope="col">Description</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let a of statuses">
-          <th scope="row">{{a.SNo}}</th>
+        <tr *ngFor="let a of statuses  | paginate
+        : {
+            itemsPerPage: tableSize,
+            currentPage: page,
+            totalItems: count
+          }; let i=index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{a.stageName}}</td>
           <td>{{a.description}}</td>
           <td>
-            <button class="btn btn-sm btn-outline-primary">
+            <button routerLink="/CRM/Settings" [queryParams]="{statusid:a.id}" class="btn btn-sm btn-outline-primary">
               <i class="fa fa-pencil-alt"></i>
             </button>
-            <button class="btn btn-sm btn-outline-danger ml-2">
+            <button routerLink="/CRM/Settings" [queryParams]="{statusid:a.id}" class="btn btn-sm btn-outline-danger ml-2">
               <i class="fa fa-trash"></i>
             </button>
           </td>
@@ -50,4 +57,7 @@
       </tbody>
     </table>
   </div>
+  <div class="pagination-container">
+    <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+</div>
   
