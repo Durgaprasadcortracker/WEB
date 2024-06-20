@@ -1,27 +1,15 @@
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-2  px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <ul  class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li *ngFor="let a of list;let i = index" class="nav-item" >
-                        <a  (click)="selectedTab(i)"  class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">{{a}}</span>
-                        </a>
-                    </li>
-                </ul>
+<div class="card m-3">
+    <div class="card-header">
+        Configration
+    </div>
+    <div class="card-body d-flex">
+        <div class="left-bar">
+            <div *ngFor="let a of list">
+                <div class="items" [routerLink]="a.url" routerLinkActive="active" >{{a.name}}</div>
             </div>
         </div>
-
-
-        <div class="col py-3">
-            <app-statusdesign *ngIf="currenttab==0"></app-statusdesign>
-            <app-stagedesign  *ngIf="currenttab==1"></app-stagedesign>
-            <app-sourcedesign *ngIf="currenttab==2"></app-sourcedesign>
-            <app-timezone *ngIf="currenttab==3"> </app-timezone>
-            <app-industrytype *ngIf="currenttab==4"></app-industrytype>
-            <app-city *ngIf="currenttab==5"></app-city>
-            <app-industry *ngIf="currenttab==6"></app-industry>
-            <app-probability *ngIf="currenttab==3"></app-probability>    
+        <div class="content">
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

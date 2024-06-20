@@ -23,6 +23,14 @@ import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.compo
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
 import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
+import { ConfigrationComponent } from './CRM_Module/Settings/Configration/configration/configration.component';
+import { UserProfileComponent } from './CRM_Module/Settings/user-profile/user-profile.component';
+import { StatusdesignComponent } from './CRM_Module/Settings/Configration/statusdesign/statusdesign.component';
+import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagedesign/stagedesign.component';
+import { SourcedesignComponent } from './CRM_Module/Settings/Configration/sourcedesign/sourcedesign.component';
+import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
+import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
+import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
 
 const routes: Routes = [
 
@@ -41,13 +49,30 @@ const routes: Routes = [
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Addnewcompany', component: AddNewCompanyComponent },
       { path: 'editcompany/:id', component: AddNewCompanyComponent },
-      { path: 'Settings', component: SettingsMainComponent },
-      { path: 'Profileview', component: ProfileComponent } ,
-      { path: 'bulk-upload', component: BulkUploadMainComponent } ,
+      {
+        path: 'Settings', component: SettingsMainComponent,
+        children: [
+          { path: 'user-view', component: UserProfileComponent },
+          { path: 'configuration', component: ConfigrationComponent,
+            children: [
+              { path: 'status', component: StatusdesignComponent },
+              { path: 'stage', component: StagedesignComponent },
+              { path: 'source', component: SourcedesignComponent },
+              { path: 'time-zone', component: TimezoneComponent },
+              { path: 'city', component: CityComponent },
+              { path: 'industry', component: IndustryComponent },
+              { path: '**', redirectTo: '/CRM/Settings/configuration/status' }
+            ]
+           },
+          { path: '**', redirectTo: '/CRM/Settings/user-view' }
+        ]
+      },
+      { path: 'Profileview', component: ProfileComponent },
+      { path: 'bulk-upload', component: BulkUploadMainComponent },
       { path: 'addcontacts', component: AddContactsComponent },
       { path: 'Profileview/:id', component: ProfileComponent },
       {
-        path: 'leadView/:id', 
+        path: 'leadView/:id',
         component: LeadsViewComponent,
         children: [
           { path: 'ContactView/:id', component: ContactViewComponent },
@@ -55,15 +80,15 @@ const routes: Routes = [
           { path: 'callLogs/:id', component: CallLogsComponent },
           { path: 'events/:id', component: EventsComponent },
           { path: 'reminder/:id', component: RemindersComponent },
-        ] 
+        ]
       },
       { path: '**', redirectTo: '/CRM/Home' }
     ]
   },
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
-  { path: 'Changepassword', component: ChangePasswordComponent},
-  { path: '**', redirectTo: '/login' } 
+  { path: 'Changepassword', component: ChangePasswordComponent },
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

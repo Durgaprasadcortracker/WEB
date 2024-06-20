@@ -20,7 +20,7 @@
             </div>
             <ul *ngIf="(a.open) && (sideBarvalue)" class="submenuclass">
                 <li *ngFor="let k of a.submenus;let m = index">
-                    <div [routerLink]="k.router" [ngClass]="{'activeSub': subCurrentIndex == m}">
+                    <div [routerLink]="k.controllerName" [ngClass]="{'activeSub': subCurrentIndex == m}">
                         <span *ngIf="sideBarvalue">{{k.menuName}}</span>
                     </div>
                 </li>
