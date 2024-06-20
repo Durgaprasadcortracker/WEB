@@ -17,13 +17,14 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
+                        <th>Actions</th>
                         <th>Contact Name</th>
                         <th>Designation</th>
                         <th>Email</th>
                         <th>Phone Number</th>
                         <th>Company Name</th>
                         <th>Source</th>
-                        <th>Actions</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,14 @@
                     currentPage: page,
                     totalItems: count }; 
                     let i = index">
+                      <td>
+                        <span  routerLink="/CRM/edit-contacts/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
+                            
+                        </span>
+                        <span (click)="deleteContact(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
+                            
+                        </span>
+                    </td>
             
                         <td>{{a.firstName+''+a.lastName}}</td>
                         <td>{{a.designation}}</td>
@@ -39,14 +48,7 @@
                         <td>{{a.mobileNumber}}</td>
                         <td>{{a.companyName}}</td>
                         <td>{{a.sourceName}}</td>
-                        <td>
-                            <span  routerLink="/CRM/edit-contacts/{{a.id}}" class="material-symbols-outlined">
-                                edit
-                            </span>
-                            <span (click)="deleteContact(a.id)" class="material-symbols-outlined" style="padding-left: 25px;">
-                                delete
-                            </span>
-                        </td>
+                      
                     </tr>
                 </tbody>
             </table>

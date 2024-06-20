@@ -32,15 +32,22 @@
                 </div>
                 <div class="col-md-3">
                     <label>Company Name <span class="required">*</span>  </label>
-                    <select class="form-control"  formControlName="CompanyId">
-                        <option value="null">--Select Company--</option>
+                    <select class="form-select"  formControlName="CompanyId">
+                        <option value="0">--Select Company--</option>
                         <option *ngFor="let company of companylist" value="{{company.id}}">{{company.companyName}}</option>
                     </select>
                 </div>
                 <div class="col-md-3">
+                    <label>Country <span class="required">*</span></label>
+                    <select class="form-select" formControlName="country" (change)="getCitybycountry()">
+                        <option value="0">--Select Country--</option>
+                        <option *ngFor="let country of countrylist" value="{{country.id}}">{{country.description}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
                     <label>City<span class="required">*</span>  </label>
-                    <select class="form-control"  formControlName="city">
-                        <option value="">--Select City--</option>
+                    <select class="form-control" formControlName="city" (change)="getstatesbycountrycity()">
+                        <option value="0">--Select City--</option>
                         <option *ngFor="let city of citylist" value="{{city.id}}">{{city.description}}</option>
                     </select>
                 </div>
@@ -51,13 +58,7 @@
                         <option *ngFor="let state of statelist" value="{{state.id}}">{{state.description}}</option>
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <label>Country <span class="required">*</span></label>
-                    <select class="form-control"  formControlName="country">
-                        <option value="null">--Select Country--</option>
-                        <option *ngFor="let country of countrylist" value="{{country.id}}">{{country.description}}</option>
-                    </select>
-                </div>
+               
                 <div class="col-md-3">
                     <label>Postal Code <span class="required">*</span></label>
                     <input type="number" class="form-control" formControlName="postalCode">

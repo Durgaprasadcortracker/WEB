@@ -53,9 +53,15 @@ export class AddContactsComponent {
   });
 
   ngOnInit() {
+    this.getCompany();
+    this.getCity();
+    this.getState();
+    this.getCountry();
+    this.getTimeZone();
+    this.getSource();  
     console.log(this.Id)
-    this.myForm=this.fb.group({
-      id:[0],
+    this.myForm=new FormGroup({
+      id:new FormControl(<Number>(0)),
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       email: new FormControl(''),
@@ -75,7 +81,7 @@ export class AddContactsComponent {
 
 
     });
-  
+    
     if (this.Id) {
 
       this.http.getapi('api/Contacts/GetContactsby/' + this.Id).subscribe((res) => {
@@ -83,14 +89,27 @@ export class AddContactsComponent {
         this.myForm.patchValue(res.data);
       });
     }
-    this.getCompany();
-    this.getCity();
-    this.getState();
-    this.getCountry();
-    this.getTimeZone();
-    this.getSource();
+   
   }
+  cityId:any;
 
+  getstatesbycountrycity(){
+    debugger;
+    this.countryId= this.myForm.get("country")?.value;
+    this.cityId=this.myForm.get("city")?.value;
+    this.http.getapi('api/Common/GetCountryByState/'+this.cityId+"/"+this.countryId).subscribe((res) => {
+      debugger;
+      this.statelist = res.data;
+    });
+  }
+  countryId:any;
+  getCitybycountry(){
+    debugger;
+    this.countryId= this.myForm.get("country")?.value;
+    this.http.getapi('api/Common/cities/'+this.countryId).subscribe((res) => {
+      this.citylist = res;
+    });
+  }
   addcontact(): void {
     console.log(this.myForm.value)
     if (this.myForm.valid) {
@@ -118,9 +137,11 @@ export class AddContactsComponent {
 
 
   getCompany(){
-    this.http.getapi('api/Contacts/GetCompanies').subscribe((res) => {
+debugger;
+    this.http.getapi('api/Company/GetCompany').subscribe((res) => {
         console.log(res);
-        this.companylist=res
+        debugger;
+        this.companylist=res.data
       }
     );
   }
@@ -148,9 +169,9 @@ export class AddContactsComponent {
     );
   }
   getTimeZone(){
-    this.http.getapi('api/Contacts/GetTimezone').subscribe((res) => {
+    this.http.getapi('api/Common/GetTimezones').subscribe((res) => {
         console.log(res);
-        this.timeZonelist=res
+        this.timeZonelist=res.data
       }
     );
   }
