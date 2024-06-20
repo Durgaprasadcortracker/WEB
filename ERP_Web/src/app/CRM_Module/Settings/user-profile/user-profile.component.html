@@ -1,1 +1,63 @@
-<p>user-profile works!</p>
+
+<div class="profile-container">
+    
+    <div class="row">
+      <div class="col">
+        <div class="side-user">
+        
+          
+            <div class="side-img">
+                <img src="https://p7.hiclipart.com/preview/954/328/914/computer-icons-user-profile-avatar.jpg" alt="">
+            
+        </div>
+
+        
+        </div>
+          
+        <div class="side-content">
+          <div class="work-links">
+            <h3>Work Link</h3>
+            <a href="#">Website Link</a>
+            <a href="#">Bootstrap Profile</a>
+            <a href="#">Bootply Profile</a>
+          </div>
+          <div class="skills">
+            <h3>Skills</h3>
+            <ul>
+              <li>Web Designer</li>
+              <li>Web Developer</li>
+              <li>WordPress</li>
+              <li>WooCommerce</li>
+              <li>PHP, .Net</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col content-column">
+        <div class="header">
+          <h2>John Doe</h2>
+          <button class="edit-profile-btn" (click)="editProfile()" >Edit Profile</button>
+        </div>
+        <h3>Web Developer and Designer</h3>
+        <p class="ranking">Ranking: 8/10</p>
+        <div class="tabs">
+          <span class="tab" [class.active]="activeTab === 'about'" (click)="showTab('about')">About</span>
+          <span class="tab" [class.active]="activeTab === 'timeline'" (click)="showTab('timeline')">Timeline</span>
+        </div>
+        
+        <div id="about" class="tab-content" *ngIf="activeTab === 'about'">
+          <div class="contact-info">
+            <p><strong style="margin-right: 100px;">User Id:</strong> {{a.userId}}</p>
+            <p><strong style="margin-right: 100px;">Name:</strong> {{a.first_name}}{{a.last_name}}</p>
+            <p><strong style="margin-right: 100px;">Email:</strong> {{a.email}}</p>
+            <p><strong style="margin-right: 100px;">Phone:</strong> {{a.phoneNumber}}</p>
+            <p><strong style="margin-right: 100px;">Designation:</strong>{{a.designation}}</p>
+          </div>
+        </div>
+        
+        <div id="timeline" class="tab-content" *ngIf="activeTab === 'timeline'">
+          <p>Timeline content goes here...</p>
+        </div>
+      </div>
+    </div>
+  </div>

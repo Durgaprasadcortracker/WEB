@@ -19,7 +19,7 @@ import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads
 import { ContactViewComponent } from './CRM_Module/Leads/leadView/contact-view/contact-view.component';
 import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conversion/email-conversion.component';
 import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
-import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
+
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
 import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
@@ -31,6 +31,8 @@ import { SourcedesignComponent } from './CRM_Module/Settings/Configration/source
 import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
 import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
 import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
+import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
+import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 
 const routes: Routes = [
 
@@ -49,6 +51,10 @@ const routes: Routes = [
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Addnewcompany', component: AddNewCompanyComponent },
       { path: 'editcompany/:id', component: AddNewCompanyComponent },
+      { path: 'events', component: EventsComponent },
+      { path: 'quoteslisting', component: QuoteslistingComponent },
+
+
       {
         path: 'Settings', component: SettingsMainComponent,
         children: [
