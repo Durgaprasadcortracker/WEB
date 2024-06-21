@@ -1,0 +1,26 @@
+<div class="container-fluid">
+
+
+    <div class="tabs" style="width: 100%;">
+        <div class="tab-header">
+          <div
+            class="tab"
+            *ngFor="let tab of tabs; let i = index"
+            [class.active]="selectedTab === i"
+            (click)="selectTab(tab,i)"
+          >
+            {{ tab.label }}
+          </div>
+        </div>
+        <div class="tab-content" style="width: 100%;">
+            <div *ngIf="selectedTab !== null">
+                <div *ngIf="selectedTab == 0">
+                  <app-profile></app-profile>
+                </div>
+                <div *ngIf="selectedTab == 1"><app-contacts-main></app-contacts-main></div>
+                <div *ngIf="selectedTab == 2"><app-quoteslisting></app-quoteslisting> </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    

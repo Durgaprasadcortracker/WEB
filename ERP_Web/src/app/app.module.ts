@@ -48,6 +48,7 @@ import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotesli
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 
 import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
+import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,8 @@ import { StateComponent } from './CRM_Module/Settings/Configration/state/state.c
     IndustryComponent,
    
     ProbabilityComponent,
-         StateComponent
+         StateComponent,
+         CompaniesInfoComponent
   ],
   imports: [
     AppRoutingModule,

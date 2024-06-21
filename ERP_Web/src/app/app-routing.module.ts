@@ -35,6 +35,7 @@ import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotesli
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
 import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
+import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
 
 const routes: Routes = [
 
@@ -55,8 +56,8 @@ const routes: Routes = [
       { path: 'editcompany/:id', component: AddNewCompanyComponent },
       { path: 'events', component: EventsComponent },
       { path: 'quoteslisting', component: QuoteslistingComponent },
-
-
+      { path: 'companiesinfo/:id', component: CompaniesInfoComponent },
+      { path: 'userprofile', component: UserProfileComponent },
       {
         path: 'Settings', component: SettingsMainComponent,
         children: [
@@ -97,6 +98,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
+
   { path: 'Changepassword', component: ChangePasswordComponent },
   { path: '**', redirectTo: '/login' }
 ];
