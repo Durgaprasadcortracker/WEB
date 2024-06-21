@@ -13,10 +13,6 @@ export class ConfigrationComponent {
       url: "/CRM/Settings/configuration/status"
     },
     {
-      name: "Stage",
-      url: "/CRM/Settings/configuration/stage"
-    },
-    {
       name: "Source",
       url: "/CRM/Settings/configuration/source"
     },
@@ -33,6 +29,11 @@ export class ConfigrationComponent {
       url: "/CRM/Settings/configuration/industry"
     },
     {
+      name: "Industry Type",
+      url: "/CRM/Settings/configuration/industry-type"
+    },
+
+    {
       name: "Probability",
       url: "/CRM/Settings/configuration/probability"
     },
@@ -41,8 +42,21 @@ export class ConfigrationComponent {
       url: "/CRM/Settings/configuration/state"
     },
     {
+<<<<<<< Updated upstream
       name: "Country",
       url: "/CRM/Settings/configuration/country"
+=======
+      name: "Call Type",
+      url: "/CRM/Settings/configuration/call-type"
+    },
+    {
+      name: "Stage",
+      url: "/CRM/Settings/configuration/stage"
+    },
+    {
+      name: "Quote Type",
+      url: "/CRM/Settings/configuration/Quotetype"
+>>>>>>> Stashed changes
     }
   ]
 }

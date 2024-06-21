@@ -43,6 +43,9 @@ import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms
 import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotes/quoteslisting/quoteslisting.component';
 import { QuotesInvoiceComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-invoice/quotes-invoice.component';
 import { CountryComponent } from './CRM_Module/Settings/Configration/country/country.component';
+import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
+import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
+import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
 
 const routes: Routes = [
 
@@ -74,7 +77,8 @@ const routes: Routes = [
         path: 'Settings', component: SettingsMainComponent,
         children: [
           { path: 'user-view', component: UserProfileComponent },
-          { path: 'configuration', component: ConfigrationComponent,
+          {
+            path: 'configuration', component: ConfigrationComponent,
             children: [
               { path: 'status', component: StatusdesignComponent },
               { path: 'stage', component: StagedesignComponent },
@@ -84,10 +88,14 @@ const routes: Routes = [
               { path: 'industry', component: IndustryComponent },
               { path: 'probability', component: ProbabilityComponent },
               { path: 'state', component: StateComponent },
-              { path:'country', component:CountryComponent },
+              { path: 'country', component: CountryComponent },
+              { path: 'industry-type', component: IndustrytypeComponent },
+              { path: 'call-type', component: CalltypeComponent },
+              { path: 'Quotetype', component: QuotetypeComponent },
+
               { path: '**', redirectTo: '/CRM/Settings/configuration/status' }
             ]
-           },
+          },
           { path: '**', redirectTo: '/CRM/Settings/user-view' }
         ]
       },
@@ -107,7 +115,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'Campagins', 
+        path: 'Campagins',
         component: CampaginsMainComponent,
         children: [
           { path: '', component: CampaginsComponent },
@@ -115,7 +123,7 @@ const routes: Routes = [
           { path: 'email-conversation', component: EmailCampaginsComponent },
           { path: 'social-media-campagins', component: SocialMediaCampaginsComponent },
           { path: 'sms-campagins', component: SmsCampaginsComponent },
-        ] 
+        ]
       },
 
 

@@ -15,30 +15,46 @@
           <button type="button" class="btn btn-secondary ml-2">Close</button>
         </form>
       </div>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      Stage 
     </div>
-  
-    <table class="table mt-4">
-      <thead>
-        <tr>
-          <th scope="col">S.No</th>
-          <th scope="col">Stage</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of Stagelist">
-          <th scope="row">1</th>
-          <td>{{a.description}}</td>
-          <td>
-            <button class="btn btn-sm btn-outline-primary">
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-            <button class="btn btn-sm btn-outline-danger ml-2">
-              <i class="fa fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+    <div class="card-body">
+      <form [formGroup]="stageForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" formControlName="description" id="description" placeholder="Enter description">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">Close</button>
+      </form>
+    </div>
   </div>
-  
+
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Stage</th> 
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of stagelist; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{s.description}}</td> 
+        <td>
+          <button routerLink="/CRM/Settings/configuration/stage" [queryParams]="{stageid:s.id}" class="btn btn-sm btn-outline-primary" (click)="edit(s.id)">
+            <i class="fa fa-pencil-alt"></i>
+          </button>
+          <button routerLink="/CRM/Settings/configuration/stage" [queryParams]="{stageid:s.id}" class="btn btn-sm btn-outline-danger ml-2" (click)="deleteStage(s.id)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> 
+
