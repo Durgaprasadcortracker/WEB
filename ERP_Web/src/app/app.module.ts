@@ -47,6 +47,7 @@ import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probabi
 import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 
+import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +89,8 @@ import { EventsComponent } from './CRM_Module/Leads/events/events.component';
     IndustrytypeComponent,
     IndustryComponent,
    
-    ProbabilityComponent
+    ProbabilityComponent,
+         StateComponent
   ],
   imports: [
     AppRoutingModule,
