@@ -49,6 +49,12 @@ import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 
 import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
+import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms-campagins/sms-campagins.component';
+import { SocialMediaCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/social-media-campagins/social-media-campagins.component';
+import { EmailCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/email-campagins/email-campagins.component';
+import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campagins/campagins.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,10 +95,15 @@ import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/co
     CityComponent,
     IndustrytypeComponent,
     IndustryComponent,
-   
+
     ProbabilityComponent,
-         StateComponent,
-         CompaniesInfoComponent
+    StateComponent,
+    CompaniesInfoComponent,
+    SmsCampaginsComponent,
+    SocialMediaCampaginsComponent,
+    EmailCampaginsComponent,
+    CampaginsComponent,
+    ConfigrationComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -103,10 +114,11 @@ import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/co
     FormsModule,
     BrowserModule,
     NgxPaginationModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    
   ],
-  exports:[
-    BrowserModule 
+  exports: [
+    BrowserModule
   ],
   providers: [
     provideClientHydration(),

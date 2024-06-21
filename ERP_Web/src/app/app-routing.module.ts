@@ -36,6 +36,11 @@ import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
 import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
+import { AddEmailConversationComponent } from './CRM_Module/Campagins/add-email-conversation/add-email-conversation.component';
+import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campagins/campagins.component';
+import { EmailCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/email-campagins/email-campagins.component';
+import { SocialMediaCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/social-media-campagins/social-media-campagins.component';
+import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms-campagins/sms-campagins.component';
 
 const routes: Routes = [
 
@@ -48,8 +53,9 @@ const routes: Routes = [
       { path: 'add-contacts', component: AddContactsComponent },
       { path: 'edit-contacts/:id', component: AddContactsComponent },
       { path: 'Leads', component: LeadsMainComponent },
-      { path: 'Campagins', component: CampaginsMainComponent },
+      // { path: 'Campagins', component: CampaginsMainComponent },
       { path: 'CampaginsAdd', component: AddCampaginComponent },
+      { path: 'AddEmailConversation', component: AddEmailConversationComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Addnewcompany', component: AddNewCompanyComponent },
@@ -93,6 +99,19 @@ const routes: Routes = [
           { path: 'reminder/:id', component: RemindersComponent },
         ]
       },
+      {
+        path: 'Campagins', 
+        component: CampaginsMainComponent,
+        children: [
+          { path: '', component: CampaginsComponent },
+          { path: 'campagins', component: CampaginsComponent },
+          { path: 'email-conversation', component: EmailCampaginsComponent },
+          { path: 'social-media-campagins', component: SocialMediaCampaginsComponent },
+          { path: 'sms-campagins', component: SmsCampaginsComponent },
+        ] 
+      },
+
+
       { path: '**', redirectTo: '/CRM/Home' }
     ]
   },

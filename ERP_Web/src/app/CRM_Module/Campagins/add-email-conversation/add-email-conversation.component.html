@@ -1,0 +1,72 @@
+<div class="card m-3">
+    <div class="card-header">
+        <h5>New Email Campaign</h5>
+    </div>
+    <div class="card-body">
+        <form (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" class="form-control" formControlName="name" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" id="subject" class="form-control" formControlName="subject" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="fromAddress" class="form-label">From address</label>
+                    <input type="text" id="fromAddress" class="form-control"
+                        value="" formControlName="fromAddress">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="lists" class="form-label">Lists<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <select type="text" class="form-select form-control-lg" formControlName="lists">
+                            <option value="0">--Select Lists-- </option>
+                            <option>Default Lists</option>
+                            <option>Opt-in Lists</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="template" class="form-label">Template<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <select type="text" class="form-select form-control-lg" formControlName="template">
+                            <option value="0">--Select Template-- </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="messenger" class="form-label">Messanger<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <select type="text" class="form-select form-control-lg" formControlName="messenger">
+                            <option value="0">--Select Messanger-- </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="tags" class="form-label">Tags</label>
+                    <input type="text" id="tags" class="form-control" formControlName="tags">
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="customHeaders" class="form-label">Set custom headers</label>
+                    <textarea id="customHeaders" class="form-control" formControlName="customHeaders"
+                        rows="3"></textarea>
+                </div>
+                <div style="width: 200px; justify-content: first baseline;">
+                    <label for="sendLater" class="form-label">Send later</label>
+                    <div class="input-group">
+                        <input type="datetime-local" id="sendLater" class="form-control" formControlName="sendLater">
+                        <span class="input-group-text">
+                            <i class="bi bi-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3 d-flex" style="justify-content: end;">
+                    <button type="submit" class="btn btn-primary" style="width: 200px;">Submit</button>
+                    <div routerLink="/CRM/Campagins/email-conversation"  class="btn btn-danger" style="width: 200px;">Close</div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

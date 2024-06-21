@@ -1,0 +1,48 @@
+<div>
+    <div class="card-header">
+      All Email Campaigns
+    </div>
+    <div class="card-body" >
+        <div>
+            <div style="float: right; padding-bottom: 20px;">
+                <button routerLink="/CRM/AddEmailConversation" class="btn btn-danger">Add Email</button>
+            </div>
+        </div>
+      <table class="table" >
+        <thead>
+          <tr>
+            <th scope="col">Email Status</th> <!--campaigns_details-->
+            <th scope="col">Email Name</th> <!--campaigns_details-->
+            <th scope="col">Email List</th> <!--email_conversation-->
+            <th scope="col">Start Date</th> <!--campaigns_details-->
+            <th scope="col">End Date</th> <!--campaigns_details-->
+            <!-- <th scope="col">Stats</th>  -->
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of listOfCampagins | paginate: 
+          { itemsPerPage: tableSize, 
+          currentPage: page,
+          totalItems: count }; 
+          let i = index">
+            <td>{{ a.emailStatus }}</td>
+            <td>{{ a.eMail }}</td>
+            <td>{{ a.list }}</td>
+            <td>{{ a.emailCreated }}</td>
+            <td>{{ a.emailUpdate }}</td>
+            <!-- <td>{{ a.description }}</td> -->
+            <td>
+              <span class="material-symbols-outlined"   (click)="edit(editData.id)" routerLink="/CRM/AddEmailConversation/{{a.id}}">edit</span>
+            <span class="material-symbols-outlined" style="padding-left: 25px;" (click)="deleteEmail(a.id)">delete</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination-container mt-4">
+        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
+    </div>
+    </div>
+  </div>
+  

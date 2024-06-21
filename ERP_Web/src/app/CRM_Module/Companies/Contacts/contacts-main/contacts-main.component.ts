@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contacts-main',
@@ -15,7 +16,10 @@ export class ContactsMainComponent {
   tableSizes: any = [3, 6, 9, 12];
   p:number=1;
   
-  constructor(private http: BackendService) { }
+  constructor(private http: BackendService,
+    
+    private snackBar: MatSnackBar,
+  ) { }
 
 
   data = {
@@ -54,6 +58,9 @@ export class ContactsMainComponent {
   }
   deleteContact(ID:any){
     this.http.deleteapi('api/Contacts/DeleteContacts/'+ID).subscribe((res) => {
+      this.snackBar.open('Contact successfully Deleted!', 'Close', {
+        duration: 3000, // Snackbar stays open for 3 seconds
+      });
         console.log(res);
         this.listOfContacts=res
         this.ngOnInit()
