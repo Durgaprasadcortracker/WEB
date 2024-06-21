@@ -58,6 +58,7 @@ import { EmailCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/e
 import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campagins/campagins.component';
 
 
+import { CountryComponent } from './CRM_Module/Settings/Configration/country/country.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,7 @@ import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campag
     ContactsMainComponent,
     AddNewCompanyComponent,
     LeadsViewComponent,
-    
+
     ContactViewComponent,
     EmailConversionComponent,
     CallLogsComponent,
@@ -98,23 +99,22 @@ import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campag
     CityComponent,
     IndustrytypeComponent,
     IndustryComponent,
-
     ProbabilityComponent,
     StateComponent,
     CompaniesInfoComponent,
-    SmsCampaginsComponent,
     SocialMediaCampaginsComponent,
     EmailCampaginsComponent,
     CampaginsComponent,
     ConfigrationComponent,
-   QuoteslistingComponent,
+    QuoteslistingComponent,
     ProbabilityComponent,
-      QuotesCreateComponent,
-      QuoteslistingComponent,
-      SignUpComponent
+    QuotesCreateComponent,
+    QuoteslistingComponent,
+    SignUpComponent,
+    StateComponent,
+    CompaniesInfoComponent,
   ],
   imports: [
-    AppRoutingModule,
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
@@ -123,7 +123,7 @@ import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campag
     BrowserModule,
     NgxPaginationModule,
     MatSnackBarModule,
-    
+
   ],
   exports: [
     BrowserModule

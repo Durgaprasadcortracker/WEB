@@ -12,6 +12,7 @@ export class StagedesignComponent {
 
   Stagelist: any;
   myForm: FormGroup;
+ 
 
   constructor(private fb: FormBuilder, private http: BackendService) {
     
@@ -39,5 +40,5 @@ export class StagedesignComponent {
         this.Stagelist = res
       });
     }
-
+   
 }

@@ -39,6 +39,10 @@ export class ConfigrationComponent {
     {
       name: "State",
       url: "/CRM/Settings/configuration/state"
+    },
+    {
+      name: "Country",
+      url: "/CRM/Settings/configuration/country"
     }
   ]
 }
