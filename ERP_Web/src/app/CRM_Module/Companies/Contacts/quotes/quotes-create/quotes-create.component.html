@@ -1,0 +1,245 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            Quote Information
+        </div>
+        <div class="card-body">
+    <div class="tabs">
+        <div class="tab-header">
+            <div class="tab" *ngFor="let tab of tabs; let i = index" [class.active]="selectedTab === i">
+                <span *ngIf="QuotedItems" (click)="selectTab(tab,i)">{{ tab }}</span>
+                <span *ngIf="!QuotedItems">{{ tab }}</span>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div *ngIf="selectedTab !== null">
+
+                <div *ngIf="selectedTab == 0" class="form first">
+                    <form [formGroup]="myForm" (ngSubmit)="addquotes()">
+                      <div class="row">
+                           <div class="col-md-6">
+                            <label>Quote Id <span style="color: red;">*</span></label>
+                            <input  type="text" style="width: 50%;" class="form-control" formControlName="quoteid" >
+
+                           </div>
+                           <div class="col-md-6">
+                            <label>Company Name <span style="color: red;">*</span></label>
+                            <select class="form-select" style="width: 50%;" formControlName="companyname">
+                                <option value="null">Select</option>
+                                <option *ngFor="let company of companylist" value="{{company.id}}">{{company.companyName}}</option>
+                            </select>
+                           </div>
+
+                           </div>
+                           <div class="row">
+                           <div class="col-md-6">
+                            <label>Valid Until <span style="color: red;">*</span></label>
+                            <input type="date" style="width: 50%;text-align: left;" class="form-control" formControlName="validuntil">
+                           </div>
+                           <div class="col-md-6">
+                            <label>Quote Type<span style="color: red;">*</span></label>
+                            <select class="form-select" style="width: 50%;" formControlName="quotetype">
+                                <option value="null">Draft</option>
+                                <option value="null">Invoice</option>
+                                <option value="null">Quote</option>
+                            </select>
+                           </div>
+                      </div>
+                      <div style="padding-top: 20px;">
+                        <h4>Address Information</h4>
+                        <hr/>
+                        
+                     
+                        <div class="details personal">
+                                 
+                                   
+                                  
+                                    <div class="card">
+                                       <div class="card-header">
+                                          Billing From
+                                       </div>
+                                       <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Name <span class="required">*</span></label>
+                                                <input type="text" style="width: 50%;" class="form-control" formControlName="billingfromcompanyname">
+                                            
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Company Address <span class="required">*</span></label>
+                                                <input type="text" style="width: 50%;" class="form-control" formControlName="billingfromcompanyaddress">
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email <span class="required">*</span></label>
+                                                <input type="text" style="width: 50%;" class="form-control" formControlName="billingfromemail">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Phone Number <span class="required">*</span></label>
+                                                <input type="number" style="width: 50%;" class="form-control" formControlName="billingfromphonenumber">
+                                            </div>
+                                            
+                                       </div>
+                                    
+                                       </div>
+                                    </div>
+                                   <div class="card">
+                                      <div class="card-header">
+                                         Billing To
+                                      </div>
+                                      <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Name <span class="required">*</span></label>
+                                                <input type="text" style="width: 50%;" class="form-control" formControlName="billingtocompanyname">
+                                            
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Company Address <span class="required">*</span></label>
+                                                <input type="text" style="width: 50%;" class="form-control" formControlName="billingtocompanyaddress">
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email <span class="required">*</span></label>
+                                                <input type="text" style="width: 50%;" class="form-control" formControlName="billingtoemail">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Phone Number <span class="required">*</span></label>
+                                                <input type="number" style="width: 50%;" class="form-control" formControlName="billingtophonenumber">
+                                            </div>
+                                            
+                                       </div>
+                                    
+                                       </div>
+                                   </div>
+                                   <div class="card">
+                                       <div class="card-header">
+                                        Terms and Conditions
+                                       </div>
+                                       <div class="card-body">
+                                        <div class="row">
+                                           <div class="col-md-6">
+                                            <label>Terms And Conditions <span class="required">*</span></label>
+                                            <textarea type="text" class="form-control" style="width: 50%;"
+                                                formControlName="termsandconditions"></textarea>
+
+                                           </div>
+                                           <div class="col-md-6">
+                                            <label>Description Information <span class="required">*</span></label>
+                                            <textarea type="text" class="form-control" style="width: 50%;"
+                                                formControlName="descriptioninformation"></textarea>
+                                           </div>
+                                        </div>
+                                      
+                                       </div>
+                                   </div>
+                                   
+                                   
+                                  
+                        </div>
+                            
+                      
+                        <div class="details ID">
+                            <div class="emp-buttons">
+                                <a style="width: 200px;" type="submit" (click)="next()" class="btn btn-primary submit-btn">Next</a>
+
+                                <div (click)="close()" routerLink="/quotations" style="width: 200px;" type="button"
+                                    class="btn btn-danger cancel-btn">Cancel</div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div *ngIf="selectedTab == 1">
+                     <div style="display: flex; justify-content: end; margin: 10px;">
+                        <div (click)="AddNewLine()" class="btn btn-danger" >Add new Product</div>
+                     </div>  
+
+                    <table class="table table-sm" style="width: 100px !important;">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">S.NO</th>
+                                <th style="width: 60px;">Product Name</th>
+                                <th style="width: 60px;">Quantity</th>
+                                <th style="width: 60px;">List Price ($)</th>
+                                <th style="width: 60px;">Amount ($)</th>
+                                <th style="width: 60px;">Discount ($)</th>
+                                <th style="width: 60px;">Tax ($)</th>
+                                <th style="width: 60px;">Total ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of lineItem;let i = index">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    <input type="text" width="30px" name="" id="" [(ngModel)]="a.productName">
+                                </td>
+                                <td>
+                                    <input type="number" name="" id="" [(ngModel)]="a.quantity">
+                                </td>
+                                <td>
+                                    <input (change)="calculateTotal(i)" type="number" name="" id="" [(ngModel)]="a.listPrice">
+                                </td>
+                                <td>
+                                    <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.amount">
+                                </td>
+                                <td>
+                                    <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.discount">
+                                </td>
+                                <td>
+                                    <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.tax">
+                                </td>
+                                <td>
+                                    <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.total">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="invoice-main">
+                        <div class="invoice">
+                            <div class="row">
+                                <label for="subtotal">Sub Total ($)</label>
+                                <input type="text" id="subtotal" formControlName="subtotal" value="5300" readonly>
+                            </div>
+                            <div class="row">
+                                <label for="discount">Discount ($)</label>
+                                <input type="text" id="discount" formControlName="Discount" value="0" readonly>
+                            </div>
+                            <div class="row">
+                                <label for="tax">Tax ($)</label>
+                                <input type="text" id="Tax" formControlName="Tax" value="0" readonly>
+                            </div>
+                            <div class="row">
+                                <label for="adjustment">Adjustment ($)</label>
+                                <input type="text" id="adjustment" formControlName="adjustment">
+                            </div>
+                            <div class="row">
+                                <label for="grandtotal">Grand Total ($)</label>
+                                <input type="text" id="grandtotal" formControlName="grandtotal" value="5300" readonly>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="details ID">
+                        <div class="emp-buttons" style="display: flex; gap: 10px;">
+                            <button type="submit" style="width: 200px;margin-right: 10px;" class="btn btn-primary" >Submit</button>
+
+                            <div style="width: 200px;" routerLink="/CRM/quotes-create"  type="button" class="btn btn-danger">Close</div>
+    
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>

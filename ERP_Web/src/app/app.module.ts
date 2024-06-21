@@ -44,8 +44,11 @@ import { CityComponent } from './CRM_Module/Settings/Configration/city/city.comp
 import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
 import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
 import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
-import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
+
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
+import { QuotesCreateComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-create/quotes-create.component';
+import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotes/quoteslisting/quoteslisting.component';
+
 
 import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
@@ -77,7 +80,7 @@ import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campag
     ContactsMainComponent,
     AddNewCompanyComponent,
     LeadsViewComponent,
-    QuoteslistingComponent,
+    
     ContactViewComponent,
     EmailConversionComponent,
     CallLogsComponent,
@@ -104,6 +107,11 @@ import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campag
     EmailCampaginsComponent,
     CampaginsComponent,
     ConfigrationComponent,
+   QuoteslistingComponent,
+    ProbabilityComponent,
+      QuotesCreateComponent,
+      QuoteslistingComponent,
+      SignUpComponent
   ],
   imports: [
     AppRoutingModule,

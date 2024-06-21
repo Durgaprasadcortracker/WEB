@@ -31,7 +31,10 @@ import { SourcedesignComponent } from './CRM_Module/Settings/Configration/source
 import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
 import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
 import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
-import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
+
+
+
+import { QuotesCreateComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-create/quotes-create.component';
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
 import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
@@ -41,6 +44,8 @@ import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campag
 import { EmailCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/email-campagins/email-campagins.component';
 import { SocialMediaCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/social-media-campagins/social-media-campagins.component';
 import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms-campagins/sms-campagins.component';
+import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotes/quoteslisting/quoteslisting.component';
+import { QuotesInvoiceComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-invoice/quotes-invoice.component';
 
 const routes: Routes = [
 
@@ -64,6 +69,10 @@ const routes: Routes = [
       { path: 'quoteslisting', component: QuoteslistingComponent },
       { path: 'companiesinfo/:id', component: CompaniesInfoComponent },
       { path: 'userprofile', component: UserProfileComponent },
+      { path: 'quotes-create', component: QuotesCreateComponent },
+      { path: 'editquotes/:id', component: QuotesCreateComponent },
+      { path: 'quotes-invoice', component: QuotesInvoiceComponent },
+
       {
         path: 'Settings', component: SettingsMainComponent,
         children: [

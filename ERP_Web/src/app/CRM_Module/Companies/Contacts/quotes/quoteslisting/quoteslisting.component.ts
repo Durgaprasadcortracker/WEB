@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { BackendService } from '../../../../Services/BackendConnection/backend.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BackendService } from '../../../../../Services/BackendConnection/backend.service';
+
+
 
 
 @Component({
@@ -8,12 +10,13 @@ import { BackendService } from '../../../../Services/BackendConnection/backend.s
   styleUrls: ['./quoteslisting.component.scss']
 })
 export class QuoteslistingComponent {
- 
   page: number = 1;
   count: number = 0;
   tableSize: number = 5;
   tableSizes: any = [3, 6, 9, 12];
   p:number=1;
+  a: any;
+  router: any;
   
   constructor(private http: BackendService) { }
 
@@ -36,9 +39,9 @@ export class QuoteslistingComponent {
     this.ngOnInit()
   }
   getData(){
-    this.http.getapi('api/Deals/GetQuotes').subscribe((res) => {
+    this.http.getapi('api/Quotation/GetQuotations').subscribe((res) => {
         console.log(res);
-        this.listOfQuotes=res.data
+        this.listOfQuotes=res
       }
     );
   }
@@ -51,16 +54,20 @@ export class QuoteslistingComponent {
     this.page = 1;
     this.getData();
   }
-  deleteQuote(ID:any){
-    this.http.deleteapi('api/Deals/DeleteQuotes/'+ID).subscribe((res) => {
-        console.log(res);
-        this.listOfQuotes=res
-        this.ngOnInit()
+  DeleteQuotations(ID:any){
+    this.http.deleteapi('api/Quotation/DeleteQuotations/'+ID).subscribe((res) => {
+      // this.snackBar.open('Quotation successfully Deleted!', 'Close', {
+      //   duration: 3000, // Snackbar stays open for 3 seconds
+      // });
+      console.log(res);
+      this.listOfQuotes=res
+      this.ngOnInit()
       }
     );
   }
-  edit(data:any){
-    this.addQuotes = 1;
-    this.editData = data
+ 
+  edit(Id: any) {
+    this.router.navigate(['/CRM/editcompany', Id]);
   }
+
 }
