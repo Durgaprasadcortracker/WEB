@@ -1,3 +1,47 @@
 .enable-bullets li {
-    list-style-type: disc; /* You can use 'disc', 'circle', 'square', etc. */
+    list-style-type: disc; 
+}
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+.dropdown-container {
+    /* width: 200px; */
+}
+
+.styled-select {
+    min-width: 70px;
+    width: calc(100%);
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #000;
+    font-size: 14px;
+    appearance: none; /* Remove default arrow for better customization */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    text-indent: 5px;
+    text-overflow: '';
+}
+
+.styled-select option {
+    background-color: #fff;
+    color: #000;
 }

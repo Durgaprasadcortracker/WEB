@@ -10,8 +10,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './add-new-company.component.css'
 })
 export class AddNewCompanyComponent {
-
-
   industrylist: any;
   industrytypelist: any;
   citylist: any;
@@ -21,11 +19,6 @@ export class AddNewCompanyComponent {
   submitted: any;
  
   Id: any;
-
-  @Output() childEvent = new EventEmitter<string>();
-  @Input() editData: any;
-
-
 
   myForm: FormGroup = new FormGroup({
     Id: new FormControl(0),
