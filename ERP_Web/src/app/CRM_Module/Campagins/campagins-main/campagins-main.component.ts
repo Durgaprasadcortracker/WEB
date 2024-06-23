@@ -18,6 +18,7 @@ export class CampaginsMainComponent {
   p:number=1;
   openMail=false
 toolbar: any;
+campaigns: any;
  
   constructor(private http: BackendService) { }
   companyPage = 0

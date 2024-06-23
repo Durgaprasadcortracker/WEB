@@ -1,92 +1,110 @@
-<form>
-    <div class="form first">
-        <h3>Calls Logs</h3>
-        <hr />
-        <div class="card-body">
-            <div>
-                <div class="mr-2 d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary">Create Call Log</button>
-                </div>
+<div class="form first">
+    <h3>Calls Logs</h3>
+    <hr />
+    <div *ngIf="open==1" class="card-body">
+        <div>
+            <div class="mr-2 d-flex justify-content-end">
+                <button type="button" routerLink="/CRM/leadView/{{id}}/callLogs/{{id}}" [queryParams]="{callsLogs:0}" class="btn btn-primary">Create Call Log</button>
             </div>
-            <div class="row mt-2">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>Contact</th>
-                            <th>Call Types </th>
-                            <th>Date</th>
-                            <th>Comments</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let a of calllogsList;let i = index">
-                            <td>{{i+1}}</td>
-                            <td>{{a.contactId}}</td>
-                            <td>{{a.callTypes}}</td>
-                            <td>{{a.callDate | date}}</td>
-                            <td>{{a.comments}}</td>
-                            <td>
-                                <span class="material-symbols-outlined">
-                                    edit
-                                </span>
-                                <span class="material-symbols-outlined">
-                                    delete
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
         </div>
-        <!-- <div>
-
-            <div class="fields" style="display: flex; width: 600px; flex-wrap: wrap;">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="input-field">
-                            <label>Contacts</label>
-                            <select class="form-select" formControlName="pipeline">
-                                <option value="null">Select Contacts</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="input-field">
-                            <label>Call types</label>
-                            <select class="form-select" formControlName="pipeline">
-                                <option value="null">Select types</option>
-                            </select>
+        <div class="row mt-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Contact</th>
+                        <th>Call Types </th>
+                        <th>Date</th>
+                        <th>Comments</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of calllogsList;let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{a.contactId}}</td>
+                        <td>{{a.callTypes}}</td>
+                        <td>{{a.callDate | date}}</td>
+                        <td>{{a.comments}}</td>
+                        <td>
+                            <span routerLink="/CRM/leadView/{{id}}/callLogs/{{id}}"  [queryParams]="{callsLogs:a.id}" (click)="edit(a.id)" class="material-symbols-outlined mr-2">
+                                edit
+                            </span>
+                            <span (click)="deleteCallLog(a.id)" class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="open==2">
+        <form [formGroup]="myForm" (ngSubmit)="addCallLog()">
+            <div class="d-flex flex-wrap">
+                <div class="col-md-3">
+                    <label for="companyIndustry" class="form-label">Contact<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <select type="text" class="form-select form-control-lg" formControlName="contactId"
+                            [ngClass]="{ 'is-invalid': submitted && f['contactId'].errors }">
+                            <option value="0">--Select Contact-- </option>
+                            <option *ngFor="let a of contactsList" value="{{a.id}}">
+                                {{a.firstName +" "+ a.lastName}}</option>
+                        </select>
+                        <div *ngIf="submitted && f['contactId'].errors" class="invalid-feedback">
+                            <div *ngIf="f['contactId'].errors['required']">Contact is required.</div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="input-field">
-                            <label>Date </label>
-                            <input type="date" class="form-control" formControlName="datetime-local">
+                <div class="col-md-3">
+                    <label for="callTypes" class="form-label">Call Types<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <select type="text" class="form-select form-control-lg" formControlName="callTypes"
+                            [ngClass]="{ 'is-invalid': submitted && f['callTypes'].errors }">
+                            <option value="0">--Select Industry-- </option>
+                            <option *ngFor="let a of calltypeslist" value="{{a.id}}">
+                                {{a.description}}</option>
+                        </select>
+                        <div *ngIf="submitted && f['callTypes'].errors" class="invalid-feedback">
+                            <div *ngIf="f['callTypes'].errors['required']">Call Types is required.</div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="input-field">
-                            <label>Comments</label>
-                            <textarea class="form-control" rows="3" id=""></textarea>
+                </div>
+                <div class="col-md-3">
+                    <label for="callDate" class="form-label">Call Date<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="date" class="form-control form-control-lg" formControlName="callDate"
+                            [ngClass]="{ 'is-invalid': submitted && f['callDate'].errors }" />
+                        <div *ngIf="submitted && f['callDate'].errors" class="invalid-feedback">
+                            <div *ngIf="f['callDate'].errors['required']">CallDate is required.</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr />
-            <div class="details ID">
-                <div class="emp-buttons">
-                    <button type="submit" style="width: 200px;" class="btn btn-danger">Submit</button>
-
-                    <div style="width: 200px;" type="button" class="btn cancel-btn">Cancel</div>
-
+            <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap">
+                    <div class="col-md-6">
+                        <label>Comments <span class="required">*</span> </label>
+                        <textarea class="form-control" cols="100" rows="3" formControlName="comments"
+                            [ngClass]="{ 'is-invalid': submitted && f['comments'].errors }"></textarea>
+                        <div *ngIf="submitted && f['comments'].errors" class="invalid-feedback">
+                            <div *ngIf="f['comments'].errors['required']">Comments is required.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div> -->
+
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6 mt-3 d-flex g-1">
+                    <div class="mr-2">
+                        <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div>
+                        <div routerLink="/CRM/leadView/{{id}}/callLogs/{{id}}"  (click)="close()" style="width: 200px;" type="button" class="btn btn-danger">Close</div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
     </div>
-</form>
+</div>

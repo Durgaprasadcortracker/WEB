@@ -19,7 +19,6 @@ import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads
 import { ContactViewComponent } from './CRM_Module/Leads/leadView/contact-view/contact-view.component';
 import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conversion/email-conversion.component';
 import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
-
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
 import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
@@ -31,11 +30,22 @@ import { SourcedesignComponent } from './CRM_Module/Settings/Configration/source
 import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
 import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
 import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
-import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
+import { QuotesCreateComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-create/quotes-create.component';
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
 import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
+import { AddEmailConversationComponent } from './CRM_Module/Campagins/add-email-conversation/add-email-conversation.component';
+import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campagins/campagins.component';
+import { EmailCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/email-campagins/email-campagins.component';
+import { SocialMediaCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/social-media-campagins/social-media-campagins.component';
+import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms-campagins/sms-campagins.component';
+import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotes/quoteslisting/quoteslisting.component';
+import { QuotesInvoiceComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-invoice/quotes-invoice.component';
+import { CountryComponent } from './CRM_Module/Settings/Configration/country/country.component';
+import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
+import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
+import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
 
 const routes: Routes = [
 
@@ -48,8 +58,9 @@ const routes: Routes = [
       { path: 'add-contacts', component: AddContactsComponent },
       { path: 'edit-contacts/:id', component: AddContactsComponent },
       { path: 'Leads', component: LeadsMainComponent },
-      { path: 'Campagins', component: CampaginsMainComponent },
+      // { path: 'Campagins', component: CampaginsMainComponent },
       { path: 'CampaginsAdd', component: AddCampaginComponent },
+      { path: 'AddEmailConversation', component: AddEmailConversationComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'Addnewcompany', component: AddNewCompanyComponent },
@@ -58,11 +69,16 @@ const routes: Routes = [
       { path: 'quoteslisting', component: QuoteslistingComponent },
       { path: 'companiesinfo/:id', component: CompaniesInfoComponent },
       { path: 'userprofile', component: UserProfileComponent },
+      { path: 'quotes-create', component: QuotesCreateComponent },
+      { path: 'editquotes/:id', component: QuotesCreateComponent },
+      { path: 'quotes-invoice', component: QuotesInvoiceComponent },
+
       {
         path: 'Settings', component: SettingsMainComponent,
         children: [
           { path: 'user-view', component: UserProfileComponent },
-          { path: 'configuration', component: ConfigrationComponent,
+          {
+            path: 'configuration', component: ConfigrationComponent,
             children: [
               { path: 'status', component: StatusdesignComponent },
               { path: 'stage', component: StagedesignComponent },
@@ -72,9 +88,14 @@ const routes: Routes = [
               { path: 'industry', component: IndustryComponent },
               { path: 'probability', component: ProbabilityComponent },
               { path: 'state', component: StateComponent },
+              { path: 'country', component: CountryComponent },
+              { path: 'industry-type', component: IndustrytypeComponent },
+              { path: 'call-type', component: CalltypeComponent },
+              { path: 'Quotetype', component: QuotetypeComponent },
+
               { path: '**', redirectTo: '/CRM/Settings/configuration/status' }
             ]
-           },
+          },
           { path: '**', redirectTo: '/CRM/Settings/user-view' }
         ]
       },
@@ -93,6 +114,19 @@ const routes: Routes = [
           { path: 'reminder/:id', component: RemindersComponent },
         ]
       },
+      {
+        path: 'Campagins',
+        component: CampaginsMainComponent,
+        children: [
+          { path: '', component: CampaginsComponent },
+          { path: 'campagins', component: CampaginsComponent },
+          { path: 'email-conversation', component: EmailCampaginsComponent },
+          { path: 'social-media-campagins', component: SocialMediaCampaginsComponent },
+          { path: 'sms-campagins', component: SmsCampaginsComponent },
+        ]
+      },
+
+
       { path: '**', redirectTo: '/CRM/Home' }
     ]
   },

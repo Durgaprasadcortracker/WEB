@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        Call Type 
+      </div>
+      <div class="card-body">
+        <form [formGroup]="calltypeForm" (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" formControlName="description" id="description" placeholder="Enter description">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <!-- <button type="button" class="btn btn-secondary ml-2">Close</button> -->
+          <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">Close</button>
+        </form>
+      </div>
+    </div>
+  
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">S.No</th>
+          <th scope="col">Call Type</th> 
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of CalltypeList"> 
+          <th scope="row">1</th>
+          <td>{{c.description}}</td> 
+          <td>
+            <button routerLink="/CRM/Settings/configuration/call-type" [queryParams]="{calltypeid:c.id}" class="btn btn-sm btn-outline-primary" (click)="edit(c.id)">
+              <i class="fa fa-pencil-alt"></i>
+            </button>
+            <button routerLink="/CRM/Settings/configuration/call-type" [queryParams]="{calltypeid:c.id}" class="btn btn-sm btn-outline-danger ml-2" (click)="deleteCalltype(c.id)"> <!-- Updated from deleteSource -->
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

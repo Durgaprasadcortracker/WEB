@@ -3,6 +3,7 @@
         <h3>Events</h3>
         <hr />
         <div class="main-container">
+            <!-- Calendar Section -->
             <div class="calendar">
                 <div class="calendar-header">
                     <button (click)="prevMonth()">&#10094;</button>
@@ -10,62 +11,46 @@
                     <button (click)="nextMonth()">&#10095;</button>
                 </div>
                 <div class="calendar-body">
+                    <!-- Weekday headers (e.g., Monday, Tuesday) -->
                     <div class="calendar-weekday" *ngFor="let day of weekDays">{{ day }}</div>
+                    <!-- Calendar days with events -->
                     <div class="calendar-day"
                          *ngFor="let day of calendarDays"
-                         [class.current]="day.isCurrent"
-                         [class.today]="day.isToday"
+                         [class.current]="day.isCurrent"   
+                         [class.today]="day.isToday"       
                          (click)="selectDay(day)">
                         <div class="date">{{ day.date }}</div>
                         <div class="events">
-                            <div *ngFor="let event of day.events">
+                            <!-- List of events for the day -->
+                            <div *ngFor="let event of day.events" class="event">
                                 <div><strong>Title:</strong> {{ event.title }}</div>
                                 <div><strong>Time:</strong> {{ event.time }}</div>
                                 <div><strong>Guests:</strong> {{ event.guests }}</div>
                                 <div><strong>Meeting Link:</strong> <a href="{{ event.meetingLink }}" target="_blank">{{ event.meetingLink }}</a></div>
                                 <div><strong>Location:</strong> {{ event.location }}</div>
+                                <button (click)="editEvent(event)">Edit</button>
+                                <button (click)="deleteEvent(event)">Delete</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Event Listing Section -->
             <div class="event-listing">
                 <h4>Event Listing</h4>
                 <ul>
+                    <!-- List of all events -->
                     <li *ngFor="let event of allEvents">
+                        <!-- Display event details -->
                         <strong>{{ event.date }}:</strong> {{ event.title }} at {{ event.time }} with {{ event.guests }}
+                        <!-- Edit and Delete buttons for each event -->
                         <button (click)="editEvent(event)">Edit</button>
                         <button (click)="deleteEvent(event)">Delete</button>
                     </li>
                 </ul>
             </div>
-        </div>
-    </div>
-    
-    <!-- Modal for Editing Event -->
-    <div *ngIf="selectedEvent" class="modal">
-        <div class="modal-content">
-            <span class="close" (click)="cancelEdit()">&times;</span>
-            <h3>Edit Event</h3>
-            <div class="edit-form">
-                <label>
-                    Title: <input [(ngModel)]="selectedEvent.title" />
-                </label>
-                <label>
-                    Time: <input [(ngModel)]="selectedEvent.time" />
-                </label>
-                <label>
-                    Guests: <input [(ngModel)]="selectedEvent.guests" />
-                </label>
-                <label>
-                    Meeting Link: <input [(ngModel)]="selectedEvent.meetingLink" />
-                </label>
-                <label>
-                    Location: <input [(ngModel)]="selectedEvent.location" />
-                </label>
-                <button (click)="updateEvent()">Update</button>
-                <button class="cancel-button" (click)="cancelEdit()">Cancel</button>
-            </div>
+            
         </div>
     </div>
 </form>

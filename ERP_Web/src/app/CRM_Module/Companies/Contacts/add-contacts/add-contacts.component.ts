@@ -3,6 +3,7 @@ import { BackendService } from '../../../../Services/BackendConnection/backend.s
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, RequiredValidator,AbstractControl,Validators, FormBuilder } from '@angular/forms';
 import { privateDecrypt } from 'crypto';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-contacts',
@@ -27,6 +28,7 @@ export class AddContactsComponent {
 
   constructor(private http: BackendService,
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
     private router: Router,private fb:FormBuilder) {
     this.Id = this.route.snapshot.paramMap.get('id');
     
@@ -119,6 +121,9 @@ export class AddContactsComponent {
       if (this.myForm.value.id === 0) {
         console.log('Adding new contact:', this.myForm.value);
         this.http.postapi('api/Contacts/AddContactDetails', this.myForm.value).subscribe(() => {
+          this.snackBar.open('Contact successfully added!', 'Close', {
+            duration: 3000, // Snackbar stays open for 3 seconds
+          });
           this.router.navigate(['/CRM/contacts']);
         }, error => {
           console.error('Error adding contact:', error);
@@ -126,6 +131,9 @@ export class AddContactsComponent {
       } else if (this.myForm.value.id > 0) {
         console.log('Editing contact:', this.myForm.value);
         this.http.putapi('api/Contacts/UpdateContacts', this.myForm.getRawValue()).subscribe(() => {
+          this.snackBar.open('Contact successfully updated!', 'Close', {
+            duration: 3000, // Snackbar stays open for 3 seconds
+          });
           this.router.navigate(['/CRM/contacts']);
         }, error => {
           console.error('Error updating contact:', error);

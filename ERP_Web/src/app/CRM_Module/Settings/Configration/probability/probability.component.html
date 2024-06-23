@@ -1,59 +1,49 @@
 <div class="container-fluid mt-5">
     <div class="card">
-      <div class="card-header">
-        Probability
-      </div>
-      <div class="card-body">
-        <form [formGroup]="probabilityForm" (ngSubmit)="submitForm()">
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Stage</label>
-                    <select type="text" class="form-control form-control-lg" formControlName="stageId" >
-                        <option value="">--Select Stage--</option>
-                        <option *ngFor="let Stage of stageList" value="{{Stage.id}}">{{Stage.description}}</option>
-                    </select>
+        <div class="card-header">Probability</div>
+        <div class="card-body">
+            <form [formGroup]="probabilityForm" (ngSubmit)="submitForm()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="stage">Stage</label>
+                        <select class="form-control form-control-lg" formControlName="stageId" id="stage">
+                            <option value="">--Select Stage--</option>
+                            <option *ngFor="let stage of stageList" [value]="stage.id">{{stage.description}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" formControlName="description" id="description" placeholder="Enter description"/>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                <label for="description">Description</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    formControlName="description"
-                    id="description"
-                    placeholder="Enter description"
-                />
-                </div>
-            </div>
-          
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">Close</button>
-        </form>
-      </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">Close</button>
+            </form>
+        </div>
     </div>
-  
     <table class="table mt-4">
-      <thead>
-        <tr>
-          <th scope="col">S.No</th>
-          <th scope="col">Stage</th>
-          <th scope="col">Probability</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of Probabilitylist; let i = index">
-          <th scope="row">{{ i + 1 }}</th>
-          <td>{{a.stage}}</td>
-          <td>{{ a.description }}</td>
-          <td>
-            <button routerLink="/CRM/Settings/configuration/probility" [queryParams]="{probilityid:a.id}" class="btn btn-sm btn-outline-primary" (click)="edit(a.id)">
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-            <button routerLink="/CRM/Settings/configuration/probility" [queryParams]="{probilityid:a.id}" class="btn btn-sm btn-outline-danger ml-2" (click)="deleteProbability(a.id)">
-              <i class="fa fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Stage</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of Probabilitylist; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ getStageDescription(a.stageId) }}</td>
+                <td>{{ a.description }}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" (click)="edit(a.id)">
+                        <i class="fa fa-pencil-alt"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteProbability(a.id)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
     </table>
-  </div>
+</div>

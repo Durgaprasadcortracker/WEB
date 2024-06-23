@@ -1,1 +1,4 @@
 npm i bootstrap@5.0.1
+ng add @angular/material for delete warning popup
+npm install xlsx file-saver
+npm install xlsx --save

@@ -19,9 +19,10 @@ interface CalendarDay {
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrls: ['./events.component.css']
+  styleUrl: './events.component.css'
 })
 export class EventsComponent implements OnInit {
+  editor: any;
   weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -29,8 +30,6 @@ export class EventsComponent implements OnInit {
   currentYear: number;
   calendarDays: CalendarDay[];
   allEvents: Event[] = [];
-  selectedEvent: Event | null = null;
-  originalEvent: Event | null = null;
 
   constructor() {
     const today = new Date();
@@ -113,57 +112,23 @@ export class EventsComponent implements OnInit {
     }
   }
 
-  editEvent(event: Event): void {
-    this.selectedEvent = { ...event };
-    this.originalEvent = event;
+
+  editEvent(event: Event) {
+    // Placeholder method for editing an event; implement your logic here
+    console.log('Edit event:', event);
+    // You can implement a modal or a separate edit form here
+}
+
+deleteEvent(event: Event) {
+  // Delete the event from allEvents
+  const index = this.allEvents.indexOf(event);
+  if (index !== -1) {
+      this.allEvents.splice(index, 1);
   }
 
-  deleteEvent(event: Event): void {
-    // Remove from allEvents
-    this.allEvents = this.allEvents.filter(e => e !== event);
-
-    // Remove from calendarDays
-    this.calendarDays.forEach(day => {
+  // Delete the event from the corresponding calendar day
+  this.calendarDays.forEach(day => {
       day.events = day.events.filter(e => e !== event);
-    });
-
-    // If currently editing, cancel edit
-    if (this.selectedEvent === event) {
-      this.cancelEdit();
-    }
-  }
-
-  updateEvent(): void {
-    if (this.originalEvent && this.selectedEvent) {
-      const updatedEvent: Event = {
-        title: this.selectedEvent.title || '',
-        time: this.selectedEvent.time || '',
-        guests: this.selectedEvent.guests || '',
-        meetingLink: this.selectedEvent.meetingLink || '',
-        location: this.selectedEvent.location || '',
-        date: this.selectedEvent.date || ''
-      };
-
-      // Update in allEvents
-      const index = this.allEvents.findIndex(e => e === this.originalEvent);
-      if (index !== -1) {
-        this.allEvents[index] = updatedEvent;
-      }
-
-      // Update in calendarDays
-      this.calendarDays.forEach(day => {
-        const eventIndex = day.events.findIndex(e => e === this.originalEvent);
-        if (eventIndex !== -1) {
-          day.events[eventIndex] = updatedEvent;
-        }
-      });
-
-      this.cancelEdit();
-    }
-  }
-
-  cancelEdit(): void {
-    this.selectedEvent = null;
-    this.originalEvent = null;
-  }
+  });
+}
 }

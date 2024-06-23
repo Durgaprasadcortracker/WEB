@@ -1,98 +1,105 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-probability',
   templateUrl: './probability.component.html',
   styleUrls: ['./probability.component.css']
 })
 export class ProbabilityComponent implements OnInit {
-  probabilityForm:any;
- 
+  probabilityForm: FormGroup;
   Probabilitylist: any;
+  stageList: any[] = [];
   currentProbabilityId = 0;
 
-  constructor(private fb: FormBuilder, private http: BackendService, private router: Router,private activatedRoute:ActivatedRoute) {
+  constructor(
+    private fb: FormBuilder,
+    private http: BackendService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
-      this.probabilityId = params.get('probabilityid');
+      const param = params.get('probabilityid');
+      this.currentProbabilityId = param ? +param : 0;
     });
 
     this.probabilityForm = this.fb.group({
+      stageId: ['', Validators.required],
       description: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.getstagevalues();
-    this.probabilityForm=new FormGroup({
-      id:new FormControl(<Number>(0)),
-      description:new FormControl('')
-    });
-    this.getapi();
-    
+    this.getStageValues();
+    this.getProbabilities();
+
+    if (this.currentProbabilityId > 0) {
+      this.getProbabilityById();
+    }
   }
 
-  getapi(): void {
+  getProbabilities(): void {
     this.http.getapi('api/Common/GetProbality').subscribe((res) => {
       this.Probabilitylist = res.data;
     }, (error) => {
       console.error('Error fetching probabilities', error);
     });
   }
-  stageList:any;
-  getstagevalues(): void {
+
+  getStageValues(): void {
     this.http.getapi('api/Common/GetStages').subscribe((res) => {
       this.stageList = res.data;
     }, (error) => {
-      console.error('Error fetching probabilities', error);
+      console.error('Error fetching stages', error);
     });
   }
-Id:any;
+
   submitForm(): void {
-    const description = this.probabilityForm.get('description')?.value;
-    this.probabilityForm.get("id").setValue(this.probabilityId);
-    if (this.probabilityId > 0) {
-      this.http.putapi(`api/Common/UpdateProbability`, this.probabilityForm.getRawValue()).subscribe((res) => {
+    const formData = this.probabilityForm.value;
+    formData.id = this.currentProbabilityId;
+
+    if (this.currentProbabilityId > 0) {
+      this.http.putapi('api/Common/UpdateProbability', formData).subscribe(() => {
         console.log('Probability updated successfully');
-        this.getapi();
+        this.getProbabilities();
         this.resetForm();
       }, (error) => {
         console.error('Error updating probability', error);
       });
-      
     } else {
-      this.http.postapi('api/Common/AddProbality', { description }).subscribe(() => {
+      this.http.postapi('api/Common/AddProbality', formData).subscribe(() => {
         console.log('Probability added successfully');
-        this.getapi();
+        this.getProbabilities();
         this.resetForm();
       }, (error) => {
         console.error('Error adding probability', error);
       });
-     
     }
   }
-  probabilityId:any;
+
   edit(id: number): void {
-    this.probabilityId = id;
+    this.currentProbabilityId = id;
     this.getProbabilityById();
   }
-  getProbabilityById(){
-    this.http.getapi('api/Common/GetProbabilityById/'+this.probabilityId).subscribe((res) => {
-      console.log(res);
-      debugger;
-      this.probabilityForm.get("probabilityId")?.setValue(res.data.stageId);
-      
-      this.probabilityForm.get("description")?.setValue(res.data.description);
-     
+
+  getProbabilityById(): void {
+    this.http.getapi(`api/Common/GetProbabilityById/${this.currentProbabilityId}`).subscribe((res) => {
+      const probability = res.data;
+      this.probabilityForm.patchValue({
+        stageId: probability.stageId,
+        description: probability.description
+      });
+    }, (error) => {
+      console.error('Error fetching probability by ID', error);
     });
-    }
+  }
 
   deleteProbability(id: number): void {
     this.http.deleteapi(`api/Common/DeleteProbability/${id}`).subscribe(() => {
       console.log('Probability deleted successfully');
-      this.getapi();
+      this.getProbabilities();
     }, (error) => {
       console.error(`Error deleting probability with id ${id}`, error);
     });
@@ -101,5 +108,10 @@ Id:any;
   resetForm(): void {
     this.probabilityForm.reset();
     this.currentProbabilityId = 0;
+  }
+
+  getStageDescription(stageId: number): string {
+    const stage = this.stageList.find(stage => stage.id === stageId);
+    return stage ? stage.description : 'Unknown Stage';
   }
 }

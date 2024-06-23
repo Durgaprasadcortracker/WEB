@@ -44,11 +44,23 @@ import { CityComponent } from './CRM_Module/Settings/Configration/city/city.comp
 import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
 import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
 import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
-import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quoteslisting/quoteslisting.component';
+
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
+import { QuotesCreateComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-create/quotes-create.component';
+import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotes/quoteslisting/quoteslisting.component';
+
 
 import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
+import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms-campagins/sms-campagins.component';
+import { SocialMediaCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/social-media-campagins/social-media-campagins.component';
+import { EmailCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/email-campagins/email-campagins.component';
+import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campagins/campagins.component';
+
+
+import { CountryComponent } from './CRM_Module/Settings/Configration/country/country.component';
+import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
+import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +83,7 @@ import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/co
     ContactsMainComponent,
     AddNewCompanyComponent,
     LeadsViewComponent,
-    QuoteslistingComponent,
+
     ContactViewComponent,
     EmailConversionComponent,
     CallLogsComponent,
@@ -89,13 +101,25 @@ import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/co
     CityComponent,
     IndustrytypeComponent,
     IndustryComponent,
-   
     ProbabilityComponent,
-         StateComponent,
-         CompaniesInfoComponent
+    StateComponent,
+    CompaniesInfoComponent,
+    SocialMediaCampaginsComponent,
+    EmailCampaginsComponent,
+    CampaginsComponent,
+    ConfigrationComponent,
+    QuoteslistingComponent,
+    ProbabilityComponent,
+    QuotesCreateComponent,
+    QuoteslistingComponent,
+    SignUpComponent,
+    StateComponent,
+    CompaniesInfoComponent,
+    StateComponent,
+    CalltypeComponent,
+    QuotetypeComponent
   ],
   imports: [
-    AppRoutingModule,
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
@@ -103,10 +127,11 @@ import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/co
     FormsModule,
     BrowserModule,
     NgxPaginationModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
   ],
-  exports:[
-    BrowserModule 
+  exports: [
+    BrowserModule
   ],
   providers: [
     provideClientHydration(),

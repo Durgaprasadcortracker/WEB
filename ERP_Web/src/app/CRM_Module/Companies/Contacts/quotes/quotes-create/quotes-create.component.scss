@@ -1,0 +1,84 @@
+.container{
+  justify-content: left;
+}
+
+.tabs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.tab-header {
+  display: flex;
+  border-bottom: 2px solid #ccc;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-bottom: none;
+}
+
+.tab.active {
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #fff;
+  background-color: #D11639;
+  color: #fff;
+}
+
+.tab-content {
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.table {
+  input {
+    width: 100px;
+  }
+}
+.invoice-main{
+  margin: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+.invoice {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  // color: #333;
+  flex: 1;
+}
+
+input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100px;
+  text-align: right;
+  flex: 1;
+}
+
+input[readonly] {
+  background-color: #f9f9f9;
+}
+
+.card-body{
+  justify-content: left;
+}
