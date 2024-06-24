@@ -46,6 +46,7 @@ import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/indust
 import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
 import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
 import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
+import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 
 
 
@@ -63,6 +64,7 @@ const routes: Routes = [
       { path: 'add-leads', component: AddLeadsComponent },
       { path: 'edit-leads/:id', component: AddLeadsComponent },
       // { path: 'Campagins', component: CampaginsMainComponent },
+     
       { path: 'AddEmailConversation', component: AddEmailConversationComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
