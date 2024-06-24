@@ -128,7 +128,7 @@ import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype
     BrowserModule,
     NgxPaginationModule,
     MatSnackBarModule,
-
+    AppRoutingModule
   ],
   exports: [
     BrowserModule

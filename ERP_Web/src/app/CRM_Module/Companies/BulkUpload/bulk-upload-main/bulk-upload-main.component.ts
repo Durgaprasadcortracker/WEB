@@ -16,13 +16,13 @@ export class BulkUploadMainComponent {
   citylist: any;
   statelist: any;
   countrylist: any;
-  industrytypelist:any
+  industrytypelist: any
 
   constructor(private http: BackendService,
     private excelRead: ExcelreadService,
   ) {
     this.getDropdowns()
-   }
+  }
   sampleCompanies = MyData.sampleCompanies;
 
 
@@ -43,68 +43,111 @@ export class BulkUploadMainComponent {
         });
     }
   }
-  convertString(str:any) {
+  convertString(str: any) {
     return str.toLowerCase().split(' ').join('');
   }
   uploadData() {
     console.log(this.uploadedData);
     let updc = JSON.parse(JSON.stringify(this.uploadedData));
-    for(let a of updc){
-      let companyIndustry = this.convertString(a.companyIndustry)
-      for(let k of this.industrylist){
+    for (let a of updc) {
+      let CompanyIndustry = this.convertString(a.CompanyIndustry)
+      for (let k of this.industrylist) {
         let description = this.convertString(k.description)
-        if(companyIndustry==description){
+        if (CompanyIndustry == description) {
           let _numType = Number(k.id)
-          a.companyIndustry = _numType
+          a.CompanyIndustry = _numType
         }
       }
-      let companyIndustryType = this.convertString(a.companyIndustryType)
-      for(let k of this.industrytypelist){
+      let CompanyIndustryType = this.convertString(a.CompanyIndustryType)
+      for (let k of this.industrytypelist) {
         let description = this.convertString(k.description)
-        if(companyIndustryType==description){
+        if (CompanyIndustryType == description) {
           let _numType = Number(k.id)
-          a.companyIndustryType = _numType
+          a.CompanyIndustryType = _numType
         }
       }
-      let country = this.convertString(a.country)
-      for(let k of this.countrylist){
+      let Country = this.convertString(a.Country)
+      for (let k of this.countrylist) {
         let description = this.convertString(k.description)
-        if(country==description){
+        if (Country == description) {
           let _numType = Number(k.id)
-          a.country = _numType
+          a.Country = _numType
         }
       }
-      let city = this.convertString(a.city)
-      for(let k of this.citylist){
+      let _City = this.convertString(a.City)
+      for (let k of this.citylist) {
         let description = this.convertString(k.description)
-        if(city==description){
+        if (_City == description) {
           let _numType = Number(k.id)
-          a.city = _numType
+          a.City = _numType
         }
       }
-      let state = this.convertString(a.state)
-      for(let k of this.statelist){
+      let State = this.convertString(a.State)
+      for (let k of this.statelist) {
         let description = this.convertString(k.description)
-        if(state==description){
+        if (State == description) {
           let _numType = Number(k.id)
-          a.state = _numType
+          a.State = _numType
         }
       }
-      let timeZone = this.convertString(a.timeZone)
-      for(let k of this.timeZonelist){
+      let TimeZone = this.convertString(a.TimeZone)
+      for (let k of this.timeZonelist) {
         let description = this.convertString(k.description)
-        if(timeZone==description){
+        if (TimeZone == description) {
           let _numType = Number(k.id)
-          a.timeZone = _numType
+          a.TimeZone = _numType
         }
       }
-      a.id=0
+      a.id = 0
     }
     console.log(updc);
+    // this.uploadtoBackend(updc)
+    // const companies = [
+    //   {
+    //     DomainName : "example.com",
+    //     CompanyName : "Example Corp",
+    //     CompanyOwner : "John Doe",
+    //     CompanyIndustry : 2,
+    //     CompanyIndustryType : 5,
+    //     HeadCount : 500,
+    //     AnnualRevenue : "5M",
+    //     City : 101,
+    //     State : 10,
+    //     Country : 1,
+    //     PostalCode : "12345",
+    //     TimeZone : 2,
+    //     Website : "http://www.example.com",
+    //     LinkedinUrl : "http://www.linkedin.com/company/example",
+    //     BusinessEmail : "contact@example.com",
+    //     CompanyAddress1 : "123 Example Street",
+    //     CampanyAddress2 : "Suite 100",
+    //   },
+    //   {
+    //     DomainName : "aaa.com",
+    //     CompanyName : "aaa Corp",
+    //     CompanyOwner : "John Doe",
+    //     CompanyIndustry : 2,
+    //     CompanyIndustryType : 5,
+    //     HeadCount : 500,
+    //     AnnualRevenue : "5M",
+    //     City : 101,
+    //     State : 10,
+    //     Country : 1,
+    //     PostalCode : "12345",
+    //     TimeZone : 2,
+    //     Website : "http://www.aaa.com",
+    //     LinkedinUrl : "http://www.linkedin.com/company/aaa",
+    //     BusinessEmail : "contact@aaa.com",
+    //     CompanyAddress1 : "123 aaa Street",
+    //     CampanyAddress2 : "Suite 100",
+    //   }
+    // ];
+
+    // console.log(companies);
     this.uploadtoBackend(updc)
   }
-  uploadtoBackend(_jsondata:any){
-    this.http.postapi('api/Company/AddMultipleCompanies', _jsondata).subscribe((res) => {
+  uploadtoBackend(_jsondata: any) {
+    this.http.postapi('api/Company/Bulkupload1', _jsondata).subscribe((res) => {
       console.log(res);
     });
   }

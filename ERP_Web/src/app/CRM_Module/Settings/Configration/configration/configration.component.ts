@@ -42,10 +42,9 @@ export class ConfigrationComponent {
       url: "/CRM/Settings/configuration/state"
     },
     {
-<<<<<<< Updated upstream
       name: "Country",
       url: "/CRM/Settings/configuration/country"
-=======
+    }, {
       name: "Call Type",
       url: "/CRM/Settings/configuration/call-type"
     },
@@ -56,7 +55,6 @@ export class ConfigrationComponent {
     {
       name: "Quote Type",
       url: "/CRM/Settings/configuration/Quotetype"
->>>>>>> Stashed changes
     }
   ]
 }

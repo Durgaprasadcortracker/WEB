@@ -72,7 +72,6 @@ const routes: Routes = [
       { path: 'quotes-create', component: QuotesCreateComponent },
       { path: 'editquotes/:id', component: QuotesCreateComponent },
       { path: 'quotes-invoice', component: QuotesInvoiceComponent },
-
       {
         path: 'Settings', component: SettingsMainComponent,
         children: [
@@ -125,8 +124,6 @@ const routes: Routes = [
           { path: 'sms-campagins', component: SmsCampaginsComponent },
         ]
       },
-
-
       { path: '**', redirectTo: '/CRM/Home' }
     ]
   },

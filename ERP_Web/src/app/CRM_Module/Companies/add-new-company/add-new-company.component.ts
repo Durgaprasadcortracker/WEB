@@ -94,7 +94,7 @@ export class AddNewCompanyComponent {
   }
 
   addcompany() {
-    debugger;
+    
     this.submitted=true;
     if(this.myForm.invalid){
       return;
@@ -162,7 +162,7 @@ export class AddNewCompanyComponent {
   }
   countryId:any;
   getCitybycountry(){
-    debugger;
+    
     this.countryId= this.myForm.get("country")?.value;
     this.http.getapi('api/Common/cities/'+this.countryId).subscribe((res) => {
       this.citylist = res;
@@ -171,11 +171,11 @@ export class AddNewCompanyComponent {
   cityId:any;
 
   getstatesbycountrycity(){
-    debugger;
+    
     this.countryId= this.myForm.get("country")?.value;
     this.cityId=this.myForm.get("city")?.value;
     this.http.getapi('api/Common/GetCountryByState/'+this.cityId+"/"+this.countryId).subscribe((res) => {
-      debugger;
+      
       this.statelist = res.data;
     });
   }
