@@ -1,0 +1,150 @@
+<div class="card m-3">
+    <div class="card-header">
+        <h2>Leads</h2>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="myForm" (ngSubmit)="addlead()">
+            <!--Inputs  -->
+            <div class="d-flex flex-wrap">
+                <div  class="col-md-3">
+                    <label>Lead Owner<span class="required">*</span></label>
+                    <select class="form-select"  formControlName="leadOwner"  >
+                        <option value="0">--Select leadowner--</option>
+                        <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Company<span class="required">*</span></label>
+                    <select class="form-select"  formControlName="Company"  >
+                        <option value="0">--Select Company--</option>
+                        <option *ngFor="let company of companylist" value="{{company.id}}">{{company.companyName}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>First Name<span class="required">*</span></label>
+                    <input type="email" class="form-control" formControlName="firstName" >
+                   
+                </div>
+                <div class="col-md-3">
+                    <label>Last Name<span class="required">*</span></label>
+                    <input type="number" class="form-control" formControlName="lastName" >
+                   
+                </div>
+                <div class="col-md-3">
+                    <label>Description</label>
+                    <input type="number" class="form-control" formControlName="description">
+                </div>
+                <div class="col-md-3">
+                    <label>Business Email<span class="required">*</span> </label>
+                    <input type="text" class="form-control" formControlName="businessEmail">
+                   
+                </div>
+                <div class="col-md-3">
+                    <label>Secondary Email </label>
+                    <input type="text" class="form-control" formControlName="secondaryEmail">
+ 
+                </div>
+                <div class="col-md-3">
+                    <label>Phone Number<span class="required">*</span></label>
+                    <input type="text" class="form-control" formControlName="phoneNumber">
+ 
+                </div>
+                <div class="col-md-3">
+                    <label>Alternate Number </label>
+                    <input type="text" class="form-control" formControlName="alternateNumber">
+                </div>
+                <div class="col-md-3">
+                    <label>Lead Status<span class="required">*</span></label>
+                    <select class="form-control"  formControlName="leadStatus" >
+                        <option value="null">--Select Status--</option>
+                        <option *ngFor="let status of statuslist" value="{{status.id}}">{{status.description}}</option>
+                    </select>
+                    
+                </div>
+               
+                <div class="col-md-3">
+                    <label>Lead Source<span class="required">*</span></label>
+                    <select class="form-control"  formControlName="leadSource" >
+                        <option value="null">--Select Source--</option>
+                        <option *ngFor="let source of sourcelist" value="{{source.id}}">{{source.description}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Lead Stage </label>
+                    <select class="form-control"  formControlName="leadStage">
+                        <option value="null">--Select stage--</option>
+                        <option *ngFor="let stage of stagelist" value="{{stage.id}}">{{stage.description}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Website </label>
+                    <input type="text" class="form-control" formControlName="website">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Industry<span class="required">*</span> </label>
+                    <select class="form-control"  formControlName="industry">
+                        <option value="null">--Select industry--</option>
+                        <option *ngFor="let industry of industrylist" value="{{industry.id}}">{{industry.description}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Number of Employees<span class="required">*</span> </label>
+                    <input type="text" class="form-control" formControlName="noofEmployees">
+                </div>
+                <div class="col-md-3">
+                    <label>Annual Revenue</label>
+                    <input type="text" class="form-control" formControlName="annualRevenue">
+                </div>
+                <div class="col-md-3">
+                    <label>Rating </label>
+                    <input type="text" class="form-control" formControlName="rating">
+                </div>
+                <div class="col-md-3">
+                    <label>Email Output </label>
+                    <input type="text" class="form-control" formControlName="emailOutput">
+                </div>
+                <div class="col-md-3">
+                    <label>Skype Id </label>
+                    <input type="text" class="form-control" formControlName="skypeId">
+                </div>
+                <div class="col-md-3">
+                    <label>Linked In</label>
+                    <input type="text" class="form-control" formControlName="linkedIn">
+                </div>
+               
+            </div>
+            <!-- Text Area -->
+            <!-- <div class="d-flex flex-wrap">
+
+                <div class="col-md-6">
+                    <label>Address1 <span class="required">*</span> </label>
+                    <textarea class="form-control" rows="3" formControlName="address1" [ngClass]="{ 'is-invalid': submitted && f['address1'].errors }"></textarea>
+                    <div *ngIf="submitted && f['address1'].errors" class="invalid-feedback">
+                        <div *ngIf="f['address1'].errors['required']">Address1 is required.</div>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Address2 </label>
+                    <textarea class="form-control" rows="3" formControlName="address2"></textarea>
+                </div>
+            </div> -->
+            <!-- Buttons -->
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6 mt-3 d-flex g-1">
+                    <div class="mr-2">
+                        <!-- <div type="" class="btn btn-primary">Submit</div> -->
+                        <!-- <button  ></button> -->
+                        <button type="submit" style="width: 200px;margin-right: 10px;" class="btn btn-primary" >Submit</button>
+
+                        <div style="width: 200px;" routerLink="/CRM/contacts"  type="button" class="btn btn-danger">Close</div>
+    
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

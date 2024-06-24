@@ -16,7 +16,7 @@ import { PipelinesMainComponent } from './CRM_Module/Pipeline/pipelines-main/pip
 import { ReportsMainComponent } from './CRM_Module/Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/settings-main.component';
 import { UserProfileComponent } from './CRM_Module/Settings/user-profile/user-profile.component';
-import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
+import { AddCampaginComponent } from './CRM_Module/Campagins/Campagins-View/add-campagin/add-campagin.component';
 import { CommonModule } from '@angular/common';
 import { ChangePasswordComponent } from './loginPages/change-password/change-password.component';
 import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
@@ -62,6 +62,7 @@ import { CountryComponent } from './CRM_Module/Settings/Configration/country/cou
 import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
 import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
 import { AddSocialmediaComponent } from './CRM_Module/Campagins/add-socialmedia/add-socialmedia.component';
+import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,7 +120,8 @@ import { AddSocialmediaComponent } from './CRM_Module/Campagins/add-socialmedia/
     StateComponent,
     CalltypeComponent,
     QuotetypeComponent,
-    AddSocialmediaComponent
+    AddSocialmediaComponent,
+    AddLeadsComponent
   ],
   imports: [
     HttpClientModule,

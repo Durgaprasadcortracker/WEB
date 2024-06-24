@@ -1,1 +1,60 @@
-<p>campagins works!</p>
+<div class=" mt-4">
+    <!-- Card Header -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Campaigns</h3>
+        </div>
+        <div class="card-body">
+            <!-- <h5>Total Records: {{ totalRecords }}</h5> -->
+            <div style="float: right;">
+                <button class="btn btn-danger mr-2" routerLink="/CRM/Addnewcampaign">Add Campaigns</button>
+                <button class="btn btn-danger button-gap"  routerLink="/CRM/bulk-upload">Bulk Upload</button>
+            </div>
+        </div>
+        <hr />
+        <!-- Table -->
+        <div class="table-responsive mt-4" style="padding: 20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>Campaign Name</th>
+                        <th>Campaign Owner</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of listOfCampaigns  | paginate
+                    : {
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count
+                      };
+                let i = index">
+                <td>
+                    <span  (click)="edit(campaign.id)" routerLink="/CRM/editcompany/{{a.id}}" class="fa fa-pencil-alt" style="color: blue;">
+                        
+                    </span>
+                    <span (click)="deleteCampaign(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
+                        
+                    </span>
+                        <td>{{a.campaignName}}</td>
+                        <td>{{a.campaignOwner}}</td>
+                        <td>{{a.type}}</td>
+                        <td>{{a.status}}</td>
+                        <td>{{a.startDate}}</td>
+                        <td>{{a.endDate}}</td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>
