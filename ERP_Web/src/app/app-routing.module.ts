@@ -8,7 +8,6 @@ import { CompanyMainComponent } from './CRM_Module/Companies/company-main/compan
 import { LeadsMainComponent } from './CRM_Module/Leads/leads-main/leads-main.component';
 import { CampaginsMainComponent } from './CRM_Module/Campagins/campagins-main/campagins-main.component';
 import { PipelinesMainComponent } from './CRM_Module/Pipeline/pipelines-main/pipelines-main.component';
-import { AddCampaginComponent } from './CRM_Module/Campagins/Campagins-View/add-campagin/add-campagin.component';
 import { ReportsMainComponent } from './CRM_Module/Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/settings-main.component';
 import { ChangePasswordComponent } from './loginPages/change-password/change-password.component';
@@ -49,6 +48,7 @@ import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype
 import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
 
 
+
 const routes: Routes = [
 
   {
@@ -63,7 +63,6 @@ const routes: Routes = [
       { path: 'add-leads', component: AddLeadsComponent },
       { path: 'edit-leads/:id', component: AddLeadsComponent },
       // { path: 'Campagins', component: CampaginsMainComponent },
-      { path: 'CampaginsAdd', component: AddCampaginComponent },
       { path: 'AddEmailConversation', component: AddEmailConversationComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
@@ -123,6 +122,8 @@ const routes: Routes = [
         children: [
           { path: '', component: CampaginsComponent },
           { path: 'campagins', component: CampaginsComponent },
+          { path: 'add-campagin', component: AddCampaginComponent},
+          { path: 'editcampaign/:id', component: AddCampaginComponent },
           { path: 'email-conversation', component: EmailCampaginsComponent },
           { path: 'social-media-campagins', component: SocialMediaCampaginsComponent },
           { path: 'sms-campagins', component: SmsCampaginsComponent },
