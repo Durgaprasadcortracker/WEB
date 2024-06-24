@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BackendService } from '../../../../../Services/BackendConnection/backend.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -17,15 +18,19 @@ export class QuoteslistingComponent {
   p:number=1;
   a: any;
   router: any;
+quotation: any;
+ 
   
-  constructor(private http: BackendService) { }
+  constructor(private http: BackendService,
+    private snackBar: MatSnackBar,) { }
 
-
-  data = {
-    records: 0
-  }
-  addQuotes = 0
-  listOfQuotes:any
+    data = {
+      records: 0
+    }
+ 
+  quotePage = 0
+ 
+  listOfQuotations:any
   editData:any
 
   ngOnInit() {
@@ -34,14 +39,15 @@ export class QuoteslistingComponent {
 
   addQuote(message: any) {
     console.log(message);
-    this.addQuotes = 0;
+    this.quotePage = 0;
     this.editData = null;
     this.ngOnInit()
   }
   getData(){
     this.http.getapi('api/Quotation/GetQuotations').subscribe((res) => {
         console.log(res);
-        this.listOfQuotes=res
+        
+        this.listOfQuotations=res.data
       }
     );
   }
@@ -54,20 +60,20 @@ export class QuoteslistingComponent {
     this.page = 1;
     this.getData();
   }
-  DeleteQuotations(ID:any){
+  deleteQuotation(ID:any){
     this.http.deleteapi('api/Quotation/DeleteQuotations/'+ID).subscribe((res) => {
-      // this.snackBar.open('Quotation successfully Deleted!', 'Close', {
-      //   duration: 3000, // Snackbar stays open for 3 seconds
-      // });
-      console.log(res);
-      this.listOfQuotes=res
-      this.ngOnInit()
+      this.snackBar.open('Quotation successfully Deleted!', 'Close', {
+        duration: 3000, // Snackbar stays open for 3 seconds
+      });
+        console.log(res);
+        this.listOfQuotations=res.data
+        this.ngOnInit()
       }
     );
   }
  
-  edit(Id: any) {
-    this.router.navigate(['/CRM/editcompany', Id]);
+  edit(data:any){
+    this.quotation=1;
+    this.editData=data
   }
-
 }

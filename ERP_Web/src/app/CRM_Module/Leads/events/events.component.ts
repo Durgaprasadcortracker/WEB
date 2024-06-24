@@ -19,10 +19,9 @@ interface CalendarDay {
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
-  styleUrl: './events.component.css'
+  styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
-  editor: any;
   weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -40,6 +39,7 @@ export class EventsComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateCalendarDays();
+    this.getEvents();
   }
 
   generateCalendarDays(): void {
@@ -75,6 +75,7 @@ export class EventsComponent implements OnInit {
       this.currentMonth--;
     }
     this.generateCalendarDays();
+    this.getEvents();
   }
 
   nextMonth(): void {
@@ -85,6 +86,7 @@ export class EventsComponent implements OnInit {
       this.currentMonth++;
     }
     this.generateCalendarDays();
+    this.getEvents();
   }
 
   selectDay(day: CalendarDay): void {
@@ -106,29 +108,86 @@ export class EventsComponent implements OnInit {
           date: eventDate
         };
 
-        day.events.push(newEvent);
-        this.allEvents.push(newEvent);
+        this.addEvent(newEvent);
       }
     }
   }
 
+  getEvents(): void {
+    // Placeholder for fetching events from a data source (e.g., API, local storage)
+    // For now, let's assume we have some static events
+    const staticEvents: Event[] = [
+      {
+        title: 'Meeting with Bob',
+        time: '10:00 AM',
+        guests: 'Bob, Alice',
+        meetingLink: 'http://example.com/meeting',
+        location: 'Conference Room',
+        date: '10 June 2024'
+      },
+      {
+        title: 'Project Deadline',
+        time: '5:00 PM',
+        guests: 'Team',
+        meetingLink: '',
+        location: 'Office',
+        date: '15 June 2024'
+      }
+    ];
 
-  editEvent(event: Event) {
-    // Placeholder method for editing an event; implement your logic here
-    console.log('Edit event:', event);
-    // You can implement a modal or a separate edit form here
-}
-
-deleteEvent(event: Event) {
-  // Delete the event from allEvents
-  const index = this.allEvents.indexOf(event);
-  if (index !== -1) {
-      this.allEvents.splice(index, 1);
+    this.allEvents = staticEvents;
+    this.calendarDays.forEach(day => {
+      day.events = this.allEvents.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate.getDate() === day.date &&
+               eventDate.getMonth() === this.currentMonth &&
+               eventDate.getFullYear() === this.currentYear;
+      });
+    });
   }
 
-  // Delete the event from the corresponding calendar day
-  this.calendarDays.forEach(day => {
+  addEvent(event: Event): void {
+    const eventDate = new Date(event.date);
+    if (eventDate.getMonth() === this.currentMonth && eventDate.getFullYear() === this.currentYear) {
+      const day = this.calendarDays.find(d => d.date === eventDate.getDate());
+      if (day) {
+        day.events.push(event);
+      }
+    }
+    this.allEvents.push(event);
+  }
+
+  editEvent(event: Event): void {
+    const eventTitle = prompt('Edit event title:', event.title);
+    const eventTime = prompt('Edit event time:', event.time);
+    const eventGuests = prompt('Edit event guests:', event.guests);
+    const eventMeetingLink = prompt('Edit event meeting link:', event.meetingLink);
+    const eventLocation = prompt('Edit event location:', event.location);
+
+    if (eventTitle && eventTime && eventGuests && eventMeetingLink && eventLocation) {
+      event.title = eventTitle;
+      event.time = eventTime;
+      event.guests = eventGuests;
+      event.meetingLink = eventMeetingLink;
+      event.location = eventLocation;
+
+      // Update the calendarDays array to reflect the edited event
+      this.calendarDays.forEach(day => {
+        day.events = day.events.map(e => e === event ? event : e);
+      });
+    }
+  }
+
+  deleteEvent(event: Event): void {
+    // Delete the event from allEvents
+    const index = this.allEvents.indexOf(event);
+    if (index !== -1) {
+      this.allEvents.splice(index, 1);
+    }
+
+    // Delete the event from the corresponding calendar day
+    this.calendarDays.forEach(day => {
       day.events = day.events.filter(e => e !== event);
-  });
-}
+    });
+  }
 }

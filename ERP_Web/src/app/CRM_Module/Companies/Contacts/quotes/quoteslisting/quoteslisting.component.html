@@ -1,4 +1,4 @@
-<div *ngIf="!addQuotes" class="Container cor-Contact">
+<div *ngIf="!quotePage" class="Container cor-Contact">
     <div class="cor-flex justify-content-sb">
       <div class="col-md-12">
         <!-- <div class="card">
@@ -36,7 +36,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let a of listOfQuotes | paginate: 
+                <tr *ngFor="let a of listOfQuotations | paginate: 
                 { itemsPerPage: tableSize, 
                 currentPage: page,
                 totalItems: count }; 
@@ -44,7 +44,7 @@
                    
                       <td>
 
-                        <span  (click)="edit(editData.id)" routerLink="/CRM/editquotes/{{a.id}}" class="fa fa-pencil-alt" style="color: blue;">
+                        <span  (click)="edit(quotation.id)" routerLink="/CRM/editquotes/{{a.id}}" class="fa fa-pencil-alt" style="color: blue;">
                         
                     </span>
                     <a routerLink="/CRM/quotes-invoice"
@@ -53,7 +53,7 @@
                             style="padding-right: 10px"
                           ></i
                         ></a>
-                    <span (click)="DeleteQuotations(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
+                    <span (click)="deleteQuotation(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
                         
                     </span>
                     
@@ -63,7 +63,7 @@
                       <td>{{a.quoteId}}</td>
                       <td>{{a.company}}</td>
                       <td>{{a.quoteType}}</td>
-                      <td>{{a.companyNewid}}</td>
+                      <td>{{a.billingFromCompanyName}}</td>
                       <td>{{a.billingToCompanyName}}</td>
                       <td>{{a.productName}}</td>
                       <td>{{a.quantity}}</td>
@@ -72,28 +72,6 @@
                   
                 </tr>
               </tbody>
-              <!-- <tr *ngFor="let a of listOfQuotes | paginate: 
-                    { itemsPerPage: tableSize, 
-                    currentPage: page,
-                    totalItems: count }; 
-                    let i = index">
-              <td>
-                <span  routerLink="/CRM/edit-contacts/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
-                    
-                </span>
-                <span (click)="deleteQuote(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
-                    
-                </span>
-            </td>
-                <td>{{ a.subject }}</td>
-                <td>{{ a.quotestage }}</td>
-                <td>{{ a.grandtotal }}</td>
-                <td>{{ a.dealname }}</td>
-                <td>{{ a.contactname }}</td>
-                <td>{{ a.accountname }}</td>
-                <td>{{ a.quoteowner }}</td>
-               
-              </tr> -->
             </table>
           </div>
         </div>
@@ -105,7 +83,7 @@
     <pagination-controls
       previousLabel="Prev"
       nextLabel="Next"
-      (pageChange)="onTableDataChange((p = $event))"
+      (pageChange)="onTableDataChange($event)"
     >
     </pagination-controls>
   </div>
