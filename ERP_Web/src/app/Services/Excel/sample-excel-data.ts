@@ -27,7 +27,7 @@ export class MyData {
       CompanyName : "aaa Corp",
       CompanyOwner : "John Doe",
       CompanyIndustry : "Technology",
-      CompanyIndustryType : "Technology",
+      CompanyIndustryType : "Education",
       HeadCount : 500,
       AnnualRevenue : "5M",
       City : "Vancouver",

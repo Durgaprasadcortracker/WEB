@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { ExcelreadService } from '../../../../Services/Excel/excelread.service';
 import { MyData } from '../../../../Services/Excel/sample-excel-data';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-bulk-upload-main',
@@ -17,9 +19,13 @@ export class BulkUploadMainComponent {
   statelist: any;
   countrylist: any;
   industrytypelist: any
+  loadingUploadButton: any;
+  _alertmessage: any;
 
   constructor(private http: BackendService,
     private excelRead: ExcelreadService,
+    private router: Router,
+    private snackBar: MatSnackBar,
   ) {
     this.getDropdowns()
   }
@@ -48,107 +54,112 @@ export class BulkUploadMainComponent {
   }
   uploadData() {
     console.log(this.uploadedData);
+    this.loadingUploadButton = true
     let updc = JSON.parse(JSON.stringify(this.uploadedData));
-    for (let a of updc) {
+    for (let [i, a] of updc.entries()) {
       let CompanyIndustry = this.convertString(a.CompanyIndustry)
+      let _CompanyIndustry = false
       for (let k of this.industrylist) {
         let description = this.convertString(k.description)
         if (CompanyIndustry == description) {
           let _numType = Number(k.id)
           a.CompanyIndustry = _numType
+          _CompanyIndustry = true
+          break;
         }
       }
+      if(!_CompanyIndustry){
+        this.alertMessages(i+1, CompanyIndustry)
+      }
       let CompanyIndustryType = this.convertString(a.CompanyIndustryType)
+      let _CompanyIndustryType = false
       for (let k of this.industrytypelist) {
         let description = this.convertString(k.description)
         if (CompanyIndustryType == description) {
           let _numType = Number(k.id)
           a.CompanyIndustryType = _numType
+          _CompanyIndustryType = true
+          break;
         }
       }
+      if(!_CompanyIndustryType){
+        this.alertMessages(i+1, CompanyIndustryType)
+      }
       let Country = this.convertString(a.Country)
+      let _Country = false
       for (let k of this.countrylist) {
         let description = this.convertString(k.description)
         if (Country == description) {
           let _numType = Number(k.id)
           a.Country = _numType
+          _Country = true
+          break;
         }
       }
+      if(!_Country){
+        this.alertMessages(i+1, Country)
+      }
       let _City = this.convertString(a.City)
+      let _City_ = false
       for (let k of this.citylist) {
         let description = this.convertString(k.description)
         if (_City == description) {
           let _numType = Number(k.id)
           a.City = _numType
+          _City_ = true
+          break;
         }
       }
+      if(!_City_){
+        this.alertMessages(i+1, _City)
+      }
       let State = this.convertString(a.State)
+      let _State = false
       for (let k of this.statelist) {
         let description = this.convertString(k.description)
         if (State == description) {
           let _numType = Number(k.id)
           a.State = _numType
+          _State = true
+          break;
         }
       }
+      if(!_State){
+        this.alertMessages(i+1, State)
+      }
       let TimeZone = this.convertString(a.TimeZone)
+      let _TimeZone = false
       for (let k of this.timeZonelist) {
         let description = this.convertString(k.description)
         if (TimeZone == description) {
           let _numType = Number(k.id)
           a.TimeZone = _numType
+          _TimeZone =true
+          break;
         }
       }
-      a.id = 0
+      if(!_TimeZone){
+        this.alertMessages(i+1, TimeZone)
+      }
     }
     console.log(updc);
-    // this.uploadtoBackend(updc)
-    // const companies = [
-    //   {
-    //     DomainName : "example.com",
-    //     CompanyName : "Example Corp",
-    //     CompanyOwner : "John Doe",
-    //     CompanyIndustry : 2,
-    //     CompanyIndustryType : 5,
-    //     HeadCount : 500,
-    //     AnnualRevenue : "5M",
-    //     City : 101,
-    //     State : 10,
-    //     Country : 1,
-    //     PostalCode : "12345",
-    //     TimeZone : 2,
-    //     Website : "http://www.example.com",
-    //     LinkedinUrl : "http://www.linkedin.com/company/example",
-    //     BusinessEmail : "contact@example.com",
-    //     CompanyAddress1 : "123 Example Street",
-    //     CampanyAddress2 : "Suite 100",
-    //   },
-    //   {
-    //     DomainName : "aaa.com",
-    //     CompanyName : "aaa Corp",
-    //     CompanyOwner : "John Doe",
-    //     CompanyIndustry : 2,
-    //     CompanyIndustryType : 5,
-    //     HeadCount : 500,
-    //     AnnualRevenue : "5M",
-    //     City : 101,
-    //     State : 10,
-    //     Country : 1,
-    //     PostalCode : "12345",
-    //     TimeZone : 2,
-    //     Website : "http://www.aaa.com",
-    //     LinkedinUrl : "http://www.linkedin.com/company/aaa",
-    //     BusinessEmail : "contact@aaa.com",
-    //     CompanyAddress1 : "123 aaa Street",
-    //     CampanyAddress2 : "Suite 100",
-    //   }
-    // ];
-
-    // console.log(companies);
     this.uploadtoBackend(updc)
+  }
+  alertMessages(row: any, type: any) {
+    this._alertmessage = "In the " + row + " row " + type + " is invalid"
+    this.loadingUploadButton = false
+
   }
   uploadtoBackend(_jsondata: any) {
     this.http.postapi('api/Company/Bulkupload1', _jsondata).subscribe((res) => {
       console.log(res);
+      if(res){
+        this.snackBar.open(_jsondata.length+' Companys successfully added!', 'Close', {
+          duration: 3000, 
+        });
+        this.router.navigate(['/CRM/Companies']);
+      }
+      this.loadingUploadButton = false
     });
   }
   getDropdowns() {

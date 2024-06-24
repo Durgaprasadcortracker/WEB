@@ -88,7 +88,11 @@
     </div>
     <div  *ngIf="uploadPage == 2" class="m-3">
         <div class="mr-2">
-            <button (click)="uploadData()" type="button" class="btn btn-primary">Upload Companys</button>
+            <button *ngIf="!loadingUploadButton" (click)="uploadData()" type="button" class="btn btn-primary">Upload Companys</button>
+            <button *ngIf="loadingUploadButton" type="button" class="btn btn-primary">Loading...</button>
+        </div>
+        <div class="m-1" style="color: red;font-size: 12px;">
+            {{_alertmessage}}
         </div>
     </div>
 </div>
