@@ -61,6 +61,7 @@ import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campag
 import { CountryComponent } from './CRM_Module/Settings/Configration/country/country.component';
 import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
 import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
+import { AddSocialmediaComponent } from './CRM_Module/Campagins/add-socialmedia/add-socialmedia.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +118,8 @@ import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype
     CompaniesInfoComponent,
     StateComponent,
     CalltypeComponent,
-    QuotetypeComponent
+    QuotetypeComponent,
+    AddSocialmediaComponent
   ],
   imports: [
     HttpClientModule,
