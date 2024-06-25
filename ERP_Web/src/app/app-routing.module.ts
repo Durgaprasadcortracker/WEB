@@ -124,13 +124,13 @@ const routes: Routes = [
         children: [
           { path: '', component: CampaginsComponent },
           { path: 'campagins', component: CampaginsComponent },
-          { path: 'add-campagin', component: AddCampaginComponent},
-          { path: 'editcampaign/:id', component: AddCampaginComponent },
           { path: 'email-conversation', component: EmailCampaginsComponent },
           { path: 'social-media-campagins', component: SocialMediaCampaginsComponent },
           { path: 'sms-campagins', component: SmsCampaginsComponent },
         ]
       },
+      { path: 'add-campagin', component: AddCampaginComponent},
+      { path: 'editcampaign/:id', component: AddCampaginComponent },
       { path: '**', redirectTo: '/CRM/Home' }
     ]
   },

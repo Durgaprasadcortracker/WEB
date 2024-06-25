@@ -39,7 +39,7 @@ export class LeadsMainComponent {
     this.ngOnInit()
   }
   getData(){
-    this.http.getapi('api/Contacts/GetContacts').subscribe((res) => {
+    this.http.getapi('api/Lead/GetLeads').subscribe((res) => {
         console.log(res);
         this.listOfleads=res.data
       }
@@ -56,8 +56,8 @@ export class LeadsMainComponent {
     this.getData();
   }
   deleteLead(ID:any){
-    this.http.deleteapi('api/Contacts/DeleteContacts/'+ID).subscribe((res) => {
-      this.snackBar.open('Contact successfully Deleted!', 'Close', {
+    this.http.deleteapi('api/Lead/DeleteLeads/'+ID).subscribe((res) => {
+      this.snackBar.open('Lead successfully Deleted!', 'Close', {
         duration: 3000, // Snackbar stays open for 3 seconds
       });
         console.log(res);
