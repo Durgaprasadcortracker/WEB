@@ -1,1 +1,64 @@
-<p>leads-main works!</p>
+<div *ngIf="!contactPage " class="container mt-4">
+    <!-- Card Header -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Leads</h3>
+        </div>
+        <div class="card-body">
+            <!-- <h5>Total Records: {{ totalRecords }}</h5> -->
+            <div style="float: right;">
+                <button routerLink="/CRM/add-leads" class="btn btn-primary">Add Leads</button>
+                <!-- <button (click)="contactPage = 2" class="btn btn-warning">Bulk Upload</button> -->
+            </div>
+        </div>
+        <hr />
+        <!-- Table -->
+        <div class="table-responsive mt-4" style="padding: 20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Lead Name</th>
+                        <th>Lead Owner</th>
+                        <th>Email</th>
+                        <th>Lead Stage</th>
+                        <th>Lead Status</th>
+                        <th>Propability</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of listOfleads | paginate: 
+                    { itemsPerPage: tableSize, 
+                    currentPage: page,
+                    totalItems: count }; 
+                    let i = index">
+                      <td>
+                        <span  routerLink="/CRM/edit-leads/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
+                            
+                        </span>
+                        <span (click)="deleteLead(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
+                            
+                        </span>
+                    </td>
+            
+                        <td>{{a.leadName}}</td>
+                        <td>{{a.leadOwner}}</td>
+                        <td>{{a.businessEmail}}</td>
+                        <td>{{a.leadStage}}</td>
+                        <td>{{a.leadStatus}}</td>
+                        <td>{{a.propability}}</td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="d-flex justify-content-left mt-4">
+        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+        </pagination-controls>
+    </div>
+</div>
+
+

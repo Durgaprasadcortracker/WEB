@@ -1,0 +1,89 @@
+<div class="card m-3">
+    <div class="card-header">
+        Campaign Registration
+    </div>
+    <div class="card-body">
+        <form  [formGroup]="myForm" (ngSubmit)="addCampaign()">
+            <!--Inputs  -->
+            <div class="d-flex flex-wrap">
+                <div class="col-md-3">
+                    <label for="campaignOwner" class="form-label">Campaign Owner<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="campaignOwner" 
+                      [ngClass]="{ 'is-invalid': submitted && f['campaignOwner'].errors }" /> 
+                        <div *ngIf="submitted && f['campaignOwner'].errors" class="invalid-feedback">
+                          <div *ngIf="f['campaignOwner'].errors['required']">domain Name is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="campaignName" class="form-label">Campaign Name<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="campaignName" 
+                      [ngClass]="{ 'is-invalid': submitted && f['campaignName'].errors }" /> 
+                        <div *ngIf="submitted && f['campaignName'].errors" class="invalid-feedback">
+                          <div *ngIf="f['campaignName'].errors['required']">company Name is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="campaignType" class="form-label">Campaign Type<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <input type="text" class="form-control form-control-lg" formControlName="campaignType" 
+                      [ngClass]="{ 'is-invalid': submitted && f['campaignType'].errors }" /> 
+                        <div *ngIf="submitted && f['campaignType'].errors" class="invalid-feedback">
+                          <div *ngIf="f['campaignType'].errors['required']">company Owner is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <select type="text" class="form-select form-control-lg" formControlName="status" 
+                      [ngClass]="{ 'is-invalid': submitted && f['status'].errors }">
+                        <option value="0">--Select Campaign Status-- </option>
+                        <option *ngFor="let CampaignStatus of statuslist" value="{{CampaignStatus.id}}">{{CampaignStatus.description}}</option>
+                    </select>
+                        <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+                          <div *ngIf="f['status'].errors['required']">Campaign Status is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="startDate" class="form-label">Start Date<span class="text-danger">*</span></label>
+                    <input type="datetime" class="form-control" formControlName="startDate">
+                </div>
+                <div class="col-md-3">
+                    <label for="endDate" class="form-label">End Date<span class="text-danger">*</span></label>
+                    <input type="datetime" class="form-control" formControlName="endDate">
+                </div>   
+                <div class="col-md-3">
+                    <label>Campaign Objective </label>
+                    <input type="text" class="form-control" formControlName="campaignObjective">
+                </div>     
+                <div class="col-md-3">
+                    <label>Budgeted Cost </label>
+                    <input type="text" class="form-control" formControlName="budgetedCost">
+                </div>                 
+            </div>
+            <!-- Text Area -->
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6">
+                    <label>Description <span class="required">*</span> </label>
+                    <textarea class="form-control" rows="3" formControlName="description" ></textarea>   
+                </div> 
+            </div>
+            <!-- Buttons -->
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6 mt-3 d-flex g-1">
+                    <div class="mr-2">
+                        <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
+
+                        <div style="width: 200px;"  type="button" class="btn btn-danger" (click)="close()">Close</div>
+    
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
