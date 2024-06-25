@@ -30,7 +30,7 @@ export class SocialMediaCampaginsComponent {
   // Use window.location.href for current page URL
   // private url: string = window.location.href;
 
-  private socialMediaShare: any = {
+  public socialMediaShare: any = {
     whatsapp: `https://api.whatsapp.com/send?text=${this.url}`,
     facebook: `https://facebook.com/sharer/sharer.php?u=${this.url}`,
     twitter: `https://twitter.com/share?url=${this.url}`,
@@ -46,6 +46,70 @@ export class SocialMediaCampaginsComponent {
   //     checkbox.checked = checked;
   //   });
   // }
+
+  share(){
+    debugger;
+    if(navigator.share)
+      {
+        navigator.share({
+          title:"Social media",
+          text:"Check the mail",
+          url: "https://www.youtube.com/channel/UChcK61TdP5xZCrK8a79ID8w"
+        });
+      }
+  }
+  sharevalidate(name:any,url:any){
+    debugger;
+    if(name=="whatsapp"){
+      navigator.share({
+        title:"Social media",
+        text:"Check the mail",
+        url: this.socialMediaShare.whatsapp
+      });
+    }
+    if(name=="twitter"){
+      navigator.share({
+        title:"Social media",
+        text:"Check the mail",
+        url: this.socialMediaShare.twitter
+      });
+    }
+    if(name=="instagram"){
+      navigator.share({
+        title:"Social media",
+        text:"Check the mail",
+        url: this.socialMediaShare.instagram
+      });
+    }
+    if(name=="linkedin"){
+      navigator.share({
+        title:"Social media",
+        text:"Check the mail",
+        url: this.socialMediaShare.linkedin
+      });
+    }
+    if(name=="facebook"){
+      navigator.share({
+        title:"Social media",
+        text:"Check the mail",
+        url: this.socialMediaShare.facebook
+      });
+    }
+    if(name=="email"){
+      navigator.share({
+        title:"Social media",
+        text:"Check the mail",
+        url: this.socialMediaShare.mail
+      });
+    }
+    if(name=="pinterest"){
+      navigator.share({
+        title:"Social media",
+        text:"Check the mail",
+        url: this.socialMediaShare.pinterest
+      });
+    }
+  }
 
   toggleSelect(event: any, platform: string) {
     if (event.target.checked) {
@@ -67,62 +131,93 @@ export class SocialMediaCampaginsComponent {
   // }
 
   postNow() {
-    const selectedArray = Array.from(this.url);
-    const postData = {
-      content: this.postContent,
-      platforms: selectedArray,
-      file: this.selectedFile,
-    };
+    debugger;
+    if(this.whatsappchecked=='true'){
+      window.open(this.socialMediaShare['whatsapp'], "w1","status=1,toolbar=1,menubar=1");
 
-    this.sendToPlatforms(postData);
+    }
+    if(this.twitterchecked=='true'){
+      window.open(this.socialMediaShare['twitter'], "w2","status=1,toolbar=1,menubar=1");
+    }
+    if(this.instagramchecked=='true'){
+      window.open(this.socialMediaShare['instagram'], "w3","status=1,toolbar=1,menubar=1");
+    }
+    if(this.linkedinchecked=='true'){
+      window.open(this.socialMediaShare['linkedin'], "w4","status=1,toolbar=1,menubar=1");
+    }
+    if(this.facebookchecked=='true'){
+      window.open(this.socialMediaShare['facebook'], "w5","status=1,toolbar=1,menubar=1");
+    }
+    if(this.mailchecked=='true'){
+      window.open(this.socialMediaShare['mail'], "w6","status=1,toolbar=1,menubar=1");
+    }
+    if(this.pinterestchecked=='true'){
+      window.open(this.socialMediaShare['pinterest'], "w7","status=1,toolbar=1,menubar=1");
+    }
+    // const selectedArray = Array.from(this.url);
+    // const postData = {
+    //   content: this.postContent,
+    //   platforms: selectedArray,
+    //   file: this.selectedFile,
+    // };
+
+    // this.sendToPlatforms(postData);
   }
-
+  whatsappchecked:any=false;
   toggleSelectwhatsapp(checked: any): void {
-    const checkbox = document.getElementById(
-      `checkbox-${'whatsapp'}`
-    ) as HTMLInputElement;
-    checkbox.checked = checked.value;
+    debugger;
+    // const checkbox = document.getElementById(
+    //   `checkbox-${'whatsapp'}`
+    // ) as HTMLInputElement;
+    // checkbox.checked = checked.value;
+    if(checked.target.checked==true){
+      this.whatsappchecked='true';
+    }
+    // else{
+    //   this.whatsappchecked='false';
+    // }
   }
   // toggleSelect(site: string, checked: boolean): void {
   //   const checkbox = document.getElementById(`checkbox-${site}`) as HTMLInputElement;
   //   checkbox.checked = checked;
   // }
+  twitterchecked:any=false;
   toggleSelecttwitter(checked: any): void {
-    const checkbox = document.getElementById(
-      `checkbox-${'twitter'}`
-    ) as HTMLInputElement;
-    checkbox.checked = checked.value;
+    if(checked.target.checked==true){
+      this.twitterchecked='true';
+    }
   }
+  instagramchecked:any=false;
   toggleSelectinstagram(checked: any): void {
-    const checkbox = document.getElementById(
-      `checkbox-${'instagram'}`
-    ) as HTMLInputElement;
-    checkbox.checked = checked.value;
+    if(checked.target.checked==true){
+      this.instagramchecked='true';
+    }
   }
+  linkedinchecked:any=false;
   toggleSelectlinkedin(checked: any): void {
-    const checkbox = document.getElementById(
-      `checkbox-${'linkedin'}`
-    ) as HTMLInputElement;
-    checkbox.checked = checked.value;
+    if(checked.target.checked==true){
+      this.linkedinchecked='true';
+    }
   }
+  facebookchecked:any=false;
   toggleSelectfacebook(checked: any): void {
-    const checkbox = document.getElementById(
-      `checkbox-${'facebook'}`
-    ) as HTMLInputElement;
-    checkbox.checked = checked.value;
+    if(checked.target.checked==true){
+      this.facebookchecked='true';
+    }
   }
+  mailchecked:any=false;
   toggleSelectmail(checked: any): void {
-    const checkbox = document.getElementById(
-      `checkbox-${'mail'}`
-    ) as HTMLInputElement;
-    checkbox.checked = checked.value;
+    if(checked.target.checked==true){
+      this.mailchecked='true';
+    }
   }
+  pinterestchecked:any=false;
   toggleSelectpinterest(checked: any): void {
-    const checkbox = document.getElementById(
-      `checkbox-${'pinterest'}`
-    ) as HTMLInputElement;
-    checkbox.checked = checked.value;
+    if(checked.target.checked==true){
+      this.pinterestchecked='true';
+    }
   }
+
   sendToPlatforms(postData: any) {
     postData.platforms.forEach((platform: string) => {
       console.log(`Sending to ${platform}`);
