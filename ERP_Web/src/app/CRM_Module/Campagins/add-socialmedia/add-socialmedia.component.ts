@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BackendService } from '../../../Services/BackendConnection/backend.service';
 
 @Component({
   selector: 'app-add-socialmedia',
@@ -9,8 +10,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddSocialmediaComponent {
   schedulePostForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private services:BackendService) {
     this.schedulePostForm = this.fb.group({
+      socialvalue: ['',Validators.required],
       title: ['', Validators.required],
       content: ['', Validators.required],
       scheduleDate: ['', Validators.required],

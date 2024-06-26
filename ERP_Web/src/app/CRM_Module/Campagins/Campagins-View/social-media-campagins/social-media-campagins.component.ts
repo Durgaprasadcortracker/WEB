@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-social-media-campagins',
@@ -15,6 +16,8 @@ export class SocialMediaCampaginsComponent {
   openMail = false;
   toolbar: any;
   campaigns: any;
+  socialvalue:any[]= [];
+
 
   constructor(private http: BackendService) {}
   companyPage = 0;
@@ -22,7 +25,6 @@ export class SocialMediaCampaginsComponent {
   selectedPlatforms: Set<string> = new Set();
   postContent: string = '';
   selectedFile: File | null = null;
-
   activity = 0;
 
   private url: string =
@@ -172,6 +174,7 @@ export class SocialMediaCampaginsComponent {
     // checkbox.checked = checked.value;
     if(checked.target.checked==true){
       this.whatsappchecked='true';
+      this.socialvalue.push(checked.target.value+",");
     }
     // else{
     //   this.whatsappchecked='false';
@@ -185,36 +188,42 @@ export class SocialMediaCampaginsComponent {
   toggleSelecttwitter(checked: any): void {
     if(checked.target.checked==true){
       this.twitterchecked='true';
+      this.socialvalue.push(checked.target.value+",");
     }
   }
   instagramchecked:any=false;
   toggleSelectinstagram(checked: any): void {
     if(checked.target.checked==true){
       this.instagramchecked='true';
+      this.socialvalue.push(checked.target.value+",");
     }
   }
   linkedinchecked:any=false;
   toggleSelectlinkedin(checked: any): void {
     if(checked.target.checked==true){
       this.linkedinchecked='true';
+      this.socialvalue.push(checked.target.value+",");
     }
   }
   facebookchecked:any=false;
   toggleSelectfacebook(checked: any): void {
     if(checked.target.checked==true){
       this.facebookchecked='true';
+      this.socialvalue.push(checked.target.value+",");
     }
   }
   mailchecked:any=false;
   toggleSelectmail(checked: any): void {
     if(checked.target.checked==true){
       this.mailchecked='true';
+      this.socialvalue.push(checked.target.value+",");
     }
   }
   pinterestchecked:any=false;
   toggleSelectpinterest(checked: any): void {
     if(checked.target.checked==true){
       this.pinterestchecked='true';
+      this.socialvalue.push(checked.target.value+",");
     }
   }
 
@@ -238,4 +247,6 @@ export class SocialMediaCampaginsComponent {
   sharePage(site: string): void {
     window.open(this.socialMediaShare[site], '_blank');
   }
+
+ 
 }
