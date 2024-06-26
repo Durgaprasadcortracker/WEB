@@ -1,61 +1,61 @@
-<div class=" mt-4">
+<div class="mt-4">
     <!-- Card Header -->
     <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3>Companies</h3>
-        </div>
-        <div class="card-body">
-            <!-- <h5>Total Records: {{ totalRecords }}</h5> -->
-            <div style="float: right;">
-                <button class="btn btn-danger mr-2" routerLink="/CRM/Addnewcompany">Add Company</button>
-                <button class="btn btn-danger button-gap"  routerLink="/CRM/bulk-upload">Bulk Upload</button>
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h3>Companies</h3>
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="search-container">
+            <label for="searchCompany" class="form-label">Search by Company Name:</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="search-addon"><i class="fa fa-search"></i></span>
+              </div>
+              <input type="text" id="searchCompany" class="form-control search-input" placeholder="Enter company name" style="width: 400px;"
+                [(ngModel)]="searchTerm" (input)="filterCompanies()">
             </div>
+          </div>
+          <div>
+            <button class="btn btn-danger mr-2" routerLink="/CRM/Addnewcompany">Add Company</button>
+            <button class="btn btn-danger button-gap" routerLink="/CRM/bulk-upload">Bulk Upload</button>
+          </div>
         </div>
-        <hr />
-        <!-- Table -->
-        <div class="table-responsive mt-4" style="padding: 20px;">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Actions</th>
-                        <th>Company Name</th>
-                        <th>Company Owner</th>
-                        <th>Industry</th>
-                        <th>Industry Type</th>
-                        <th>Head Count</th>
-                        <th>Annual Revenue</th>
-                       
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let a of listOfCompanys  | paginate
-                    : {
-                        itemsPerPage: tableSize,
-                        currentPage: page,
-                        totalItems: count
-                      };
-                let i = index">
-                <td>
-                    <span  (click)="edit(company.id)" routerLink="/CRM/editcompany/{{a.id}}" class="fa fa-pencil-alt" style="color: blue;">
-                        
-                    </span>
-                    <span (click)="deleteCompany(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
-                        
-                    </span>
-                </td>
-                        <td><a style="text-decoration: none;" routerLink="/CRM/companiesinfo/{{a.id}}"> {{a.companyName}}</a></td>
-                        <td>{{a.companyOwner}}</td>
-                        <td>{{a.companyIndustry}}</td>
-                        <td>{{a.companyIndustryType}}</td>
-                        <td>{{a.headCount}}</td>
-                        <td>{{a.annualRevenue}}</td>
-                        
-                    </tr>
-                </tbody>
-            </table>
-            <div class="pagination">
-                <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
-            </div>
+      </div>
+      <hr />
+      <!-- Table -->
+      <div class="table-responsive mt-4" style="padding: 20px;">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Actions</th>
+              <th>Company Name</th>
+              <th>Company Owner</th>
+              <th>Industry</th>
+              <th>Industry Type</th>
+              <th>Head Count</th>
+              <th>Annual Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of filteredCompanies | paginate : { itemsPerPage: tableSize, currentPage: page, totalItems: count }; let i = index">
+              <td>
+                <span (click)="edit(company.id)" routerLink="/CRM/editcompany/{{a.id}}" class="fa fa-pencil-alt" style="color: blue;"></span>
+                <span (click)="deleteCompany(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;"></span>
+              </td>
+              <td><a style="text-decoration: none;" routerLink="/CRM/companiesinfo/{{a.id}}">{{a.companyName}}</a></td>
+              <td>{{a.companyOwner}}</td>
+              <td>{{a.companyIndustry}}</td>
+              <td>{{a.companyIndustryType}}</td>
+              <td>{{a.headCount}}</td>
+              <td>{{a.annualRevenue}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination">
+          <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  
