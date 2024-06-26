@@ -7,6 +7,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -70,42 +71,35 @@ export class AddLeadsComponent {
   });
 
   ngOnInit() {
-    // this.myForm = this.fb.group({
-    //   id: new FormControl(0),
-    //   leadOwner: new FormControl(null),
-    //   Company: new FormControl(null),
-    //   firstName: new FormControl(null),
-    //   lastName: new FormControl(null),
-    //   description: new FormControl(null),
-    //   businessEmail: new FormControl(null),
-    //   secondaryEmail: new FormControl(null),
-    //   phoneNumber: new FormControl(null),
-    //   alternateNumber: new FormControl(null),
-    //   leadStatus: new FormControl(null),
-    //   leadSource: new FormControl(null),
-    //   leadStage: new FormControl(null),
-    //   website: new FormControl(null),
-    //   industry: new FormControl(null),
-    //   annualRevenue: new FormControl(null),
-    //   emailOutput: new FormControl(null),
-    //   skypeId: new FormControl(null),
-    //   linkedIn: new FormControl(null),
-    //   noofEmployees:new FormControl(null),
-    //   rating:new FormControl(null),
-    // });
+    this.myForm = this.fb.group({
+      id: new FormControl(0),
+      leadOwner: [null, Validators.required],
+      Company: [null, Validators.required],
+      firstName: [null, Validators.required],
+      lastName: [null, Validators.required],
+      description: [null, Validators.required],
+      businessEmail: [null, Validators.required],
+      phoneNumber: [null, Validators.required],
+      leadStatus: [null, Validators.required],
+      leadSource: [null, Validators.required],
+      leadStage: [null, Validators.required],
+      industry: [null, Validators.required],
+      noofEmployees:[null, Validators.required],
+     
+    });
     this.getCompany();
     this.getStage();
     this.getStatus();
     this.getIndustry();
     // this.getLogin();
     console.log(this.Id);
-    this.myForm.get('Company')?.valueChanges.subscribe((value) => {
+    this.myForm.get('Leads')?.valueChanges.subscribe((value) => {
       this.selectedCompany(value);
     });
 
     if (this.Id) {
       this.http
-        .getapi('api/Contacts/GetContactsby/' + this.Id)
+        .getapi('api/Lead/GetLeadsby/' + this.Id)
         .subscribe((res) => {
           console.log(res);
           this.myForm.patchValue(res.data);
@@ -145,7 +139,7 @@ export class AddLeadsComponent {
               this.snackBar.open('Lead successfully updated!', 'Close', {
                 duration: 3000, // Snackbar stays open for 3 seconds
               });
-              this.router.navigate(['/CRM/leads']);
+              this.router.navigate(['/CRM/Leads']);
             },
             (error) => {
               console.error('Error updating lead:', error);
@@ -159,7 +153,13 @@ export class AddLeadsComponent {
   get f(): { [key: string]: AbstractControl } {
     return this.myForm.controls;
   }
-
+  getcompanydetails(){
+    this.http.getapi('api/Company/GetContactsbycompanyId').subscribe((res) => {
+      console.log(res);
+      
+      
+    });
+  }
   getCompany() {
     this.http.getapi('api/Company/GetCompany').subscribe((res) => {
       console.log(res);

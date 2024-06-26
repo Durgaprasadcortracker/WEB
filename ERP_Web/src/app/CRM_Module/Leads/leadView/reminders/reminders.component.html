@@ -32,7 +32,7 @@
                                 (click)="edit(a.id)" class="material-symbols-outlined mr-2">
                                 edit
                             </span>
-                            <span (click)="deleteCallLog(a.id)" class="material-symbols-outlined">
+                            <span (click)="deleteReminder(a.id)" class="material-symbols-outlined">
                                 delete
                             </span>
                         </td>
@@ -45,32 +45,32 @@
         <form [formGroup]="myForm" (ngSubmit)="addReminder()">
             <div class="d-flex flex-wrap">
                 <div class="col-md-3">
-                    <label for="reminderName" class="form-label">Reminder Name<span class="text-danger">*</span></label>
+                    <label for="ReminderName" class="form-label">Reminder Name<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline">
-                        <input type="text" class="form-control" formControlName="reminderName"
-                            [ngClass]="{ 'is-invalid': submitted && f['reminderName'].errors }">
-                        <div *ngIf="submitted && f['reminderName'].errors" class="invalid-feedback">
-                            <div *ngIf="f['reminderName'].errors['required']">Contact is required.</div>
+                        <input type="text" class="form-control" formControlName="ReminderName"
+                            [ngClass]="{ 'is-invalid': submitted && f['ReminderName'].errors }">
+                        <div *ngIf="submitted && f['ReminderName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['ReminderName'].errors['required']">Contact is required.</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="reminderDate" class="form-label">Reminder Date<span class="text-danger">*</span></label>
+                    <label for="ReminderDate" class="form-label">Reminder Date<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline">
-                        <input type="date" class="form-control" formControlName="reminderDate" 
-                        [ngClass]="{ 'is-invalid': submitted && f['reminderDate'].errors }">
-                        <div *ngIf="submitted && f['reminderDate'].errors" class="invalid-feedback">
-                            <div *ngIf="f['reminderDate'].errors['required']">Call Types is required.</div>
+                        <input type="date" class="form-control" formControlName="ReminderDate" 
+                        [ngClass]="{ 'is-invalid': submitted && f['ReminderDate'].errors }">
+                        <div *ngIf="submitted && f['ReminderDate'].errors" class="invalid-feedback">
+                            <div *ngIf="f['ReminderDate'].errors['required']">Call Types is required.</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="reminderTime" class="form-label">Reminder Time<span class="text-danger">*</span></label>
+                    <label for="ReminderTime" class="form-label">Reminder Time<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline">
-                        <input type="time" class="form-control" formControlName="reminderTime"
-                        [ngClass]="{ 'is-invalid': submitted && f['reminderTime'].errors }">
-                        <div *ngIf="submitted && f['reminderTime'].errors" class="invalid-feedback">
-                            <div *ngIf="f['reminderTime'].errors['required']">CallDate is required.</div>
+                        <input type="time" class="form-control" formControlName="ReminderTime"
+                        [ngClass]="{ 'is-invalid': submitted && f['ReminderTime'].errors }">
+                        <div *ngIf="submitted && f['ReminderTime'].errors" class="invalid-feedback">
+                            <div *ngIf="f['ReminderTime'].errors['required']">CallDate is required.</div>
                         </div>
                     </div>
                 </div>
@@ -79,10 +79,10 @@
                 <div class="d-flex flex-wrap">
                     <div class="col-md-6">
                         <label>Notes <span class="required">*</span> </label>
-                        <textarea class="form-control" cols="100" rows="3" formControlName="notes"
-                            [ngClass]="{ 'is-invalid': submitted && f['notes'].errors }"></textarea>
-                        <div *ngIf="submitted && f['notes'].errors" class="invalid-feedback">
-                            <div *ngIf="f['notes'].errors['required']">Comments is required.</div>
+                        <textarea class="form-control" cols="100" rows="3" formControlName="Notes"
+                            [ngClass]="{ 'is-invalid': submitted && f['Notes'].errors }"></textarea>
+                        <div *ngIf="submitted && f['Notes'].errors" class="invalid-feedback">
+                            <div *ngIf="f['Notes'].errors['required']">Comments is required.</div>
                         </div>
                     </div>
                 </div>

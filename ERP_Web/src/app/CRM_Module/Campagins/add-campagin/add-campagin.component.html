@@ -7,14 +7,14 @@
             <!--Inputs  -->
             <div class="d-flex flex-wrap">
                 <div class="col-md-3">
-                    <label for="campaignOwner" class="form-label">Campaign Owner<span class="text-danger">*</span></label>
-                    <div data-mdb-input-init class="form-outline"> 
-                      <input type="text" class="form-control form-control-lg" formControlName="campaignOwner" 
-                      [ngClass]="{ 'is-invalid': submitted && f['campaignOwner'].errors }" /> 
-                        <div *ngIf="submitted && f['campaignOwner'].errors" class="invalid-feedback">
-                          <div *ngIf="f['campaignOwner'].errors['required']">domain Name is required.</div>
-                        </div>
-                    </div>
+                    <label>Campaign Owner <span class="required">*</span>  </label>
+                    <select class="form-select"  formControlName="loginId"  [ngClass]="{ 'is-invalid': submitted && f['LeadOwnerId'].errors }">
+                        <option value="0">--Select CampaignOwner--</option>
+                        <option *ngFor="let campaignOwner of campaignOwnerlist" value="{{campaignOwner.id}}">{{campaignOwner.leadOwnerName}}</option>
+                    </select>
+                    <div *ngIf="submitted && f['CompanyId'].errors" class="invalid-feedback">
+                        <div *ngIf="f['CompanyId'].errors['required']">Company is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-3">
                     <label for="campaignName" class="form-label">Campaign Name<span class="text-danger">*</span></label>
@@ -37,10 +37,10 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label for="status" class="form-label">Status<span class="text-danger">*</span></label>
+                    <label for="campaignStatus" class="form-label">Status<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline"> 
-                      <select type="text" class="form-select form-control-lg" formControlName="status" 
-                      [ngClass]="{ 'is-invalid': submitted && f['status'].errors }">
+                      <select type="text" class="form-select form-control-lg" formControlName="campaignStatus" 
+                      [ngClass]="{ 'is-invalid': submitted && f['campaignStatus'].errors }">
                         <option value="0">--Select Campaign Status-- </option>
                         <option *ngFor="let CampaignStatus of statuslist" value="{{CampaignStatus.id}}">{{CampaignStatus.description}}</option>
                     </select>
@@ -51,11 +51,11 @@
                 </div>
                 <div class="col-md-3">
                     <label for="startDate" class="form-label">Start Date<span class="text-danger">*</span></label>
-                    <input type="datetime" class="form-control" formControlName="startDate">
+                    <input type="date" class="form-control" formControlName="startDate">
                 </div>
                 <div class="col-md-3">
                     <label for="endDate" class="form-label">End Date<span class="text-danger">*</span></label>
-                    <input type="datetime" class="form-control" formControlName="endDate">
+                    <input type="date" class="form-control" formControlName="endDate">
                 </div>   
                 <div class="col-md-3">
                     <label>Campaign Objective </label>
@@ -63,7 +63,7 @@
                 </div>     
                 <div class="col-md-3">
                     <label>Budgeted Cost </label>
-                    <input type="text" class="form-control" formControlName="budgetedCost">
+                    <input type="text" class="form-control" formControlName="budgetCost">
                 </div>                 
             </div>
             <!-- Text Area -->
@@ -79,7 +79,7 @@
                     <div class="mr-2">
                         <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
 
-                        <div style="width: 200px;"  type="button" class="btn btn-danger" (click)="close()">Close</div>
+                        <div style="width: 200px;"  type="button" class="btn btn-danger" routerLink="/CRM/Campagins/campagins">Close</div>
     
                     </div>
                 </div>

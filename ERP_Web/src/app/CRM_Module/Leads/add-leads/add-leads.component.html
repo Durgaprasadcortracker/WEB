@@ -8,14 +8,17 @@
             <div class="d-flex flex-wrap">
                 <div  class="col-md-3">
                     <label>Lead Owner<span class="required">*</span></label>
-                    <select class="form-select"  formControlName="leadOwner"  >
+                    <select class="form-select"  formControlName="leadOwner" [ngClass]="{ 'is-invalid': submitted && f['leadOwner'].errors }" >
                         <option value="0">--Select leadowner--</option>
                         <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
                     </select>
+                    <div *ngIf="submitted && f['leadOwner'].errors" class="invalid-feedback">
+                        <div *ngIf="f['leadOwner'].errors['required']">Lead Owner is required.</div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label>Company<span class="required">*</span></label>
-                    <select class="form-select"  formControlName="Company"  >
+                    <select class="form-select"  formControlName="Company" (change)="getcompanydetails()" >
                         <option value="0">--Select Company--</option>
                         <option *ngFor="let company of companylist" value="{{company.id}}">{{company.companyName}}</option>
                     </select>
@@ -137,7 +140,7 @@
                         <!-- <button  ></button> -->
                         <button type="submit" style="width: 200px;margin-right: 10px;" class="btn btn-primary" >Submit</button>
 
-                        <div style="width: 200px;" routerLink="/CRM/contacts"  type="button" class="btn btn-danger">Close</div>
+                        <div style="width: 200px;" routerLink="/CRM/Leads"  type="button" class="btn btn-danger">Close</div>
     
                     </div>
                 </div>

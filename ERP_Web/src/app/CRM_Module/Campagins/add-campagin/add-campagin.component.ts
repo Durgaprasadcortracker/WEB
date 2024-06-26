@@ -11,11 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddCampaginComponent {
   statuslist: any;
-  industrytypelist: any;
-  citylist: any;
-  statelist: any;
-  countrylist: any;
-  timeZonelist: any;
+  campaignOwnerlist:any;
+ 
   submitted: any;
  
   Id: any;
@@ -43,36 +40,30 @@ export class AddCampaginComponent {
     private snackBar: MatSnackBar,
   ) {
     this.Id = this.route.snapshot.paramMap.get('id');
+    console.log(this.Id);
+    this.getCampaignStatus();
+    this.getLeadOwner();
   }
 
   ngOnInit() {
     this.myForm = this.fb.group({
       id: [0],
-      campaignOwner: [null, Validators.required],
+      loginId: [null, Validators.required],
       campaignName: [null, Validators.required],
       campaignType: [null, Validators.required],
-      status: [null, Validators.required],
+      campaignStatus: [null, Validators.required],
       startDate: [null, Validators.required],
       endDate: [null, Validators.required],
       campaignObjective: [null, Validators.required],
-      budgetedCost: [null, Validators.required],
+      budgetCost: [null, Validators.required],
       description: [null, Validators.required],
-     
     });
     if (this.Id) {
-      this.http.getapi('api/Company/GetCompaniesby/' + this.Id).subscribe((res) => {
+      this.http.getapi('api/Campaign/GetCampaignById/' + this.Id).subscribe((res) => {
         console.log(res)
         this.myForm.patchValue(res.data);
-     
-     
-     
-      });
-      
+      }); 
     }
-
-    this.getCampaignStatus();
-   
-  
   }
 
   addCampaign() {
@@ -83,20 +74,20 @@ export class AddCampaginComponent {
     }
     if (this.myForm.value.id == 0) {
       console.log(this.myForm.value)
-      this.http.postapi('api/Company/AddCompanies', this.myForm.value).subscribe(() => {
-        this.snackBar.open('Company successfully added!', 'Close', {
+      this.http.postapi('api/Campaign/AddCampaign', this.myForm.value).subscribe(() => {
+        this.snackBar.open('Campaign successfully added!', 'Close', {
           duration: 3000, // Snackbar stays open for 3 seconds
         });
-        this.router.navigate(['/CRM/Companies']);
+        this.router.navigate(['/CRM/Campagins/campagins']);
       });
     }
     else if(this.myForm.value.id > 0) {
       console.log("edit")
-      this.http.putapi(`api/Company/UpdateCompanies`, this.myForm.getRawValue()).subscribe(() => {
-        this.snackBar.open('Company successfully updated!', 'Close', {
+      this.http.putapi(`api/Campaign/UpdateCampaign`, this.myForm.getRawValue()).subscribe(() => {
+        this.snackBar.open('Campaign successfully updated!', 'Close', {
           duration: 3000, // Snackbar stays open for 3 seconds
         });
-        this.router.navigate(['/CRM/Companies']);
+        this.router.navigate(['/CRM/Campagins/campagins']);
       });
     }
   }
@@ -104,25 +95,23 @@ export class AddCampaginComponent {
 
   close() {
     this.myForm.reset();
-    this.router.navigate(['/CRM/Companies']);
+    this.router.navigate(['/CRM/Campaigns']);
   }
 
+ getLeadOwner(){
+  this.http.getapi('api/Lead/GetLeads').subscribe((res) => {
+    this.campaignOwnerlist = res.data;
+  });
+ }
  
 
   getCampaignStatus() {
-    this.http.getapi('api/Common/GetIndustryType').subscribe((res) => {
+    this.http.getapi('api/Common/GetCampaignStatus').subscribe((res) => {
       this.statuslist = res.data;
     });
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.myForm.controls;
-  }
-  onSubmit() {
-    //if (this.myForm.valid) {
-      this.http.putapi(`api/Company/UpdateCompanies`, this.myForm.getRawValue()).subscribe(() => {
-        this.router.navigate(['/CRM/Companies']);
-      });
-   // }
   }
 }

@@ -1,5 +1,53 @@
 
-
+.search-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input-group {
+    position: relative;
+    width: 100%;
+  }
+  
+  .input-group-prepend {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    pointer-events: none;
+  }
+  
+  .input-group-text {
+    background: none;
+    border: none;
+  }
+  
+  .fa-search {
+    color: #6c757d;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding-left: 40px; /* Adjust padding to make room for the icon */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
 
 
 
