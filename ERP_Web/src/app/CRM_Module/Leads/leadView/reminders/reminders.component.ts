@@ -51,39 +51,42 @@ export class RemindersComponent {
     if (this.reminder == 0) {
       this.open = 2
     }
+    const currentTime = new Date();
     this.myForm = this.fb.group({
-      id: [0],
-      leadId: [this.id, Validators.required],
-      reminderName: [null, Validators.required],
-      reminderDate: [null, Validators.required],
-      reminderTime: [null, Validators.required],
-      notes: [null, Validators.required],
-      createdBy: [1, Validators.required],
-      createdAt: [1, Validators.required],
-      modifiedBy: [1, Validators.required],
-      modifiedAt: [1, Validators.required],
+      Id: [0],
+      LeadId: [this.id, Validators.required],
+      ReminderName: [null, Validators.required],
+      ReminderDate: [null, Validators.required],
+      ReminderTime: [null, Validators.required],
+      Notes: [null, Validators.required],
+      CreatedBy: [1, Validators.required],
+      CreatedAt: [currentTime, Validators.required],
+      ModifiedBy: [1, Validators.required],
+      ModifiedAt: [currentTime, Validators.required],
     });
   }
   addReminder() {
     this.submitted = true;
+    const reminderDateTime = `${this.myForm.value.ReminderDate}T${this.myForm.value.ReminderTime}:00`;
+    this.myForm.value.ReminderTime = reminderDateTime;
     console.log(this.myForm.value);
-    if (this.myForm.value.id == 0) {
-      this.http.postapi('api/Lead/Reminders', this.myForm.value).subscribe((res) => {
+    if (this.myForm.value.Id == 0) {
+      this.http.postapi('api/Lead/AddReminder', this.myForm.value).subscribe((res) => {
         console.log(res);
         this.myForm.reset();
-        this.router.navigate(['/CRM/leadView/'+this.id+'/callLogs/'+this.id]);
+        this.router.navigate(['/CRM/leadView/'+this.id+'/reminder/'+this.id]);
         this.open = 1
         this.getRequiredData()
 
       });
     }
-    else if (this.myForm.value.id > 0) {
-      this.http.putapi('api/Lead/UpdateCallLogs', this.myForm.getRawValue()).subscribe((res) => {
+    else if (this.myForm.value.Id > 0) {
+      this.http.postapi('api/Lead/UpdateReminder', this.myForm.value).subscribe((res) => {
         console.log(res);
         this.myForm.reset();
         this.open = 1
         this.getRequiredData()
-        this.router.navigate(['/CRM/leadView/'+this.id+'/callLogs/'+this.id]);
+        this.router.navigate(['/CRM/leadView/'+this.id+'/reminder/'+this.id]);
       });
     }
   }
@@ -94,31 +97,33 @@ export class RemindersComponent {
         this.remindersList = res
       }
     });
-    this.http.getapi('api/Contacts/GetContacts').subscribe((res) => {
-      if (res) {
-        this.contactsList = res.data
-        console.log(this.contactsList);
-      }
-    });
-    this.http.getapi('api/Common/GetCallTypes').subscribe((res) => {
-      if (res) {
-        this.calltypeslist = res.data
-        console.log(this.calltypeslist);
-      }
-    });
   }
   edit(_id: any) {
-    this.http.getapi('api/Lead/GetCallLogsby/' + _id).subscribe((res) => {
-      console.log(res);
+    this.http.getapi('api/Lead/GetRemindersby/' + _id).subscribe((res) => {
       if (res) {
-        if (res.callDate) {
-          res.callDate = new Date(res.callDate).toISOString().substring(0, 10);
+        let _obj :any = new Object();
+        console.log(res);
+        _obj.Id=res.id
+        _obj.LeadId=res.leadId
+        _obj.ReminderName=res.reminderName
+        if (res.reminderDate) {
+          _obj.ReminderDate = new Date(res.reminderDate).toISOString().substring(0, 10);
         }
-        this.myForm.patchValue(res);
+        _obj.ReminderTime= this.extractTime( res.reminderTime)
+        _obj.CreatedBy=res.createdBy
+        _obj.CreatedAt=res.createdAt
+        _obj.ModifiedBy=res.modifiedBy
+        _obj.ModifiedAt=res.modifiedAt
+        _obj.Notes=res.notes
+        console.log(_obj);
         this.open = 2
+        this.myForm.patchValue(_obj);
         console.log(this.myForm.value);
       }
     });
+  }
+  extractTime(dateTime: string): string {
+    return dateTime.slice(11, 16);
   }
   get f(): { [key: string]: AbstractControl } {
     return this.myForm.controls;
@@ -126,8 +131,8 @@ export class RemindersComponent {
   close() {
     this.myForm.reset();
   }
-  deleteCallLog(ID: any) {
-    this.http.deleteapi('api/Lead/DeleteCallLogs/' + ID).subscribe((res) => {
+  deleteReminder(ID: any) {
+    this.http.deleteapi('api/Lead/DeleteReminder/' + ID).subscribe((res) => {
       console.log(res);
       if (res) {
         this.getRequiredData()
