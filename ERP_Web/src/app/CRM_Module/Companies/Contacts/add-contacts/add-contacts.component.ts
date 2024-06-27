@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, RequiredValidator,AbstractControl,Validators, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, RequiredValidator, AbstractControl, Validators, FormBuilder } from '@angular/forms';
 import { privateDecrypt } from 'crypto';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -19,25 +19,24 @@ export class AddContactsComponent {
   p: number = 1;
   Id: any;
   citylist: any;
-  countrylist:any;
-  statelist:any;
-  companylist:any;
+  countrylist: any;
+  statelist: any;
+  companylist: any;
   timeZonelist: any;
   sourcelist: any;
-  
+  companyid: string | null;
+
 
   constructor(private http: BackendService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private router: Router,private fb:FormBuilder) {
+    private router: Router, private fb: FormBuilder) {
+    this.companyid = this.route.snapshot.paramMap.get('companyid');
     this.Id = this.route.snapshot.paramMap.get('id');
-    
-
+    console.log(this.Id)
   }
-  @Output() childEvent = new EventEmitter<string>();
-  @Input() editData: any;
 
-  myForm: FormGroup  = new FormGroup({
+  myForm: FormGroup = new FormGroup({
     id: new FormControl(0),
     firstName: new FormControl(null),
     lastName: new FormControl(null),
@@ -54,7 +53,7 @@ export class AddContactsComponent {
     source: new FormControl(''),
     address1: new FormControl(null),
     address2: new FormControl(null)
-    
+
   });
 
   ngOnInit() {
@@ -65,23 +64,23 @@ export class AddContactsComponent {
       email: [null, Validators.required],
       designation: [null, Validators.required],
       mobileNumber: [null, Validators.required],
-      CompanyId: [null, Validators.required],
+      CompanyId: [this.companyid, Validators.required],
       country: [null, Validators.required],
       city: [null, Validators.required],
       state: [null, Validators.required],
-      postalCode:[null, Validators.required],
-      source:[null, Validators.required],
-      address1:[null, Validators.required],
+      postalCode: [null, Validators.required],
+      source: [null, Validators.required],
+      address1: [null, Validators.required],
     });
     this.getCompany();
     this.getCity();
     this.getState();
     this.getCountry();
     this.getTimeZone();
-    this.getSource();  
+    this.getSource();
     console.log(this.Id)
-   
-    
+
+
     if (this.Id) {
 
       this.http.getapi('api/Contacts/GetContactsby/' + this.Id).subscribe((res) => {
@@ -89,31 +88,31 @@ export class AddContactsComponent {
         this.myForm.patchValue(res.data);
       });
     }
-   
+
   }
-  cityId:any;
+  cityId: any;
   submitted: any;
-  getstatesbycountrycity(){
-    
-    this.countryId= this.myForm.get("country")?.value;
-    this.cityId=this.myForm.get("city")?.value;
-    this.http.getapi('api/Common/GetCountryByState/'+this.cityId+"/"+this.countryId).subscribe((res) => {
-      
+  getstatesbycountrycity() {
+
+    this.countryId = this.myForm.get("country")?.value;
+    this.cityId = this.myForm.get("city")?.value;
+    this.http.getapi('api/Common/GetCountryByState/' + this.cityId + "/" + this.countryId).subscribe((res) => {
+
       this.statelist = res.data;
     });
   }
-  countryId:any;
-  getCitybycountry(){
-    
-    this.countryId= this.myForm.get("country")?.value;
-    this.http.getapi('api/Common/cities/'+this.countryId).subscribe((res) => {
+  countryId: any;
+  getCitybycountry() {
+
+    this.countryId = this.myForm.get("country")?.value;
+    this.http.getapi('api/Common/cities/' + this.countryId).subscribe((res) => {
       this.citylist = res;
     });
   }
   addcontact(): void {
-    
-    this.submitted=true;
-    if(this.myForm.invalid){
+
+    this.submitted = true;
+    if (this.myForm.invalid) {
       return;
     }
     console.log(this.myForm.value)
@@ -124,7 +123,7 @@ export class AddContactsComponent {
           this.snackBar.open('Contact successfully added!', 'Close', {
             duration: 3000, // Snackbar stays open for 3 seconds
           });
-          this.router.navigate(['/CRM/contacts']);
+          this.router.navigate(['/CRM/Companies/companiesinfo/' + this.companyid+ '/contact/' + this.companyid]);
         }, error => {
           console.error('Error adding contact:', error);
         });
@@ -134,7 +133,7 @@ export class AddContactsComponent {
           this.snackBar.open('Contact successfully updated!', 'Close', {
             duration: 3000, // Snackbar stays open for 3 seconds
           });
-          this.router.navigate(['/CRM/contacts']);
+          this.router.navigate(['/CRM/Companies/companiesinfo/' + this.companyid+ '/contact/' + this.companyid]);
         }, error => {
           console.error('Error updating contact:', error);
         });
@@ -146,53 +145,53 @@ export class AddContactsComponent {
   get f(): { [key: string]: AbstractControl } {
     return this.myForm.controls;
   }
- 
 
 
-  getCompany(){
+
+  getCompany() {
 
     this.http.getapi('api/Company/GetCompany').subscribe((res) => {
-        console.log(res);
-        
-        this.companylist=res.data
-      }
+      console.log(res);
+
+      this.companylist = res.data
+    }
     );
   }
 
-  getCity(){
+  getCity() {
     this.http.getapi('api/Contacts/GetCities').subscribe((res) => {
-        console.log(res);
-        this.citylist=res
-      }
+      console.log(res);
+      this.citylist = res
+    }
     );
   }
-  getState(){
+  getState() {
     this.http.getapi('api/Contacts/GetStateDetails').subscribe((res) => {
-        console.log(res);
-        this.statelist=res
-      }
+      console.log(res);
+      this.statelist = res
+    }
     );
   }
 
-  getCountry(){
+  getCountry() {
     this.http.getapi('api/Contacts/GetCountryDetails').subscribe((res) => {
-        console.log(res);
-        this.countrylist=res
-      }
+      console.log(res);
+      this.countrylist = res
+    }
     );
   }
-  getTimeZone(){
+  getTimeZone() {
     this.http.getapi('api/Common/GetTimezones').subscribe((res) => {
-        console.log(res);
-        this.timeZonelist=res.data
-      }
+      console.log(res);
+      this.timeZonelist = res.data
+    }
     );
   }
-  getSource(){
+  getSource() {
     this.http.getapi('api/Contacts/GetSource').subscribe((res) => {
-        console.log(res);
-        this.sourcelist=res
-      }
+      console.log(res);
+      this.sourcelist = res
+    }
     );
   }
   close() {

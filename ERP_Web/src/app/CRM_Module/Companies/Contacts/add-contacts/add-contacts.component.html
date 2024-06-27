@@ -107,7 +107,7 @@
                         <option *ngFor="let source of sourcelist" value="{{source.id}}">{{source.description}}</option>
                     </select>
                     <div *ngIf="submitted && f['source'].errors" class="invalid-feedback">
-                        <div *ngIf="f['source'].errors['required']">Source is required.</div>
+                        <div *ngIf="f['source'].errors['required']">Time Zone is required.</div>
                       </div>
                 </div>
 
@@ -137,7 +137,7 @@
                         <!-- <button  ></button> -->
                         <button type="submit" style="width: 200px;margin-right: 10px;" class="btn btn-primary" >Submit</button>
 
-                        <div style="width: 200px;" routerLink="/CRM/contacts"  type="button" class="btn btn-danger">Close</div>
+                        <div style="width: 200px;" routerLink="/CRM/Companies/companiesinfo/{{companyid}}/contact/{{companyid}}"  type="button" class="btn btn-danger">Close</div>
     
                     </div>
                 </div>

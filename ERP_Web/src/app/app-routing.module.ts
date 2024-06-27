@@ -66,8 +66,10 @@ const routes: Routes = [
           { path: 'listing', component: CompanyMainComponent },
           { path: 'add', component: AddNewCompanyComponent },
           { path: 'edit/:id', component: AddNewCompanyComponent },
-          {
-            path: 'companiesinfo/:id', component: CompaniesInfoComponent,
+          { path: 'companiesinfo/:id', component: CompaniesInfoComponent},
+          { path: 'add-contacts/:companyid', component: AddContactsComponent },
+          { path: 'edit-contacts/:companyid/:id', component: AddContactsComponent },
+          { path: 'companiesinfo/:id', component: CompaniesInfoComponent,
             children: [
               { path: 'profile/:id', component: ProfileComponent },
               { path: 'contact/:id', component: ContactsMainComponent },
@@ -123,6 +125,10 @@ const routes: Routes = [
       { path: 'edit-contacts/:id', component: AddContactsComponent },
       // { path: 'Leads', component: LeadsMainComponent },
       // { path: 'add-leads', component: AddLeadsComponent },
+      // { path: 'contacts', component: ContactsMainComponent },
+      { path: 'Leads', component: LeadsMainComponent },
+      { path: 'add-leads', component: AddLeadsComponent },
+      { path: 'edit-leads/:id', component: AddLeadsComponent },
       // { path: 'Campagins', component: CampaginsMainComponent },
 
       { path: 'Pipeline', component: PipelinesMainComponent },

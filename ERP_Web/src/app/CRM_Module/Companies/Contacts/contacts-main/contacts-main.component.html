@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div style="float: right;">
-            <button routerLink="/CRM/add-contacts" class="btn btn-primary">Add Contacts</button>
+            <button routerLink="/CRM/Companies/add-contacts/{{id}}" class="btn btn-primary">Add Contacts</button>
         </div>
     </div>
     <div class="table-responsive mt-4" style="padding: 20px;">
@@ -28,7 +28,7 @@
                     totalItems: count }; 
                     let i = index">
                     <td>
-                        <span routerLink="/CRM/edit-contacts/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
+                        <span routerLink="/CRM/Companies/edit-contacts/{{id}}/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
 
                         </span>
                         <span (click)="deleteContact(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">

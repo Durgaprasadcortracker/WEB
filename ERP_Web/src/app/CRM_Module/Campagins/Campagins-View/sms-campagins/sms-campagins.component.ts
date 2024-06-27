@@ -18,7 +18,7 @@ public maxCharCount : number = 200;
 // try {
 // await SMS.send('0129219', "Odr message');
 // const toast = this.toast.create({
-// message: 'Text was sent!',
+//  message: 'Text was sent!',
 // duration: 3000
 // });
 // toast.present();

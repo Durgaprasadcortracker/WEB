@@ -1,19 +1,20 @@
-<div class="container-fluid;" style="width: 980px !important;">
+<!-- <div class="container">
     <div class="invoice-box">
-        <table cellpadding="0" cellspacing="0">
+        <table>
             <tr class="top">
                 <td colspan="2">
                     <table>
                         <tr>
                             <td class="title">
-                                <h2><img src="https://cortracker.com/assets/img/logo.png.789.png"> Hyderabad</h2>
+                                <h2><img src="https://cortracker.com/assets/img/logo.png.789.png"> </h2>
                             </td>
                             <td>
-                                <h3>Invoice Details</h3>
-                                Date: May 1, 2024<br>
-                                Payment Terms: Cant be refunded<br>
-                                Due Date: Jun 22, 2024<br>
-                                PO Number: 12121321
+                                <h6>Invoice Details</h6>
+                                Date: {{ invoiceDate }}<br>
+                                Payment Terms: {{ paymentTerms }}<br>
+                                Due Date: {{ dueDate }}<br>
+                                PO Number: {{ poNumber }}<br>
+                                Quotation Number: {{ quotationNumber }}
                             </td>
                         </tr>
                     </table>
@@ -25,55 +26,54 @@
                         <tr>
                             <td>
                                 Bill To:<br>
-                                Symphlore<br>
+                                {{ billTo }}<br>
                                 Ship To:<br>
-                                Symphlore
+                                {{ shipTo }}
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
             <tr class="heading">
+                <th>S.No</th>
+                <th>Item</th>
+                <th>Amount</th>
+            </tr>
+            <tr *ngFor="let item of items; let i= index">
+                <td scope="row">{{i+1}}</td>
                 <td>
-                    Item
+                    {{ item.name }}
                 </td>
                 <td>
-                    Amount
+                    {{ item.amount }}
                 </td>
             </tr>
-            <tr class="item">
-                <td>
-                    Lenevo Laptop (Quantity: 5, Rate: 55,000.00)
-                </td>
-                <td>
-                    55,000.00
-                </td>
-            </tr>
-            <tr class="total">
-                <td></td>
-                <td>
-                    Subtotal: 55,000.00<br>
-                    Discount (10%): -5000.00<br>
-                    Tax (0%): 0.00<br>
-                    <strong>Total: 50,000.00</strong>
-                </td>
-            </tr>
+            <div>
+                <tr class="total">
+                    
+                     <td>
+                         Subtotal: {{ subtotal  }}<br>
+                         Discount ({{ discountPercentage }}%): -{{ discountAmount}}<br>
+                         Tax ({{ taxPercentage }}%): {{ taxAmount }}<br>
+                         <strong>Total: {{ total  }}</strong>
+                     </td>
+                 </tr>
+            </div>
+            
         </table>
         <br>
         <p>Notes:<br>
-        100% free trainings<br>
-        Implementations<br>
-        Support</p>
+            {{ notes }}
+        </p>
         <p>Terms:<br>
-        NON refundable</p>
+            {{ terms }}
+        </p>
     </div>
 </div>
-<div class="details ID">
+<div>
     <div class="buttons" style="display: flex; gap: 10px;">
-        <button routerLink="/quoteslisting" class="btn btn-primary"  style="width: 200px;" type="button">Back To Quotes</button>
-
-        <div routerLink="/" style="width: 200px;" type="button"
-            class="btn btn-danger">Close</div>
-
+        <button routerLink="/quoteslisting" class="btn btn-primary" style="width: 200px;" type="button">Back To Quotes</button>
+        <button routerLink="/" class="btn btn-danger" style="width: 200px;" type="button">Close</button>
+        <button (click)="generatePDF()" class="btn btn-primary" style="width: 200px;" type="button">Download</button>
     </div>
-</div>
+</div> -->
