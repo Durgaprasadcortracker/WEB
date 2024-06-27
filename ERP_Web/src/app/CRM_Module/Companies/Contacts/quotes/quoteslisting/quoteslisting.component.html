@@ -1,91 +1,62 @@
 <div *ngIf="!quotePage" class="Container cor-Contact">
-    <div class="cor-flex justify-content-sb">
-      <div class="col-md-12">
-        <!-- <div class="card">
-                  <div class="card-header">
-                      <div class="head-1">Quotes</div>
-                  </div>
-                  <div class="card-body"> -->
-        <div class="row">
-          <div
-            class="col-md-2"
-            style="
+  <div class="cor-flex justify-content-sb">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-2" style="
               display: flex;
               justify-content: end;
               width: 90%;
               margin-bottom: 20px;
-            "
-          >
-            <button routerLink="/CRM/quotes-create">Create Quote</button>
-          </div>
-          <div class="child2">
-            <table class="table">
-              <thead>
-                <tr>
-                    <th>Actions</th>
-                  <th>Quote Owner</th>
-                  <th>Deal Name</th>
-                  <th>Subject</th>
-                  <th>Company Name</th>
-                  <th>Contact Name</th>
-                  <th>Product Name</th>
-                  <th>Quantity</th>
-                  <th>Grand Total</th>
-                  <th>Email</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let a of listOfQuotations | paginate: 
+            ">
+          <button class="btn btn-danger mr-2" routerLink="/CRM/Companies/add-quotes/{{id}}">Create Quote</button>
+        </div>
+        <div class="child2">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Actions</th>
+                <th>Quote Number</th>
+                <th>Quote Type</th>
+                <th>Valid Until</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let a of listOfQuotations | paginate: 
                 { itemsPerPage: tableSize, 
                 currentPage: page,
                 totalItems: count }; 
                 let i = index">
-                   
-                      <td>
 
-                        <span  (click)="edit(quotation.id)" routerLink="/CRM/editquotes/{{a.id}}" class="fa fa-pencil-alt" style="color: blue;">
-                        
-                    </span>
-                    <a routerLink="/CRM/quotes-invoice"
-                          ><i
-                            class="fa-solid fa-download"
-                            style="padding-right: 10px"
-                          ></i
-                        ></a>
-                    <span (click)="deleteQuotation(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
-                        
-                    </span>
-                    
-                        
-                        
-                      </td>
-                      <td>{{a.quoteId}}</td>
-                      <td>{{a.company}}</td>
-                      <td>{{a.quoteType}}</td>
-                      <td>{{a.billingFromCompanyName}}</td>
-                      <td>{{a.billingToCompanyName}}</td>
-                      <td>{{a.productName}}</td>
-                      <td>{{a.quantity}}</td>
-                      <td>{{a.grandtotal}}</td>
-                      <td>{{a.billingToEmail}}</td>
-                  
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                <td>
+
+                  <span (click)="edit(quotation.id)" routerLink="/CRM/editquotes/{{a.id}}" class="fa fa-pencil-alt"
+                    style="color: blue;">
+
+                  </span>
+                  <a routerLink="/CRM/quotes-invoice"><i class="fa-solid fa-download"
+                      style="padding-right: 10px"></i></a>
+                  <span (click)="deleteQuotation(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
+
+                  </span>
+
+
+
+                </td>
+                <td>{{a.quoteId}}</td>
+                <td>{{a.quoteTypeName}}</td>
+                <td>{{a.validUntil}}</td>
+
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
-  <!-- </div> -->
-  <div class="d-flex justify-content-left">
-    <pagination-controls
-      previousLabel="Prev"
-      nextLabel="Next"
-      (pageChange)="onTableDataChange($event)"
-    >
-    </pagination-controls>
-  </div>
-  <!-- </div> -->
-  
+</div>
+<!-- </div> -->
+<div class="d-flex justify-content-left">
+  <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+  </pagination-controls>
+</div>
+<!-- </div> -->

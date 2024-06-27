@@ -69,7 +69,9 @@ const routes: Routes = [
           { path: 'companiesinfo/:id', component: CompaniesInfoComponent},
           { path: 'add-contacts/:companyid', component: AddContactsComponent },
           { path: 'edit-contacts/:companyid/:id', component: AddContactsComponent },
-          { path: 'companiesinfo/:id', component: CompaniesInfoComponent,
+          { path: 'add-quotes/:companyid', component: QuotesCreateComponent },
+          {
+            path: 'companiesinfo/:id', component: CompaniesInfoComponent,
             children: [
               { path: 'profile/:id', component: ProfileComponent },
               { path: 'contact/:id', component: ContactsMainComponent },
@@ -136,7 +138,6 @@ const routes: Routes = [
       { path: 'events', component: EventsComponent },
       { path: 'quoteslisting', component: QuoteslistingComponent },
       { path: 'userprofile', component: UserProfileComponent },
-      { path: 'quotes-create', component: QuotesCreateComponent },
       { path: 'editquotes/:id', component: QuotesCreateComponent },
       { path: 'quotes-invoice', component: QuotesInvoiceComponent },
       {
