@@ -4,7 +4,7 @@
     <div *ngIf="open==1" class="card-body">
         <div>
             <div class="mr-2 d-flex justify-content-end">
-                <button type="button" routerLink="/CRM/leadView/{{id}}/reminder/{{id}}" [queryParams]="{reminder:0}"
+                <button type="button" routerLink="/CRM/Leads/leadView/{{id}}/reminder/{{id}}" [queryParams]="{reminder:0}"
                     class="btn btn-primary">Create Reminder</button>
             </div>
         </div>
@@ -28,7 +28,7 @@
                         <td>{{a.reminderDate | date}}</td>
                         <td>{{a.reminderTime | date: 'shortTime'}}</td>
                         <td>
-                            <span routerLink="/CRM/leadView/{{id}}/reminder/{{id}}" [queryParams]="{reminder:a.id}"
+                            <span routerLink="/CRM/Leads/leadView/{{id}}/reminder/{{id}}" [queryParams]="{reminder:a.id}"
                                 (click)="edit(a.id)" class="material-symbols-outlined mr-2">
                                 edit
                             </span>
@@ -94,7 +94,7 @@
                         <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
                     </div>
                     <div>
-                        <div routerLink="/CRM/leadView/{{id}}/reminder/{{id}}" (click)="close()" style="width: 200px;"
+                        <div routerLink="/CRM/Leads/leadView/{{id}}/reminder/{{id}}" (click)="close()" style="width: 200px;"
                             type="button" class="btn btn-danger">Close</div>
                     </div>
                 </div>

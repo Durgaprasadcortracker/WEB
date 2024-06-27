@@ -74,7 +74,7 @@ export class RemindersComponent {
       this.http.postapi('api/Lead/AddReminder', this.myForm.value).subscribe((res) => {
         console.log(res);
         this.close()
-        this.router.navigate(['/CRM/leadView/'+this.id+'/reminder/'+this.id]);
+        this.router.navigate(['/CRM/Leads/leadView/'+this.id+'/reminder/'+this.id]);
         this.open = 1
         this.getRequiredData()
 
@@ -86,7 +86,7 @@ export class RemindersComponent {
         this.close()
         this.open = 1
         this.getRequiredData()
-        this.router.navigate(['/CRM/leadView/'+this.id+'/reminder/'+this.id]);
+        this.router.navigate(['/CRM/Leads/leadView/'+this.id+'/reminder/'+this.id]);
       });
     }
   }

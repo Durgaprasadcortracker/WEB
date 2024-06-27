@@ -7,7 +7,7 @@
         <div class="card-body">
             <!-- <h5>Total Records: {{ totalRecords }}</h5> -->
             <div style="float: right;">
-                <button routerLink="/CRM/add-leads" class="btn btn-primary">Add Leads</button>
+                <button routerLink="/CRM/Leads/add-leads" class="btn btn-primary">Add Leads</button>
                 <!-- <button (click)="contactPage = 2" class="btn btn-warning">Bulk Upload</button> -->
             </div>
         </div>
@@ -34,7 +34,7 @@
                     totalItems: count }; 
                     let i = index">
                       <td>
-                        <span  routerLink="/CRM/edit-leads/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
+                        <span  routerLink="/CRM/Leads/edit-leads/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
                             
                         </span>
                         <span (click)="deleteLead(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
@@ -42,7 +42,7 @@
                         </span>
                     </td>
             
-                        <td> <a routerLink="/CRM/leadView/{{a.id}}/ContactView/{{a.id}}"> {{a.leadName}}</a></td>
+                        <td> <a routerLink="/CRM/Leads/leadView/{{a.id}}/ContactView/{{a.id}}"> {{a.leadName}}</a></td>
                         <td>{{a.leadOwner}}</td>
                         <td>{{a.businessEmail}}</td>
                         <td>{{a.leadStage}}</td>

@@ -65,6 +65,8 @@ import { AddSocialmediaComponent } from './CRM_Module/Campagins/add-socialmedia/
 import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
+import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-router.component';
+import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -124,7 +126,9 @@ import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/
     QuotetypeComponent,
     AddSocialmediaComponent,
     AddLeadsComponent,
-    CompainesRouteComponent
+    CompainesRouteComponent,
+    LeadsRouterComponent,
+    CampaginsRouteComponent
   ],
   imports: [
     HttpClientModule,

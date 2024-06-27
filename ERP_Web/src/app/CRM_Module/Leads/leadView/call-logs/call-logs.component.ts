@@ -68,7 +68,7 @@ export class CallLogsComponent {
     if (this.myForm.value.id == 0) {
       this.http.postapi('api/Lead/AddCallLogs', this.myForm.value).subscribe((res) => {
         console.log(res);
-        this.router.navigate(['/CRM/leadView/'+this.id+'/callLogs/'+this.id]);
+        this.router.navigate(['/CRM/Leads/leadView/'+this.id+'/callLogs/'+this.id]);
         this.open = 1
         this.getRequiredData()
         this.close()
@@ -81,7 +81,7 @@ export class CallLogsComponent {
         this.close()
         this.open = 1
         this.getRequiredData()
-        this.router.navigate(['/CRM/leadView/'+this.id+'/callLogs/'+this.id]);
+        this.router.navigate(['/CRM/Leads/leadView/'+this.id+'/callLogs/'+this.id]);
       });
     }
   }

@@ -48,6 +48,8 @@ import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
 import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
+import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-router.component';
+import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
 
 
 
@@ -57,31 +59,72 @@ const routes: Routes = [
     path: 'CRM', component: CrmMainComponent,
     children: [
       { path: 'Home', component: DashboardMainComponent },
+      //-----------------------Companies---------------------------
       {
         path: 'Companies', component: CompainesRouteComponent,
         children: [
           { path: 'listing', component: CompanyMainComponent },
           { path: 'add', component: AddNewCompanyComponent },
           { path: 'edit/:id', component: AddNewCompanyComponent },
-          { path: 'companiesinfo/:id', component: CompaniesInfoComponent,
+          {
+            path: 'companiesinfo/:id', component: CompaniesInfoComponent,
             children: [
               { path: 'profile/:id', component: ProfileComponent },
               { path: 'contact/:id', component: ContactsMainComponent },
               { path: 'quotation/:id', component: QuoteslistingComponent },
-            ] },
+            ]
+          },
           { path: 'bulk-upload', component: BulkUploadMainComponent },
           { path: '**', redirectTo: '/CRM/Companies/listing' }
         ]
       },
-      // { path: 'contacts', component: ContactsMainComponent },
+      //-----------------------Leads-------------------------------
+      {
+        path: 'Leads', component: LeadsRouterComponent,
+        children: [
+          { path: 'listing', component: LeadsMainComponent },
+          { path: 'add-leads', component: AddLeadsComponent },
+          { path: 'edit-leads/:id', component: AddLeadsComponent },
+          {
+            path: 'leadView/:id',
+            component: LeadsViewComponent,
+            children: [
+              { path: 'ContactView/:id', component: ContactViewComponent },
+              { path: 'emailConversation/:id', component: EmailConversionComponent },
+              { path: 'callLogs/:id', component: CallLogsComponent },
+              { path: 'events/:id', component: EventsComponent },
+              { path: 'reminder/:id', component: RemindersComponent },
+            ]
+          },
+          { path: '**', redirectTo: '/CRM/Leads/listing' }
+        ]
+      },
+      //-----------------------Campagins---------------------------
+      {
+        path: 'Campagins', component: CampaginsRouteComponent,
+        children: [
+          { path: 'add-campagin', component: AddCampaginComponent },
+          { path: 'editcampaign/:id', component: AddCampaginComponent },
+          { path: 'add-email', component: AddEmailConversationComponent },
+          {
+            path: 'main', component: CampaginsMainComponent,
+            children: [
+              { path: 'campagins', component: CampaginsComponent },
+              { path: 'email-conversation', component: EmailCampaginsComponent },
+              { path: 'social-media-campagins', component: SocialMediaCampaginsComponent },
+              { path: 'sms-campagins', component: SmsCampaginsComponent },
+              { path: '**', redirectTo: '/CRM/Campagins/main/campagins' }
+            ]
+          },
+          { path: '**', redirectTo: '/CRM/Campagins/main' }
+        ]
+      },
       { path: 'add-contacts', component: AddContactsComponent },
       { path: 'edit-contacts/:id', component: AddContactsComponent },
-      { path: 'Leads', component: LeadsMainComponent },
-      { path: 'add-leads', component: AddLeadsComponent },
-      { path: 'edit-leads/:id', component: AddLeadsComponent },
+      // { path: 'Leads', component: LeadsMainComponent },
+      // { path: 'add-leads', component: AddLeadsComponent },
       // { path: 'Campagins', component: CampaginsMainComponent },
 
-      { path: 'AddEmailConversation', component: AddEmailConversationComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
       { path: 'events', component: EventsComponent },
@@ -112,36 +155,11 @@ const routes: Routes = [
       { path: 'Profileview', component: ProfileComponent },
       { path: 'addcontacts', component: AddContactsComponent },
       { path: 'Profileview/:id', component: ProfileComponent },
-      {
-        path: 'leadView/:id',
-        component: LeadsViewComponent,
-        children: [
-          { path: 'ContactView/:id', component: ContactViewComponent },
-          { path: 'emailConversation/:id', component: EmailConversionComponent },
-          { path: 'callLogs/:id', component: CallLogsComponent },
-          { path: 'events/:id', component: EventsComponent },
-          { path: 'reminder/:id', component: RemindersComponent },
-        ]
-      },
-      {
-        path: 'Campagins',
-        component: CampaginsMainComponent,
-        children: [
-          { path: 'campagins', component: CampaginsComponent },
-          { path: 'email-conversation', component: EmailCampaginsComponent },
-          { path: 'social-media-campagins', component: SocialMediaCampaginsComponent },
-          { path: 'sms-campagins', component: SmsCampaginsComponent },
-          { path: '**', redirectTo: '/CRM/Campagins/campagins' }
-        ]
-      },
-      { path: 'add-campagin', component: AddCampaginComponent },
-      { path: 'editcampaign/:id', component: AddCampaginComponent },
       { path: '**', redirectTo: '/CRM/Home' }
     ]
   },
   { path: 'login', component: LoginPageComponent },
   { path: 'SignUp', component: SignUpComponent },
-
   { path: 'Changepassword', component: ChangePasswordComponent },
   { path: '**', redirectTo: '/login' }
 ];
