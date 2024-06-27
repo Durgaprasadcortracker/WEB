@@ -70,7 +70,7 @@ Id:any;
   getTimezoneById() {
     this.http.getapi('api/Common/GetTimezones/' + this.currentTimezoneId).subscribe((res) => {
       console.log(res);
-      debugger;
+      
       this.timezoneForm.get("timezoneId")?.setValue(res.data.timezoneId);
       this.timezoneForm.get("description")?.setValue(res.data.description);
     });

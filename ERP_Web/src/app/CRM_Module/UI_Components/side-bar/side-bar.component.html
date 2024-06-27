@@ -5,7 +5,7 @@
     </div>
     <ul class="user-routes">
         <li *ngFor="let a of menuItems;let i = index">
-            <div [routerLink]="a.controllerName" class="item" [ngClass]="{'active': currentIndex == i}"
+            <div [routerLink]="a.controllerName" class="item" routerLinkActive="active"
                 (click)="currentIndex = i">
                 <div (click)="a.open=(a.open?false:true)" class="aligin-sb">
                     <span>
@@ -20,7 +20,7 @@
             </div>
             <ul *ngIf="(a.open) && (sideBarvalue)" class="submenuclass">
                 <li *ngFor="let k of a.submenus;let m = index">
-                    <div [routerLink]="k.controllerName" [ngClass]="{'activeSub': subCurrentIndex == m}">
+                    <div [routerLink]="k.controllerName" routerLinkActive="activeSub">
                         <span *ngIf="sideBarvalue">{{k.menuName}}</span>
                     </div>
                 </li>

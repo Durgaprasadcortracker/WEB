@@ -196,10 +196,10 @@ return this.myForm.controls;
     this.childEvent.emit('Hello Parent!');
   }
   getCompany(){
-    debugger;
+    
         this.http.getapi('api/Company/GetCompany').subscribe((res) => {
             console.log(res);
-            debugger;
+            
             this.companylist=res.data
           }
         );
@@ -207,7 +207,7 @@ return this.myForm.controls;
  
 
   getQuotation() {
-    debugger;
+    
     this.http.getapi('api/Quotation/GetQuotations').subscribe((res) => {
       console.log(res);
       this.companylist = res.data;

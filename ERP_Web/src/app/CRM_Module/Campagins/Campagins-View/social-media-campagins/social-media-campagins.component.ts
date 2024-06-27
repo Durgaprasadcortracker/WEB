@@ -50,7 +50,7 @@ export class SocialMediaCampaginsComponent {
   // }
 
   share(){
-    debugger;
+    
     if(navigator.share)
       {
         navigator.share({
@@ -61,7 +61,7 @@ export class SocialMediaCampaginsComponent {
       }
   }
   sharevalidate(name:any,url:any){
-    debugger;
+    
     if(name=="whatsapp"){
       navigator.share({
         title:"Social media",
@@ -133,7 +133,7 @@ export class SocialMediaCampaginsComponent {
   // }
 
   postNow() {
-    debugger;
+    
     if(this.whatsappchecked=='true'){
       window.open(this.socialMediaShare['whatsapp'], "w1","status=1,toolbar=1,menubar=1");
 
@@ -167,7 +167,7 @@ export class SocialMediaCampaginsComponent {
   }
   whatsappchecked:any=false;
   toggleSelectwhatsapp(checked: any): void {
-    debugger;
+    
     // const checkbox = document.getElementById(
     //   `checkbox-${'whatsapp'}`
     // ) as HTMLInputElement;

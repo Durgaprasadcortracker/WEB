@@ -61,14 +61,14 @@ export class StatusdesignComponent {
       console.log(res);
      
     });
-    debugger;
+    
   
   }
   }
   getstatusbyId(){
     this.http.getapi('api/Common/GetStatusById/'+this.statusId).subscribe((res) => {
       console.log(res);
-      debugger;
+      
       this.myForm.get("stageId")?.setValue(res.data.stageId);
       
       this.myForm.get("description")?.setValue(res.data.description);
@@ -95,7 +95,7 @@ export class StatusdesignComponent {
 
     getSatage() {
       this.http.getapi('api/Common/GetStages').subscribe((res) => {
-        debugger;
+        
         this.Stagelist = res;
       });
     }

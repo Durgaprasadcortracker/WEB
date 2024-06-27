@@ -49,9 +49,6 @@ export class CallLogsComponent {
 
 
   ngOnInit() {
-    if (this.callsLogs == 0) {
-      this.open = 2
-    }
     this.myForm = this.fb.group({
       id: [0],
       leadId: [this.id, Validators.required],
@@ -60,6 +57,10 @@ export class CallLogsComponent {
       callDate: [null, Validators.required],
       comments: [null, Validators.required]
     });
+    console.log(this.myForm.value);
+    if (this.callsLogs == 0) {
+      this.open = 2
+    }
   }
   addCallLog() {
     this.submitted = true;
@@ -67,17 +68,17 @@ export class CallLogsComponent {
     if (this.myForm.value.id == 0) {
       this.http.postapi('api/Lead/AddCallLogs', this.myForm.value).subscribe((res) => {
         console.log(res);
-        this.myForm.reset();
         this.router.navigate(['/CRM/leadView/'+this.id+'/callLogs/'+this.id]);
         this.open = 1
         this.getRequiredData()
+        this.close()
 
       });
     }
     else if (this.myForm.value.id > 0) {
       this.http.putapi('api/Lead/UpdateCallLogs', this.myForm.getRawValue()).subscribe((res) => {
         console.log(res);
-        this.myForm.reset();
+        this.close()
         this.open = 1
         this.getRequiredData()
         this.router.navigate(['/CRM/leadView/'+this.id+'/callLogs/'+this.id]);
@@ -122,6 +123,7 @@ export class CallLogsComponent {
   }
   close() {
     this.myForm.reset();
+    this.ngOnInit()
   }
   deleteCallLog(ID: any) {
     this.http.deleteapi('api/Lead/DeleteCallLogs/' + ID).subscribe((res) => {

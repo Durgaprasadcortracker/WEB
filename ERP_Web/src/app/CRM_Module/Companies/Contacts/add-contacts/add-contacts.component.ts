@@ -94,24 +94,24 @@ export class AddContactsComponent {
   cityId:any;
   submitted: any;
   getstatesbycountrycity(){
-    debugger;
+    
     this.countryId= this.myForm.get("country")?.value;
     this.cityId=this.myForm.get("city")?.value;
     this.http.getapi('api/Common/GetCountryByState/'+this.cityId+"/"+this.countryId).subscribe((res) => {
-      debugger;
+      
       this.statelist = res.data;
     });
   }
   countryId:any;
   getCitybycountry(){
-    debugger;
+    
     this.countryId= this.myForm.get("country")?.value;
     this.http.getapi('api/Common/cities/'+this.countryId).subscribe((res) => {
       this.citylist = res;
     });
   }
   addcontact(): void {
-    debugger;
+    
     this.submitted=true;
     if(this.myForm.invalid){
       return;
@@ -150,10 +150,10 @@ export class AddContactsComponent {
 
 
   getCompany(){
-debugger;
+
     this.http.getapi('api/Company/GetCompany').subscribe((res) => {
         console.log(res);
-        debugger;
+        
         this.companylist=res.data
       }
     );

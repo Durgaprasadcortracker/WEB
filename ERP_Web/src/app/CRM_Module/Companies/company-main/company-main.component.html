@@ -17,8 +17,8 @@
             </div>
           </div>
           <div>
-            <button class="btn btn-danger mr-2" routerLink="/CRM/Addnewcompany">Add Company</button>
-            <button class="btn btn-danger button-gap" routerLink="/CRM/bulk-upload">Bulk Upload</button>
+            <button class="btn btn-danger mr-2" routerLink="/CRM/Companies/add">Add Company</button>
+            <button class="btn btn-danger button-gap" routerLink="/CRM/Companies/bulk-upload">Bulk Upload</button>
           </div>
         </div>
       </div>
@@ -40,10 +40,10 @@
           <tbody>
             <tr *ngFor="let a of filteredCompanies | paginate : { itemsPerPage: tableSize, currentPage: page, totalItems: count }; let i = index">
               <td>
-                <span (click)="edit(company.id)" routerLink="/CRM/editcompany/{{a.id}}" class="fa fa-pencil-alt" style="color: blue;"></span>
+                <span (click)="edit(company.id)" routerLink="/CRM/Companies/edit/{{a.id}}" class="fa fa-pencil-alt" style="color: blue;"></span>
                 <span (click)="deleteCompany(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;"></span>
               </td>
-              <td><a style="text-decoration: none;" routerLink="/CRM/companiesinfo/{{a.id}}">{{a.companyName}}</a></td>
+              <td><a style="text-decoration: none;" routerLink="/CRM/Companies/companiesinfo/{{a.id}}/profile/{{a.id}}">{{a.companyName}}</a></td>
               <td>{{a.companyOwner}}</td>
               <td>{{a.companyIndustry}}</td>
               <td>{{a.companyIndustryType}}</td>

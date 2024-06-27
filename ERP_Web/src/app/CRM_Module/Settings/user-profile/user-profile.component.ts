@@ -15,7 +15,14 @@ export class UserProfileComponent  {
   page: number = 1;
   count: number = 0;
   p:number=1;
-  a: any;
+  a = {
+    userId:"",
+    last_name:"",
+    first_name:"",
+    email:"",
+    phoneNumber:"",
+    designation:""
+  }
  constructor(private http: BackendService) { }
   data = {
     records: 0

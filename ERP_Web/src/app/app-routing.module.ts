@@ -45,8 +45,9 @@ import { CountryComponent } from './CRM_Module/Settings/Configration/country/cou
 import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
 import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
 import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
-import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
+import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
+import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
 
 
 
@@ -56,23 +57,35 @@ const routes: Routes = [
     path: 'CRM', component: CrmMainComponent,
     children: [
       { path: 'Home', component: DashboardMainComponent },
-      { path: 'Companies', component: CompanyMainComponent },
-      { path: 'contacts', component: ContactsMainComponent },
+      {
+        path: 'Companies', component: CompainesRouteComponent,
+        children: [
+          { path: 'listing', component: CompanyMainComponent },
+          { path: 'add', component: AddNewCompanyComponent },
+          { path: 'edit/:id', component: AddNewCompanyComponent },
+          { path: 'companiesinfo/:id', component: CompaniesInfoComponent,
+            children: [
+              { path: 'profile/:id', component: ProfileComponent },
+              { path: 'contact/:id', component: ContactsMainComponent },
+              { path: 'quotation/:id', component: QuoteslistingComponent },
+            ] },
+          { path: 'bulk-upload', component: BulkUploadMainComponent },
+          { path: '**', redirectTo: '/CRM/Companies/listing' }
+        ]
+      },
+      // { path: 'contacts', component: ContactsMainComponent },
       { path: 'add-contacts', component: AddContactsComponent },
       { path: 'edit-contacts/:id', component: AddContactsComponent },
       { path: 'Leads', component: LeadsMainComponent },
       { path: 'add-leads', component: AddLeadsComponent },
       { path: 'edit-leads/:id', component: AddLeadsComponent },
       // { path: 'Campagins', component: CampaginsMainComponent },
-     
+
       { path: 'AddEmailConversation', component: AddEmailConversationComponent },
       { path: 'Pipeline', component: PipelinesMainComponent },
       { path: 'Reports', component: ReportsMainComponent },
-      { path: 'Addnewcompany', component: AddNewCompanyComponent },
-      { path: 'editcompany/:id', component: AddNewCompanyComponent },
       { path: 'events', component: EventsComponent },
       { path: 'quoteslisting', component: QuoteslistingComponent },
-      { path: 'companiesinfo/:id', component: CompaniesInfoComponent },
       { path: 'userprofile', component: UserProfileComponent },
       { path: 'quotes-create', component: QuotesCreateComponent },
       { path: 'editquotes/:id', component: QuotesCreateComponent },
@@ -80,31 +93,23 @@ const routes: Routes = [
       {
         path: 'Settings', component: SettingsMainComponent,
         children: [
+          { path: 'status', component: StatusdesignComponent },
+          { path: 'stage', component: StagedesignComponent },
+          { path: 'source', component: SourcedesignComponent },
+          { path: 'time-zone', component: TimezoneComponent },
+          { path: 'city', component: CityComponent },
+          { path: 'industry', component: IndustryComponent },
+          { path: 'probability', component: ProbabilityComponent },
+          { path: 'state', component: StateComponent },
+          { path: 'country', component: CountryComponent },
+          { path: 'industry-type', component: IndustrytypeComponent },
+          { path: 'call-type', component: CalltypeComponent },
+          { path: 'quote-type', component: QuotetypeComponent },
           { path: 'user-view', component: UserProfileComponent },
-          {
-            path: 'configuration', component: ConfigrationComponent,
-            children: [
-              { path: 'status', component: StatusdesignComponent },
-              { path: 'stage', component: StagedesignComponent },
-              { path: 'source', component: SourcedesignComponent },
-              { path: 'time-zone', component: TimezoneComponent },
-              { path: 'city', component: CityComponent },
-              { path: 'industry', component: IndustryComponent },
-              { path: 'probability', component: ProbabilityComponent },
-              { path: 'state', component: StateComponent },
-              { path: 'country', component: CountryComponent },
-              { path: 'industry-type', component: IndustrytypeComponent },
-              { path: 'call-type', component: CalltypeComponent },
-              { path: 'Quotetype', component: QuotetypeComponent },
-
-              { path: '**', redirectTo: '/CRM/Settings/configuration/status' }
-            ]
-          },
           { path: '**', redirectTo: '/CRM/Settings/user-view' }
         ]
       },
       { path: 'Profileview', component: ProfileComponent },
-      { path: 'bulk-upload', component: BulkUploadMainComponent },
       { path: 'addcontacts', component: AddContactsComponent },
       { path: 'Profileview/:id', component: ProfileComponent },
       {
@@ -122,14 +127,14 @@ const routes: Routes = [
         path: 'Campagins',
         component: CampaginsMainComponent,
         children: [
-          { path: '', component: CampaginsComponent },
           { path: 'campagins', component: CampaginsComponent },
           { path: 'email-conversation', component: EmailCampaginsComponent },
           { path: 'social-media-campagins', component: SocialMediaCampaginsComponent },
           { path: 'sms-campagins', component: SmsCampaginsComponent },
+          { path: '**', redirectTo: '/CRM/Campagins/campagins' }
         ]
       },
-      { path: 'add-campagin', component: AddCampaginComponent},
+      { path: 'add-campagin', component: AddCampaginComponent },
       { path: 'editcampaign/:id', component: AddCampaginComponent },
       { path: '**', redirectTo: '/CRM/Home' }
     ]

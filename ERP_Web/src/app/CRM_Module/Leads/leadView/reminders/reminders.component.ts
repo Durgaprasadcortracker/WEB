@@ -73,7 +73,7 @@ export class RemindersComponent {
     if (this.myForm.value.Id == 0) {
       this.http.postapi('api/Lead/AddReminder', this.myForm.value).subscribe((res) => {
         console.log(res);
-        this.myForm.reset();
+        this.close()
         this.router.navigate(['/CRM/leadView/'+this.id+'/reminder/'+this.id]);
         this.open = 1
         this.getRequiredData()
@@ -83,7 +83,7 @@ export class RemindersComponent {
     else if (this.myForm.value.Id > 0) {
       this.http.postapi('api/Lead/UpdateReminder', this.myForm.value).subscribe((res) => {
         console.log(res);
-        this.myForm.reset();
+        this.close()
         this.open = 1
         this.getRequiredData()
         this.router.navigate(['/CRM/leadView/'+this.id+'/reminder/'+this.id]);
@@ -107,7 +107,9 @@ export class RemindersComponent {
         _obj.LeadId=res.leadId
         _obj.ReminderName=res.reminderName
         if (res.reminderDate) {
-          _obj.ReminderDate = new Date(res.reminderDate).toISOString().substring(0, 10);
+          const reminderDate = new Date(res.reminderDate);
+          reminderDate.setMinutes(reminderDate.getMinutes() + reminderDate.getTimezoneOffset());
+          _obj.ReminderDate = reminderDate.toISOString().substring(0, 10);
         }
         _obj.ReminderTime= this.extractTime( res.reminderTime)
         _obj.CreatedBy=res.createdBy
@@ -130,6 +132,7 @@ export class RemindersComponent {
   }
   close() {
     this.myForm.reset();
+    this.ngOnInit()
   }
   deleteReminder(ID: any) {
     this.http.deleteapi('api/Lead/DeleteReminder/' + ID).subscribe((res) => {
