@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -11,26 +11,31 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class QuotetypeComponent implements OnInit {
   quotetypeForm: any;
   QuotetypeList: any;
-  currentQuotetypeId = 0;
+  quotetypeId: any;
+  submitted: any;
 
-  constructor(private fb: FormBuilder, private http: BackendService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.queryParamMap.subscribe((params) => {
+  constructor(
+    private fb: FormBuilder,
+    private http: BackendService,
+    private router: Router,
+    private ActivatedRoute: ActivatedRoute) {
+    this.ActivatedRoute.queryParamMap.subscribe((params) => {
       this.quotetypeId = params.get('quotetypeid');
+      console.log(this.quotetypeId);
+      if (this.quotetypeId > 0) {
+        this.getQuotetypeById(this.quotetypeId)
+      }
     });
 
-    this.quotetypeForm = this.fb.group({
-      description: ['', Validators.required]
-    });
   }
 
   ngOnInit(): void {
     this.quotetypeForm = this.fb.group({
-      id: new FormControl(<Number>(0)),
-      description: new FormControl('')
+      id: [0],
+      description: [null, Validators.required]
     });
     this.getapi();
   }
-
   getapi(): void {
     this.http.getapi('api/Common/GetQuoteType').subscribe((res) => {
       this.QuotetypeList = res.data;
@@ -38,41 +43,35 @@ export class QuotetypeComponent implements OnInit {
       console.error('Error fetching quotetypes', error);
     });
   }
-  Id:any;
   submitForm(): void {
-    const description = this.quotetypeForm.get('description')?.value;
-    this.quotetypeForm.get("id").setValue(this.currentQuotetypeId);
-    if (this.currentQuotetypeId > 0) {
-      this.http.putapi(`api/Common/UpdateQuoteType`, this.quotetypeForm.getRawValue()).subscribe((res) => { // Updated from UpdateCalltype
-        console.log('Quotetype updated successfully');
-        this.getapi();
-        this.resetForm();
+    this.submitted = true;
+    console.log(this.quotetypeForm.value);
+    const _ID = this.quotetypeForm.value.id
+    if (this.quotetypeForm.invalid) {
+      return;
+    }
+    if (_ID > 0) {
+      this.http.putapi(`api/Common/UpdateQuoteType`, this.quotetypeForm.value).subscribe((res) => { 
+        this.clear();
       }, (error) => {
         console.error('Error updating quotetype', error);
       });
     } else {
-      this.http.postapi('api/Common/AddQuotetype', { description }).subscribe(() => { // Updated from SaveCalltype
-        console.log('Quotetype added successfully');
-        this.getapi(); 
-        this.resetForm();
+      this.http.postapi('api/Common/AddQuotetype', this.quotetypeForm.value).subscribe(() => { 
+        this.clear();
       }, (error) => {
         console.error('Error adding quotetype', error);
       });
     }
   }
-
-  quotetypeId: any;
-  edit(id: number): void {
-    this.currentQuotetypeId = id;
-    this.getQuotetypeById();
-  }
-
-  getQuotetypeById() {
-    this.http.getapi('api/Common/GetQuotetypeDetails/' + this.currentQuotetypeId).subscribe((res) => { 
+  getQuotetypeById(id: any) {
+    this.http.getapi('api/Common/GetQuoteTypeBy/' + id).subscribe((res) => {
       console.log(res);
-      this.quotetypeForm.get("id")?.setValue(res.data.quotetypeId);
-      this.quotetypeForm.get("description")?.setValue(res.data.description);
+      this.quotetypeForm.patchValue(res.data);
     });
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.quotetypeForm.controls;
   }
 
   deleteQuotetype(id: number): void {
@@ -84,8 +83,10 @@ export class QuotetypeComponent implements OnInit {
     });
   }
 
-  resetForm(): void {
+  clear(): void {
+    this.submitted = false;
     this.quotetypeForm.reset();
-    this.currentQuotetypeId = 0;
+    this.ngOnInit()
+    this.router.navigate(['/CRM/Settings/quote-type']);
   }
 }

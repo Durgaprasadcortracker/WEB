@@ -1,226 +1,249 @@
-<div class="container-fluid">
+<div class="">
     <div class="card">
         <div class="card-header">
-            Quote Information
+            Create Quote
         </div>
-        <div class="card-body">
-            <div class="tabs">
-                <div class="tab-header">
-                    <div class="tab" *ngFor="let tab of tabs; let i = index" [class.active]="selectedTab === i">
-                        <span *ngIf="QuotedItems" (click)="selectTab(tab,i)">{{ tab }}</span>
-                        <span *ngIf="!QuotedItems">{{ tab }}</span>
-                    </div>
-                </div>
-                <div class="tab-content">
-                    <div *ngIf="selectedTab !== null">
-                        <div *ngIf="selectedTab == 0" class="form first">
-                            <form [formGroup]="quoteForm" (ngSubmit)="addquotations()">
-                                <div class="row">
-                                    <!-- <div class="col-md-6">
-                                        <label>Quote Id <span style="color: red;">*</span></label>
-                                        <input type="text" style="width: 50%;" class="form-control"
-                                            formControlName="quoteid">
-
-                                    </div> -->
-                                    <div class="col-md-6">
-                                        <label>Company Name <span style="color: red;">*</span></label>
-                                        <select class="form-select" style="width: 50%;" formControlName="companyId">
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let company of companylist" value="{{company.id}}">
-                                                {{company.companyName}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Valid Until <span style="color: red;">*</span></label>
-                                        <input type="date" style="width: 50%;text-align: left;" class="form-control"
-                                            formControlName="validUntil">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Quote Type<span style="color: red;">*</span></label>
-                                        <select class="form-select" style="width: 50%;" formControlName="quoteType">
-                                            <option value="null">--Select One--</option>
-                                            <option *ngFor="let a of quoteTypes" [value]="a.id">{{a.description}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div style="padding-top: 20px;">
-                                    <h4>Address Information</h4>
-                                    <hr />
-                                    <div class="details personal">
-                                        Billing From
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Company Name <span class="required">*</span></label>
-                                            <input type="text" style="width: 50%;" class="form-control"
-                                                formControlName="billingFromCompanyName">
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Company Address <span class="required">*</span></label>
-                                            <input type="text" style="width: 50%;" class="form-control"
-                                                formControlName="billingFromCompanyAddress">
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Email <span class="required">*</span></label>
-                                            <input type="text" style="width: 50%;" class="form-control"
-                                                formControlName="billingFromEmail">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Phone Number <span class="required">*</span></label>
-                                            <input type="number" style="width: 50%;" class="form-control"
-                                                formControlName="billingFromPhoneNumber">
-                                        </div>
-                                        Billing To
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Company Name <span class="required">*</span></label>
-                                            <input type="text" style="width: 50%;" class="form-control"
-                                                formControlName="billingToCompanyName">
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Company Address <span class="required">*</span></label>
-                                            <input type="text" style="width: 50%;" class="form-control"
-                                                formControlName="billingToCompanyAddress">
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Email <span class="required">*</span></label>
-                                            <input type="text" style="width: 50%;" class="form-control"
-                                                formControlName="billingToEmail">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Phone Number <span class="required">*</span></label>
-                                            <input type="number" style="width: 50%;" class="form-control"
-                                                formControlName="billingToPhoneNumber">
-                                        </div>
-                                        Terms and Conditions
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Terms And Conditions <span class="required">*</span></label>
-                                                <textarea type="text" class="form-control" style="width: 50%;"
-                                                    formControlName="termsandconditions"></textarea>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Description Information <span class="required">*</span></label>
-                                                <textarea type="text" class="form-control" style="width: 50%;"
-                                                    formControlName="descriptionInformation"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="details ID">
-                                        <div class="emp-buttons">
-                                            <a style="width: 200px;" type="submit" (click)="next()"
-                                                class="btn btn-primary submit-btn">Next</a>
-
-                                            <div (click)="close()" routerLink="/quotations" style="width: 200px;"
-                                                type="button" class="btn btn-danger cancel-btn">Cancel</div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div *ngIf="selectedTab == 1">
-                            <div style="display: flex; justify-content: end; margin: 10px;">
-                                <div (click)="AddNewLine()" class="btn btn-danger">Add new Product</div>
-                            </div>
-
-                            <table class="table table-sm" style="width: 100px !important;">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 50px;">S.NO</th>
-                                        <th style="width: 60px;">Product Name</th>
-                                        <th style="width: 60px;">Quantity</th>
-                                        <th style="width: 60px;">List Price ($)</th>
-                                        <th style="width: 60px;">Amount ($)</th>
-                                        <th style="width: 60px;">Discount ($)</th>
-                                        <th style="width: 60px;">Tax ($)</th>
-                                        <th style="width: 60px;">Total ($)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let a of lineItem;let i = index">
-                                        <td>{{i+1}}</td>
-                                        <td>
-                                            <input type="text" width="30px" name="" id="" [(ngModel)]="a.productName">
-                                        </td>
-                                        <td>
-                                            <input type="number" name="" id="" [(ngModel)]="a.quantity">
-                                        </td>
-                                        <td>
-                                            <input (change)="calculateTotal(i)" type="number" name="" id=""
-                                                [(ngModel)]="a.listPrice">
-                                        </td>
-                                        <td>
-                                            <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.amount">
-                                        </td>
-                                        <td>
-                                            <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.discount">
-                                        </td>
-                                        <td>
-                                            <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.tax">
-                                        </td>
-                                        <td>
-                                            <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.total">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div class="invoice-main">
-                                <div class="invoice">
-                                    <div class="row">
-                                        <label for="subtotal">Sub Total ($)</label>
-                                        <input type="text" id="subtotal" formControlName="subtotal" value="5300"
-                                            readonly>
-                                    </div>
-                                    <div class="row">
-                                        <label for="discount">Discount ($)</label>
-                                        <input type="text" id="discount" formControlName="Discount" value="0" readonly>
-                                    </div>
-                                    <div class="row">
-                                        <label for="tax">Tax ($)</label>
-                                        <input type="text" id="Tax" formControlName="Tax" value="0" readonly>
-                                    </div>
-                                    <div class="row">
-                                        <label for="adjustment">Adjustment ($)</label>
-                                        <input type="text" id="adjustment" formControlName="adjustment">
-                                    </div>
-                                    <div class="row">
-                                        <label for="grandtotal">Grand Total ($)</label>
-                                        <input type="text" id="grandtotal" formControlName="grandtotal" value="5300"
-                                            readonly>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="details ID">
-                                <div class="emp-buttons" style="display: flex; gap: 10px;">
-                                    <button type="submit" style="width: 200px;margin-right: 10px;"
-                                        class="btn btn-primary">Submit</button>
-
-                                    <div style="width: 200px;" routerLink="/CRM/quotes-create" type="button"
-                                        class="btn btn-danger">Close</div>
-
-
-                                </div>
-                            </div>
-
+        <form [formGroup]="quoteForm" (ngSubmit)="addQuote()">
+            <div class="d-flex flex-wrap">
+                <div class="col-md-3">
+                    <label for="companyId" class="form-label">Quote Type<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <select type="text" class="form-select form-control-lg" formControlName="companyId"
+                            [ngClass]="{ 'is-invalid': submitted && f['companyId'].errors }">
+                            <option value="null">--Select company-- </option>
+                            <option *ngFor="let a of listOfCompanys" value="{{a.id}}">
+                                {{a.companyName}}</option>
+                        </select>
+                        <div *ngIf="submitted && f['companyId'].errors" class="invalid-feedback">
+                            <div *ngIf="f['companyId'].errors['required']">company is required.</div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <label for="quoteType" class="form-label">Quote Type<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <select type="text" class="form-select form-control-lg" formControlName="quoteType"
+                            [ngClass]="{ 'is-invalid': submitted && f['quoteType'].errors }">
+                            <option value="null">--Select quoteType-- </option>
+                            <option *ngFor="let a of quoteItems" value="{{a.id}}">
+                                {{a.description}}</option>
+                        </select>
+                        <div *ngIf="submitted && f['quoteType'].errors" class="invalid-feedback">
+                            <div *ngIf="f['quoteType'].errors['required']">quoteType is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="validUntil" class="form-label">valid Until<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="date" class="form-control form-control-lg" formControlName="validUntil"
+                            [ngClass]="{ 'is-invalid': submitted && f['validUntil'].errors }" />
+                        <div *ngIf="submitted && f['validUntil'].errors" class="invalid-feedback">
+                            <div *ngIf="f['validUntil'].errors['required']">valid Until is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class=" m-2 ">Billing From</div>
+            <div class="d-flex flex-wrap">
+                <div class="col-md-3">
+                    <label for="billingFromCompanyName" class="form-label">Billing From Company Name<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="text" class="form-control form-control-lg" formControlName="billingFromCompanyName"
+                            [ngClass]="{ 'is-invalid': submitted && f['billingFromCompanyName'].errors }" />
+                        <div *ngIf="submitted && f['billingFromCompanyName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['billingFromCompanyName'].errors['required']">billing From CompanyName is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="billingFromCompanyAddress" class="form-label">Company Address<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="text" class="form-control form-control-lg" formControlName="billingFromCompanyAddress"
+                            [ngClass]="{ 'is-invalid': submitted && f['billingFromCompanyAddress'].errors }" />
+                        <div *ngIf="submitted && f['billingFromCompanyAddress'].errors" class="invalid-feedback">
+                            <div *ngIf="f['billingFromCompanyAddress'].errors['required']">billing From Company Address is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="billingFromEmail" class="form-label">Email<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="email" class="form-control form-control-lg" formControlName="billingFromEmail"
+                            [ngClass]="{ 'is-invalid': submitted && f['billingFromEmail'].errors }" />
+                        <div *ngIf="submitted && f['billingFromEmail'].errors" class="invalid-feedback">
+                            <div *ngIf="f['billingFromEmail'].errors['required']">Billing From Email is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="billingFromPhoneNumber" class="form-label">Phone Number<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="number" class="form-control form-control-lg" formControlName="billingFromPhoneNumber"
+                            [ngClass]="{ 'is-invalid': submitted && f['billingFromPhoneNumber'].errors }" />
+                        <div *ngIf="submitted && f['billingFromPhoneNumber'].errors" class="invalid-feedback">
+                            <div *ngIf="f['billingFromPhoneNumber'].errors['required']">billing From PhoneNumber is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class=" m-2 ">Billing To</div>
+            <div class="d-flex flex-wrap">
+                <div class="col-md-3">
+                    <label for="billingToCompanyName" class="form-label">Billing to Company Name<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="text" class="form-control form-control-lg" formControlName="billingToCompanyName"
+                            [ngClass]="{ 'is-invalid': submitted && f['billingToCompanyName'].errors }" />
+                        <div *ngIf="submitted && f['billingToCompanyName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['billingToCompanyName'].errors['required']">billing to CompanyName is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="billingToCompanyAddress" class="form-label">Company Address<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="text" class="form-control form-control-lg" formControlName="billingToCompanyAddress"
+                            [ngClass]="{ 'is-invalid': submitted && f['billingToCompanyAddress'].errors }" />
+                        <div *ngIf="submitted && f['billingToCompanyAddress'].errors" class="invalid-feedback">
+                            <div *ngIf="f['billingToCompanyAddress'].errors['required']">billing to Company Address is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="billingToEmail" class="form-label">Email<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="email" class="form-control form-control-lg" formControlName="billingToEmail"
+                            [ngClass]="{ 'is-invalid': submitted && f['billingToEmail'].errors }" />
+                        <div *ngIf="submitted && f['billingToEmail'].errors" class="invalid-feedback">
+                            <div *ngIf="f['billingToEmail'].errors['required']">Billing to Email is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="billingToPhoneNumber" class="form-label">Phone Number<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <input type="number" class="form-control form-control-lg" formControlName="billingToPhoneNumber"
+                            [ngClass]="{ 'is-invalid': submitted && f['billingToPhoneNumber'].errors }" />
+                        <div *ngIf="submitted && f['billingToPhoneNumber'].errors" class="invalid-feedback">
+                            <div *ngIf="f['billingToPhoneNumber'].errors['required']">billing to PhoneNumber is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class=" m-2 ">Terms and Conditions</div>
+            <div class="d-flex flex-wrap">
+                <div class="d-flex flex-wrap">
+                    <div class="col-md-6">
+                        <label>Terms And Conditions <span class="required">*</span> </label>
+                        <textarea class="form-control" cols="100" rows="3" formControlName="termsandconditions"
+                            [ngClass]="{ 'is-invalid': submitted && f['termsandconditions'].errors }"></textarea>
+                        <div *ngIf="submitted && f['termsandconditions'].errors" class="invalid-feedback">
+                            <div *ngIf="f['termsandconditions'].errors['required']">Terms And Conditions is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Description Information<span class="required">*</span> </label>
+                        <textarea class="form-control" cols="100" rows="3" formControlName="descriptionInformation"
+                            [ngClass]="{ 'is-invalid': submitted && f['descriptionInformation'].errors }"></textarea>
+                        <div *ngIf="submitted && f['descriptionInformation'].errors" class="invalid-feedback">
+                            <div *ngIf="f['descriptionInformation'].errors['required']">Description Information is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6 mt-3 d-flex g-1">
+                    <div class="mr-2">
+                        <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
+                    </div>
+                    <div>
+                        <div routerLink="/CRM/Leads/leadView/{{id}}/callLogs/{{id}}" style="width: 200px;" type="button"
+                            class="btn btn-danger">Close</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div style="display: flex; justify-content: end; margin: 10px;">
+            <div (click)="AddNewLine()" class="btn btn-danger" >Add new Product</div>
+         </div>  
+
+        <table class="table table-sm" style="width: 100px !important;">
+            <thead>
+                <tr>
+                    <th style="width: 50px;">S.NO</th>
+                    <th style="width: 60px;">Product Name</th>
+                    <th style="width: 60px;">Quantity</th>
+                    <th style="width: 60px;">List Price ($)</th>
+                    <th style="width: 60px;">Amount ($)</th>
+                    <th style="width: 60px;">Discount ($)</th>
+                    <th style="width: 60px;">Tax ($)</th>
+                    <th style="width: 60px;">Total ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of lineItem;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>
+                        <input type="text" width="30px" name="" id="" [(ngModel)]="a.productName">
+                    </td>
+                    <td>
+                        <input type="number" name="" id="" [(ngModel)]="a.quantity">
+                    </td>
+                    <td>
+                        <input type="number" name="" id="" [(ngModel)]="a.listPrice">
+                    </td>
+                    <td>
+                        <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.amount">
+                    </td>
+                    <td>
+                        <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.discount">
+                    </td>
+                    <td>
+                        <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.tax">
+                    </td>
+                    <td>
+                        <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.total">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="invoice-main">
+            <div class="invoice">
+                <div class="row">
+                    <label for="subtotal">Sub Total ($)</label>
+                    <input type="text" id="subtotal" value="5300" readonly>
+                </div>
+                <div class="row">
+                    <label for="discount">Discount ($)</label>
+                    <input type="text" id="discount" value="0" readonly>
+                </div>
+                <div class="row">
+                    <label for="tax">Tax ($)</label>
+                    <input type="text" id="tax" value="0" readonly>
+                </div>
+                <div class="row">
+                    <label for="adjustment">Adjustment ($)</label>
+                    <input type="text" id="adjustment">
+                </div>
+                <div class="row">
+                    <label for="grandtotal">Grand Total ($)</label>
+                    <input type="text" id="grandtotal" value="5300" readonly>
+                </div>
+            </div>
+        </div>
+      
+        <div class="details ID">
+            <div class="emp-buttons" style="display: flex; gap: 10px;">
+                <button routerLink="/Quotes"  class="btn btn-danger"  style="width: 200px;" type="button">Submit</button>
+
+                <div routerLink="/Quotes" style="width: 200px;" type="button"
+                    class="btn cancel-btn">Close</div>
+
             </div>
         </div>
     </div>

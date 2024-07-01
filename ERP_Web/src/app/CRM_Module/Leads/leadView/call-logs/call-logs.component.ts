@@ -23,7 +23,7 @@ export class CallLogsComponent {
   constructor(private route: ActivatedRoute,
     private http: BackendService,
     private fb: FormBuilder,
-    private ActivatedRoute: ActivatedRoute,    
+    private ActivatedRoute: ActivatedRoute,
     private router: Router
 
   ) {
@@ -36,11 +36,11 @@ export class CallLogsComponent {
       if (this.callsLogs == 0) {
         this.open = 2;
       }
-      else if(this.callsLogs > 0){
+      else if (this.callsLogs > 0) {
         this.edit(this.callsLogs)
         this.open = 2;
       }
-      else if(this.callsLogs == null){
+      else if (this.callsLogs == null) {
         this.open = 1;
         this.close()
       }
@@ -68,11 +68,10 @@ export class CallLogsComponent {
     if (this.myForm.value.id == 0) {
       this.http.postapi('api/Lead/AddCallLogs', this.myForm.value).subscribe((res) => {
         console.log(res);
-        this.router.navigate(['/CRM/Leads/leadView/'+this.id+'/callLogs/'+this.id]);
+        this.router.navigate(['/CRM/Leads/leadView/' + this.id + '/callLogs/' + this.id]);
         this.open = 1
         this.getRequiredData()
         this.close()
-
       });
     }
     else if (this.myForm.value.id > 0) {
@@ -81,7 +80,7 @@ export class CallLogsComponent {
         this.close()
         this.open = 1
         this.getRequiredData()
-        this.router.navigate(['/CRM/Leads/leadView/'+this.id+'/callLogs/'+this.id]);
+        this.router.navigate(['/CRM/Leads/leadView/' + this.id + '/callLogs/' + this.id]);
       });
     }
   }
@@ -122,6 +121,7 @@ export class CallLogsComponent {
     return this.myForm.controls;
   }
   close() {
+    this.submitted = false;
     this.myForm.reset();
     this.ngOnInit()
   }

@@ -132,6 +132,7 @@ export class RemindersComponent {
   }
   close() {
     this.myForm.reset();
+    this.submitted = false;
     this.ngOnInit()
   }
   deleteReminder(ID: any) {

@@ -10,29 +10,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./quotes-create.component.scss']
 })
 export class QuotesCreateComponent {
-
-  companylist: any;
-  myForm: any
-  selectedTab: number = 0;
-  quoteTypes:any
-  QuotedItems = false;
-  public tabs = ["Quote Information", "Quoted Items"];
-  Id: any;
-  submited = false;
-  lineItem: any[] = [];
   quoteForm: any
+  submitted: any;
+  id: any;
+  quoteItems: any;
+  listOfCompanys: any;
+  lineItem:any=[]
   companyid: any;
-  constructor(
+  constructor(private route: ActivatedRoute,
     private http: BackendService,
-    private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private ActivatedRoute: ActivatedRoute,
+    private router: Router
+
   ) {
-    this.Id = this.route.snapshot.paramMap.get('id');
-    this.companyid = this.route.snapshot.paramMap.get('companyid');
-    this.getRequired()
+    this.companyid = this.route.snapshot.params['companyid'];
+    this.id = this.route.snapshot.params['id'];
+    this.getRequiredData()
   }
+
 
   ngOnInit() {
     this.quoteForm = this.fb.group({
@@ -58,111 +54,27 @@ export class QuotesCreateComponent {
       modifiedAt: [null],
       companyNewid: [null]
     });
-    this.getQuotation();
-    if (this.Id) {
-      this.http.getapi(`api/Quotation/GetQuotationsby/${this.Id}`).subscribe((res) => {
-        console.log(res);
-        this.myForm.patchValue(res.data);
-      });
-    }
   }
-
-  selectTab(tab: any, index: number) {
-    this.selectedTab = index;
+  addQuote() {
   }
-
-  addquotations(): void {
-    this.submited = true;
-    if (this.myForm.invalid) {
-      return;
-    }
-    console.log(this.myForm.value)
-    if (this.myForm.valid) {
-      if (this.myForm.value.id === 0) {
-        console.log('Adding new Quotation:', this.myForm.value);
-        this.http.postapi('api/Quotation/AddQuotations', this.myForm.value).subscribe(() => {
-          this.snackBar.open('Quotation successfully added!', 'Close', {
-            duration: 3000,
-          });
-          this.router.navigate(['/CRM/quotes-create']);
-        }, error => {
-          console.error('Error adding Quotation:', error);
-        });
-      } else if (this.myForm.value.id > 0) {
-        console.log('Editing Quotation:', this.myForm.value);
-        this.http.putapi('api/Quotations/UpdateQuotations', this.myForm.getRawValue()).subscribe(() => {
-          this.snackBar.open('Quotation successfully updated!', 'Close', {
-            duration: 3000, // Snackbar stays open for 3 seconds
-          });
-          this.router.navigate(['/CRM/quoteslisting']);
-        }, error => {
-          console.error('Error updating Quotation:', error);
-        });
-      }
-    } else {
-      console.log('Form is invalid');
-    }
-  }
-  get f(): { [key: string]: AbstractControl } {
-    return this.myForm.controls;
-  }
-  next() {
-    console.log(this.quoteForm);
-    this.AddNewLine()
-    this.selectedTab = 1;
-    this.QuotedItems = true;
-  }
-
-  submit() {
-    const obj = {
-      quote: this.myForm.value,
-      lineitems: this.lineItem
-    };
-    console.log(obj);
-  }
-
-  AddNewLine() {
-    const obj = {
-      productName: "",
-      quantity: 0,
-      listPrice: 0,
-      amount: 0,
-      discount: 0,
-      tax: 0,
-      total: 0
-    };
-    this.lineItem.push({ ...obj });
-  }
-
-  calculateTotal(i: number) {
-    const item = this.lineItem[i];
-    item.amount = item.quantity * item.listPrice;
-    item.total = item.amount - item.discount + item.tax;
-  }
-
-  onSubmit() {
-    this.http.postapi('api/Quotation/AddCompanies', this.myForm.getRawValue()).subscribe(() => {
-      this.router.navigate(['/CRM/quotes-create']);
-    });
-  }
-
-  close() {
-    this.myForm.reset();
-  }
-  getRequired() {
+  getRequiredData() {
     this.http.getapi('api/Company/GetCompany').subscribe((res) => {
       console.log(res);
-      this.companylist = res.data
+      this.listOfCompanys = res.data;
     });
     this.http.getapi('api/Common/GetQuoteType').subscribe((res) => {
       console.log(res);
-      this.quoteTypes = res.data
+      if (res) {
+        this.quoteItems = res.data
+      }
     });
   }
-  getQuotation() {
-    this.http.getapi('api/Quotation/GetQuotations').subscribe((res) => {
-      console.log(res);
-      this.companylist = res.data;
-    });
+  edit(_id: any) {
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.quoteForm.controls;
+  }
+  AddNewLine(){
+    
   }
 }
