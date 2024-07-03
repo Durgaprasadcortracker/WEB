@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -12,22 +12,28 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CalltypeComponent implements OnInit {
   calltypeForm: any; 
   CalltypeList: any;
-  currentCalltypeId = 0;
+  calltypeId: any;
+  submited: any;
 
-  constructor(private fb: FormBuilder, private http: BackendService, private router: Router, private activatedRoute: ActivatedRoute) {
+
+  constructor(
+    private fb: FormBuilder, 
+    private http: BackendService, 
+    private router: Router, 
+    private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       this.calltypeId = params.get('calltypeid');
-    });
-
-    this.calltypeForm = this.fb.group({
-      description: ['', Validators.required]
+      console.log(this.calltypeId);
+      if (this.calltypeId > 0) {
+        this.getCalltypeById(this.calltypeId)
+      }
     });
   }
 
   ngOnInit(): void {
     this.calltypeForm = this.fb.group({
-      id: new FormControl(<number>(0)) ,
-      description: new FormControl('')
+      id: [0],
+      description: [null, Validators.required]
     });
     this.getapi();
   }
@@ -39,41 +45,39 @@ export class CalltypeComponent implements OnInit {
       console.error('Error fetching calltypes', error);
     });
   }
-  Id:any;
+ 
   submitForm(): void {
-    const description = this.calltypeForm.get('description')?.value;
-    this.calltypeForm.get("id").setValue(this.currentCalltypeId);
-    if (this.currentCalltypeId > 0) {
-      this.http.putapi(`api/Common/UpdateCallType`, this.calltypeForm.getRawValue()).subscribe((res) => { // Updated endpoint from UpdateSource to UpdateCalltype
-        console.log('Calltype updated successfully');
-        this.getapi();
-        this.resetForm();
+    this.submited = true;
+    console.log(this.calltypeForm.value);
+    const _ID = this.calltypeForm.value.id
+    if (this.calltypeForm.invalid) {
+      return;
+    }
+    if (_ID > 0) {
+      this.http.putapi(`api/Common/UpdateCallType`, this.calltypeForm.value).subscribe((res) => { 
+        this.clear();
       }, (error) => {
-        console.error('Error updating calltype', error);
+        console.error('Error updating Calltype', error);
       });
     } else {
-      this.http.postapi('api/Common/AddCallType', { description }).subscribe(() => { // Updated endpoint from SaveSource to SaveCalltype
-        console.log('Calltype added successfully');
-        this.getapi();
-        this.resetForm();
+      this.http.postapi('api/Common/AddCallType', this.calltypeForm.value).subscribe(() => { 
+        this.clear();
       }, (error) => {
-        console.error('Error adding calltype', error);
+        console.error('Error adding Calltype', error);
       });
     }
+
   }
 
-  calltypeId: any;
-  edit(id: number): void {
-    this.currentCalltypeId = id;
-    this.getCalltypeById();
-  }
-
-  getCalltypeById() {
-    this.http.getapi('api/Common/GetCallType/' + this.currentCalltypeId).subscribe((res) => {
+  getCalltypeById(Id: any) {
+    this.http.getapi('api/Common/GetCallType/' + Id).subscribe((res) => {
       console.log(res);
-      this.calltypeForm.get("id")?.setValue(res.data.calltypeId);
-      this.calltypeForm.get("description")?.setValue(res.data.description);
+      this.calltypeForm.patchValue(res.data);
+    
     });
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.calltypeForm.controls;
   }
 
   deleteCalltype(id: number): void { 
@@ -85,9 +89,11 @@ export class CalltypeComponent implements OnInit {
     });
   }
 
-  resetForm(): void {
+  clear(): void {
     this.calltypeForm.reset();
-    this.currentCalltypeId = 0;
+    this.submited = false;
+    this.ngOnInit()
+    this.router.navigate(['/CRM/Settings/call-type']);
   }
 }
 

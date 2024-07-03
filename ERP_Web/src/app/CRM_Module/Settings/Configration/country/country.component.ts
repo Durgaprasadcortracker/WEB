@@ -1,101 +1,105 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-country',
   templateUrl: './country.component.html',
-  styleUrls: ['./country.component.css']
+  styleUrl: './country.component.css'
 })
 export class CountryComponent implements OnInit {
-  countryForm: FormGroup;
-  countryList: any[] = [];
-  currentCountryId = 0;
+
+  countryForm: any;
+  CountryList: any;
+  countryid: any;
+  submited: any;
+
+
+
+
 
   constructor(
     private fb: FormBuilder,
     private http: BackendService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {
-    this.activatedRoute.queryParamMap.subscribe((params) => {
-      const param = params.get('countryid');
-      this.currentCountryId = param ? +param : 0;
-    });
-
-    this.countryForm = this.fb.group({
-      description: ['', Validators.required]
+    private ActivatedRoute: ActivatedRoute) {
+    this.ActivatedRoute.queryParamMap.subscribe((params) => {
+      this.countryid = params.get('countryid');
+      console.log(this.countryid);
+      if (this.countryid > 0) {
+        this.getCountryById(this.countryid)
+      }
     });
   }
 
   ngOnInit(): void {
-    this.getCountries();
-
-    if (this.currentCountryId > 0) {
-      this.getCountryById();
-    }
+    this.countryForm = this.fb.group({
+      id: [0],
+      description: [null, Validators.required]
+    });
+    this.getapi();
   }
 
-  getCountries(): void {
-    this.http.getapi('api/Common/GetCountry').subscribe((res) => {
-      this.countryList = res.data;
-      console.log('Fetched country:', this.countryList); // Logging fetched countries
+  getapi(): void {
+    this.http.getapi('api/Common/GetCountries').subscribe((res) => {
+      this.CountryList = res.data;
     }, (error) => {
       console.error('Error fetching countries', error);
     });
   }
 
   submitForm(): void {
-    const formData = this.countryForm.value;
-    formData.id = this.currentCountryId;
-
-    if (this.currentCountryId > 0) {
-      this.http.putapi('api/Common/UpdateCountry', formData).subscribe(() => {
-        console.log('Country updated successfully');
-        this.getCountries();
-        this.resetForm();
+    this.submited = true;
+    console.log(this.countryForm.value);
+    const _ID = this.countryForm.value.id
+    if (this.countryForm.invalid) {
+      return;
+    }
+    if (_ID > 0) {
+      this.http.putapi(`api/Common/UpdateCountry`, this.countryForm.value).subscribe((res) => { 
+        this.clear();
       }, (error) => {
         console.error('Error updating country', error);
       });
     } else {
-      this.http.postapi('api/Common/AddCountry', formData).subscribe(() => {
-        console.log('Country added successfully');
-        this.getCountries();
-        this.resetForm();
+      this.http.postapi('api/Common/AddCountry', this.countryForm.value).subscribe(() => { 
+        this.clear();
       }, (error) => {
         console.error('Error adding country', error);
       });
     }
   }
 
-  edit(id: number): void {
-    this.currentCountryId = id;
-    this.getCountryById();
-  }
+ 
 
-  getCountryById(): void {
-    this.http.getapi(`api/Common/GetCountryById/${this.currentCountryId}`).subscribe((res) => {
-      const country = res.data;
-      this.countryForm.patchValue({
-        description: country.description
-      });
-    }, (error) => {
-      console.error('Error fetching country by ID', error);
+  getCountryById(Id: any)  {
+    this.http.getapi('api/Common/GetCountry/' 
+      + Id ).subscribe((res) => {
+      console.log(res);
+      this.countryForm.patchValue(res.data);
     });
   }
+  get f(): { [key: string]: AbstractControl } {
+    return this.countryForm.controls;
+  }
+
 
   deleteCountry(id: number): void {
-    this.http.deleteapi(`api/Common/DeleteCountry/${id}`).subscribe(() => {
+    this.http.deleteapi(`api/Common/DeleteCountry/
+      ${id}`).subscribe(() => {
       console.log('Country deleted successfully');
-      this.getCountries();
+      this.getapi();
     }, (error) => {
-      console.error(`Error deleting country with id ${id}`, error);
+      console.error(`Error deleting country with id 
+        ${id}`, error);
     });
   }
 
-  resetForm(): void {
+  clear(): void {
     this.countryForm.reset();
-    this.currentCountryId = 0;
+    this.submited = false;
+    this.ngOnInit()
+    this.router.navigate(['/CRM/Settings/country']);
   }
 }

@@ -1,88 +1,109 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-stagedesign',
   templateUrl: './stagedesign.component.html',
-  styleUrls: ['./stagedesign.component.css']
+  styleUrl: './stagedesign.component.css'
 })
 export class StagedesignComponent implements OnInit {
-  stageForm: FormGroup;
-  stagelist: any;
-  currentStageId = 0;
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [5, 10, 15, 20];
+  p:number=1;
+  
+  myForm: FormGroup=new FormGroup({
+    id:new FormControl(<Number>(0)),
+    stageId:new FormControl(''),
+    description:new FormControl('')
 
-  Stagelist: any;
+  });
+  stageForm: any;
+  stageId: any;
+  StageList: any;
+  submited: any;
+
  
   constructor(
-    private fb: FormBuilder,private http: BackendService,private router: Router,private activatedRoute: ActivatedRoute) {
+    private fb: FormBuilder,
+    private http: BackendService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       this.stageId = params.get('stageid'); 
-    });
-
-    this.stageForm = this.fb.group({
-      description: ['', Validators.required]
+      console.log(this.stageId);
+      if (this.stageId > 0) {
+        this.getStageById(this.stageId)
+      }
     });
   }
 
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.StageList();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.StageList();
+  }
+
   ngOnInit(): void {
-    this.stageForm = new FormGroup({
-      id: new FormControl(<Number>(0)),
-      description: new FormControl('')
+    this.stageForm = this.fb.group({
+      id: [0],
+      description: [null, Validators.required]
     });
     this.getapi();
   }
 
   getapi(): void {
     this.http.getapi('api/Common/GetStages').subscribe((res) => {
-      this.stagelist = res.data;
+      this.StageList = res.data;
     }, (error) => {
       console.error('Error fetching stages', error);
     });
   }
-  Id:any;
+
   submitForm(): void {
-    const formData = this.stageForm.getRawValue();
-    if (this.currentStageId > 0) {
-      this.http.putapi('api/Common/UpdateStage', formData).subscribe(() => { // Updated API endpoint
-        console.log('Stage updated successfully');
-        this.getapi();
-        this.resetForm();
+    this.submited = true;
+    console.log(this.stageForm.value);
+    const _ID = this.stageForm.value.id
+    if (this.stageForm.invalid) {
+      return;
+    }
+    if (_ID > 0) {
+      this.http.putapi(`api/Common/UpdateStage`, this.stageForm.value).subscribe((res) => { 
+        this.clear();
       }, (error) => {
-        console.error('Error updating stage', error);
+        console.error('Error updating Stage', error);
       });
     } else {
-      this.http.postapi('api/Common/AddStage', { description: formData.description }).subscribe(() => { // Updated API endpoint
-        console.log('Stage added successfully');
-        debugger
-        this.getapi();
-        this.resetForm();
+      this.http.postapi('api/Common/AddStage', this.stageForm.value).subscribe(() => { 
+        this.clear();
       }, (error) => {
         console.error('Error adding stage', error);
       });
     }
    
   }
-  stageId: any;
-  edit(id: number): void {
-    this.currentStageId = id;
-    this.getStageById();
-  }
+ 
 
-  getStageById(): void {
-    this.http.getapi(`api/Common/GetStage/${this.stageId}`).subscribe((res) => { 
-      this.stageForm.patchValue({
-        id: res.data.stageId, 
-        description: res.data.description
-      });
-    }, (error) => {
-      console.error('Error fetching stage details', error);
+  getStageById(Id: any)   {
+    this.http.getapi('api/Common/GetStage/' + Id).subscribe((res) => { 
+      console.log(res);
+      this.stageForm.patchValue(res.data);
+    
     });
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.stageForm.controls;
   }
 
   deleteStage(id: number): void {
-    this.http.deleteapi(`api/Common/stage/${id}`).subscribe(() => { 
+    this.http.deleteapi(`api/Common/DeleteStage/${id}`).subscribe(() => { 
       console.log('Stage deleted successfully');
       this.getapi();
     }, (error) => {
@@ -90,9 +111,10 @@ export class StagedesignComponent implements OnInit {
     });
   }
 
-  resetForm(): void {
-    this.stageForm.reset({ id: 0, description: '' });
-    this.currentStageId = 0;
+  clear(): void {
+    this.stageForm.reset();
+    this.submited = false;
+    this.ngOnInit()
+    this.router.navigate(['/CRM/Settings/stage']);
   }
 }
-

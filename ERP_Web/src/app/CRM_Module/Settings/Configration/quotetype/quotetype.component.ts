@@ -65,7 +65,8 @@ export class QuotetypeComponent implements OnInit {
     }
   }
   getQuotetypeById(id: any) {
-    this.http.getapi('api/Common/GetQuoteTypeBy/' + id).subscribe((res) => {
+    this.http.getapi('api/Common/GetQuoteTypeBy/' 
+      + id).subscribe((res) => {
       console.log(res);
       this.quotetypeForm.patchValue(res.data);
     });

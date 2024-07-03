@@ -1,63 +1,71 @@
-<!-- app.component.html -->
 <div class="container-fluid mt-5">
-    <div class="card">
-      <div class="card-header">
-        Status
-      </div>
-      <div class="card-body">
-
-        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-            <div class="col-md-6">
-                <label>Stage</label>
-                <select type="text" class="form-control form-control-lg" formControlName="stageId" >
-                    <option value="">--Select Stage--</option>
-                    <option *ngFor="let Stage of Stagelist" value="{{Stage.id}}">{{Stage.description}}</option>
-                </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="description">Description</label>
-                    <input type="text" class="form-control" formControlName="description" id="description" placeholder="Enter description">
-                </div>
-            </div>
-          <button type="submit" class="btn btn-primary m-2">Submit</button>
-          <button type="button" class="btn btn-secondary m-2">Close</button>
-        </form>
-      </div>
+  <div class="card">
+    <div class="card-header">
+      Status
     </div>
-  
-    <table class="table mt-4">
-      <thead>
-        <tr>
-          <th scope="col">S.No</th>
-          <th scope="col">Stage</th>
-          <th scope="col">Description</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of statuses  | paginate
-        : {
-            itemsPerPage: tableSize,
-            currentPage: page,
-            totalItems: count
-          }; let i=index">
-          <th scope="row">{{i+1}}</th>
-          <td>{{a.stageName}}</td>
-          <td>{{a.description}}</td>
-          <td>
-            <button routerLink="/CRM/Settings/configuration/status" [queryParams]="{statusid:a.id}" class="btn btn-sm btn-outline-primary">
-              <i class="fa fa-pencil-alt"></i>
-            </button>
-            <button routerLink="/CRM/Settings/configuration/status" [queryParams]="{statusid:a.id}" class="btn btn-sm btn-outline-danger ml-2">
-              <i class="fa fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="card-body">
+
+      <form [formGroup]="statusForm" (ngSubmit)="submitForm()">
+          <div class="row">
+          <div class="col-md-6">
+              <label>Stage</label>
+              <select type="text" class="form-control form-control-lg" formControlName="stageId" >
+                  <option value="">--Select Stage--</option>
+                  <option *ngFor="let Stage of Stagelist" value="{{Stage.id}}">
+                    {{Stage.description}}</option>
+              </select>
+              </div>
+              <div class="col-md-6">
+                  <div class="mb-2">
+                    <label for="description" class="form-label">Description<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                      <input type="text" class="form-control" id="description" formControlName="description"
+                        placeholder="Enter description" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" />
+                      <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                        <div *ngIf="f['description'].errors['required']">Description is required.</div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        <button type="submit" class="btn btn-primary m-2">Submit</button>
+        <button type="button" class="btn btn-secondary m-2"(click)="clear()">Close</button>
+      </form>
+    </div>
   </div>
-  <div class="pagination-container">
-    <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Stage</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of statuses  | paginate
+      : {
+          itemsPerPage: tableSize,
+          currentPage: page,
+          totalItems: count
+        }; let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{a.stageName}}</td>
+        <td>{{a.description}}</td>
+        <td>
+          <button routerLink="/CRM/Settings/status" [queryParams]="{statusid:a.id}"
+           class="btn btn-sm btn-outline-primary">
+           <i class="fa fa-pencil-alt"></i>
+          </button>
+          <button  class="btn btn-sm btn-outline-danger ml-2" (click)="deletestatus(a.id)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-  
+<div class="pagination-container">
+  <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+</div>

@@ -67,6 +67,8 @@ import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-ca
 import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
 import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-router.component';
 import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
+import { AddStateComponent } from './CRM_Module/Settings/Configration/state/add-state/add-state.component';
+import { AddCityComponent } from './CRM_Module/Settings/Configration/city/add-city/add-city.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,7 +91,7 @@ import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/
     ContactsMainComponent,
     AddNewCompanyComponent,
     LeadsViewComponent,
-
+    CountryComponent,
     ContactViewComponent,
     EmailConversionComponent,
     CallLogsComponent,
@@ -128,7 +130,9 @@ import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/
     AddLeadsComponent,
     CompainesRouteComponent,
     LeadsRouterComponent,
-    CampaginsRouteComponent
+    CampaginsRouteComponent,
+    AddStateComponent,
+    AddCityComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,103 +1,149 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-statusdesign',
   templateUrl: './statusdesign.component.html',
   styleUrl: './statusdesign.component.css'
 })
-export class StatusdesignComponent {
+export class StatusdesignComponent implements OnInit {
   page: number = 1;
   count: number = 0;
-  tableSize: number = 5;
-  tableSizes: any = [5, 10, 15, 20];
+  tableSize: number = 20;
+  tableSizes: any = [20, 40, 60, 80];
   p:number=1;
+
+  statusForm : any;
+  Statuslist :any;
+  Stagelist: any;
+  statusId:any;
+  submitted: any;
+
   statuses : any;
+ 
+  constructor(
+    private fb: FormBuilder, 
+    private http: BackendService,
+    private router: Router,
+    private ActivatedRoute:ActivatedRoute
+  ) {
+    this.ActivatedRoute.queryParamMap.subscribe((params) => {
+      this.statusId = params.get('statusid');
+      console.log(this.statusId);
+      if (this.statusId > 0) {
+        this.getstatusbyId(this.statusId)
+      }
+    });
+  }
+
   myForm: FormGroup=new FormGroup({
     id:new FormControl(<Number>(0)),
     stageId:new FormControl(''),
     description:new FormControl('')
 
   });
-  Stagelist: any;
-  statusId:any;
-  constructor(private fb: FormBuilder, private http: BackendService,private ActivatedRoute:ActivatedRoute) {
-    this.ActivatedRoute.queryParamMap.subscribe((params) => {
-      this.statusId = params.get('statusid');
-     
-    });
-    if(this.statusId>0){
-      this.getstatusbyId();
-    }
 
-    // Initialize the form group with form controls and validators
-    // this.myForm = this.fb.group({
-    //   addcountry: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9.-]+$')]]
-    // });
-  }
-  onTableDataChange(event: any) {
-    this.page = event;
-    this.getstatusList();
-  }
-  onTableSizeChange(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-    this.getstatusList();
-  }
-  
-
-  onSubmit() {
+  ngOnInit(): void {
+    this.getStage();
+    this.getstatus();
     
-    if(this.statusId>0){
-      this.myForm.get("id")?.setValue(this.statusId);
-    this.http.putapi('api/Common/UpdateStatus',this.myForm.getRawValue()).subscribe((res) => {
-      console.log(res);
-     
+    this.statusForm = this.fb.group({
+      id: [0],
+      description: [null, Validators.required],
+      stageId: [null, Validators.required]
+    });
+    this.getapi();
+  }
+ 
+  getapi(): void {
+    this.http.getapi('api/Common/GetStatus').subscribe((res) => {
+      this.Statuslist = res.data;
+    }, (error) => {
+      console.error('Error fetching Status', error);
     });
   }
-  else{
-    this.http.postapi('api/Common/AddStatus',this.myForm.getRawValue()).subscribe((res) => {
-      console.log(res);
-     
-    });
-    
-  
-  }
-  }
-  getstatusbyId(){
-    this.http.getapi('api/Common/GetStatusById/'+this.statusId).subscribe((res) => {
-      console.log(res);
-      
-      this.myForm.get("stageId")?.setValue(res.data.stageId);
-      
-      this.myForm.get("description")?.setValue(res.data.description);
-     
-    });
-  }
-  
-  close() {
-    console.log('field closed');
-    }
 
+  submitForm(): void {
+    this.submitted = true;
+    console.log(this.statusForm.value);
+    const _ID = this.statusForm.value.id
+    if (this.statusForm.invalid) {
+      return;
+    }
+    if (_ID > 0) {
+      this.http.putapi('api/Common/UpdateStatus', this.statusForm.value).subscribe((res) => { 
+        this.clear();
+      }, (error) => {
+        console.error('Error updating Status', error);
+      });
+    } else {
+      this.http.postapi('api/Common/AddStatus', this.statusForm.value).subscribe(() => { 
+        this.clear();
+      }, (error) => {
+        console.error('Error adding Status', error);
+      });
+    }
+  }
    
-    ngOnInit(){
-      this.getSatage();
-      this.getstatusList();
-     
+ 
+  getstatusbyId(id: any){
+    this.http.getapi('api/Common/GetStatusById/'+id).subscribe((res) => {
+      console.log(res);
+      
+      this.myForm.get("statusid")?.setValue(res.data.statusid);
+      this.statusForm.patchValue(res.data);
+    });
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.statusForm.controls;
+  }
+  
+ 
+
+    
+    getStage(): void {
+      this.http.getapi('api/Common/GetStages').subscribe((res) => {
+        this.Stagelist = res.data;
+      }, (error) => {
+        console.error('Error fetching stages', error);
+      });
     }
-    getstatusList(){
-      this.http.getapi('api/Common/GetStatus').subscribe((res) => {
+
+
+    getstatus(){
+      this.http.getapi('api/Common/GetStatus').subscribe((res)=> {
         console.log(res);
         this.statuses = res.data
       });
     }
 
-    getSatage() {
-      this.http.getapi('api/Common/GetStages').subscribe((res) => {
-        
-        this.Stagelist = res;
+    deletestatus(id: number): void {
+      this.http.deleteapi(`api/Common/DeleteStatus/${id}`).subscribe(() => {
+        console.log('Status deleted successfully');
+        this.ngOnInit()
+        this.getapi();
+      }, (error) => {
+        console.error(`Error deleting Status with id ${id}`, error);
       });
+    }
+  
+    clear(): void {
+      this.submitted = false;
+      this.statusForm.reset();
+      this.ngOnInit()
+      this.router.navigate(['/CRM/Settings/status']);
+    }
+
+
+    onTableDataChange(event: any) {
+      this.page = event;
+      this.Statuslist();
+    }
+    onTableSizeChange(event: any): void {
+      this.tableSize = event.target.value;
+      this.page = 1;
+      this.Statuslist();
     }
 
 }

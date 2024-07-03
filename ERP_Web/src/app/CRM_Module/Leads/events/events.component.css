@@ -100,54 +100,102 @@
   background-color: #f9f9f9;
   margin-top: 20px;
 }
-
-/* Modal styles */
+/* Modal Styles */
 .modal {
-  display: block; /* Hidden by default, set to block to display */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  animation: fadeIn 0.5s; /* Animation for fade-in */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+.modal.show {
+  display: block;
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 10% auto; /* 10% from the top and centered */
+  background-color: #fff;
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  max-width: 600px; /* Maximum width */
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  position: relative; /* Ensure relative positioning for the close button */
-  animation: slideIn 0.5s; /* Animation for slide-in */
+  width: 400px;
+  border-radius: 8px;
 }
 
-@keyframes slideIn {
-  from {transform: translateY(-50px);}
-  to {transform: translateY(0);}
+.modal-header, .modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.close {
-  position: absolute; /* Position it absolutely */
-  top: 10px; /* 10px from the top */
-  right: 15px; /* 15px from the right */
-  color: #aaa;
-  font-size: 28px;
-  font-weight: bold;
+.modal-header h2 {
+  margin: 0;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+/* Modal Background */
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index:9999999999; /* Ensure it's above other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fff; /* White background */
+  z-index:99999999999; /* Ensure it's above other content */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Drop shadow */
+  overflow: auto;
+  width: 500px ;
+  height: 500px;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Modal Header */
+.modal-header {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Modal Body */
+.modal-body {
+  margin-bottom: 20px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  text-align: right;
+}
+
+
+.close-btn {
+  font-size: 24px;
   cursor: pointer;
 }
+
 
 .close:hover,
 .close:focus {

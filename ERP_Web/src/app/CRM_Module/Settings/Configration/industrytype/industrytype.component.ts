@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { error } from 'console';
+
 
 @Component({
   selector: 'app-industrytype', 
@@ -11,29 +13,30 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class IndustrytypeComponent implements OnInit {
   industrytypeForm: any;
   IndustrytypeList: any; 
-  currentIndustrytypeId = 0; 
+  industrytypeId:any;
+  submitted:any;
 
-  constructor(private fb: FormBuilder, 
+  constructor(
+    private fb: FormBuilder, 
     private http: BackendService, 
     private router: Router, 
     private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       this.industrytypeId = params.get('industrytypeid'); 
-    });
-
-    this.industrytypeForm = this.fb.group({
-      description: ['', Validators.required]
+      console.log(this.industrytypeId);
+      if (this.industrytypeId > 0) {
+        this.getIndustrytypeById(this.industrytypeId)
+      }
     });
   }
 
   ngOnInit(): void {
     this.industrytypeForm = this.fb.group({
-      id: new FormControl(<Number>(0)),
-      description: new FormControl('')
+      id: [0],
+      description:[null, Validators.required]
     });
     this.getapi();
   }
-
   getapi(): void {
     this.http.getapi('api/Common/GetIndustrytype').subscribe((res) => {
       this.IndustrytypeList = res.data;
@@ -41,41 +44,39 @@ export class IndustrytypeComponent implements OnInit {
       console.error('Error fetching industrytypes', error);
     });
   }
-  Id:any;
+
   submitForm(): void {
-    const description = this.industrytypeForm.get('description')?.value;
-    this.industrytypeForm.get("id").setValue(this.currentIndustrytypeId);
-    if (this.currentIndustrytypeId > 0) {
-      this.http.putapi(`api/Common/UpdateIndustryTypes`, this.industrytypeForm.getRawValue()).subscribe((res) => { 
-        console.log('Industrytype updated successfully');
-        this.getapi();
-        this.resetForm();
-      }, (error) => {
-        console.error('Error updating industrytype', error);
+    this.submitted = true; 
+    console.log (this.industrytypeForm.value);
+    const _ID = this.industrytypeForm.value.id
+    if (this.industrytypeForm.invalid){
+      return;
+    }
+
+    if (_ID > 0){
+      this.http.putapi(`api/Common/UpdateIndustryTypes`, this.industrytypeForm.value).subscribe((res) => {
+        this.clear();
+      },(error)=> {
+        console.error('Error updating Industry Type', error);
       });
-    } else {
-      this.http.postapi('api/Common/AddIndustryType', { description }).subscribe(() => { 
-        console.log('Industrytype added successfully');
-        this.getapi();
-        this.resetForm();
-      }, (error) => {
-        console.error('Error adding industrytype', error);
+    }else {
+      this.http.postapi('api/Common/AddIndustryType', this.industrytypeForm.value).subscribe(()=>{
+        this.clear();
+      },(error) => {
+        console.error('Error adding quotetype', error);
       });
     }
-  }
+    }
 
-  industrytypeId: any;
-  edit(id: number): void {
-    this.currentIndustrytypeId = id;
-    this.getIndustrytypeById();
-  }
 
-  getIndustrytypeById() {
-    this.http.getapi('api/Common/GetIndustryTypesby/' + this.currentIndustrytypeId).subscribe((res) => {
+  getIndustrytypeById(id: any) {
+    this.http.getapi('api/Common/GetIndustryTypesby/' + id).subscribe((res) => {
       console.log(res);
-      this.industrytypeForm.get("id")?.setValue(res.data.industrytypeId);
-      this.industrytypeForm.get("description")?.setValue(res.data.description);
+      this.industrytypeForm.patchValue(res.data);
     });
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.industrytypeForm.controls;
   }
 
   deleteIndustrytype(id: number): void {
@@ -87,8 +88,10 @@ export class IndustrytypeComponent implements OnInit {
     });
   }
 
-  resetForm(): void {
+  clear(): void {
+    this.submitted = false;
     this.industrytypeForm.reset();
-    this.currentIndustrytypeId = 0;
+    this.ngOnInit()
+    this.router.navigate(['/CRM/Settings/industry-type'])
   }
 }

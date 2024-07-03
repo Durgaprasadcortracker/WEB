@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BackendService } from '../../../Services/BackendConnection/backend.service';
+import { Meeting } from './meeting.model';
 
 interface Event {
   title: string;
@@ -29,8 +31,16 @@ export class EventsComponent implements OnInit {
   currentYear: number;
   calendarDays: CalendarDay[];
   allEvents: Event[] = [];
+  showModal = false;
+  selectedDay: CalendarDay | null = null;
+  currentEvent: Event | Partial<Event> = {};
+  guests: string[] = ['Alice', 'Bob', 'Charlie'];  // Example guest list
+  isEditing = false;
+  meetingDetails: Meeting | undefined;
 
-  constructor() {
+
+  constructor(private http: BackendService,
+  ) {
     const today = new Date();
     this.currentMonth = today.getMonth();
     this.currentYear = today.getFullYear();
@@ -91,57 +101,38 @@ export class EventsComponent implements OnInit {
 
   selectDay(day: CalendarDay): void {
     if (day.isCurrent) {
-      const eventTitle = prompt('Enter event title:');
-      const eventTime = prompt('Enter event time:');
-      const eventGuests = prompt('Enter event guests:');
-      const eventMeetingLink = prompt('Enter event meeting link:');
-      const eventLocation = prompt('Enter event location:');
-
-      if (eventTitle && eventTime && eventGuests && eventMeetingLink && eventLocation) {
-        const eventDate = `${day.date} ${this.months[this.currentMonth]} ${this.currentYear}`;
-        const newEvent: Event = {
-          title: eventTitle,
-          time: eventTime,
-          guests: eventGuests,
-          meetingLink: eventMeetingLink,
-          location: eventLocation,
-          date: eventDate
-        };
-
-        this.addEvent(newEvent);
-      }
+      this.selectedDay = day;
+      this.showModal = true;
+      this.isEditing = false;
+      this.currentEvent = {};
     }
   }
 
   getEvents(): void {
-    // Placeholder for fetching events from a data source (e.g., API, local storage)
-    // For now, let's assume we have some static events
-    const staticEvents: Event[] = [
-      {
-        title: 'Meeting with Bob',
-        time: '10:00 AM',
-        guests: 'Bob, Alice',
-        meetingLink: 'http://example.com/meeting',
-        location: 'Conference Room',
-        date: '10 June 2024'
-      },
-      {
-        title: 'Project Deadline',
-        time: '5:00 PM',
-        guests: 'Team',
-        meetingLink: '',
-        location: 'Office',
-        date: '15 June 2024'
+    const staticEvents: Event[] = [];
+    this.http.getapi('api/Lead/GetEvents').subscribe((res) => {
+      console.log(res.data);
+      for(let a of res.data){
+        staticEvents.push(
+          this.meetingDetails = new Meeting(
+            a.eventTitle,
+            '5:00 PM', // a.eventTime
+            a.eventQuests,
+            a.meetingLink,
+            a.meetingLocation,
+            '12 July 2024'
+          )
+        )
       }
-    ];
-
-    this.allEvents = staticEvents;
-    this.calendarDays.forEach(day => {
-      day.events = this.allEvents.filter(event => {
-        const eventDate = new Date(event.date);
-        return eventDate.getDate() === day.date &&
-               eventDate.getMonth() === this.currentMonth &&
-               eventDate.getFullYear() === this.currentYear;
+      console.log(staticEvents)
+      this.allEvents = staticEvents;
+      this.calendarDays.forEach(day => {
+        day.events = this.allEvents.filter(event => {
+          const eventDate = new Date(event.date);
+          return eventDate.getDate() === day.date &&
+                 eventDate.getMonth() === this.currentMonth &&
+                 eventDate.getFullYear() === this.currentYear;
+        });
       });
     });
   }
@@ -149,7 +140,7 @@ export class EventsComponent implements OnInit {
   addEvent(event: Event): void {
     const eventDate = new Date(event.date);
     if (eventDate.getMonth() === this.currentMonth && eventDate.getFullYear() === this.currentYear) {
-      const day = this.calendarDays.find(d => d.date === eventDate.getDate());
+      const day = this.calendarDays.find(d => d.date === eventDate.getDate() && d.isCurrent);
       if (day) {
         day.events.push(event);
       }
@@ -157,28 +148,17 @@ export class EventsComponent implements OnInit {
     this.allEvents.push(event);
   }
 
-  editEvent(event: Event): void {
-    const eventTitle = prompt('Edit event title:', event.title);
-    const eventTime = prompt('Edit event time:', event.time);
-    const eventGuests = prompt('Edit event guests:', event.guests);
-    const eventMeetingLink = prompt('Edit event meeting link:', event.meetingLink);
-    const eventLocation = prompt('Edit event location:', event.location);
+  editEvent(event: Event, eventClick: MouseEvent): void {
+    eventClick.stopPropagation(); // Prevent triggering other click handlers
 
-    if (eventTitle && eventTime && eventGuests && eventMeetingLink && eventLocation) {
-      event.title = eventTitle;
-      event.time = eventTime;
-      event.guests = eventGuests;
-      event.meetingLink = eventMeetingLink;
-      event.location = eventLocation;
-
-      // Update the calendarDays array to reflect the edited event
-      this.calendarDays.forEach(day => {
-        day.events = day.events.map(e => e === event ? event : e);
-      });
-    }
+    this.showModal = true;
+    this.isEditing = true;
+    this.currentEvent = { ...event };
   }
 
-  deleteEvent(event: Event): void {
+  deleteEvent(event: Event, eventClick: MouseEvent): void {
+    eventClick.stopPropagation(); // Prevent triggering other click handlers
+
     // Delete the event from allEvents
     const index = this.allEvents.indexOf(event);
     if (index !== -1) {
@@ -189,5 +169,47 @@ export class EventsComponent implements OnInit {
     this.calendarDays.forEach(day => {
       day.events = day.events.filter(e => e !== event);
     });
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.currentEvent = {};
+  }
+
+  submitEvent(): void {
+    if (this.currentEvent.title && this.currentEvent.time) {
+      const eventDate = this.selectedDay ? `${this.selectedDay.date} ${this.months[this.currentMonth]} ${this.currentYear}` : this.currentEvent.date || '';
+      const event: Event = {
+        title: this.currentEvent.title,
+        time: this.currentEvent.time,
+        guests: this.currentEvent.guests || '',
+        meetingLink: this.currentEvent.meetingLink || '',
+        location: this.currentEvent.location || '',
+        date: eventDate
+      };
+
+      if (this.isEditing) {
+        // Find and update the event in allEvents
+        const index = this.allEvents.findIndex(e => e.date === this.currentEvent.date && e.title === this.currentEvent.title && e.time === this.currentEvent.time);
+        if (index !== -1) {
+          this.allEvents[index] = event;
+        }
+        // Update the event in the calendar day
+        this.calendarDays.forEach(day => {
+          if (day.date === this.selectedDay?.date && day.isCurrent) {
+            const eventIndex = day.events.findIndex(e => e.title === this.currentEvent.title && e.time === this.currentEvent.time);
+            if (eventIndex !== -1) {
+              day.events[eventIndex] = event;
+            }
+          }
+        });
+      } else {
+        this.addEvent(event);
+      }
+
+      this.currentEvent = {};
+      this.showModal = false;
+      this.isEditing = false;
+    }
   }
 }

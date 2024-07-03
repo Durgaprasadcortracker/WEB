@@ -6,13 +6,19 @@
     <div class="card-body">
 
       <form [formGroup]="industryForm" (ngSubmit)="submitForm()">
-        <div class="form-group">
-          <label for="description">Description</label>
-          <input type="text" formControlName="description" class="form-control" id="description" placeholder="Enter description">
+        <div class="mb-2">
+          <label for="description" class="form-label">Description<span class="text-danger">*</span></label>
+          <div data-mdb-input-init class="form-outline">
+            <input type="text" class="form-control" id="description" formControlName="description"
+              placeholder="Enter description" [ngClass]="{ 'is-invalid': submited && f['description'].errors }" />
+            <div *ngIf="submited && f['description'].errors" class="invalid-feedback">
+              <div *ngIf="f['description'].errors['required']">Description is required.</div>
+            </div>
+          </div>
         </div>
           <button type="submit" class="btn btn-primary">Submit</button>
           <!-- <button type="button" class="btn btn-secondary ml-2">Close</button> -->
-          <button type="button" class="btn btn-secondary ml-2" (click)="resetForm()">Reset</button>
+          <button type="button" class="btn btn-secondary ml-2" (click)="clear()">Close</button>
       </form>
     </div>
   </div>
@@ -26,14 +32,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let a of Industrylist; let i= index">
+      <tr *ngFor="let in of IndustryList; let i= index">
         <th scope="row">{{i+1}}</th>
-        <td>{{a.description}}</td>
+        <td>{{in.description}}</td>
         <td>
-          <button (click)="edit(a.id)" routerLink="/CRM/Settings/configuration/industry" [queryParams]="{industryid:a.id}" class="btn btn-sm btn-outline-primary">
+          <button routerLink="/CRM/Settings/industry" [queryParams]="{industryid: in.id}" 
+          class="btn btn-sm btn-outline-primary">
             <i class="fa fa-pencil-alt"></i>
           </button>
-          <button (click)="deleteIndustry(a.id)" routerLink="/CRM/Settings/configuration/industry" [queryParams]="{industryid:a.id}" class="btn btn-sm btn-outline-danger ml-2">
+          <button  class="btn btn-sm btn-outline-danger ml-2" (click)="deleteIndustry(in.id)" >
             <i class="fa fa-trash"></i>
           </button>
         </td>

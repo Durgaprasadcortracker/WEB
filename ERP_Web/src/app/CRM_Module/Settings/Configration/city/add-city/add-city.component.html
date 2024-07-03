@@ -1,0 +1,55 @@
+<div class="card">
+    <div class="card-header">
+      City
+    </div>
+<div class="card-body">
+    <form [formGroup]="cityForm" (ngSubmit)="submitForm()">
+      <div class="row">
+        <div class="col-md-6">
+          <label>Country</label>
+          <select class="form-select" formControlName="country" (change)="getCitybycountry()"  [ngClass]="{ 'is-invalid': submited && f['country'].errors }">
+            <option value="null">--Select Country--</option>
+            <option *ngFor="let country of countrylist" value="{{country.id}}">{{country.description}}</option>
+        </select>
+        <div *ngIf="submited && f['country'].errors" class="invalid-feedback">
+            <div *ngIf="f['country'].errors['required']">Country is required.</div>
+          </div>
+          <!-- <select class="form-control form-control-lg" (change)="getStates()" formControlName="countryId">
+            <option value="">--Select Country--</option>
+            <option *ngFor="let country of countrylist" [value]="country.id">{{ country.description }}</option>
+          </select> -->
+        </div>
+        <div class="col-md-6">
+          <label>State</label>
+          <select class="form-select" formControlName="state"  [ngClass]="{ 'is-invalid': submited && f['state'].errors }">
+            <option value="null">--Select State --</option>
+            <option *ngFor="let state of stateList" value="{{state.id}}">{{state.description}}</option>
+        </select>
+        <div *ngIf="submited && f['state'].errors" class="invalid-feedback">
+            <div *ngIf="f['state'].errors['required']">State is required.</div>
+          </div>
+
+          <!-- <select class="form-control form-control-lg" formControlName="stateId">
+            <option value="">--Select State--</option>
+            <option *ngFor="let state of stateList" [value]="state.id">{{ state.description }}</option>
+          </select> -->
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <label for="description" class="form-label">City<span class="text-danger">*</span></label>
+          <div data-mdb-input-init class="form-outline">
+            <input type="text" class="form-control"(change)="getstatesbycountrycity()" id="description" formControlName="description"
+              placeholder="Enter description" [ngClass]="{ 'is-invalid': submited && f['description'].errors }" />
+            <div *ngIf="submited && f['description'].errors" class="invalid-feedback">
+              <div *ngIf="f['description'].errors['required']">Description is required.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      <button type="button" class="btn btn-secondary ml-2 mt-3" (click)="clear()">Close</button>
+    </form>
+  </div>
+  </div>

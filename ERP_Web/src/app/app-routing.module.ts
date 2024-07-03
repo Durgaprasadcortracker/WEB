@@ -50,6 +50,8 @@ import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.compon
 import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
 import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-router.component';
 import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
+import { AddStateComponent } from './CRM_Module/Settings/Configration/state/add-state/add-state.component';
+import { AddCityComponent } from './CRM_Module/Settings/Configration/city/add-city/add-city.component';
 
 
 
@@ -148,9 +150,11 @@ const routes: Routes = [
           { path: 'source', component: SourcedesignComponent },
           { path: 'time-zone', component: TimezoneComponent },
           { path: 'city', component: CityComponent },
+          { path: 'addcity', component: AddCityComponent },
           { path: 'industry', component: IndustryComponent },
           { path: 'probability', component: ProbabilityComponent },
           { path: 'state', component: StateComponent },
+          { path: 'addstate', component: AddStateComponent },
           { path: 'country', component: CountryComponent },
           { path: 'industry-type', component: IndustrytypeComponent },
           { path: 'call-type', component: CalltypeComponent },

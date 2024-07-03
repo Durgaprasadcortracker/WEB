@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -9,93 +9,121 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./state.component.css']
 })
 export class StateComponent implements OnInit {
-  stateForm: FormGroup;
+  stateForm: any;
   stateList: any;
-  currentStateId = 0;
-  countryList: any;
-  cityList: any;
-  stateId: any;
+  CountryList: any;
 
-  constructor(private fb: FormBuilder, 
-              private http: BackendService, 
-              private router: Router, 
-              private activatedRoute: ActivatedRoute) {
+  stateId: any;
+  submited: any;
+  states: any;
+  currentStateId: any;
+
+  constructor(
+  private fb: FormBuilder,private http: BackendService,private router: Router,private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
-      this.stateId = params.get('stateid');
+      this.stageId = params.get('stageid'); 
     });
 
     this.stateForm = this.fb.group({
-      countryId: ['', Validators.required],
-      cityId: ['', Validators.required],
       description: ['', Validators.required]
     });
   }
+  
 
   ngOnInit(): void {
+    this.getapi();
     this.getCountry();
-    this.getCity();
-    if (this.stateId) {
-      this.getStateById();
-    }
+    this.getstates();
+
+    this.stateForm = this.fb.group({
+      id: [0],
+      description: [null, Validators.required],
+      countryId: [null, Validators.required]
+    });
+
   }
 
+  getapi(): void {
+    this.http.getapi('api/Common/GetStages').subscribe((res) => {
+      this.stateList = res;
+    }, (error) => {
+      console.error('Error fetching stages', error);
+    });
+  }
   getCountry() {
-    this.http.getapi('api/Common/GetCountry').subscribe((res) => {
-      this.countryList = res.data;
+    this.http.getapi('api/Common/GetCountries').subscribe((res) => {
+      this.CountryList = res.data;
+    });
+  }
+  getstates() {
+    this.http.getapi('api/Common/GetStates').subscribe((res)=> {
+      console.log(res);
+      this.states = res.data
     });
   }
 
-  getCity() {
-    this.http.getapi('api/Common/GetCities').subscribe((res) => {
-      this.cityList = res.data;
-    });
-  }
-
+  Id:any;
   submitForm(): void {
-    const stateData = this.stateForm.getRawValue();
-    if (this.stateId) {
-      this.http.putapi(`api/Common/states/${this.stateId}`, stateData).subscribe((res) => {
+    const formData = this.stateForm.getRawValue();
+    if (this.currentStateId > 0) {
+      this.http.putapi('api/Common/UpdateState', formData).subscribe(() => { // Updated API endpoint
         console.log('State updated successfully');
+        this.getapi();
         this.resetForm();
       }, (error) => {
         console.error('Error updating state', error);
       });
     } else {
-      this.http.postapi('api/Common/states', stateData).subscribe(() => {
+      this.http.postapi('api/Common/AddState', { description: formData.description }).subscribe(() => { // Updated API endpoint
         console.log('State added successfully');
+        debugger
+        this.getapi();
         this.resetForm();
       }, (error) => {
         console.error('Error adding state', error);
       });
     }
+   
   }
-
+  stageId: any;
   edit(id: number): void {
-    this.stateId = id;
+    this.currentStateId = id;
     this.getStateById();
   }
 
-  getStateById() {
-    this.http.getapi(`api/Common/GetStateById/${this.stateId}`).subscribe((res) => {
-      const stateData = res.data;
+  getStateById(): void {
+    this.http.getapi(`api/Common/GetState/${this.stageId}`).subscribe((res) => { 
       this.stateForm.patchValue({
-        countryId: stateData.countryId,
-        cityId: stateData.cityId,
-        description: stateData.description
+        id: res.data.stageId, 
+        description: res.data.description
       });
+    }, (error) => {
+      console.error('Error fetching stage details', error);
     });
   }
 
-  deleteState(id: number): void {
-    this.http.deleteapi(`api/Common/DeleteState/${id}`).subscribe(() => {
+  // onTableDataChange(event: any) {
+  //   this.page = event;
+  //   this.getapi();
+  // }
+  // onTableSizeChange(event: any): void {
+  //   this.tableSize = event.target.value;
+  //   this.page = 1;
+  //   this.getapi();
+  // }
+  
+  deletestate(id: number): void {
+    this.http.deleteapi(`api/Common/DeleteState/${id}`).subscribe(() => { 
       console.log('State deleted successfully');
+      this.getapi();
+      this.ngOnInit()
     }, (error) => {
       console.error(`Error deleting state with id ${id}`, error);
     });
   }
 
   resetForm(): void {
-    this.stateForm.reset();
-    this.stateId = 0;
+    this.stateForm.reset({ id: 0, description: '' });
+    this.currentStateId = 0;
   }
 }

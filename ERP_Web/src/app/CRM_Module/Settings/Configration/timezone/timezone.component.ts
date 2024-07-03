@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -12,22 +12,29 @@ import { ActivatedRoute } from '@angular/router';
 export class TimezoneComponent implements OnInit {
   timezoneForm: any;
   Timezonelist: any;
-  currentTimezoneId = 0;
+  timezoneId:any;
+  submitted:any;
 
-  constructor(private fb: FormBuilder, private http: BackendService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.queryParamMap.subscribe((params) => {
-      this.timezoneId = params.get('timezoneid');
-    });
 
-    this.timezoneForm = this.fb.group({
-      description: ['', Validators.required]
+  constructor(
+    private fb: FormBuilder, 
+    private http: BackendService, 
+    private router: Router, 
+    private ActivatedRoute: ActivatedRoute
+  ) {
+    this.ActivatedRoute.queryParamMap.subscribe((params) => {
+      this.timezoneId = params.get('timezoneId');
+      console.log(this.timezoneId);
+      if (this.timezoneId) {
+        this.getTimezoneById(this.timezoneId)
+      }
     });
   }
 
   ngOnInit(): void {
-    this.timezoneForm = new FormGroup({
-      id: new FormControl(<Number>(0)),
-      description: new FormControl('')
+    this.timezoneForm = this.fb.group({
+      id: [0],
+      description: [null, Validators.required]
     });
     this.getapi();
   }
@@ -39,45 +46,41 @@ export class TimezoneComponent implements OnInit {
       console.error('Error fetching timezones', error);
     });
   }
-Id:any;
+
   submitForm(): void {
-    const description = this.timezoneForm.get('description')?.value;
-    this.timezoneForm.get("id").setValue(this.currentTimezoneId);
-    if (this.currentTimezoneId > 0) {
-      this.http.putapi(`api/Common/UpdateTimezone`, this.timezoneForm.getRawValue()).subscribe((res) => {
-        console.log('Timezone updated successfully');
-        this.getapi();
-        this.resetForm();
+    this.submitted = true;
+    console.log(this.timezoneForm.value);
+    const _ID = this.timezoneForm.value.id
+    if (this.timezoneForm.invalid) {
+      return;
+    }
+    if (_ID > 0) {
+      this.http.putapi(`api/Common/UpdateTimezone`, this.timezoneForm.value).subscribe((res) => { 
+        this.clear();
       }, (error) => {
-        console.error('Error updating timezone', error);
+        console.error('Error updating Timezone', error);
       });
     } else {
-      this.http.postapi('api/Common/AddTimezone', { description }).subscribe(() => {
-        console.log('Timezone added successfully');
-        this.getapi();
-        this.resetForm();
+      this.http.postapi('api/Common/AddTimezone', this.timezoneForm.value).subscribe(() => { 
+        this.clear();
       }, (error) => {
-        console.error('Error adding timezone', error);
+        console.error('Error adding quotetype', error);
       });
     }
   }
-  timezoneId:any;
-  edit(id: number): void {
-    this.currentTimezoneId = id;
-    this.getTimezoneById();
-  }
 
-  getTimezoneById() {
-    this.http.getapi('api/Common/GetTimezones/' + this.currentTimezoneId).subscribe((res) => {
+  getTimezoneById(id : any) {
+    this.http.getapi('api/Common/GetTimezones/' + id).subscribe((res) => {
       console.log(res);
-      
-      this.timezoneForm.get("timezoneId")?.setValue(res.data.timezoneId);
-      this.timezoneForm.get("description")?.setValue(res.data.description);
+      this.timezoneForm.patchValue(res.data);
     });
+  }
+  get f(): { [key: string]: AbstractControl } {
+    return this.timezoneForm.controls;
   }
 
   deleteTimezone(id: number): void {
-    this.http.deleteapi(`api/Common/Deletetimezones/${id}`).subscribe(() => {
+    this.http.deleteapi(`api/Common/timezones/${id}`).subscribe(() => {
       console.log('Timezone deleted successfully');
       this.getapi();
     }, (error) => {
@@ -85,8 +88,10 @@ Id:any;
     });
   }
 
-  resetForm(): void {
+  clear(): void {
+    this.submitted = false;
     this.timezoneForm.reset();
-    this.currentTimezoneId = 0;
+    this.ngOnInit()
+    this.router.navigate (['/CRM/Settings/time-zone']);
   }
 }
