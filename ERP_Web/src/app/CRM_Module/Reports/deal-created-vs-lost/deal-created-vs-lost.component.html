@@ -1,0 +1,82 @@
+<p>deal-created-vs-lost works!</p>
+<div class="card m-3">
+    <div class="card-header">
+        <h4>DEAL CREATED VS LOST</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="myForm" (ngSubmit)="onSearch()">
+            <!--Inputs  -->-
+            <div class="d-flex flex-wrap">
+                <div  class="col-md-3">
+                    <label>Sales Owner<span class="required">*</span></label>
+                    <select class="form-select"  formControlName="LeadOwner" [ngClass]="{ 'is-invalid': submitted && f['leadOwner'].errors }" >
+                        <option value="0">--Select leadowner--</option>
+                        <option *ngFor="let a of _loginlist" [value]="a.id">{{a.firstName+''+a.lastName}}</option>
+                    </select>
+                    <div *ngIf="submitted && f['leadOwner'].errors" class="invalid-feedback">
+                        <div *ngIf="f['leadOwner'].errors['required']">Lead Owner is required.</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>From date <span class="required">*</span></label>
+                    <input type="Date" class="form-control" formControlName="fromDate" >
+                   
+                </div>
+                <div class="col-md-3">
+                    <label>To date <span class="required">*</span></label>
+                    <input type="date" class="form-control" formControlName="toDate" >
+                   
+                </div>
+               
+                <div class="col-md-6 mt-3 d-flex g-1">
+                    <button type="submit" style="width: 200px; margin-right: 10px;" class="btn btn-success" >Search</button>
+                    <button type="button" style="width: 200px; margin-right: 10px;" class="btn btn-warning" (click)="clear()">Clear</button>
+                    <button type="button" style="width: 200px;" class="btn btn-info" (click)="downloadReport()">Download Report</button>
+                    
+                </div>
+            </div>
+                <div class="table-responsive mt-4" style="padding: 20px;">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <!-- <th>S.No</th> -->
+                                <th>Company</th>
+                                <th>Email</th>
+                                <th>Sales Owner</th>
+                                <th>Proposed Deal Value</th>
+                                <th>Closed Deal Value</th>
+                                <th>Deal Close Date</th>
+            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- <td>
+                                    <span routerLink="/CRM/Companies/edit-contacts/{{id}}/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
+            
+                                    </span>
+                                    <span (click)="deleteContact(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
+            
+                                    </span>
+                                </td> -->
+                            
+                                <!-- <td>{{a.companiesName}}</td>
+                                <td>{{a.businesEmail}}</td>
+                                <td>{{a.salesOwner }}</td>
+                                <td>{{a.ProposedDeaValue}}</td>
+                                <td>{{a.ClosedDealValue}}</td>
+                                <td>{{a.DealCloseDate}}</td> -->
+            
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            
+                <div class="d-flex justify-content-left mt-4">
+                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                    </pagination-controls>
+                </div>
+           
+        </form>
+    </div>
+</div>

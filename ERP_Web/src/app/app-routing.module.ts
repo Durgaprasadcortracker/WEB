@@ -52,6 +52,7 @@ import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-rout
 import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
 import { AddStateComponent } from './CRM_Module/Settings/Configration/state/add-state/add-state.component';
 import { AddCityComponent } from './CRM_Module/Settings/Configration/city/add-city/add-city.component';
+import { DealCreatedVsLostComponent } from './CRM_Module/Reports/deal-created-vs-lost/deal-created-vs-lost.component';
 
 
 
@@ -136,7 +137,10 @@ const routes: Routes = [
       // { path: 'Campagins', component: CampaginsMainComponent },
 
       { path: 'Pipeline', component: PipelinesMainComponent },
-      { path: 'Reports', component: ReportsMainComponent },
+      { path: 'Reports', component: ReportsMainComponent,
+        children: [
+          { path: 'deal-created-vs-lost', component: DealCreatedVsLostComponent },
+        ] },
       { path: 'events', component: EventsComponent },
       { path: 'quoteslisting', component: QuoteslistingComponent },
       { path: 'userprofile', component: UserProfileComponent },
@@ -153,7 +157,7 @@ const routes: Routes = [
           { path: 'addcity', component: AddCityComponent },
           { path: 'industry', component: IndustryComponent },
           { path: 'probability', component: ProbabilityComponent },
-          { path: 'state', component: StateComponent },
+          { path: 'state', component: StateComponent }, 
           { path: 'addstate', component: AddStateComponent },
           { path: 'country', component: CountryComponent },
           { path: 'industry-type', component: IndustrytypeComponent },
