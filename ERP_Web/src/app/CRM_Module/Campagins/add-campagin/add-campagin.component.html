@@ -8,13 +8,15 @@
             <div class="d-flex flex-wrap">
                 <div class="col-md-3">
                     <label>Campaign Owner <span class="required">*</span>  </label>
-                    <select class="form-select"  formControlName="loginId"  [ngClass]="{ 'is-invalid': submitted && f['LeadOwnerId'].errors }">
-                        <option value="0">--Select CampaignOwner--</option>
-                        <option *ngFor="let campaignOwner of campaignOwnerlist" value="{{campaignOwner.id}}">{{campaignOwner.leadOwnerName}}</option>
+                    <select class="form-control"  formControlName="loginId"  [ngClass]="{ 'is-invalid': submitted && f['campaignOwnerName'].errors }">
+                        <option value="null">--Select CampaignOwner--</option>
+                        <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
+                        <!-- <option *ngFor="let campaignOwner of campaignOwnerlist" value="{{campaignOwner.id}}">{{campaignOwner.LeadOwnerName}}</option> -->
+                        <!-- <option *ngFor="let campaignOwner of _loginlist" value="{{campaignOwner.id}}">{{campaignOwner.firstName+''+campaignOwner.lastName}}</option> -->
                     </select>
-                    <div *ngIf="submitted && f['CompanyId'].errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f['CompanyId'].errors" class="invalid-feedback">
                         <div *ngIf="f['CompanyId'].errors['required']">Company is required.</div>
-                      </div>
+                      </div> -->
                 </div>
                 <div class="col-md-3">
                     <label for="campaignName" class="form-label">Campaign Name<span class="text-danger">*</span></label>
@@ -39,14 +41,14 @@
                 <div class="col-md-3">
                     <label for="campaignStatus" class="form-label">Status<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline"> 
-                      <select type="text" class="form-select form-control-lg" formControlName="campaignStatus" 
+                      <select type="text" class="form-control" formControlName="campaignStatus" 
                       [ngClass]="{ 'is-invalid': submitted && f['campaignStatus'].errors }">
-                        <option value="0">--Select Campaign Status-- </option>
+                        <option value="null">--Select Campaign Status-- </option>
                         <option *ngFor="let CampaignStatus of statuslist" value="{{CampaignStatus.id}}">{{CampaignStatus.description}}</option>
                     </select>
-                        <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+                        <!-- <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
                           <div *ngIf="f['status'].errors['required']">Campaign Status is required.</div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -63,7 +65,7 @@
                 </div>     
                 <div class="col-md-3">
                     <label>Budgeted Cost </label>
-                    <input type="text" class="form-control" formControlName="budgetCost">
+                    <input type="number" class="form-control" formControlName="budgetCost">
                 </div>                 
             </div>
             <!-- Text Area -->

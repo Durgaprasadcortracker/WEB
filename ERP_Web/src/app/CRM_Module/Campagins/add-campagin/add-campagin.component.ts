@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AddCampaginComponent {
   statuslist: any;
-  campaignOwnerlist:any;
+  _loginlist:any;
  
   submitted: any;
  
@@ -19,7 +19,7 @@ export class AddCampaginComponent {
 
   myForm: FormGroup = new FormGroup({
     Id: new FormControl(0),
-    campaignOwner: new FormControl(null),
+    campaignOwnerName: new FormControl(null),
     campaignName: new FormControl(null),
     campaignType: new FormControl(null),
     status: new FormControl(null),
@@ -74,7 +74,7 @@ export class AddCampaginComponent {
     }
     if (this.myForm.value.id == 0) {
       console.log(this.myForm.value)
-      this.http.postapi('api/Campaign/AddCampaign', this.myForm.value).subscribe(() => {
+      this.http.postapi('api/Campaign/AddCampaign', this.myForm.getRawValue()).subscribe(() => {
         this.snackBar.open('Campaign successfully added!', 'Close', {
           duration: 3000, // Snackbar stays open for 3 seconds
         });
@@ -99,9 +99,10 @@ export class AddCampaginComponent {
   }
 
  getLeadOwner(){
-  this.http.getapi('api/Lead/GetLeads').subscribe((res) => {
-    this.campaignOwnerlist = res.data;
-  });
+  this.http.getapi('api/Login/GetLogins').subscribe((res) => {
+    console.log(res);
+    this._loginlist = res;
+  })
  }
  
 

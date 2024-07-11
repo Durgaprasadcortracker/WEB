@@ -7,77 +7,109 @@
             <!--Inputs  -->
             <div class="d-flex flex-wrap">
                 <div  class="col-md-3">
-                    <label>Lead Owner<span class="required">*</span></label>
-                    <select class="form-select"  formControlName="leadOwner" [ngClass]="{ 'is-invalid': submitted && f['leadOwner'].errors }" >
+                    <!-- <label>Lead Owner<span class="required">*</span></label>
+                    <select class="form-select"  formControlName="LeadOwner" [ngClass]="{ 'is-invalid': submitted && f['LeadOwner'].errors }" >
                         <option value="0">--Select leadowner--</option>
                         <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
                     </select>
                     <div *ngIf="submitted && f['leadOwner'].errors" class="invalid-feedback">
                         <div *ngIf="f['leadOwner'].errors['required']">Lead Owner is required.</div>
+                    </div> -->
+
+                    <label for="LeadOwner" class="form-label">Lead Owner<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline"> 
+                      <select type="text" class="form-control" formControlName="LeadOwner" 
+                      [ngClass]="{ 'is-invalid': submitted && f['LeadOwner'].errors }">
+                      <option value="null">--Select leadowner--</option>
+                      <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
+                    </select>
+                        <div *ngIf="submitted && f['LeadOwner'].errors" class="invalid-feedback">
+                          <div *ngIf="f['LeadOwner'].errors['required']">Lead Owner is required.</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label>Company<span class="required">*</span></label>
-                    <select class="form-select"  formControlName="Company" (change)="getcompanydetails()" >
-                        <option value="0">--Select Company--</option>
+                    <select class="form-control"   formControlName="CompanyId" [ngClass]="{ 'is-invalid': submitted && f['CompanyId'].errors }" (change)="getcompanydetails($event)" >
+                        <option value="null">--Select Company--</option>
                         <option *ngFor="let company of companylist" value="{{company.id}}">{{company.companyName}}</option>
                     </select>
+                    <div *ngIf="submitted && f['CompanyId'].errors" class="invalid-feedback">
+                        <div *ngIf="f['CompanyId'].errors['required']">Company is required.</div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label>First Name<span class="required">*</span></label>
-                    <input type="email" class="form-control" formControlName="firstName" >
-                   
+                    <input type="text" class="form-control" readonly formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
+                    <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['firstName'].errors['required']">First Name is required.</div>
+                    </div>  
                 </div>
                 <div class="col-md-3">
                     <label>Last Name<span class="required">*</span></label>
-                    <input type="text" class="form-control" formControlName="lastName" >
-                   
+                    <input type="text" class="form-control" readonly formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" >
+                    <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['lastName'].errors['required']">Last Name is required.</div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label>Description</label>
                     <input type="text" class="form-control" formControlName="description">
                 </div>
+               
                 <div class="col-md-3">
-                    <label>Business Email<span class="required">*</span> </label>
-                    <input type="text" class="form-control" formControlName="businessEmail">
-                   
+                    <label>Business Email<span class="required">*</span></label>
+                    <input type="email" class="form-control" readonly formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                        <div *ngIf="f['email'].errors['required']">Email is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-3">
                     <label>Secondary Email </label>
-                    <input type="text" class="form-control" formControlName="secondaryEmail">
+                    <input type="email" class="form-control" formControlName="secondaryEmail">
  
                 </div>
                 <div class="col-md-3">
                     <label>Phone Number<span class="required">*</span></label>
-                    <input type="text" class="form-control" formControlName="phoneNumber">
- 
+                    <input type="number" class="form-control" readonly formControlName="mobileNumber"  [ngClass]="{ 'is-invalid': submitted && f['mobileNumber'].errors }">
+                    <div *ngIf="submitted && f['mobileNumber'].errors" class="invalid-feedback">
+                        <div *ngIf="f['mobileNumber'].errors['required']">Phone Number is required.</div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label>Alternate Number </label>
-                    <input type="text" class="form-control" formControlName="alternateNumber">
+                    <input type="number" class="form-control" formControlName="alternateNumber">
                 </div>
                 <div class="col-md-3">
                     <label>Lead Status<span class="required">*</span></label>
-                    <select class="form-control"  formControlName="leadStatus" >
+                    <select class="form-control"  formControlName="leadStatus"  [ngClass]="{ 'is-invalid': submitted && f['leadStatus'].errors }">
                         <option value="null">--Select Status--</option>
                         <option *ngFor="let status of statuslist" value="{{status.id}}">{{status.description}}</option>
                     </select>
-                    
+                    <div *ngIf="submitted && f['leadStatus'].errors" class="invalid-feedback">
+                        <div *ngIf="f['leadStatus'].errors['required']">Lead Status is required.</div>
+                    </div>
                 </div>
                
                 <div class="col-md-3">
                     <label>Lead Source<span class="required">*</span></label>
-                    <select class="form-control"  formControlName="leadSource" >
+                    <select class="form-control"  formControlName="leadSource"  [ngClass]="{ 'is-invalid': submitted && f['leadSource'].errors }">
                         <option value="null">--Select Source--</option>
                         <option *ngFor="let source of sourcelist" value="{{source.id}}">{{source.description}}</option>
                     </select>
+                    <div *ngIf="submitted && f['source'].errors" class="invalid-feedback">
+                        <div *ngIf="f['source'].errors['required']">Lead Source is required.</div>
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Lead Stage </label>
-                    <select class="form-control"  formControlName="leadStage">
+                    <label>Lead Stage<span class="required">*</span> </label>
+                    <select class="form-control"  formControlName="leadStage" [ngClass]="{ 'is-invalid': submitted && f['leadStage'].errors }">
                         <option value="null">--Select stage--</option>
                         <option *ngFor="let stage of stagelist" value="{{stage.id}}">{{stage.description}}</option>
                     </select>
+                    <div *ngIf="submitted && f['leadStage'].errors" class="invalid-feedback">
+                        <div *ngIf="f['leadStage'].errors['required']">Lead Stage is required.</div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label>Website </label>
@@ -86,26 +118,32 @@
 
                 <div class="col-md-3">
                     <label>Industry<span class="required">*</span> </label>
-                    <select class="form-control"  formControlName="industry">
+                    <select class="form-control"  readonly formControlName="industryType" [ngClass]="{ 'is-invalid': submitted && f['industryType'].errors }">
                         <option value="null">--Select industry--</option>
                         <option *ngFor="let industry of industrylist" value="{{industry.id}}">{{industry.description}}</option>
                     </select>
+                    <div *ngIf="submitted && f['industryType'].errors" class="invalid-feedback">
+                        <div *ngIf="f['industryType'].errors['required']"> Industry is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-3">
-                    <label>Number of Employees<span class="required">*</span> </label>
-                    <input type="text" class="form-control" formControlName="noofEmployees">
+                    <label>Number of Employees <span class="required">*</span> </label>
+                    <input type="number" class="form-control"  readonly formControlName="headCount">
+                    <div *ngIf="submitted && f['headCount'].errors" class="invalid-feedback">
+                        <div *ngIf="f['headCount'].errors['required']">Head Count is required.</div>
+                      </div>
                 </div>
                 <div class="col-md-3">
                     <label>Annual Revenue</label>
-                    <input type="text" class="form-control" formControlName="annualRevenue">
+                    <input type="number" class="form-control" formControlName="annualRevenue">
                 </div>
                 <div class="col-md-3">
                     <label>Rating </label>
-                    <input type="text" class="form-control" formControlName="rating">
+                    <input type="number" class="form-control" formControlName="rating">
                 </div>
                 <div class="col-md-3">
                     <label>Email Output </label>
-                    <input type="text" class="form-control" formControlName="emailOutput">
+                    <input type="email" class="form-control" formControlName="emailOutput">
                 </div>
                 <div class="col-md-3">
                     <label>Skype Id </label>
@@ -115,23 +153,15 @@
                     <label>Linked In</label>
                     <input type="text" class="form-control" formControlName="linkedIn">
                 </div>
-               
+                <div class="col-md-3">
+                    <label>Lost Reason</label>
+                    <select class="form-control"  formControlName="lostReason"  [ngClass]="{ 'is-invalid': submitted && f['lostReason'].errors }">
+                        <option value="null">--Select LostReason--</option>
+                        <option *ngFor="let lostReason of lostReasonlist" value="{{lostReason.id}}">{{lostReason.description}}</option>
+                    </select>
+                </div>
             </div>
-            <!-- Text Area -->
-            <!-- <div class="d-flex flex-wrap">
-
-                <div class="col-md-6">
-                    <label>Address1 <span class="required">*</span> </label>
-                    <textarea class="form-control" rows="3" formControlName="address1" [ngClass]="{ 'is-invalid': submitted && f['address1'].errors }"></textarea>
-                    <div *ngIf="submitted && f['address1'].errors" class="invalid-feedback">
-                        <div *ngIf="f['address1'].errors['required']">Address1 is required.</div>
-                      </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Address2 </label>
-                    <textarea class="form-control" rows="3" formControlName="address2"></textarea>
-                </div>
-            </div> -->
+           
             <!-- Buttons -->
             <div class="d-flex flex-wrap">
                 <div class="col-md-6 mt-3 d-flex g-1">

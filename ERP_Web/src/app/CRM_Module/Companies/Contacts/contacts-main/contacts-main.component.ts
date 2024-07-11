@@ -45,7 +45,7 @@ export class ContactsMainComponent {
   }
   
   getData(){
-    this.http.getapi('api/Contacts/GetContacts/'+ this.id).subscribe((res) => {
+    this.http.getapi('api/Contacts/GetContacts'+ this.id).subscribe((res) => {
         console.log(res);
         this.listOfContacts=res.data
       }

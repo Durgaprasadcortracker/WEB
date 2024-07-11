@@ -8,6 +8,9 @@ import { API_URL } from '../../utility/constants';
   providedIn: 'root'
 })
 export class BackendService {
+  getStages(pipelineDto: any) {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = 'https://www.youtube.com/channel/UChcK61TdP5xZCrK8a79ID8w';
   private baseUrl = API_URL; 
 

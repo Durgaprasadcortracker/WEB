@@ -71,4 +71,6 @@ export class LeadsMainComponent {
     this.editData=data
   }
 
+  
+
 }

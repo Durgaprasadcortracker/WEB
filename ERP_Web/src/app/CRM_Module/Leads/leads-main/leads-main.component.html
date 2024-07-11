@@ -28,26 +28,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let a of listOfleads | paginate: 
-                    { itemsPerPage: tableSize, 
-                    currentPage: page,
-                    totalItems: count }; 
-                    let i = index">
+                    <tr *ngFor="let a of listOfleads  | paginate
+                    : {
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count
+                      };
+                let i = index">
                       <td>
-                        <span  routerLink="/CRM/Leads/edit-leads/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
+                        <!-- <span  routerLink="/CRM/Leads/edit-leads/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
                             
-                        </span>
+                        </span> -->
+                        <span routerLink="/CRM/Leads/add-leads" [queryParams]="{leadid:a.id}"
+                         class="btn btn-sm">
+                        <i class="fa fa-pencil-alt"></i>
+                    </span>
                         <span (click)="deleteLead(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
                             
                         </span>
                     </td>
             
                         <td> <a routerLink="/CRM/Leads/leadView/{{a.id}}/ContactView/{{a.id}}"> {{a.leadName}}</a></td>
-                        <td>{{a.leadOwner}}</td>
+                        <td>{{a.leadOwnerName}}</td>
                         <td>{{a.businessEmail}}</td>
                         <td>{{a.leadStage}}</td>
                         <td>{{a.leadStatus}}</td>
-                        <td>{{a.propability}}</td>
+                        <td>{{a.probability}}</td>
                       
                     </tr>
                 </tbody>
@@ -55,9 +61,8 @@
         </div>
 
     </div>
-    <div class="d-flex justify-content-left mt-4">
-        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
-        </pagination-controls>
+    <div class="pagination">
+        <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
     </div>
 </div>
 
