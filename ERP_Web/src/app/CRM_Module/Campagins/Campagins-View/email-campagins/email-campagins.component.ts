@@ -65,19 +65,19 @@ export class EmailCampaginsComponent implements OnInit {
     });
   }
 
-  deleteEmail(ID: any) {
-    this.http.deleteapi('api/Campaign/DeleteCampaign/' + ID).subscribe((res) => {
-      console.log(res);
-      this.getData(); // Refresh the data after deletion
-      this.snackBar.open('Company successfully deleted!', 'Close', {
+  DeleteEmail(ID: any) {
+    this.http.deleteapi('api/Campaign/DeleteEmail/' + ID).subscribe((res) => {
+      this.snackBar.open('Email Campaign successfully deleted!', 'Close', {
         duration: 3000, // Snackbar stays open for 3 seconds
       });
+      console.log(res);
+      this.getData(); // Refresh the data after deletion
     });
   }
 
   edit(data: any) {
     this.contactPage = 1;
     this.editData = data;
-    this.router.navigate(['/CRM/AddEmailConversation', data.id]);
+    this.router.navigate(['api/Campaign/EmailDetails/', data.id]);
   }
 }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BackendService } from '../../../Services/BackendConnection/backend.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-email-conversation',
@@ -7,31 +10,31 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './add-email-conversation.component.css'
 })
 export class AddEmailConversationComponent {
-  campaignForm: FormGroup;
+  myForm: FormGroup;
   submitted = false;
 
   constructor(private fb: FormBuilder) {
-    this.campaignForm = this.fb.group({
-      name: ['', Validators.required],
+    this.myForm = this.fb.group({
+      to: ['', [Validators.required, Validators.email]],
       subject: ['', Validators.required],
-      fromAddress: ['', Validators.required],
-      lists: [''],
-      template: [''],
-      messenger: ['', Validators.required],
-      tags: [''],
-      sendLater: [''],
-      customHeaders: ['']
+      body: ['', Validators.required],
+      attachment: [''],
+      scheduledTime: ['', Validators.required]
     });
   }
 
-  ngOnInit(): void { }
+  get f(): { [key: string]: AbstractControl } {
+    return this.myForm.controls;
+  }
 
   onSubmit(): void {
     this.submitted = true;
-    if (this.campaignForm.valid) {
-      console.log('Form Submitted', this.campaignForm.value);
-      // Handle form submission logic
-    }
-  }
 
+    if (this.myForm.invalid) {
+      return;
+    }
+
+    // Handle form submission logic here
+    console.log(this.myForm.value);
+  }
 }

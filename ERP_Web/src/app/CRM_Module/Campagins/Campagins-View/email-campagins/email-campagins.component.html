@@ -10,20 +10,20 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="search-addon"><i class="fa fa-search"></i></span>
           </div>
-          <input type="text" id="searchEmail" class="form-control search-input" placeholder="Enter email name"
+          <input type="text" id="searchEmail" class="form-control search-input" placeholder="Enter E-Mail"
             style="width: 400px;" [(ngModel)]="searchTerm" (input)="filterCampaigns()">
         </div>
       </div>
-      <button routerLink="/CRM/Campagins/add-email" class="btn btn-danger">Add Email</button>
+      <button routerLink="/CRM/Campagins/add-email" class="btn btn-danger">Compose</button>
     </div>
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Email Status</th>
-          <th scope="col">Email Name</th>
-          <th scope="col">Email List</th>
-          <th scope="col">Start Date</th>
-          <th scope="col">End Date</th>
+          <th scope="col">Email</th>
+          <th scope="col">Receiver Name</th>
+          <th scope="col">Email Created Date</th>
+          <th scope="col">List</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -34,15 +34,15 @@
           totalItems: count }; 
           let i = index">
           <td>{{ a.emailStatus }}</td>
-          <td><a style="text-decoration: none;" routerLink="CRM/AddEmailConversation/{{a.id}}"> {{a.eMail}}</a></td>
-          <td><a style="text-decoration: none;" routerLink="CRM/AddEmailConversation/{{a.id}}"> {{a.list}}</a></td>
+          <td>{{a.eMail}}</td>
+          <td>{{a.receiverName}}</td>
           <td>{{ a.emailCreated }}</td>
-          <td>{{ a.emailUpdate }}</td>
+          <td>{{ a.emailLists }}</td>
           <td>
-            <span class="material-symbols-outlined" (click)="edit(editData.id)"
-              routerLink="/CRM/AddEmailConversation/{{a.id}}">edit</span>
+            <span  (click)="edit(editData.id)"
+              routerLink="/CRM/Campagins/add-email"><i class="fa-solid fa-reply"></i></span>
             <span class="material-symbols-outlined" style="padding-left: 25px;"
-              (click)="deleteEmail(a.id)">delete</span>
+              (click)="DeleteEmail(a.id)">delete</span>
           </td>
         </tr>
       </tbody>
