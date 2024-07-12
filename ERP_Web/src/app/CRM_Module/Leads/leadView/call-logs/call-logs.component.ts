@@ -86,12 +86,12 @@ export class CallLogsComponent {
   }
   getRequiredData() {
     this.http.getapi('api/Lead/GetCallLog/' + this.id).subscribe((res) => {
-      console.log(res);
       if (res) {
         this.calllogsList = res
+        console.log(this.calllogsList);
       }
     });
-    this.http.getapi('api/Contacts/GetContacts').subscribe((res) => {
+    this.http.getapi('api/Contacts/GetAllContacts').subscribe((res) => {
       if (res) {
         this.contactsList = res.data
         console.log(this.contactsList);
@@ -121,9 +121,11 @@ export class CallLogsComponent {
     return this.myForm.controls;
   }
   close() {
-    this.submitted = false;
-    this.myForm.reset();
-    this.ngOnInit()
+    if(this.myForm){
+      this.myForm.reset();
+      this.submitted = false;
+      this.ngOnInit()
+    }
   }
   deleteCallLog(ID: any) {
     this.http.deleteapi('api/Lead/DeleteCallLogs/' + ID).subscribe((res) => {

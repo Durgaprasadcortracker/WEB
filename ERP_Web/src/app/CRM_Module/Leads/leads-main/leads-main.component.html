@@ -24,7 +24,7 @@
                         <th>Lead Stage</th>
                         <th>Lead Status</th>
                         <th>Propability</th>
-                       
+
                     </tr>
                 </thead>
                 <tbody>
@@ -35,26 +35,33 @@
                         totalItems: count
                       };
                 let i = index">
-                      <td>
-                        <!-- <span  routerLink="/CRM/Leads/edit-leads/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
+                        <td>
+                            <!-- <span  routerLink="/CRM/Leads/edit-leads/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
                             
                         </span> -->
-                        <span routerLink="/CRM/Leads/add-leads" [queryParams]="{leadid:a.id}"
-                         class="btn btn-sm">
-                        <i class="fa fa-pencil-alt"></i>
-                    </span>
-                        <span (click)="deleteLead(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
-                            
-                        </span>
-                    </td>
-            
-                        <td> <a routerLink="/CRM/Leads/leadView/{{a.id}}/ContactView/{{a.id}}"> {{a.leadName}}</a></td>
-                        <td>{{a.leadOwnerName}}</td>
-                        <td>{{a.businessEmail}}</td>
+                            <span routerLink="/CRM/Leads/add-leads" [queryParams]="{leadid:a.leadId}"
+                                class="btn btn-sm">
+                                <i class="fa fa-pencil-alt"></i>
+                            </span>
+                            <!-- <span (click)="deleteLead(a.id)" class="fa fa-trash"
+                                style="padding-left: 25px;color:red ;"></span> -->
+                            <!-- <span routerLink="/CRM/Leads/edit-leads/{{a.leadId}}" class="fa fa-pencil-alt"
+                                style="color:blue">
+                            </span> -->
+                            <span (click)="deleteLead(a.leadId)" class="fa fa-trash"
+                                style="padding-left: 25px;color:red ;">
+
+                            </span>
+                        </td>
+
+                        <td> <a routerLink="/CRM/Leads/leadView/{{a.leadId}}/ContactView/{{a.leadId}}">
+                                {{a.companyName}}</a></td>
+                        <td>{{a.leadownerFname +" "+ a.leadownerLname }}</td>
+                        <td>{{a.email}}</td>
                         <td>{{a.leadStage}}</td>
                         <td>{{a.leadStatus}}</td>
-                        <td>{{a.probability}}</td>
-                      
+                        <td>{{a.probility}}</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -65,5 +72,3 @@
         <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
     </div>
 </div>
-
-

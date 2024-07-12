@@ -131,9 +131,11 @@ export class RemindersComponent {
     return this.myForm.controls;
   }
   close() {
-    this.myForm.reset();
-    this.submitted = false;
-    this.ngOnInit()
+    if(this.myForm){
+      this.myForm.reset();
+      this.submitted = false;
+      this.ngOnInit()
+    }
   }
   deleteReminder(ID: any) {
     this.http.deleteapi('api/Lead/DeleteReminder/' + ID).subscribe((res) => {

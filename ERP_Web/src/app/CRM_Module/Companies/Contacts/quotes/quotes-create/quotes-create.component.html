@@ -188,25 +188,25 @@
                 <tr *ngFor="let a of lineItem;let i = index">
                     <td>{{i+1}}</td>
                     <td>
-                        <input type="text" width="30px" name="" id="" [(ngModel)]="a.productName">
+                        <input class="form-control" type="text" width="30px" name="" id="" [(ngModel)]="a.productName">
                     </td>
                     <td>
-                        <input type="number" name="" id="" [(ngModel)]="a.quantity">
+                        <input class="form-control" type="number" name="" id="" [(ngModel)]="a.quantity">
                     </td>
                     <td>
-                        <input type="number" name="" id="" [(ngModel)]="a.listPrice">
+                        <input class="form-control" type="number" name="" id="" [(ngModel)]="a.listPrice">
                     </td>
                     <td>
-                        <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.amount">
+                        <input class="form-control" [disabled]="true" type="text" name="" id="" [(ngModel)]="a.amount">
                     </td>
                     <td>
-                        <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.discount">
+                        <input class="form-control" [disabled]="true" type="text" name="" id="" [(ngModel)]="a.discount">
                     </td>
                     <td>
-                        <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.tax">
+                        <input class="form-control" [disabled]="true" type="text" name="" id="" [(ngModel)]="a.tax">
                     </td>
                     <td>
-                        <input [disabled]="true" type="text" name="" id="" [(ngModel)]="a.total">
+                        <input class="form-control" [disabled]="true" type="text" name="" id="" [(ngModel)]="a.total">
                     </td>
                 </tr>
             </tbody>
@@ -216,32 +216,32 @@
             <div class="invoice">
                 <div class="row">
                     <label for="subtotal">Sub Total ($)</label>
-                    <input type="text" id="subtotal" value="5300" readonly>
+                    <input type="text" class="form-control" id="subtotal"  >
                 </div>
                 <div class="row">
                     <label for="discount">Discount ($)</label>
-                    <input type="text" id="discount" value="0" readonly>
+                    <input type="text" class="form-control" id="discount"  >
                 </div>
                 <div class="row">
                     <label for="tax">Tax ($)</label>
-                    <input type="text" id="tax" value="0" readonly>
+                    <input type="text" class="form-control" id="tax" >
                 </div>
                 <div class="row">
                     <label for="adjustment">Adjustment ($)</label>
-                    <input type="text" id="adjustment">
+                    <input type="text" class="form-control" id="adjustment">
                 </div>
                 <div class="row">
                     <label for="grandtotal">Grand Total ($)</label>
-                    <input type="text" id="grandtotal" value="5300" readonly>
+                    <input type="text" class="form-control" id="grandtotal" >
                 </div>
             </div>
         </div>
       
         <div class="details ID">
             <div class="emp-buttons" style="display: flex; gap: 10px;">
-                <button routerLink="/Quotes"  class="btn btn-danger"  style="width: 200px;" type="button">Submit</button>
+                <button routerLink="/CRM/Companies/Quotes"  class="btn btn-danger"  style="width: 200px;" type="button">Submit</button>
 
-                <div routerLink="/Quotes" style="width: 200px;" type="button"
+                <div routerLink="/CRM/Companies/Quotes" style="width: 200px;" type="button"
                     class="btn cancel-btn">Close</div>
 
             </div>

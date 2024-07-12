@@ -27,6 +27,7 @@ export class QuotesCreateComponent {
     this.companyid = this.route.snapshot.params['companyid'];
     this.id = this.route.snapshot.params['id'];
     this.getRequiredData()
+    this.AddNewLine()
   }
 
 
@@ -75,6 +76,15 @@ export class QuotesCreateComponent {
     return this.quoteForm.controls;
   }
   AddNewLine(){
-    
+    let obj = {
+      productName:"",
+      quantity:"",
+      listPrice:"",
+      amount:0,
+      discount:0,
+      tax:0,
+      total:0
+    }
+    this.lineItem.push(JSON.parse(JSON.stringify(obj)))
   }
 }
