@@ -71,6 +71,8 @@ import { AddStateComponent } from './CRM_Module/Settings/Configration/state/add-
 import { AddCityComponent } from './CRM_Module/Settings/Configration/city/add-city/add-city.component';
 import { DealCreatedVsLostComponent } from './CRM_Module/Reports/deal-created-vs-lost/deal-created-vs-lost.component';
 import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/churn-overview.component';
+import { RevenuebyMonthuarterearComponent } from './CRM_Module/Reports/revenueby-monthuarterear/revenueby-monthuarterear.component';
+import { SalesTeamPermonanceComponent } from './CRM_Module/Reports/sales-team-permonance/sales-team-permonance.component';
 
 @NgModule({
   declarations: [
@@ -138,7 +140,9 @@ import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/chur
     AddCityComponent,
     DealCreatedVsLostComponent,
     ChurnOverviewComponent,
-    DealCreatedVsLostComponent
+    DealCreatedVsLostComponent,
+    RevenuebyMonthuarterearComponent,
+    SalesTeamPermonanceComponent
     
   ],
   imports: [
