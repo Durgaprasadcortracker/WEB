@@ -53,6 +53,7 @@ import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/
 import { AddStateComponent } from './CRM_Module/Settings/Configration/state/add-state/add-state.component';
 import { AddCityComponent } from './CRM_Module/Settings/Configration/city/add-city/add-city.component';
 import { DealCreatedVsLostComponent } from './CRM_Module/Reports/deal-created-vs-lost/deal-created-vs-lost.component';
+import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/churn-overview.component';
 
 
 
@@ -140,6 +141,7 @@ const routes: Routes = [
       { path: 'Reports', component: ReportsMainComponent,
         children: [
           { path: 'deal-created-vs-lost', component: DealCreatedVsLostComponent },
+          { path: 'churn-overview', component: ChurnOverviewComponent },
         ] },
       { path: 'events', component: EventsComponent },
       { path: 'quoteslisting', component: QuoteslistingComponent },
