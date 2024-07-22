@@ -1,82 +1,79 @@
+<!-- deal-created-vs-lost.component.html -->
 <p>deal-created-vs-lost works!</p>
 <div class="card m-3">
-    <div class="card-header">
-        <h4>DEAL CREATED VS LOST</h4>
-    </div>
-    <div class="card-body">
-        <form [formGroup]="myForm" (ngSubmit)="onSearch()">
-            <!--Inputs  -->-
-            <div class="d-flex flex-wrap">
-                <div  class="col-md-3">
-                    <label>Sales Owner<span class="required">*</span></label>
-                    <select class="form-select"  formControlName="LeadOwner" [ngClass]="{ 'is-invalid': submitted && f['leadOwner'].errors }" >
-                        <option value="0">--Select leadowner--</option>
-                        <option *ngFor="let a of _loginlist" [value]="a.id">{{a.firstName+''+a.lastName}}</option>
-                    </select>
-                    <div *ngIf="submitted && f['leadOwner'].errors" class="invalid-feedback">
-                        <div *ngIf="f['leadOwner'].errors['required']">Lead Owner is required.</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <label>From date <span class="required">*</span></label>
-                    <input type="Date" class="form-control" formControlName="fromDate" >
-                   
-                </div>
-                <div class="col-md-3">
-                    <label>To date <span class="required">*</span></label>
-                    <input type="date" class="form-control" formControlName="toDate" >
-                   
-                </div>
-               
-                <div class="col-md-6 mt-3 d-flex g-1">
-                    <button type="submit" style="width: 200px; margin-right: 10px;" class="btn btn-success" >Search</button>
-                    <button type="button" style="width: 200px; margin-right: 10px;" class="btn btn-warning" (click)="clear()">Clear</button>
-                    <button type="button" style="width: 200px;" class="btn btn-info" (click)="downloadReport()">Download Report</button>
-                    
-                </div>
-            </div>
-                <div class="table-responsive mt-4" style="padding: 20px;">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <!-- <th>S.No</th> -->
-                                <th>Company</th>
-                                <th>Email</th>
-                                <th>Sales Owner</th>
-                                <th>Proposed Deal Value</th>
-                                <th>Closed Deal Value</th>
-                                <th>Deal Close Date</th>
-            
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <!-- <td>
-                                    <span routerLink="/CRM/Companies/edit-contacts/{{id}}/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
-            
-                                    </span>
-                                    <span (click)="deleteContact(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
-            
-                                    </span>
-                                </td> -->
-                            
-                                <!-- <td>{{a.companiesName}}</td>
-                                <td>{{a.businesEmail}}</td>
-                                <td>{{a.salesOwner }}</td>
-                                <td>{{a.ProposedDeaValue}}</td>
-                                <td>{{a.ClosedDealValue}}</td>
-                                <td>{{a.DealCloseDate}}</td> -->
-            
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            
-                <div class="d-flex justify-content-left mt-4">
-                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
-                    </pagination-controls>
-                </div>
+  <div class="card-header">
+    <h4>DEAL CREATED VS LOST</h4>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="myForm" (ngSubmit)="onSearch()">
+      <div class="d-flex flex-wrap">
+        <div class="col-md-3">
+          <label for="salesOwner">Sales Owner <span class="required">*</span></label>
+          <select
+            id="salesOwner"
+            class="form-select"
+            formControlName="SalesOwnerName"
+            [ngClass]="{ 'is-invalid': submitted && f['SalesOwnerName']?.errors }">
+            <option value="0">--Select lead owner--</option>
+            <option *ngFor="let a of _loginlist" [value]="a.id">{{ a.firstName + ' ' + a.lastName }}</option>
+          </select>
+          <!-- <div *ngIf="submitted && f['LeadOwner'].errors" class="invalid-feedback">
+            <div *ngIf="f['LeadOwner'].errors['required']">Lead Owner is required.</div>
+          </div> -->
+        </div>
+        <div class="col-md-3">
+          <label for="fromDate">From date <span class="required">*</span></label>
+          <input type="date" id="fromDate" class="form-control" formControlName="fromDate" />
+        </div>
+        <div class="col-md-3">
+          <label for="toDate">To date <span class="required">*</span></label>
+          <input type="date" id="toDate" class="form-control" formControlName="toDate" />
+        </div>
+        <div class="col-md-3">
+          <label for="LostReason">Lost Reason <span class="required">*</span></label>
+          <select id="LostReason" class="form-select" formControlName="LostReason">
+            <option value="">--Select lost reason--</option>
+            <option *ngFor="let a of _LostReason" [value]="a">{{ a }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex mt-3">
+        <input type="submit" class="btn btn-danger me-2" value="Search"/>
+        <button type="button" class="btn btn-dark me-2" (click)="clear()">Clear</button>
+        <button *ngIf="deals" class="btn btn-primary" (click)="downloadReport()">Download Report</button>
+      </div>
+      <div class="table-responsive mt-4">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Email</th>
+              <th>Sales Owner</th>
+              <th>Proposed Deal Value</th>
+              <th>Lost Reason</th>
+              <th>Call Logs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of deals; let i = index">
            
-        </form>
-    </div>
+              <td>{{a.companiesName }}</td>
+              <td>{{a.businesEmail }}</td>
+              <td>{{a.salesOwnerName }}</td>
+              <td>{{a.QuotesType }}</td>
+              <td>{{a.lostReason}}</td>
+              <td>{{a.calltypes}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-left mt-4">
+        <pagination-controls
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="onTableDataChange($event)"
+        ></pagination-controls>
+      </div>
+    </form>
+  </div>
 </div>

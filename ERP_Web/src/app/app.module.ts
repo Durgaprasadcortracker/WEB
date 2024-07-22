@@ -137,7 +137,9 @@ import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/chur
     AddStateComponent,
     AddCityComponent,
     DealCreatedVsLostComponent,
-    ChurnOverviewComponent
+    ChurnOverviewComponent,
+    DealCreatedVsLostComponent
+    
   ],
   imports: [
     HttpClientModule,
