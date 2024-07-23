@@ -1,89 +1,82 @@
 <div class="card m-3">
-    <div class="card-header">
+    <div class="card-header h4 d-flex justify-content-between align-items-center">
         Campaign Registration
     </div>
     <div class="card-body">
-        <form  [formGroup]="myForm" (ngSubmit)="addCampaign()">
-            <!--Inputs  -->
-            <div class="d-flex flex-wrap">
+        <form [formGroup]="myForm" (ngSubmit)="addCampaign()">
+            <div class="row mt-4">
                 <div class="col-md-3">
-                    <label>Campaign Owner <span class="required">*</span>  </label>
-                    <select class="form-control"  formControlName="loginId"  [ngClass]="{ 'is-invalid': submitted && f['campaignOwnerName'].errors }">
-                        <option value="null">--Select CampaignOwner--</option>
-                        <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
-                        <!-- <option *ngFor="let campaignOwner of campaignOwnerlist" value="{{campaignOwner.id}}">{{campaignOwner.LeadOwnerName}}</option> -->
-                        <!-- <option *ngFor="let campaignOwner of _loginlist" value="{{campaignOwner.id}}">{{campaignOwner.firstName+''+campaignOwner.lastName}}</option> -->
+                    <label for="campaignOwner">Campaign Owner <span class="required">*</span></label>
+                    <select class="form-control" formControlName="loginId" [ngClass]="{ 'is-invalid': submitted && f['loginId'].errors }">
+                        <option value="null">--Select Campaign Owner--</option>
+                        <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName + ' ' + a.lastName}}</option>
                     </select>
-                    <!-- <div *ngIf="submitted && f['CompanyId'].errors" class="invalid-feedback">
-                        <div *ngIf="f['CompanyId'].errors['required']">Company is required.</div>
-                      </div> -->
+                    <div *ngIf="submitted && f['loginId'].errors" class="invalid-feedback">
+                        <div *ngIf="f['loginId'].errors['required']">Campaign Owner is required.</div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label for="campaignName" class="form-label">Campaign Name<span class="text-danger">*</span></label>
-                    <div data-mdb-input-init class="form-outline"> 
-                      <input type="text" class="form-control form-control-lg" formControlName="campaignName" 
-                      [ngClass]="{ 'is-invalid': submitted && f['campaignName'].errors }" /> 
-                        <div *ngIf="submitted && f['campaignName'].errors" class="invalid-feedback">
-                          <div *ngIf="f['campaignName'].errors['required']">company Name is required.</div>
-                        </div>
+                    <input type="text" class="form-control" formControlName="campaignName" [ngClass]="{ 'is-invalid': submitted && f['campaignName'].errors }">
+                    <div *ngIf="submitted && f['campaignName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['campaignName'].errors['required']">Campaign Name is required.</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label for="campaignType" class="form-label">Campaign Type<span class="text-danger">*</span></label>
-                    <div data-mdb-input-init class="form-outline"> 
-                      <input type="text" class="form-control form-control-lg" formControlName="campaignType" 
-                      [ngClass]="{ 'is-invalid': submitted && f['campaignType'].errors }" /> 
-                        <div *ngIf="submitted && f['campaignType'].errors" class="invalid-feedback">
-                          <div *ngIf="f['campaignType'].errors['required']">company Owner is required.</div>
-                        </div>
+                    <input type="text" class="form-control" formControlName="campaignType" [ngClass]="{ 'is-invalid': submitted && f['campaignType'].errors }">
+                    <div *ngIf="submitted && f['campaignType'].errors" class="invalid-feedback">
+                        <div *ngIf="f['campaignType'].errors['required']">Campaign Type is required.</div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label for="campaignStatus" class="form-label">Status<span class="text-danger">*</span></label>
-                    <div data-mdb-input-init class="form-outline"> 
-                      <select type="text" class="form-control" formControlName="campaignStatus" 
-                      [ngClass]="{ 'is-invalid': submitted && f['campaignStatus'].errors }">
-                        <option value="null">--Select Campaign Status-- </option>
-                        <option *ngFor="let CampaignStatus of statuslist" value="{{CampaignStatus.id}}">{{CampaignStatus.description}}</option>
+                    <select class="form-control" formControlName="campaignStatus" [ngClass]="{ 'is-invalid': submitted && f['campaignStatus'].errors }">
+                        <option value="null">--Select Campaign Status--</option>
+                        <option *ngFor="let status of statuslist" value="{{status.id}}">{{status.description}}</option>
                     </select>
-                        <!-- <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
-                          <div *ngIf="f['status'].errors['required']">Campaign Status is required.</div>
-                        </div> -->
+                    <div *ngIf="submitted && f['campaignStatus'].errors" class="invalid-feedback">
+                        <div *ngIf="f['campaignStatus'].errors['required']">Status is required.</div>
                     </div>
                 </div>
+            </div>
+            <div class="row mt-4">
                 <div class="col-md-3">
                     <label for="startDate" class="form-label">Start Date<span class="text-danger">*</span></label>
-                    <input type="date" class="form-control" formControlName="startDate">
+                    <input type="date" class="form-control" formControlName="startDate" [ngClass]="{ 'is-invalid': submitted && f['startDate'].errors }">
+                    <div *ngIf="submitted && f['startDate'].errors" class="invalid-feedback">
+                        <div *ngIf="f['startDate'].errors['required']">Start Date is required.</div>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <label for="endDate" class="form-label">End Date<span class="text-danger">*</span></label>
-                    <input type="date" class="form-control" formControlName="endDate">
-                </div>   
-                <div class="col-md-3">
-                    <label>Campaign Objective </label>
-                    <input type="text" class="form-control" formControlName="campaignObjective">
-                </div>     
-                <div class="col-md-3">
-                    <label>Budgeted Cost </label>
-                    <input type="number" class="form-control" formControlName="budgetCost">
-                </div>                 
-            </div>
-            <!-- Text Area -->
-            <div class="d-flex flex-wrap">
-                <div class="col-md-6">
-                    <label>Description <span class="required">*</span> </label>
-                    <textarea class="form-control" rows="3" formControlName="description" ></textarea>   
-                </div> 
-            </div>
-            <!-- Buttons -->
-            <div class="d-flex flex-wrap">
-                <div class="col-md-6 mt-3 d-flex g-1">
-                    <div class="mr-2">
-                        <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
-
-                        <div style="width: 200px;"  type="button" class="btn btn-danger" routerLink="/CRM/Campagins/campagins">Close</div>
-    
+                    <input type="date" class="form-control" formControlName="endDate" [ngClass]="{ 'is-invalid': submitted && f['endDate'].errors }">
+                    <div *ngIf="submitted && f['endDate'].errors" class="invalid-feedback">
+                        <div *ngIf="f['endDate'].errors['required']">End Date is required.</div>
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <label for="campaignObjective" class="form-label">Campaign Objective</label>
+                    <input type="text" class="form-control" formControlName="campaignObjective">
+                </div>
+                <div class="col-md-3">
+                    <label for="budgetCost" class="form-label">Budgeted Cost</label>
+                    <input type="number" class="form-control" formControlName="budgetCost">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <label for="description">Description <span class="required">*</span></label>
+                    <textarea class="form-control" rows="3" formControlName="description" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+                    <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                        <div *ngIf="f['description'].errors['required']">Description is required.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap mt-4">
+                <div class="col-md-6 d-flex justify-content-start">
+                    <button type="submit" class="btn btn-danger mr-4" style="width: 200px; background-color: #8d0000;">Submit</button>
+                    <button type="button" class="btn btn-dark" style="width: 200px;" routerLink="/CRM/Campagins/campagins">Close</button>
                 </div>
             </div>
         </form>

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { BackendService } from '../../Services/BackendConnection/backend.service';
 
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-change-password',
@@ -15,16 +16,19 @@ export class ChangePasswordComponent {
     currentPassword: new FormControl(''),
     newPassword: new FormControl(''),
     confirmNewPassword: new FormControl(''),
-   
+
   });
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private backendService:BackendService) {}
+  constructor(private formBuilder: FormBuilder,
+    private backendService: BackendService,
+    public dialogRef: MatDialogRef<ChangePasswordComponent>
+  ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        
+
         currentPassword: [
           '',
           [
@@ -33,7 +37,7 @@ export class ChangePasswordComponent {
             Validators.maxLength(16),
           ],
         ],
-    
+
         newPassword: [
           '',
           [
@@ -43,11 +47,8 @@ export class ChangePasswordComponent {
           ],
         ],
         confirmNewPassword: ['', Validators.required],
-     
+
       },
-      // {
-      //   validators: [Validation.match('password', 'confirmPassword')],
-      // }
     );
   }
 
@@ -59,22 +60,16 @@ export class ChangePasswordComponent {
     console.log(this.form.value)
     this.submitted = true;
 
-    //if (this.form.invalid) {
-      this.backendService.putapi('api/Login/ChangePassword',this.form.getRawValue()).subscribe((res)=>{
-        console.log(res);
-        this.ngOnInit();
-      })
-      return;
-    //}
+    this.backendService.putapi('api/Login/ChangePassword', this.form.getRawValue()).subscribe((res) => {
+      console.log(res);
+      this.ngOnInit();
+    })
+    return;
+
 
     console.log(JSON.stringify(this.form.value, null, 2));
   }
 
-  // onReset(): void {
-  //   this.submitted = false;
-  //   this.form.reset();
-  // }
 
 
-  
 }

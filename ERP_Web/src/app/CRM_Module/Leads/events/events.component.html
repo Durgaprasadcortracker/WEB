@@ -1,81 +1,69 @@
 <form>
-    <div class="form first">
-      <h3>Events</h3>
-      <hr />
-      <div class="main-container">
-        <div class="calendar">
-          <div class="calendar-header">
-            <button (click)="prevMonth()">&#10094;</button>
-            <div>{{ months[currentMonth] }} {{ currentYear }}</div>
-            <button (click)="nextMonth()">&#10095;</button>
-          </div>
-          <div class="calendar-body">
-            <div class="calendar-weekday" *ngFor="let day of weekDays">{{ day }}</div>
-            <div class="calendar-day"
-                 *ngFor="let day of calendarDays"
-                 [class.current]="day.isCurrent"   
-                 [class.today]="day.isToday"       
-                 (click)="selectDay(day)">
-              <div class="date">{{ day.date }}</div>
-              <div class="events">
-                <div *ngFor="let event of day.events" class="event">
-                  <div><strong>Title:</strong> {{ event.title }}</div>
-                  <div><strong>Time:</strong> {{ event.time }}</div>
-                  <div><strong>Guests:</strong> {{ event.guests }}</div>
-                  <div><strong>Meeting Link:</strong> <a href="{{ event.meetingLink }}" target="_blank">{{ event.meetingLink }}</a></div>
-                  <div><strong>Location:</strong> {{ event.location }}</div>
-                  <button (click)="editEvent(event, $event)" class="material-symbols-outlined">Edit</button>
-                  <button (click)="deleteEvent(event, $event)" class="material-symbols-outlined">Delete</button>
-                </div>
+  <div class="form first">
+    <div class="main-container">
+      <div class="calendar">
+        <div class="calendar-header">
+          <button (click)="prevMonth()">&#10094;</button>
+          <div>{{ months[currentMonth] }} {{ currentYear }}</div>
+          <button (click)="nextMonth()">&#10095;</button>
+        </div>
+        <div class="calendar-body">
+          <div class="calendar-weekday" *ngFor="let day of weekDays">{{ day }}</div>
+          <div class="calendar-day"
+               *ngFor="let day of calendarDays"
+               [class.current]="day.isCurrent"
+               [class.today]="day.isToday"
+               (click)="selectDay(day)">
+            <div class="date">{{ day.date }}</div>
+            <div class="events">
+              <div *ngFor="let event of day.events" class="event">
+                <div class="event-title">{{ event.title }}</div>
+                <button (click)="editEvent(event, $event)" class="material-symbols-outlined">Edit</button>
+                <button (click)="deleteEvent(event, $event)" class="material-symbols-outlined">Delete</button>
               </div>
             </div>
           </div>
         </div>
-        <div *ngIf="showModal" class="modal-background" (click)="closeModal()">
-            <div class="modal-content" (click)="$event.stopPropagation()">
-              <button class="close-button" (click)="closeModal()">&#10005;</button>
-              <form (ngSubmit)="submitEvent()">
-                <div class="form first">
-                  <h3>Events</h3>
-                  <hr />
-                  <div class="fields" style="display: flex; flex-wrap: wrap; flex-direction: column;">
-                    <div class="input-field">
-                      <label>Event Title</label>
-                      <input type="text" class="form-control" [(ngModel)]="currentEvent.title" name="title" required>
-                    </div>
-                    <div class="input-field">
-                      <label>Event time</label>
-                      <input type="time" class="form-control" [(ngModel)]="currentEvent.time" name="time" required>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="input-field">
-                          <label>Add guests</label>
-                          <select class="form-select" [(ngModel)]="currentEvent.guests" name="guests" required>
-                            <option value="">Select guests</option>
-                            <option *ngFor="let guest of guests" [value]="guest">{{ guest }}</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="input-field">
-                      <label>Meeting Link</label>
-                      <input type="text" class="form-control" [(ngModel)]="currentEvent.meetingLink" name="meetingLink">
-                    </div>
-                    <div class="input-field">
-                      <label>Add Location</label>
-                      <input type="text" class="form-control" [(ngModel)]="currentEvent.location" name="location">
-                    </div>
-                    <div class="emp-buttons" style="margin-top: 25px; text-align: right;">
-                      <button type="submit" class="btn submit-btn btn-danger">Submit</button>
-                    </div>
-                  </div>
+      </div>
+      <div *ngIf="showModal" class="modal-background" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <button class="close-button" (click)="closeModal()">&#10005;</button>
+          <form (ngSubmit)="submitEvent()">
+            <div class="form first">
+              <h3>Events</h3>
+              <hr />
+              <div class="fields">
+                <div class="input-field">
+                  <label>Event Title</label>
+                  <input type="text" class="form-control" [(ngModel)]="currentEvent.title" name="title" required>
                 </div>
-              </form>
+                <div class="input-field">
+                  <label>Event time</label>
+                  <input type="time" class="form-control" [(ngModel)]="currentEvent.time" name="time" required>
+                </div>
+                <div class="input-field">
+                  <label>Add guests</label>
+                  <select class="form-select" [(ngModel)]="currentEvent.guests" name="guests" required>
+                    <option value="">Select guests</option>
+                    <option *ngFor="let guest of guests" [value]="guest">{{ guest }}</option>
+                  </select>
+                </div>
+                <div class="input-field">
+                  <label>Meeting Link</label>
+                  <input type="text" class="form-control" [(ngModel)]="currentEvent.meetingLink" name="meetingLink">
+                </div>
+                <div class="input-field">
+                  <label>Add Location</label>
+                  <input type="text" class="form-control" [(ngModel)]="currentEvent.location" name="location">
+                </div>
+                <div class="emp-buttons">
+                  <button type="submit" class="btn submit-btn btn-danger">Submit</button>
+                </div>
+              </div>
             </div>
-          </div>
-          
+          </form>
+        </div>
       </div>
     </div>
-  </form>
-  
+  </div>
+</form>

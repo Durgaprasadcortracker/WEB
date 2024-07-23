@@ -1,50 +1,56 @@
 <div class="form first">
-    <h3>Reminders</h3>
-    <hr />
-    <div *ngIf="open==1" class="card-body">
-        <div>
-            <div class="mr-2 d-flex justify-content-end">
-                <button type="button" routerLink="/CRM/Leads/leadView/{{id}}/reminder/{{id}}" [queryParams]="{reminder:0}"
+    <div *ngIf="open==1" >
+            <div class="mr-2 d-flex justify-content-end" style="padding-bottom: 20px;">
+                <button style=" background-color: #8d0000;" type="button" routerLink="/CRM/Leads/leadView/{{id}}/reminder/{{id}}" [queryParams]="{reminder:0}"
                     class="btn btn-primary">Create Reminder</button>
             </div>
-        </div>
         <div class="row mt-2">
-            <table class="table">
+            <table class="rwd-table table-bordered" style="width: 100%;">
                 <thead>
                     <tr>
+                        <th>Actions</th>
                         <th>S.No</th>
                         <th>Notes</th>
                         <th>Reminder Name</th>
                         <th>Reminder Date</th>
                         <th>Reminder Time </th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let a of remindersList;let i = index">
+                    <tr
+                    *ngFor="let a of remindersList | paginate: 
+                    { itemsPerPage: tableSize, 
+                    currentPage: page,
+                    totalItems: count }; 
+                    let i = index">
+                        <td>
+                            <span routerLink="/CRM/Leads/leadView/{{id}}/reminder/{{id}}" [queryParams]="{reminder:a.id}"
+                                (click)="edit(a.id)" class="fa fa-pencil-alt" style="color:blue">
+                               
+                            </span>
+                            <span (click)="deleteReminder(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
+                              
+                            </span>
+                        </td>
                         <td>{{i+1}}</td>
                         <td>{{a.notes}}</td>
                         <td>{{a.reminderName}}</td>
                         <td>{{a.reminderDate | date}}</td>
                         <td>{{a.reminderTime | date: 'shortTime'}}</td>
-                        <td>
-                            <span routerLink="/CRM/Leads/leadView/{{id}}/reminder/{{id}}" [queryParams]="{reminder:a.id}"
-                                (click)="edit(a.id)" class="material-symbols-outlined mr-2">
-                                edit
-                            </span>
-                            <span (click)="deleteReminder(a.id)" class="material-symbols-outlined">
-                                delete
-                            </span>
-                        </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="d-flex justify-content-right mt-4" style="justify-content: end;">
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+            </div>
         </div>
     </div>
     <div *ngIf="open==2">
         <form [formGroup]="myForm" (ngSubmit)="addReminder()">
-            <div class="d-flex flex-wrap">
-                <div class="col-md-3">
+            <div class="">
+                <div class="row" style="padding-top: 20px !important">
+                <div class="col-md-4">
                     <label for="ReminderName" class="form-label">Reminder Name<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline">
                         <input type="text" class="form-control" formControlName="ReminderName"
@@ -54,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="ReminderDate" class="form-label">Reminder Date<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline">
                         <input type="date" class="form-control" formControlName="ReminderDate" 
@@ -64,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label for="ReminderTime" class="form-label">Reminder Time<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline">
                         <input type="time" class="form-control" formControlName="ReminderTime"
@@ -75,8 +81,9 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="d-flex flex-wrap">
-                <div class="d-flex flex-wrap">
+                <div class="row" style="padding-top: 20px !important">
                     <div class="col-md-6">
                         <label>Notes <span class="required">*</span> </label>
                         <textarea class="form-control" cols="100" rows="3" formControlName="Notes"
@@ -88,14 +95,14 @@
                 </div>
             </div>
 
-            <div class="d-flex flex-wrap">
+            <div class="d-flex flex-wrap" style="padding-top: 20px !important">
                 <div class="col-md-6 mt-3 d-flex g-1">
                     <div class="mr-2">
-                        <button type="submit" style="width: 200px;" class="btn btn-primary">Submit</button>
+                        <button type="submit" style="width: 200px; background-color: #8d0000;" class="btn btn-primary">Submit</button>
                     </div>
                     <div>
                         <div routerLink="/CRM/Leads/leadView/{{id}}/reminder/{{id}}" (click)="close()" style="width: 200px;"
-                            type="button" class="btn btn-danger">Close</div>
+                            type="button" class="btn btn-dark">Close</div>
                     </div>
                 </div>
             </div>

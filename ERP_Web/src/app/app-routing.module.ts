@@ -46,7 +46,7 @@ import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/indust
 import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
 import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
-import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
+
 import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
 import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-router.component';
 import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
@@ -56,6 +56,8 @@ import { DealCreatedVsLostComponent } from './CRM_Module/Reports/deal-created-vs
 import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/churn-overview.component';
 import { SalesTeamPermonanceComponent } from './CRM_Module/Reports/sales-team-permonance/sales-team-permonance.component';
 import { RevenuebyMonthuarterearComponent } from './CRM_Module/Reports/revenueby-monthuarterear/revenueby-monthuarterear.component';
+import { CompanyProfileComponent } from './CRM_Module/Companies/company-profile/company-profile.component';
+import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
 
 
 
@@ -79,7 +81,7 @@ const routes: Routes = [
           {
             path: 'companiesinfo/:id', component: CompaniesInfoComponent,
             children: [
-              { path: 'profile/:id', component: ProfileComponent },
+              { path: 'profile/:id', component: CompanyProfileComponent },
               { path: 'contact/:id', component: ContactsMainComponent },
               { path: 'quotation/:id', component: QuoteslistingComponent },
             ]
@@ -135,8 +137,8 @@ const routes: Routes = [
       // { path: 'add-leads', component: AddLeadsComponent },
       // { path: 'contacts', component: ContactsMainComponent },
       { path: 'Leads', component: LeadsMainComponent },
-      { path: 'add-leads', component: AddLeadsComponent },
-      { path: 'edit-leads/:id', component: AddLeadsComponent },
+     // { path: 'add-leads', component: AddLeadsComponent },
+     // { path: 'edit-leads/:id', component: AddLeadsComponent },
       // { path: 'Campagins', component: CampaginsMainComponent },
 
       { path: 'Pipeline', component: PipelinesMainComponent },

@@ -18,10 +18,13 @@
                     </span>
                 </div>
             </div>
+            <hr class="sidebar-divider"/>
             <ul *ngIf="(a.open) && (sideBarvalue)" class="submenuclass">
+                
                 <li *ngFor="let k of a.submenus;let m = index">
-                    <div [routerLink]="k.controllerName" routerLinkActive="activeSub">
-                        <span *ngIf="sideBarvalue">{{k.menuName}}</span>
+                   
+                    <div style="padding: 5px;margin-left: 10px; text-decoration: underline;" [routerLink]="k.controllerName" routerLinkActive="activeSub">
+                        <span class="fa fa-arrow-right" style="font-size: 10px;"></span> <span *ngIf="sideBarvalue" > {{k.menuName}}</span>
                     </div>
                 </li>
             </ul>

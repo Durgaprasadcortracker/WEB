@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +13,14 @@ export class HeaderComponent {
   currentTime: any;
 
   private subscription: any;
-  username: any = "Admin";
+  username: any = sessionStorage.getItem("FullName");
 
   _sideBarValue=true
+
+  constructor(private fb: FormBuilder,
+    private router:Router ,
+    private snackBar: MatSnackBar,
+  ){}
 
   sideBar() {
     const value = true; 
@@ -30,5 +38,12 @@ export class HeaderComponent {
     }, 1000);
   }
 
+  OnClick(){
+    this.snackBar.open('Logged Out Successfully,Thank You !', 'Close', {
+      duration: 3000, // Snackbar stays open for 3 seconds
+    });
+  }
 
 }
+
+

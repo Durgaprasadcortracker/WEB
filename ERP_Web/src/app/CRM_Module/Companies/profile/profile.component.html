@@ -1,33 +1,53 @@
-<div class="company-details">
-  <h1>{{ company.companyName }}</h1>
-  <div class="row">
-    <div class="col-md-4">
-      <p><strong>Domain Name:</strong> {{ company.companyDomainName }}</p>
-      <p><strong>Owner:</strong> {{ company.companyOwner }}</p>
-      <p><strong>Industry:</strong> {{ company.industry }}</p>
+ <div class="profile-container">
+  <div class="profile-header">
+    <div class="side-user">
+      <div class="side-img">
+        <img src="https://p7.hiclipart.com/preview/954/328/914/computer-icons-user-profile-avatar.jpg" alt="User Avatar">
+      </div>
+      <div>
+        <h2> <i class="fa-solid fa-user" style="padding-right: 10px;"></i>{{fullname}} <i class="fa-solid fa-laptop-code" style="padding-left: 20px; padding-right: 10px;"></i>{{designation}}</h2>
+      </div>
     </div>
-    <div class="col-md-4">
-      <p><strong>Industry Type:</strong> {{ company.industryType }}</p>
-      <p><strong>Head Count:</strong> {{ company.headCount }}</p>
-      <p><strong>Annual Revenue:</strong> {{ company.annualRevenue }}</p>
+    <div  style="padding-right: 45px;">
+      <img src="http://localhost:4200/logo/logo.png" alt="Company Logo">
     </div>
-    <div class="col-md-4">
-      <p><strong>City:</strong> {{ company.cityName }}</p>
-      <p><strong>State:</strong> {{ company.state }}</p>
-      <p><strong>Country:</strong> {{ company.country }}</p>
+  </div>
+  <div class="profile-details">
+    <div class="detail-item">
+      <label>Designation:</label>
+      <b>{{profiledetails.designation}}</b>
     </div>
-    <div class="col-md-4">
-      <p><strong>Postal Code:</strong> {{ company.postalCode }}</p>
-      <p><strong>Time Zone:</strong> {{ company.timeZone }}</p>
-      <p><strong>Website:</strong> <a href="{{ company.website }}" target="_blank">{{ company.website }}</a></p>
+    <div class="detail-item">
+      <label>Date Of Birth:</label>
+      <b>{{profiledetails.dateOfBirth | date:'dd/MM/yyyy'}}</b>
     </div>
-    <div class="col-md-4">
-      <p><strong>Business Email:</strong> {{ company.businessEmail }}</p>
-      <p><strong>LinkedIn URL:</strong> <a href="{{ company.linkedinUrl }}" target="_blank">{{ company.linkedinUrl }}</a></p>
+    <div class="detail-item">
+      <label>Company Name:</label>
+      <b>{{profiledetails.companyName}}</b>
     </div>
-    <div class="col-md-4">
-      <p><strong>Address 1:</strong> {{ company.address1 }}</p>
-      <p><strong>Address 2:</strong> {{ company.address2 }}</p>
+    <div class="detail-item">
+      <label>Email:</label>
+      <b>{{profiledetails.email}}</b>
+    </div>
+    <div class="detail-item">
+      <label>Gender:</label>
+      <b>{{profiledetails.genderName}}</b>
+    </div>
+    <div class="detail-item">
+      <label>Role:</label>
+      <b>{{profiledetails.roleName}}</b>
+    </div>
+    <div class="detail-item">
+      <label>Address - 1:</label>
+      <b>{{profiledetails.address1}}</b>
+    </div>
+    <div class="detail-item">
+      <label>Address - 2:</label>
+      <b>{{profiledetails.address2}}</b>
+    </div>
+    <div class="detail-item">
+      <label>Address - 3:</label>
+      <b>{{profiledetails.address3}}</b>
     </div>
   </div>
 </div>

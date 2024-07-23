@@ -9,7 +9,17 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
   styleUrl: './call-logs.component.css'
 })
 export class CallLogsComponent {
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [3, 6, 9, 12];
+  p:number=1;
 
+  data = {
+    records: 0
+  }
+
+  
   calllogsList: any
   id: any;
   open = 1;
@@ -49,6 +59,7 @@ export class CallLogsComponent {
 
 
   ngOnInit() {
+    
     this.myForm = this.fb.group({
       id: [0],
       leadId: [this.id, Validators.required],
@@ -135,5 +146,18 @@ export class CallLogsComponent {
       }
     }
     );
+  }
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getData();
+  }
+  getData() {
+    throw new Error('Method not implemented.');
+  }
+  
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.getData();
   }
 }

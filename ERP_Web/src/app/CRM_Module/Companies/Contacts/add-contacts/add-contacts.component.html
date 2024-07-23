@@ -1,11 +1,12 @@
 <div class="card m-3">
-    <div class="card-header">
-        <h2>Contacts</h2>
+    <div class="card-header h4 d-flex justify-content-between align-items-center">
+        Contacts
     </div>
     <div class="card-body">
         <form [formGroup]="myForm" (ngSubmit)="addcontact()">
-            <!--Inputs  -->
-            <div class="d-flex flex-wrap">
+           
+            <div class="">
+              <div class="row" style="margin-top: 20px !important;">
                 <div class="col-md-3">
                     <label>First Name <span class="required">*</span></label>
                     <input type="text" class="form-control" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
@@ -34,6 +35,8 @@
                         <div *ngIf="f['mobileNumber'].errors['required']">Mobile Number is required.</div>
                       </div>
                 </div>
+             </div>
+             <div class="row" style="margin-top: 20px !important">
                 <div class="col-md-3">
                     <label>Alternate Number</label>
                     <input type="number" class="form-control" formControlName="alternateNumber">
@@ -65,6 +68,8 @@
                         <div *ngIf="f['country'].errors['required']">Country is required.</div>
                       </div>
                 </div>
+              </div>
+              <div class="row" style="margin-top: 20px !important">
                 <div class="col-md-3">
                     <label>City<span class="required">*</span>  </label>
                     <select class="form-control" formControlName="city" (change)="getstatesbycountrycity()" [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
@@ -100,6 +105,8 @@
                         <option *ngFor="let timeZone of timeZonelist" value="{{timeZone.id}}">{{timeZone.description}}</option>
                     </select>
                 </div>
+               </div>
+               <div class="row" style="margin-top: 20px !important">
                 <div class="col-md-3">
                     <label>Source<span class="required">*</span> </label>
                     <select class="form-control"  formControlName="source" [ngClass]="{ 'is-invalid': submitted && f['source'].errors }">
@@ -110,12 +117,12 @@
                         <div *ngIf="f['source'].errors['required']">Source is required.</div>
                       </div>
                 </div>
-
+              </div>
                
                
             </div>
-            <!-- Text Area -->
-            <div class="d-flex flex-wrap">
+            
+            <div class="row" style="margin-top: 20px !important">
 
                 <div class="col-md-6">
                     <label>Address1 <span class="required">*</span> </label>
@@ -129,21 +136,20 @@
                     <textarea class="form-control" rows="3" formControlName="address2"></textarea>
                 </div>
             </div>
-            <!-- Buttons -->
-            <div class="d-flex flex-wrap">
+           
+            <div class="d-flex flex-wrap" style="padding-top: 20px;">
                 <div class="col-md-6 mt-3 d-flex g-1">
                     <div class="mr-2">
-                        <!-- <div type="" class="btn btn-primary">Submit</div> -->
-                        <!-- <button  ></button> -->
-                        <button type="submit" style="width: 200px;margin-right: 10px;" class="btn btn-primary" >Submit</button>
-
-                        <div style="width: 200px;" routerLink="/CRM/Companies/companiesinfo/{{companyid}}/contact/{{companyid}}"  type="button" class="btn btn-danger">Close</div>
-    
+                        <button type="submit" style="width: 200px; background-color: #8D0000;" class="btn btn-danger  mr-4">Submit</button>
+                        <div style="width: 200px;" routerLink="/CRM/Companies/companiesinfo/{{companyid}}/contact/{{companyid}}"  type="button" class="btn btn-dark">Close</div>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+
+
 
 

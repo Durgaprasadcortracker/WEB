@@ -1,55 +1,56 @@
-<div *ngIf="!contactPage " class="container mt-1">
-    <div class=" d-flex justify-content-between align-items-center">
-        <h3>Contacts</h3>
-    </div>
-    <div class="card-body">
-        <div style="float: right;">
-            <button routerLink="/CRM/Companies/add-contacts/{{id}}" class="btn btn-primary">Add Contacts</button>
+<div *ngIf="!contactPage " class="container mt-4">
+    
+            <div style="float: right;">
+                <button routerLink="/CRM/Companies/add-contacts/{{id}}" [queryParams]="{companyid:id,'create':'add'}"   class="btn btn-danger" style="background-color: #8D0000;">Add Contacts</button>
+              
+            </div>
         </div>
-    </div>
-    <div class="table-responsive mt-4" style="padding: 20px;">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Actions</th>
-                    <th>Contact Name</th>
-                    <th>Designation</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Company Name</th>
-                    <th>Source</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let a of listOfContacts | paginate: 
+      
+    
+        <div class="table-responsive mt-4" style="padding: 20px;">
+            <table class="rwd-table table-bordered" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>Contact Name</th>
+                        <th>Designation</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Company Name</th>
+                        <th>Source</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of listOfContacts | paginate: 
                     { itemsPerPage: tableSize, 
                     currentPage: page,
                     totalItems: count }; 
                     let i = index">
-                    <td>
-                        <span routerLink="/CRM/Companies/edit-contacts/{{id}}/{{a.id}}" class="fa fa-pencil-alt" style="color:blue">
-
+                      <td>
+                        <span  routerLink="/CRM/Companies/edit-contacts/{{id}}/{{a.id}}" [queryParams]="{id:a.id}"  class="fa fa-pencil-alt" style="color:blue">
+                            
                         </span>
                         <span (click)="deleteContact(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
-
+                            
                         </span>
                     </td>
+            
+                        <td>{{a.firstName+''+a.lastName}}</td>
+                        <td>{{a.designation}}</td>
+                        <td>{{a.email}}</td>
+                        <td>{{a.mobileNumber}}</td>
+                        <td>{{a.companyName}}</td>
+                        <td>{{a.sourceName}}</td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-                    <td>{{a.firstName+''+a.lastName}}</td>
-                    <td>{{a.designation}}</td>
-                    <td>{{a.email}}</td>
-                    <td>{{a.mobileNumber}}</td>
-                    <td>{{a.companyName}}</td>
-                    <td>{{a.sourceName}}</td>
-
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
+    
     <div class="d-flex justify-content-left mt-4">
         <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
         </pagination-controls>
     </div>
-</div>
+ 

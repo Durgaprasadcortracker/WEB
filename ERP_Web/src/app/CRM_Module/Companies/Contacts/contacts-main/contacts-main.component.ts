@@ -45,7 +45,7 @@ export class ContactsMainComponent {
   }
   
   getData(){
-    this.http.getapi('api/Contacts/GetContacts'+ this.id).subscribe((res) => {
+    this.http.getapi('api/Contacts/GetContacts/'+ this.id).subscribe((res) => {
         console.log(res);
         this.listOfContacts=res.data
       }
@@ -63,6 +63,7 @@ export class ContactsMainComponent {
     this.getData();
   }
   deleteContact(ID:any){
+    debugger;
     this.http.deleteapi('api/Contacts/DeleteContacts/'+ID).subscribe((res) => {
       this.snackBar.open('Contact successfully Deleted!', 'Close', {
         duration: 3000, // Snackbar stays open for 3 seconds
@@ -77,4 +78,7 @@ export class ContactsMainComponent {
     this.contactPage=1;
     this.editData=data
   }
+
+
+
 }

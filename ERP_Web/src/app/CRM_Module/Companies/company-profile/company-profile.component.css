@@ -1,0 +1,38 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+    background: #f9f9f9;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.col-md-4 {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.form-label {
+    font-weight: normal;
+    display: block;
+}
+
+b {
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
+}
+h6 {
+    margin: 0;
+    text-decoration:double;
+    display: inline-block;
+    text-size-adjust: 20px !important;
+}

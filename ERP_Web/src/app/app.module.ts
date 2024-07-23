@@ -73,6 +73,7 @@ import { DealCreatedVsLostComponent } from './CRM_Module/Reports/deal-created-vs
 import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/churn-overview.component';
 import { RevenuebyMonthuarterearComponent } from './CRM_Module/Reports/revenueby-monthuarterear/revenueby-monthuarterear.component';
 import { SalesTeamPermonanceComponent } from './CRM_Module/Reports/sales-team-permonance/sales-team-permonance.component';
+import { CompanyProfileComponent } from './CRM_Module/Companies/company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -142,8 +143,8 @@ import { SalesTeamPermonanceComponent } from './CRM_Module/Reports/sales-team-pe
     ChurnOverviewComponent,
     DealCreatedVsLostComponent,
     RevenuebyMonthuarterearComponent,
-    SalesTeamPermonanceComponent
-    
+    SalesTeamPermonanceComponent,
+    CompanyProfileComponent
   ],
   imports: [
     HttpClientModule,

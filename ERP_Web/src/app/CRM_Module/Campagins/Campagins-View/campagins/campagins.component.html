@@ -1,15 +1,11 @@
-<div class=" mt-4">
-    <div class=" d-flex justify-content-between align-items-center">
-        <h3>Campaigns</h3>
-    </div>
+<div class="">
     <div class="card-body">
-        <div style="float: right; margin-bottom: 30px;">
-            <button class="btn btn-danger" routerLink="/CRM/Campagins/add-campagin">Add Campaigns</button>
+        <div style="float: right;">
+            <button class="btn btn-danger" routerLink="/CRM/Campagins/add-campagin" style="background-color: #8D0000;">Add Campaigns</button>
         </div>
     </div>
-    <hr />
     <div class="table-responsive mt-4" style="padding: 20px;">
-        <table class="table table-bordered">
+        <table class="rwd-table table-bordered" style="width: 100%;">
             <thead>
                 <tr>
                     <th>Actions</th>
@@ -49,8 +45,9 @@
                 </tr>
             </tbody>
         </table>
-        <div class="pagination">
-            <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
-        </div>
+        <div class="pagination-container mt-4" style="justify-content: end;">
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+            </pagination-controls>
+          </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="">
+<!-- <div class="">
     <div class="card">
         <div class="card-header">
             Create Quote
@@ -244,6 +244,237 @@
                 <div routerLink="/CRM/Companies/Quotes" style="width: 200px;" type="button"
                     class="btn cancel-btn">Close</div>
 
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header h4 d-flex justify-content-between align-items-center">
+            Quote Information
+        </div>
+        <div class="card-body">
+            <div class="tabs">
+                <div class="tab-header">
+                    <div class="tab" *ngFor="let tab of tabs; let i = index" [class.active]="selectedTab === i">
+                        <span (click)="selectTab(tab,i)">{{ tab }}</span>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div *ngIf="selectedTab !== null">
+                        <div *ngIf="selectedTab == 0" class="form first">
+                            <form [formGroup]="myForm" (ngSubmit)="addquotes()">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Quote Id <span style="color: red;">*</span></label>
+                                        <input type="text" class="form-control col-md-8" formControlName="quoteid" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Valid Until <span style="color: red;">*</span></label>
+                                        <input type="date" style="text-align: left;" class="form-control col-md-8"
+                                            formControlName="validuntil">
+                                    </div>
+                                    <div class="col-md-6" style="padding-top: 20px;">
+                                        <label>Quote Type<span style="color: red;">*</span></label>
+                                        <select class="form-select col-md-8" formControlName="quotetype">
+                                            <option value="1">Invoice</option>
+                                            <option value="2">Quote</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="padding-top: 20px;padding-bottom: 20px;">
+                                    <h4 style="text-align: center;">Address Information</h4>
+                                    <hr />
+                                    <fieldset>
+                                        <legend style="padding-top: 12px; padding-bottom: 12px;">Billing From</legend>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Name <span class="required">*</span></label>
+                                                <input type="text" class="form-control col-md-8"
+                                                    formControlName="billingfromcompanyname">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Company Address <span class="required">*</span></label>
+                                                <input type="text" class="form-control col-md-8"
+                                                    formControlName="billingfromcompanyaddress">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="padding-top: 20px;padding-bottom: 20px;">
+                                                <label>Email <span class="required">*</span></label>
+                                                <input type="text" class="form-control col-md-8"
+                                                    formControlName="billingfromemail">
+                                            </div>
+                                            <div class="col-md-6" style="padding-top: 20px; padding-bottom: 20px;">
+                                                <label>Phone Number <span class="required">*</span></label>
+                                                <input type="number" class="form-control col-md-8"
+                                                    formControlName="billingfromphonenumber">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <hr />
+                                        <legend style="padding-top: 12px; padding-bottom: 12px;">Billing To</legend>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Name <span class="required">*</span></label>
+                                                <input type="text" class="form-control col-md-8"
+                                                    formControlName="billingtocompanyname">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Company Address <span class="required">*</span></label>
+                                                <input type="text" class="form-control col-md-8"
+                                                    formControlName="billingtocompanyaddress">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="padding-top: 20px;">
+                                                <label>Email <span class="required">*</span></label>
+                                                <input type="text" class="form-control col-md-8"
+                                                    formControlName="billingtoemail">
+                                            </div>
+                                            <div class="col-md-6" style="padding-top: 20px;">
+                                                <label>Phone Number <span class="required">*</span></label>
+                                                <input type="number" class="form-control col-md-8"
+                                                    formControlName="billingtophonenumber">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <fieldset>
+                                    <hr />
+                                    <legend style="padding-top: 12px; padding-bottom: 12px;">Terms and Conditions
+                                    </legend>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Terms And Conditions <span class="required">*</span></label>
+                                            <textarea type="textarea" rows="4" class="form-control col-md-10"
+                                                formControlName="termsandconditions"></textarea>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Description Information <span class="required">*</span></label>
+                                            <textarea type="textarea" rows="4" class="form-control col-md-10"
+                                                formControlName="descriptioninformation"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="details ID mt-4">
+                                    <div class="emp-buttons">
+                                        <!-- <input style="width: 200px; height: 20px; background-color: #8D0000;"
+                                            type="submit" class="btn btn-primary" value="Next" /> -->
+                                            <button type="submit" style="width: 200px; background-color: #8D0000;"
+                                             class="btn btn-danger  mr-4">Submit & Next</button>
+                                        <div (click)="close()"
+                                            routerLink="/CRM/Companies/companiesinfo/{{companyid}}/quotation/{{companyid}}"
+                                            style="width: 200px;" type="button" class="btn btn-dark  mr-4">Cancel</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+
+
+
+                        <!--Item table-->
+
+
+
+
+                        <div *ngIf="selectedTab == 1">
+                            <div style="display: flex; justify-content: end; margin: 10px;">
+                                <div (click)="AddNewLine()" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    class="btn btn-danger" style="background-color: #8D0000;">Add new Product</div>
+                            </div>
+                            
+                            <div class="invoice-main">
+                                <div class="invoice">
+                                    <div class="row">
+                                        <label for="subtotal">Sub Total ($) : </label>
+                                        <input type="text" id="subtotal" formControlName="subtotal" >
+                                    </div>
+                                    <div class="row">
+                                        <label for="discount">Discount ($) : </label>
+                                        <input type="text" id="discount" formControlName="Discount">
+                                    </div>
+                                    <div class="row">
+                                        <label for="tax">Tax ($) : </label>
+                                        <input type="text" id="Tax" formControlName="Tax">
+                                    </div>
+                                    <div class="row">
+                                        <label for="adjustment">Adjustment ($) : </label>
+                                        <input type="number" id="adjustment" formControlName="adjustment" >
+                                    </div>
+                                    <div class="row">
+                                        <label for="grandtotal">Grand Total ($) : </label>
+                                        <input type="number" id="grandtotal" formControlName="grandtotal" >
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="details ID">
+                                <div class="emp-buttons" style="display: flex; gap: 10px;">
+                                    <button type="submit" style="width: 200px;margin-right: 10px;background-color: #8D0000;"
+                                        class="btn btn-primary">Submit</button>
+
+                                    <div style="width: 200px;" routerLink="/CRM/quotes-create" type="button"
+                                        class="btn btn-danger" class="btn btn-dark">Close</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade pt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 800px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="" style="width: fit-content;">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>S.NO</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>List Price ($)</th>
+                                <th>Amount ($)</th>
+                                <th>Discount ($)</th>
+                                <th>Tax ($)</th>
+                                <th>Total ($)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12</td>
+                                <td>product</td>
+                                <td>20</td>
+                                <td>456</td>
+                                <td>456</td>
+                                <td>4556</td>
+                                <td>456</td>
+                                <td>456</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button routerLink="/CRM/Companies/companiesinfo/{{companyid}}/quotation/{{companyid}}" type="button"
+                    class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button routerLink="/CRM/Companies/companiesinfo/{{companyid}}/quotation/{{companyid}}" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

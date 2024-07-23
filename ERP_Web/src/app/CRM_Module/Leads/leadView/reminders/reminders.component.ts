@@ -9,6 +9,13 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
   styleUrl: './reminders.component.css'
 })
 export class RemindersComponent {
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
+  tableSizes: any = [3, 6, 9, 12];
+  p:number=1;
+
+
   remindersList: any
   id: any;
   open = 1;
@@ -146,5 +153,17 @@ export class RemindersComponent {
     }
     );
   }
-
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getData();
+  }
+  getData() {
+    throw new Error('Method not implemented.');
+  }
+  
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.getData();
+  }
 }

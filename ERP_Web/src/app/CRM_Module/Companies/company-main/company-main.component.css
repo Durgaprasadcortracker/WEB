@@ -1,4 +1,6 @@
-
+.container-fluid{
+  width: 100%;
+}
 .search-container {
     display: flex;
     flex-direction: column;
