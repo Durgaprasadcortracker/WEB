@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 
 @Component({
   selector: 'app-sms-campagins',
@@ -8,6 +9,21 @@ import { Component } from '@angular/core';
 export class SmsCampaginsComponent {
 public message: string = '';
 public maxCharCount : number = 200;
+phoneNumber: string = '';
+messageBody: string = '';
+responseMessage: string = '';
+
+  constructor(private backendservice : BackendService) { }
+
+sendSms() {
+  this.backendservice.sendSms(this.phoneNumber).subscribe(
+    response => {
+      this.responseMessage = 'SMS sent successfully! Message SID: ' + response.message;
+    },
+    error => {
+      this.responseMessage = 'Failed to send SMS.';
+    }
+  );
 
 // phoneNumber: number;
 // textMessage: string;
@@ -33,4 +49,5 @@ public maxCharCount : number = 200;
 // }
 // }
 
+}
 }

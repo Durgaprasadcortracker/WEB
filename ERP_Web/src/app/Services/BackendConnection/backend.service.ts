@@ -31,4 +31,7 @@ export class BackendService {
   deleteapi(url: any,): Observable<any> {
     return this.http.delete(`${this.baseUrl}${url}`);
   }
+  sendSms(phoneNumber: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl, { phoneNumber });
+  }
 }
