@@ -1,19 +1,21 @@
-   <div class="container-fluid mt-4">
-   
+<div class="container-fluid mt-4">
+
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center h4">
             Companies
         </div>
 
         <div class="card-body">
-          <div style="float: right;">
-            <button class="btn btn-danger mr-2" style="background-color: #8d0000;" routerLink="/CRM/Companies/add">Add Company</button>
-            <button class="btn btn-danger button-gap" style="background-color: #8d0000;" routerLink="/CRM/Companies/bulk-upload">Bulk Upload</button>
+            <div style="float: right;">
+                <button class="btn btn-danger mr-2" style="background-color: #8d0000;"
+                    routerLink="/CRM/Companies/add">Add Company</button>
+                <button class="btn btn-danger button-gap" style="background-color: #8d0000;"
+                    routerLink="/CRM/Companies/bulk-upload">Bulk Upload</button>
+            </div>
         </div>
-       </div>
 
         <hr />
-       
+
         <div class="table-responsive mt-4" style="padding: 20px; ">
             <table class="rwd-table table-bordered" style="width: 100%;">
                 <thead>
@@ -25,7 +27,7 @@
                         <th>Industry Type</th>
                         <th>Head Count</th>
                         <th>Annual Revenue</th>
-                       
+
                     </tr>
                 </thead>
                 <tbody>
@@ -36,26 +38,31 @@
                         totalItems: count
                       };
                 let i = index">
-                <td>
-                    <span  routerLink="/CRM/Companies/edit/{{a.id}}" [queryParams]="{id:a.id}"  class="fa fa-pencil-alt" style="color: blue;">
-                        
-                    </span>
-                    <span (click)="deleteCompany(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
-                        
-                    </span>
-                </td>
-                        <td><a style="text-decoration: underline;" routerLink="/CRM/Companies/companiesinfo/{{a.id}}/profile/{{a.id}}"  [queryParams]="{companyId:a.id}"> {{a.companyName}}</a></td>
+                        <td>
+                            <span routerLink="/CRM/Companies/edit/{{a.id}}" [queryParams]="{id:a.id}"
+                                class="fa fa-pencil-alt" style="color: blue;">
+
+                            </span>
+                            <span (click)="deleteCompany(a.id)" class="fa fa-trash"
+                                style="padding-left: 25px;color: red;">
+
+                            </span>
+                        </td>
+                        <td><a style="text-decoration: underline;"
+                                routerLink="/CRM/Companies/companiesinfo/{{a.id}}/profile/{{a.id}}"
+                                [queryParams]="{companyId:a.id}"> {{a.companyName}}</a></td>
                         <td>{{a.companyOwner}}</td>
                         <td>{{a.companyIndustryName}}</td>
                         <td>{{a.companyIndustryTypeName}}</td>
                         <td>{{a.headCount}}</td>
                         <td>{{a.annualRevenue}}</td>
-                        
+
                     </tr>
                 </tbody>
             </table>
-            <div class="pagination float-end pt-2">
-                <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+            <div class="pagination-container mt-4" style="justify-content: end;">
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
             </div>
         </div>
     </div>

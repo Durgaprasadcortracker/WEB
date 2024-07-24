@@ -8,6 +8,18 @@ import { Observable } from 'rxjs';
   styleUrl: './social-media-campagins.component.css',
 })
 export class SocialMediaCampaginsComponent {
+  showScheduleInput: boolean = false;
+  scheduledTime: string = '';
+
+
+  toggleScheduleInput(show: boolean) {
+    this.showScheduleInput = show;
+  }
+
+  updateScheduledTime(event: any) {
+    this.scheduledTime = event.target.value;
+  }
+
   page: number = 1;
   count: number = 0;
   tableSize: number = 5;
