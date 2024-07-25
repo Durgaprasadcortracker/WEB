@@ -8,17 +8,19 @@ import { Observable } from 'rxjs';
   styleUrl: './social-media-campagins.component.css',
 })
 export class SocialMediaCampaginsComponent {
-  showScheduleInput: boolean = false;
-  scheduledTime: string = '';
+  showDateTimePicker = false;
+  scheduledTime: string | null = null;
 
-
-  toggleScheduleInput(show: boolean) {
-    this.showScheduleInput = show;
+  handlePublishOptionChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.showDateTimePicker = target.value === 'scheduleDate';
   }
 
-  updateScheduledTime(event: any) {
-    this.scheduledTime = event.target.value;
+  updateScheduledTime(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.scheduledTime = target.value;
   }
+
 
   page: number = 1;
   count: number = 0;

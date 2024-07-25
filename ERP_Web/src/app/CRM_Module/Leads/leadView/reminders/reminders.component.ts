@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reminders',
@@ -30,7 +31,8 @@ export class RemindersComponent {
     private http: BackendService,
     private fb: FormBuilder,
     private ActivatedRoute: ActivatedRoute,    
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
 
   ) {
     this.id = this.route.snapshot.params['id'];
@@ -80,6 +82,9 @@ export class RemindersComponent {
     if (this.myForm.value.Id == 0) {
       this.http.postapi('api/Lead/AddReminder', this.myForm.value).subscribe((res) => {
         console.log(res);
+        this.snackBar.open('Remainder successfully Added!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.close()
         this.router.navigate(['/CRM/Leads/leadView/'+this.id+'/reminder/'+this.id]);
         this.open = 1
@@ -90,6 +95,9 @@ export class RemindersComponent {
     else if (this.myForm.value.Id > 0) {
       this.http.postapi('api/Lead/UpdateReminder', this.myForm.value).subscribe((res) => {
         console.log(res);
+        this.snackBar.open('Remainder successfully Updated!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.close()
         this.open = 1
         this.getRequiredData()
@@ -107,6 +115,9 @@ export class RemindersComponent {
   }
   edit(_id: any) {
     this.http.getapi('api/Lead/GetRemindersby/' + _id).subscribe((res) => {
+      this.snackBar.open('Remainder successfully Updated!', 'Close', {
+        duration: 3000, // Snackbar stays open for 3 seconds
+      });
       if (res) {
         let _obj :any = new Object();
         console.log(res);
@@ -147,6 +158,9 @@ export class RemindersComponent {
   deleteReminder(ID: any) {
     this.http.deleteapi('api/Lead/DeleteReminder/' + ID).subscribe((res) => {
       console.log(res);
+      this.snackBar.open('Remainder successfully Deleted!', 'Close', {
+        duration: 3000, // Snackbar stays open for 3 seconds
+      });
       if (res) {
         this.getRequiredData()
       }

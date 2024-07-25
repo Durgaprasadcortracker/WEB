@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sms-campagins',
@@ -13,16 +14,23 @@ phoneNumber: string = '';
 messageBody: string = '';
 responseMessage: string = '';
 
-  constructor(private backendservice : BackendService) { }
+  constructor(private backendservice : BackendService,
+    private snackBar: MatSnackBar,
+  ) { }
 
 sendSms() {
   this.backendservice.sendSms(this.phoneNumber).subscribe(
     response => {
       this.responseMessage = 'SMS sent successfully! Message SID: ' + response.message;
+      this.snackBar.open('SMS successfully Sent!', 'Close', {
+        duration: 3000, // Snackbar stays open for 3 seconds
+      });
     },
+    
     error => {
       this.responseMessage = 'Failed to send SMS.';
     }
+    
   );
 
 // phoneNumber: number;

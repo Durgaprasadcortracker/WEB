@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-call-logs',
@@ -34,7 +35,8 @@ export class CallLogsComponent {
     private http: BackendService,
     private fb: FormBuilder,
     private ActivatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar,
 
   ) {
     this.id = this.route.snapshot.params['id'];
@@ -79,6 +81,9 @@ export class CallLogsComponent {
     if (this.myForm.value.id == 0) {
       this.http.postapi('api/Lead/AddCallLogs', this.myForm.value).subscribe((res) => {
         console.log(res);
+        this.snackBar.open('Call Log successfully Added!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.router.navigate(['/CRM/Leads/leadView/' + this.id + '/callLogs/' + this.id]);
         this.open = 1
         this.getRequiredData()
@@ -88,6 +93,9 @@ export class CallLogsComponent {
     else if (this.myForm.value.id > 0) {
       this.http.putapi('api/Lead/UpdateCallLogs', this.myForm.getRawValue()).subscribe((res) => {
         console.log(res);
+        this.snackBar.open('Call Log successfully Updated!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.close()
         this.open = 1
         this.getRequiredData()
@@ -118,6 +126,9 @@ export class CallLogsComponent {
   edit(_id: any) {
     this.http.getapi('api/Lead/GetCallLogsby/' + _id).subscribe((res) => {
       console.log(res);
+      this.snackBar.open('Call Log successfully Updated!', 'Close', {
+        duration: 3000, // Snackbar stays open for 3 seconds
+      });
       if (res) {
         if (res.callDate) {
           res.callDate = new Date(res.callDate).toISOString().substring(0, 10);
@@ -141,6 +152,9 @@ export class CallLogsComponent {
   deleteCallLog(ID: any) {
     this.http.deleteapi('api/Lead/DeleteCallLogs/' + ID).subscribe((res) => {
       console.log(res);
+      this.snackBar.open('Call Log successfully Deleted!', 'Close', {
+        duration: 3000, // Snackbar stays open for 3 seconds
+      });
       if (res) {
         this.getRequiredData()
       }

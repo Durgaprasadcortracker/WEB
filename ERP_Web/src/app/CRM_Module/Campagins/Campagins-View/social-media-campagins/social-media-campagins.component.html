@@ -89,9 +89,9 @@
       </div>
     </div>
   </div>
-</div> -->
-
-<div class="container">
+</div> 
+ -->
+ <div class="container">
   <div class="row">
     <div class="col-4">
       <div class="d-flex align-items-start mb-3">
@@ -99,66 +99,52 @@
           <div class="w-100">
             <div class="d-flex justify-content-between mb-2" style="padding-top: 20px;">
               <div class="text-center" style="padding-left: 20px;">
-                <div class="custom-checkbox">
-                  <input type="checkbox" id="whatsapp" value="whatsapp" (change)="toggleSelectwhatsapp($event)" multiple />
-                  <label for="whatsapp" class="btn btn-light btn-icon" (click)="sharePage('whatsapp')">
-                    <i class="fab fa-whatsapp fa-2x" style="color: #25d366"></i>
-                  </label>
-                </div>
+                <input type="checkbox" id="whatsapp" value="whatsapp" (change)="toggleSelectwhatsapp($event)" multiple />
+                <label for="whatsapp" class="custom-checkbox">
+                  <i class="fab fa-whatsapp fa-2x" style="color: #25d366"></i>
+                </label>
               </div>
               <div class="text-center" style="padding-left: 50px; padding-bottom: 20px;">
-                <div class="custom-checkbox">
-                  <input type="checkbox" id="twitter" value="twitter" (change)="toggleSelecttwitter($event)" />
-                  <label for="twitter" class="btn btn-light btn-icon" (click)="sharePage('twitter')">
-                    <i class="fab fa-twitter fa-2x" style="color: #55acee"></i>
-                  </label>
-                </div>
+                <input type="checkbox" id="twitter" value="twitter" (change)="toggleSelecttwitter($event)" />
+                <label for="twitter" class="custom-checkbox">
+                  <i class="fab fa-twitter fa-2x" style="color: #55acee"></i>
+                </label>
               </div>
               <div class="text-center" style="padding-left: 50px;">
-                <div class="custom-checkbox">
-                  <input type="checkbox" id="linkedin" value="linkedin" (change)="toggleSelectlinkedin($event)" />
-                  <label for="linkedin" class="btn btn-light btn-icon" (click)="sharePage('linkedin')">
-                    <i class="fab fa-linkedin-in fa-2x" style="color: #0082ca"></i>
-                  </label>
-                </div>
+                <input type="checkbox" id="linkedin" value="linkedin" (change)="toggleSelectlinkedin($event)" />
+                <label for="linkedin" class="custom-checkbox">
+                  <i class="fab fa-linkedin-in fa-2x" style="color: #0082ca"></i>
+                </label>
               </div>
             </div>
             <div class="d-flex justify-content-between mb-2">
               <div class="text-center" style="padding-left: 20px;">
-                <div class="custom-checkbox">
-                  <input type="checkbox" id="instagram" value="instagram" (change)="toggleSelectinstagram($event)" />
-                  <label for="instagram" class="btn btn-light btn-icon" (click)="sharePage('instagram')">
-                    <i class="fab fa-instagram fa-2x" style="color: #ac2bac"></i>
-                  </label>
-                </div>
+                <input type="checkbox" id="instagram" value="instagram" (change)="toggleSelectinstagram($event)" />
+                <label for="instagram" class="custom-checkbox">
+                  <i class="fab fa-instagram fa-2x" style="color: #ac2bac"></i>
+                </label>
               </div>
               <div class="text-center" style="padding-left: 20px; padding-bottom: 20px;">
-                <div class="custom-checkbox">
-                  <input type="checkbox" id="facebook" value="facebook" (change)="toggleSelectfacebook($event)" />
-                  <label for="facebook" class="btn btn-light btn-icon" (click)="sharePage('facebook')">
-                    <i class="fab fa-facebook-f fa-2x" style="color: #3b5998"></i>
-                  </label>
-                </div>
+                <input type="checkbox" id="facebook" value="facebook" (change)="toggleSelectfacebook($event)" />
+                <label for="facebook" class="custom-checkbox">
+                  <i class="fab fa-facebook-f fa-2x" style="color: #3b5998"></i>
+                </label>
               </div>
               <div class="text-center" style="padding-left: 20px;">
-                <div class="custom-checkbox">
-                  <input type="checkbox" id="mail" value="mail" (change)="toggleSelectmail($event)" />
-                  <label for="mail" class="btn btn-light btn-icon" (click)="sharePage('mail')">
-                    <i class="fab fa-google fa-2x" style="color: #dd4b39"></i>
-                  </label>
-                </div>
+                <input type="checkbox" id="mail" value="mail" (change)="toggleSelectmail($event)" />
+                <label for="mail" class="custom-checkbox">
+                  <i class="fab fa-google fa-2x" style="color: #dd4b39"></i>
+                </label>
               </div>
             </div>
             <div class="d-flex justify-content-between mb-2">
               <div class="text-center" style="padding-left: 20px;">
-                <div class="custom-checkbox">
-                  <input type="checkbox" id="pinterest" value="pinterest" (change)="toggleSelectpinterest($event)" />
-                  <label for="pinterest" class="btn btn-light btn-icon" (click)="sharePage('pinterest')">
-                    <i class="fab fa-pinterest fa-2x" style="color: #c61118"></i>
-                  </label>
-                </div>
+                <input type="checkbox" id="pinterest" value="pinterest" (change)="toggleSelectpinterest($event)" />
+                <label for="pinterest" class="custom-checkbox">
+                  <i class="fab fa-pinterest fa-2x" style="color: #c61118"></i>
+                </label>
               </div>
-              
+              <!-- Add more icons here if needed, or leave blank for proper alignment -->
             </div>
           </div>
         </div>
@@ -175,29 +161,35 @@
             <label for="fileUpload">Upload Image</label>
             <input type="file" class="form-control" id="fileUpload" />
           </div>
+          <div style="padding-top: 30px;">
+            <label class="h6" for="scheduledTime">Scheduled Time :</label>
+            <div *ngIf="scheduledTime" class="alert alert-info   h6">
+               {{ scheduledTime | date: 'short' }}
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
           <div class="form-group mb-3 h6" style="padding-top: 10px;">
             <label>Publishing Options</label>
             <div class="post-options p-3 border rounded">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="publishingOptions" id="publishNow" value="publishNow" (change)="toggleScheduleInput(false)" />
+                <input class="form-check-input" type="radio" name="publishingOptions" id="publishNow" value="publishNow" (change)="handlePublishOptionChange($event)" />
                 <label class="form-check-label" for="publishNow">Publish Now</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="publishingOptions" id="scheduleDate" value="scheduleDate" (change)="toggleScheduleInput(true)" />
+                <input class="form-check-input" type="radio" name="publishingOptions" id="scheduleDate" value="scheduleDate" (change)="handlePublishOptionChange($event)" />
                 <label class="form-check-label" for="scheduleDate">Schedule for a Specific Date</label>
               </div>
-              <div class="form-group mt-2" *ngIf="showScheduleInput">
-                <label for="scheduledTime">Scheduled Time</label>
-                <input type="datetime-local" class="form-control" id="scheduledTime" (change)="updateScheduledTime($event)" />
+              <div *ngIf="showDateTimePicker" class="form-group mt-3">
+                <label for="scheduledTime">Select Date and Time</label>
+                <input type="datetime-local" id="scheduledTime" class="form-control" (change)="updateScheduledTime($event)" />
               </div>
             </div>
           </div>
         </div>
       </div>
+     
       <div class="mt-3">
-        <p *ngIf="scheduledTime" class="scheduled-time-text">Scheduled Time: {{ scheduledTime }}</p>
         <button type="button" class="btn btn-primary m-2" style="background-color: #8d0000;" (click)="postNow()">Post Now</button>
       </div>
     </div>

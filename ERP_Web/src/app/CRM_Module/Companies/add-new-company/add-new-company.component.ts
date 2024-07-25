@@ -348,7 +348,7 @@ createId:any=0;
   }
   countryId:any;
   getCitybycountry(){
-    debugger;
+    
     this.countryId= this.myForm.get("country")?.value;
     this.http.getapi('api/Common/cities/'+this.countryId).subscribe((res) => {
       this.citylist = res;
@@ -361,7 +361,7 @@ createId:any=0;
     this.countryId= this.myForm.get("country")?.value;
     this.cityId=this.myForm.get("city")?.value;
     this.http.getapi('api/Common/GetCountryByState/'+this.cityId+"/"+this.countryId).subscribe((res) => {
-      debugger;
+      
       this.statelist = res.data;
     });
   }
