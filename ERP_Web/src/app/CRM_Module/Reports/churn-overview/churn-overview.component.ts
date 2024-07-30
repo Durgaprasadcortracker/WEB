@@ -77,7 +77,7 @@ export class ChurnOverviewComponent implements OnInit {
     }
 
     this.http.postapi('api/Common/GetDealCreatedReports', this.myForm.getRawValue()).subscribe((res) => {
-      this.listofdealswon = res;
+      this.churnData= res;
       this.count = this.listofdealswon.length;
     });
   }
