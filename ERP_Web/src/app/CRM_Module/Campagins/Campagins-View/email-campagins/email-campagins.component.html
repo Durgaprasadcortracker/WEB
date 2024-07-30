@@ -31,10 +31,10 @@
           totalItems: count }; 
           let i = index">
           <td>
-            <span  (click)="edit(editData.id)" class="fa fa-pencil-alt" style="color:blue"
-              routerLink="/CRM/Campagins/add-email"></span>
-            <span class="fa fa-trash" style="padding-left: 25px;color:red ;"
-              (click)="DeleteEmail(a.id)"></span>
+            <span  (click)="edit(editData.id)" class="btn btn-sm btn-outline-primary" 
+              routerLink="/CRM/Campagins/add-email"><i class="fa-solid fa-reply"></i></span>
+            <span class="btn btn-sm btn-outline-danger ml-4" 
+              (click)="DeleteEmail(a.id)"><i class="fa fa-trash"></i></span>
           </td>
           <td>{{ a.emailStatus }}</td>
           <td>{{a.eMail}}</td>

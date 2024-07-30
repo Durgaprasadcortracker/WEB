@@ -97,11 +97,11 @@
                     totalItems: count }; 
                     let i = index">
                       <td>
-                        <span  routerLink="/CRM/Leads/edit-leads/{{a.leadId}}" class="fa fa-pencil-alt" style="color:blue">
-                            
+                        <span  routerLink="/CRM/Leads/edit-leads/{{a.leadId}}" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-pencil-alt"></i>
                         </span>
-                        <span (click)="deleteLead(a.leadId)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
-                            
+                        <span (click)="deleteLead(a.leadId)" class="btn btn-sm btn-outline-danger ml-4">
+                            <i class="fa fa-trash"></i>
                         </span>
                     </td>
             

@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header h4">
+
+
+      Add New Stage
+    </div>
+    <div class="card-body">
+      <form [formGroup]="stageForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea type="text" class="form-control" id="description" formControlName="description"
+            placeholder="Enter description" rows="4" cols="3"></textarea>
+        </div>
+      </form>
+      <div class="d-flex flex-wrap">
+        <div class="col-md-6 mt-4 d-flex g-3 ">
+          <div type="submit" style="width: 200px; background-color: #8D0000;" class="btn btn-danger  mr-4">Save</div>
+          <div style="width: 200px;" type="button" class="btn btn-dark" routerLink="/CRM/Settings/leadstagelist"
+            (click)="close()">Close</div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,41 @@
+<div class="container-fluid mt-5">
+  <div class="card">
+    <div class="card-header h4">
+      Status
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2" style="padding-top: 20px;">
+          <a class="btn btn-outline-primary" routerLink="/CRM/Settings/status" style="background-color: #8D0000; color: white; float: right;">Add Status</a>
+        </div>
+      </div>
+      <table class="rwd-table table-bordered mt-4" style="width: 100%;">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center" style="width: 20%;">Actions</th>
+            <th scope="col" class="text-center" style="width: 40%;">Stage</th>
+            <th scope="col" class="text-center" style="width: 40%;">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let a of statuses | paginate: { itemsPerPage: tableSize, currentPage: page, totalItems: count }; let i = index">
+            <td class="text-center">
+              <button routerLink="/CRM/Settings/status" [queryParams]="{statusid: a.id}" class="btn btn-sm btn-outline-primary">
+                <i class="fa fa-pencil-alt"></i>
+              </button>
+              <button (click)="deleteStatus(a.id)" class="btn btn-sm btn-outline-danger ml-2">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+            <td class="text-center">{{a.stageName}}</td>
+            <td class="text-center">{{a.description}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination-container" style="float: right;">
+        <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

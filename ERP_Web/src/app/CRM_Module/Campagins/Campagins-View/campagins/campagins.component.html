@@ -25,11 +25,11 @@
                 let i = index">
                     <td>
                         <span (click)="edit(campaign.id)" routerLink="/CRM/Campagins/editcampaign/{{a.id}}"
-                            class="fa fa-pencil-alt" style="color: blue;">
-
+                            class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-pencil-alt"></i>
                         </span>
-                        <span (click)="deleteCampaign(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
-
+                        <span (click)="deleteCampaign(a.id)" class="btn btn-sm btn-outline-danger ml-4">
+                            <i class="fa fa-trash"></i>
                         </span>
                     </td>
                     <td>{{a.campaignName}}</td>

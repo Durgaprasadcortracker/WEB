@@ -1,0 +1,30 @@
+<div class="container-fluid mt-5">
+  <div class="card">
+    <div class="card-header h4">
+
+
+      New Time Zone
+    </div>
+    <div class="card-body">
+      <form [formGroup]="timezoneForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label for="description" class="h6">Description<span class="text-danger">*</span></label>
+          <div data-mdb-input-init class="form-outline">
+            <textarea type="text" class="form-control " id="description" formControlName="description" rows="4" cols="3"
+              placeholder="Enter description"
+              [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"></textarea>
+            <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+              <div *ngIf="f['description'].errors['required']">Description is required.</div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="d-flex flex-wrap">
+        <div class="col-md-6 mt-4 d-flex g-3 ">
+          <div type="submit" style="width: 200px; background-color: #8D0000;" class="btn btn-danger  mr-4">Save</div>
+          <div style="width: 200px;" type="button" class="btn btn-dark" routerLink="/CRM/Settings/timezonelist"
+            (click)="close()">Close</div>
+        </div>
+      </div>
+    </div>
+  </div>

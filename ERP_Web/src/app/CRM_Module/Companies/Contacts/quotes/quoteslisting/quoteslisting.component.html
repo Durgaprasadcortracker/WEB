@@ -100,15 +100,11 @@
                 <td style="width: 200px;">
 
                   <span (click)="edit(quotation.id)"  routerLink="/CRM/editquotes/{{a.id}}"
-                    class="fa fa-pencil-alt" style="color: blue;">
+                    class="btn btn-sm btn-outline-primary"> <i class="fa fa-pencil-alt"></i>
                   </span>
-                  <span style="padding-left: 20px;" routerLink="/CRM/quotes-invoice/{{a.id}}"><i class="fa-solid fa-download"></i></span>
-                  <span (click)="deleteQuotation(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
+                  <span  routerLink="/CRM/quotes-invoice/{{a.id}}" class="btn btn-sm btn-outline-primary ml-4"><i class="fa-solid fa-download"></i></span>
+                  <span (click)="deleteQuotation(a.id)" class="btn btn-sm btn-outline-danger ml-4"><i class="fa fa-trash"></i>
                   </span>
-                  <!-- <span>
-                    <a routerLink="/CRM/quotes-invoice"><i class="fa-solid fa-download"
-                      style="padding-right: 10px"></i></a>
-                  </span> -->
                 </td>
                 <td>{{a.quoteId}}</td>
 

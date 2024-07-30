@@ -1,0 +1,46 @@
+<!-- app.component.html -->
+<div class="container-fluid mt-5">
+    <div class="card">
+      <div class="card-header h4">
+        Status
+      </div>
+      <div class="card-body">
+
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+            <div class="col-md-6">
+                <label class="h6">Stage</label>
+                <select type="text" class="form-control form-control" formControlName="stageId" >
+                    <option value="" style="text-align: center;">--Select Stage--</option>
+                    <option *ngFor="let Stage of Stagelist" value="{{Stage.id}}">{{Stage.description}}</option>
+                </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="description" class="h6">Description</label>
+                    <textarea type="textarea" class="form-control" formControlName="description" id="description" placeholder="Enter description" rows="4" cols="3"></textarea>
+                </div>
+            </div>
+          <!-- <button type="submit" class="btn btn-danger m-2" style="background-color: #8D0000;">Submit</button>
+          <button type="button" class="btn btn-dark m-2" routerLink="/CRM/Settings/statuslist">Close</button> -->
+
+          <div class="d-flex flex-wrap">
+            <div class="col-md-6 mt-4 d-flex g-3 ">
+    
+              <button type="submit" style="width: 200px; background-color: #8D0000;"
+                class="btn btn-danger  mr-4">Save</button>
+    
+              <div style="width: 200px;" type="button" class="btn btn-dark" routerLink="/CRM/Settings/statuslist"
+               (click)="close()">Close</div>
+    
+    
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  
+    
+  </div>
+  
+  

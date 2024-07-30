@@ -1,0 +1,30 @@
+<div class="container-fluid mt-5">
+    <div class="card">
+        <div class="card-header h4">Probability</div>
+        <div class="card-body">
+            <form [formGroup]="probabilityForm" (ngSubmit)="submitForm()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="stage" class="h6">Stage</label>
+                        <select class="form-control form-control" formControlName="stageId" id="stage">
+                            <option value="">--Select Stage--</option>
+                            <option *ngFor="let stage of stageList" [value]="stage.id">{{stage.description}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="description" class="h6">Description</label>
+                        <input type="text" class="form-control" formControlName="description" id="description"
+                            placeholder="Enter description" />
+                    </div>
+                </div>
+            </form>
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6 mt-4 d-flex g-3 ">
+                    <div type="submit" style="width: 200px; background-color: #8D0000;" class="btn btn-danger  mr-4">
+                        Save</div>
+                    <div style="width: 200px;" type="button" class="btn btn-dark"
+                        routerLink="/CRM/Settings/probabilitylist" (click)="close()">Close</div>
+                </div>
+            </div>
+        </div>
+    </div>

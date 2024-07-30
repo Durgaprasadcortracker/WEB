@@ -25,11 +25,11 @@
                     totalItems: count }; 
                     let i = index">
                         <td>
-                            <span routerLink="/CRM/Leads/leadView/{{id}}/callLogs/{{id}}"  [queryParams]="{callsLogs:a.id}" (click)="edit(a.id)" class="fa fa-pencil-alt" style="color:blue">
-                               
+                            <span routerLink="/CRM/Leads/leadView/{{id}}/callLogs/{{id}}"  [queryParams]="{callsLogs:a.id}" (click)="edit(a.id)" class="btn btn-sm btn-outline-primary">
+                                <i class="fa fa-pencil-alt"></i>
                             </span>
-                            <span (click)="deleteCallLog(a.id)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
-                              
+                            <span (click)="deleteCallLog(a.id)" class="btn btn-sm btn-outline-danger ml-4">
+                                <i class="fa fa-trash"></i>
                             </span>
                         </td>
                         <td>{{i+1}}</td>

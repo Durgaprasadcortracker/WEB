@@ -21,18 +21,9 @@ import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-lo
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
 import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
-import { ConfigrationComponent } from './CRM_Module/Settings/Configration/configration/configration.component';
 import { UserProfileComponent } from './CRM_Module/Settings/user-profile/user-profile.component';
-import { StatusdesignComponent } from './CRM_Module/Settings/Configration/statusdesign/statusdesign.component';
-import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagedesign/stagedesign.component';
-import { SourcedesignComponent } from './CRM_Module/Settings/Configration/sourcedesign/sourcedesign.component';
-import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
-import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
-import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
 import { QuotesCreateComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-create/quotes-create.component';
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
-import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
-import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
 import { AddEmailConversationComponent } from './CRM_Module/Campagins/add-email-conversation/add-email-conversation.component';
 import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campagins/campagins.component';
@@ -41,23 +32,33 @@ import { SocialMediaCampaginsComponent } from './CRM_Module/Campagins/Campagins-
 import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms-campagins/sms-campagins.component';
 import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotes/quoteslisting/quoteslisting.component';
 import { QuotesInvoiceComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-invoice/quotes-invoice.component';
-import { CountryComponent } from './CRM_Module/Settings/Configration/country/country.component';
-import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
-import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
-import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 
 import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
 import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-router.component';
 import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
-import { AddStateComponent } from './CRM_Module/Settings/Configration/state/add-state/add-state.component';
-import { AddCityComponent } from './CRM_Module/Settings/Configration/city/add-city/add-city.component';
 import { DealCreatedVsLostComponent } from './CRM_Module/Reports/deal-created-vs-lost/deal-created-vs-lost.component';
 import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/churn-overview.component';
 import { SalesTeamPermonanceComponent } from './CRM_Module/Reports/sales-team-permonance/sales-team-permonance.component';
 import { RevenuebyMonthuarterearComponent } from './CRM_Module/Reports/revenueby-monthuarterear/revenueby-monthuarterear.component';
 import { CompanyProfileComponent } from './CRM_Module/Companies/company-profile/company-profile.component';
 import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
+import { LeadStatusComponent } from './CRM_Module/Settings/lead-status/lead-status.component';
+import { LeadStatusListComponent } from './CRM_Module/Settings/lead-status-list/lead-status-list.component';
+import { LeadStageComponent } from './CRM_Module/Settings/lead-stage/lead-stage.component';
+import { LeadStageListComponent } from './CRM_Module/Settings/lead-stage-list/lead-stage-list.component';
+import { ProbabilityListComponent } from './CRM_Module/Settings/probability-list/probability-list.component';
+import { ProbabilityComponent } from './CRM_Module/Settings/probability/probability.component';
+import { TimezoneListComponent } from './CRM_Module/Settings/timezone-list/timezone-list.component';
+import { TimezoneComponent } from './CRM_Module/Settings/timezone/timezone.component';
+import { IndustrytypeListComponent } from './CRM_Module/Settings/industrytype-list/industrytype-list.component';
+import { IndustrytypeComponent } from './CRM_Module/Settings/industrytype/industrytype.component';
+import { CalltypeListComponent } from './CRM_Module/Settings/calltype-list/calltype-list.component';
+import { CalltypeComponent } from './CRM_Module/Settings/calltype/calltype.component';
+import { IndustryListComponent } from './CRM_Module/Settings/industry-list/industry-list.component';
+import { IndustryComponent } from './CRM_Module/Settings/industry/industry.component';
+import { CityListComponent } from './CRM_Module/Settings/city-list/city-list.component';
+import { CityComponent } from './CRM_Module/Settings/city/city.component';
 
 
 
@@ -131,6 +132,33 @@ const routes: Routes = [
           { path: '**', redirectTo: '/CRM/Campagins/main' }
         ]
       },
+
+      {
+        path: 'Settings', component: SettingsMainComponent, children: [
+          {
+            path: 'status', component: LeadStatusComponent,
+
+          }, { path: 'statuslist', component: LeadStatusListComponent },
+          {
+            path: 'leadstage', component: LeadStageComponent,
+
+          }, { path: 'leadstagelist', component: LeadStageListComponent },
+          { path: 'probabilitylist', component: ProbabilityListComponent },
+          { path: 'probability', component: ProbabilityComponent },
+          { path: 'timezonelist', component: TimezoneListComponent },
+          { path: 'timezone', component: TimezoneComponent },
+          { path: 'industrytypelist', component: IndustrytypeListComponent },
+          { path: 'industrytype', component: IndustrytypeComponent },
+          { path: 'calltypelist', component: CalltypeListComponent },
+          { path: 'calltype', component: CalltypeComponent },
+          { path: 'industrylist', component: IndustryListComponent },
+          { path: 'industry', component: IndustryComponent },
+          { path: 'citylist', component: CityListComponent },
+          { path: 'city', component: CityComponent }
+
+        ]
+      }, 
+
       { path: 'add-contacts', component: AddContactsComponent },
       { path: 'edit-contacts/:id', component: AddContactsComponent },
       // { path: 'Leads', component: LeadsMainComponent },
@@ -157,20 +185,7 @@ const routes: Routes = [
       {
         path: 'Settings', component: SettingsMainComponent,
         children: [
-          { path: 'status', component: StatusdesignComponent },
-          { path: 'stage', component: StagedesignComponent },
-          { path: 'source', component: SourcedesignComponent },
-          { path: 'time-zone', component: TimezoneComponent },
-          { path: 'city', component: CityComponent },
-          { path: 'addcity', component: AddCityComponent },
-          { path: 'industry', component: IndustryComponent },
-          { path: 'probability', component: ProbabilityComponent },
-          { path: 'state', component: StateComponent }, 
-          { path: 'addstate', component: AddStateComponent },
-          { path: 'country', component: CountryComponent },
-          { path: 'industry-type', component: IndustrytypeComponent },
-          { path: 'call-type', component: CalltypeComponent },
-          { path: 'quote-type', component: QuotetypeComponent },
+          
           { path: 'user-view', component: UserProfileComponent },
           { path: '**', redirectTo: '/CRM/Settings/user-view' }
         ]

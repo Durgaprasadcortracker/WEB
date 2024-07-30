@@ -1,0 +1,46 @@
+<div class="container-fluid mt-5">
+    <div class="card">
+      <div class="card-header">
+        Industry
+      </div>
+      <div class="card-body">
+        <div class="row" >
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <a class="btn  btn-outline-primary" routerLink="/CRM/Settings/industry" style="background-color: #8D0000;color: white;">Add Industry</a>
+            </div>
+          
+        </div>
+        <table class="rwd-table mt-4" style="width: 100%;">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Industry</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let in of IndustryList| paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page,
+                  totalItems: count
+                }; let i=index">
+                <td scope="row">{{i+1}}</td>
+                <td>{{in.description}}</td>
+                <td>
+                  <button routerLink="/CRM/Settings/industry" [queryParams]="{industryid: in.id}" 
+                  class="btn btn-sm btn-outline-primary">
+                    <i class="fa fa-pencil-alt"></i>
+                  </button>
+                  <button  class="btn btn-sm btn-outline-danger ml-2" (click)="deleteIndustry(in.id)" >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination-container">
+            <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+        </div>
+        </div>

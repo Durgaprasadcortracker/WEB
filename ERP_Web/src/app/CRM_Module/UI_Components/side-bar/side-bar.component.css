@@ -111,13 +111,13 @@
 .subitems1 .activeSub {
     color: #ff9f43;
 }
-.submenuclass li {
+/* .submenuclass li {
     padding-left: 20px;
-}
+} */
 .submenuclass li:hover {
-    border-left: 7px solid #ff9f43 ;
+    border-left: 7px solid #8d0000 ;
     padding-left: 13px;
-    color: #ff9f43;
+    color: #8d0000;
 }
 @keyframes shake {
     10%, 90% {

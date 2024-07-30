@@ -27,10 +27,6 @@ import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conv
 import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
 
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
-import { SourcedesignComponent } from './CRM_Module/Settings/Configration/sourcedesign/sourcedesign.component';
-import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagedesign/stagedesign.component';
-import { ConfigrationComponent } from './CRM_Module/Settings/Configration/configration/configration.component';
-import { StatusdesignComponent } from './CRM_Module/Settings/Configration/statusdesign/statusdesign.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
@@ -38,42 +34,43 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
-
-import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
-import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
-import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
-import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
-import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
-
 import { EventsComponent } from './CRM_Module/Leads/events/events.component';
 import { QuotesCreateComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-create/quotes-create.component';
 import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotes/quoteslisting/quoteslisting.component';
-
-
-import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
 import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
 import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms-campagins/sms-campagins.component';
 import { SocialMediaCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/social-media-campagins/social-media-campagins.component';
 import { EmailCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/email-campagins/email-campagins.component';
 import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campagins/campagins.component';
-
-
-import { CountryComponent } from './CRM_Module/Settings/Configration/country/country.component';
-import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
-import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
 import { AddSocialmediaComponent } from './CRM_Module/Campagins/add-socialmedia/add-socialmedia.component';
 import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
 import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
 import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
 import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-router.component';
 import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
-import { AddStateComponent } from './CRM_Module/Settings/Configration/state/add-state/add-state.component';
-import { AddCityComponent } from './CRM_Module/Settings/Configration/city/add-city/add-city.component';
 import { DealCreatedVsLostComponent } from './CRM_Module/Reports/deal-created-vs-lost/deal-created-vs-lost.component';
 import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/churn-overview.component';
 import { RevenuebyMonthuarterearComponent } from './CRM_Module/Reports/revenueby-monthuarterear/revenueby-monthuarterear.component';
 import { SalesTeamPermonanceComponent } from './CRM_Module/Reports/sales-team-permonance/sales-team-permonance.component';
 import { CompanyProfileComponent } from './CRM_Module/Companies/company-profile/company-profile.component';
+import { IndustryComponent } from './CRM_Module/Settings/industry/industry.component';
+import { CalltypeComponent } from './CRM_Module/Settings/calltype/calltype.component';
+import { CalltypeListComponent } from './CRM_Module/Settings/calltype-list/calltype-list.component';
+import { CityComponent } from './CRM_Module/Settings/city/city.component';
+import { CityListComponent } from './CRM_Module/Settings/city-list/city-list.component';
+import { IndustryListComponent } from './CRM_Module/Settings/industry-list/industry-list.component';
+import { LeadStageComponent } from './CRM_Module/Settings/lead-stage/lead-stage.component';
+import { LeadStageListComponent } from './CRM_Module/Settings/lead-stage-list/lead-stage-list.component';
+import { ProbabilityComponent } from './CRM_Module/Settings/probability/probability.component';
+import { LeadStatusComponent } from './CRM_Module/Settings/lead-status/lead-status.component';
+import { LeadStatusListComponent } from './CRM_Module/Settings/lead-status-list/lead-status-list.component';
+import { ProbabilityListComponent } from './CRM_Module/Settings/probability-list/probability-list.component';
+import { QuotetypeComponent } from './CRM_Module/Settings/quotetype/quotetype.component';
+import { QuotetypeListComponent } from './CRM_Module/Settings/quotetype-list/quotetype-list.component';
+import { TimezoneComponent } from './CRM_Module/Settings/timezone/timezone.component';
+import { TimezoneListComponent } from './CRM_Module/Settings/timezone-list/timezone-list.component';
+import { IndustrytypeComponent } from './CRM_Module/Settings/industrytype/industrytype.component';
+import { IndustrytypeListComponent } from './CRM_Module/Settings/industrytype-list/industrytype-list.component';
 
 @NgModule({
   declarations: [
@@ -97,54 +94,54 @@ import { CompanyProfileComponent } from './CRM_Module/Companies/company-profile/
     ContactsMainComponent,
     AddNewCompanyComponent,
     LeadsViewComponent,
-    CountryComponent,
     ContactViewComponent,
     EmailConversionComponent,
     CallLogsComponent,
     EventsComponent,
     RemindersComponent,
-    SourcedesignComponent,
-    StagedesignComponent,
-    ConfigrationComponent,
-    StagedesignComponent,
-    StatusdesignComponent,
     ProfileComponent,
     AddNewCompanyComponent,
     BulkUploadMainComponent,
-    TimezoneComponent,
-    CityComponent,
-    IndustrytypeComponent,
-    IndustryComponent,
-    ProbabilityComponent,
-    StateComponent,
     CompaniesInfoComponent,
     SocialMediaCampaginsComponent,
     EmailCampaginsComponent,
     CampaginsComponent,
-    ConfigrationComponent,
     QuoteslistingComponent,
-    ProbabilityComponent,
     QuotesCreateComponent,
     QuoteslistingComponent,
     SignUpComponent,
-    StateComponent,
     CompaniesInfoComponent,
-    StateComponent,
-    CalltypeComponent,
-    QuotetypeComponent,
     AddSocialmediaComponent,
     AddLeadsComponent,
     CompainesRouteComponent,
     LeadsRouterComponent,
     CampaginsRouteComponent,
-    AddStateComponent,
-    AddCityComponent,
     DealCreatedVsLostComponent,
     ChurnOverviewComponent,
     DealCreatedVsLostComponent,
     RevenuebyMonthuarterearComponent,
     SalesTeamPermonanceComponent,
-    CompanyProfileComponent
+    CompanyProfileComponent,
+    IndustryComponent,
+    CalltypeComponent,
+    CalltypeListComponent,
+    CityComponent,
+    CityListComponent,
+    IndustryListComponent,
+    LeadStageComponent,
+    LeadStageListComponent,
+    ProbabilityComponent,
+    LeadStatusComponent,
+    LeadStatusListComponent,
+    ProbabilityListComponent,
+    QuotetypeComponent,
+    QuotetypeListComponent,
+    SettingsMainComponent,
+    TimezoneComponent,
+    TimezoneListComponent,
+    UserProfileComponent,
+    IndustrytypeComponent,
+    IndustrytypeListComponent
   ],
   imports: [
     HttpClientModule,

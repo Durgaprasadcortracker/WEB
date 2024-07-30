@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        Call Type 
+      </div>
+      <div class="card-body">
+        <div class="row" >
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <a class="btn  btn-outline-primary" routerLink="/CRM/Settings/calltype" style="background-color: #8D0000;color: white;">Add Call Type</a>
+            </div>
+          
+        </div>
+        <table class="rwd-table mt-4" style="width: 100%;">
+            <thead>
+              <tr>
+                <th scope="col-2">S.No</th>
+                <th scope="col-5">Call Type</th> 
+                <th scope="col-5">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of CalltypeList| paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page,
+                  totalItems: count
+                }; let i=index"> 
+                <td scope="row">{{i+1}}</td>
+                <td>{{c.description}}</td> 
+                <td>
+                  <button routerLink="/CRM/Settings/calltype" [queryParams]="{calltypeid: c.id}" 
+                    class="btn btn-sm btn-outline-primary">
+                    <i class="fa fa-pencil-alt"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger ml-2"  (click)="deleteCalltype(c.id)"> <!-- Updated from deleteSource -->
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pagination-container">
+            <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+        </div>
+</div>

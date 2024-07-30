@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        Industry Type
+      </div>
+      <div class="card-body">
+  
+        <form [formGroup]="industrytypeForm" (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <div data-mdb-input-init class="form-outline">
+              <input type="text" class="form-control" id="description" formControlName="description"
+                placeholder="Enter description" [ngClass]="{ 'is-invalid': submitted && f['description'].errors }" />
+              <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                <div *ngIf="f['description'].errors['required']">Description is required.</div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger">Submit</button>
+          <button type="button" class="btn btn-secondary ml-2" (click)="clear()">Close</button>
+        </form>
+      </div>
+    </div>
+</div>

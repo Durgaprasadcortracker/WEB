@@ -99,6 +99,7 @@ thead {
   min-width: 300px;
   max-width: 100%;
   border-collapse: collapse;
+  border: 1px solid black !important;
 }
 
 .rwd-table th{
@@ -111,6 +112,7 @@ thead {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: #f5f9fc;
+
 }
 
 .rwd-table tr:nth-child(odd):not(:first-child) {
@@ -150,6 +152,7 @@ thead {
   color: #333;
   border-radius: .4em;
   overflow: hidden;
+  border: 1px solid black;
 }
 
 .rwd-table tr {

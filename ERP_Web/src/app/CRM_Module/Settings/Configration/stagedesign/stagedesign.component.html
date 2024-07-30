@@ -1,58 +1,63 @@
-
-<div class="container mt-5">
+<div class="container-fluid">
     <div class="card">
-      <div class="card-header">
-        Stage
-      </div>
-      <div class="card-body">
-        
-        <form [formGroup]="stageForm" (ngSubmit)="submitForm()">
-          <div class="mb-2">
-            <label for="description" class="form-label">Description<span class="text-danger">*</span></label>
-            <div data-mdb-input-init class="form-outline">
-              <input type="text" class="form-control" id="description" formControlName="description"
-                placeholder="Enter description" [ngClass]="{ 'is-invalid': submited && f['description'].errors }" />
-              <div *ngIf="submited && f['description'].errors" class="invalid-feedback">
-                <div *ngIf="f['description'].errors['required']">Description is required.</div>
-              </div>
-            </div>
+<div class="card-header">
+    Add Stage
+</div>
+<div class="card-body">
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Description</label>
+            <input type="text" class="form-control" formControlName="">
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="button" class="btn btn-secondary ml-2"(click)="clear()">Close</button>
-        </form>
-      </div>
+               
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row emp-buttons" style="margin-top: 20px;">
+                    <div class="col-md-3" >
+                        <button type="submit" style="width: 100px;" class="btn submit-btn">Submit</button>
+                     
+                </div>
+                <div class="col-md-2" style="margin-left: 60px;">
+                    <div (click)="close()" style="width: 100px;"  type="button" class="btn cancel-btn">Close</div>
+                </div> 
+                </div>
+            </div>
+                    </div>
+    </form>
+    
+    <div class="child2" style="padding-top: 40px;">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>State</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Stage 1</td>
+                    <td>
+                        <span class="material-symbols-outlined">
+                            edit
+                        </span>
+                        <span  class="material-symbols-outlined">
+                            delete
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
 </div>
 
-  <table class="table mt-4">
-    <thead>
-      <tr>
-        <th scope="col">S.No</th>
-        <th scope="col">Stage</th> 
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let s of StageList   | paginate
-      : {
-          itemsPerPage: tableSize,
-          currentPage: page,
-          totalItems: count
-        } ; let i = index">
-        <th scope="row">{{i+1}}</th>
-        <td>{{s.description}}</td> 
-        <td>
-          <button routerLink="/CRM/Settings/stage/" [queryParams]="{stageid:s.id}"
-           class="btn btn-sm btn-outline-primary">
-            <i class="fa fa-pencil-alt"></i>
-          </button>
-          <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteStage(s.id)">
-            <i class="fa fa-trash"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div> 
-<div class="pagination-container">
-  <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
-</div>
+
+
+
+
