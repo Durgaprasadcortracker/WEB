@@ -30,7 +30,7 @@
         <div class="d-flex mt-3">
           <input type="submit" class="btn btn-danger me-2" value="Search"/>
           <button type="button" class="btn btn-dark me-2" (click)="clear()">Clear</button>
-          <button *ngIf="salesData" class="btn btn-danger" (click)="downloadReport()">Download Report</button>
+          <button *ngIf="deals" class="btn btn-danger" (click)="downloadReport()">Download Report</button>
         </div>
         <div class="table-responsive mt-4">
           <table class="table table-bordered">

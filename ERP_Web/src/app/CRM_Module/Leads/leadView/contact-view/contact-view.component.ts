@@ -31,7 +31,7 @@ export class ContactViewComponent {
       }
     });
     this.http.getapi('api/Common/GetStages').subscribe((res) => {
-      this.allstages = res
+      this.allstages = res.data
     });
     this.http.getapi('api/Common/GetStatus').subscribe((res) => {
       if (res.status) {

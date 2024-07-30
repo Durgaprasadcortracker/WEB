@@ -78,6 +78,7 @@ export class DealCreatedVsLostComponent implements OnInit {
     //   return;
     // }
     this.http.postapi('api/Common/GetDealLostReports', this.myForm.getRawValue()).subscribe((res) => {
+      console.log(res)
       this.deals = res; 
     });
   }
