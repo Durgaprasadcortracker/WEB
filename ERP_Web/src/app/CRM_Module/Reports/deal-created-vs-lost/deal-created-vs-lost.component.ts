@@ -17,10 +17,10 @@ export class DealCreatedVsLostComponent implements OnInit {
   tableSizes: any = [3, 6, 9, 12];
   p: number = 1;
   Id: any;
-  listofdealswon: any;
+  deals: any;
   _loginlist: any;
   _LostReason: string[] = ['Pricing', 'Product-Requirement', 'Lost to Competition', 'Prospecting'];
-  deals: any[] = [];
+
   myForm: FormGroup;
   submitted = false;
 

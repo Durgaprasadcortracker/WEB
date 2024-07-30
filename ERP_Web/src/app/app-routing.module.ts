@@ -147,7 +147,7 @@ const routes: Routes = [
           { path: 'deal-created-vs-lost', component: DealCreatedVsLostComponent },
           { path: 'churn-overview', component: ChurnOverviewComponent },
           { path: 'revenue-by-month-year-quoter', component: RevenuebyMonthuarterearComponent },
-          { path: 'sales-team-perfomance', component: SalesTeamPermonanceComponent },
+          { path: 'sales-team-permonance', component: SalesTeamPermonanceComponent },
         ] },
       { path: 'events', component: EventsComponent },
       { path: 'quoteslisting', component: QuoteslistingComponent },

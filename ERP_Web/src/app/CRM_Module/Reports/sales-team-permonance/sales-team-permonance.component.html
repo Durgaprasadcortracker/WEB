@@ -1,1 +1,72 @@
-<p>sales-team-permonance works!</p>
+<div class="card m-3">
+    <div class="card-header">
+      <h4>Sales Team Perfomance</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="myForm" (ngSubmit)="onSearch()">
+        <div class="d-flex flex-wrap">
+          <div class="col-md-3">
+            <label for="salesOwner">Sales Owner <span class="required">*</span></label>
+            <select
+              id="salesOwner"
+              class="form-select"
+              formControlName="SalesOwnerName">
+              <option value="0">--Select lead owner--</option>
+              <option *ngFor="let a of _loginlist" [value]="a.id">{{ a.firstName + ' ' + a.lastName }}</option>
+            </select>
+            <!-- <div *ngIf="submitted && f['LeadOwner'].errors" class="invalid-feedback">
+              <div *ngIf="f['LeadOwner'].errors['required']">Lead Owner is required.</div>
+            </div> -->
+          </div>
+          <div class="col-md-3">
+            <label for="fromDate">From date <span class="required">*</span></label>
+            <input type="date" id="fromDate" class="form-control" formControlName="fromDate" />
+          </div>
+          <div class="col-md-3">
+            <label for="toDate">To date <span class="required">*</span></label>
+            <input type="date" id="toDate" class="form-control" formControlName="toDate" />
+          </div>
+        </div>
+        <div class="d-flex mt-3">
+          <input type="submit" class="btn btn-danger me-2" value="Search"/>
+          <button type="button" class="btn btn-dark me-2" (click)="clear()">Clear</button>
+          <button *ngIf="salesData" class="btn btn-danger" (click)="downloadReport()">Download Report</button>
+        </div>
+        <div class="table-responsive mt-4">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>S.no</th>
+                <th>Sales Owner</th>
+                <th>Nurturings in Pipeline</th>
+                <th>Number of Deals Won</th>
+                <th>Avg Deal Value</th>
+                <th>Total Revenue</th>
+                <th>No of Deals Lost</th>
+                <th>Win %</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of deals; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ data.salesOwnerName }}</td>
+                    <td>{{ data.nurturingsInPipeline }}</td>
+                    <td>{{ data.numberOfDealsWon }}</td>
+                    <td>{{ data.avgDealValue }}</td>
+                    <td>{{ data.totalRevenue }}</td>
+                    <td>{{ data. numberOfDealsLost }}</td>
+                    <td>{{ data.winPercentage }}</td>
+                  </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-left mt-4">
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onTableDataChange($event)"
+          ></pagination-controls>
+        </div>
+      </form>
+    </div>
+  </div>

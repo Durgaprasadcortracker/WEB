@@ -12,8 +12,7 @@
           <select
             id="salesOwner"
             class="form-select"
-            formControlName="SalesOwnerName"
-            [ngClass]="{ 'is-invalid': submitted && f['SalesOwnerName']?.errors }">
+            formControlName="SalesOwnerName">
             <option value="0">--Select lead owner--</option>
             <option *ngFor="let a of _loginlist" [value]="a.id">{{ a.firstName + ' ' + a.lastName }}</option>
           </select>
