@@ -9,6 +9,9 @@ import { error } from 'console';
   styleUrl: './industrytype.component.css'
 })
 export class IndustrytypeComponent {
+close() {
+throw new Error('Method not implemented.');
+}
   industrytypeForm: any;
   IndustrytypeList: any; 
   industrytypeId:any;

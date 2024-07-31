@@ -16,6 +16,7 @@ export class SideBarComponent {
     this.http.getapi('api/Menu/GetMenus').subscribe((res) => {
       console.log(res);
       if (res.status) {
+        console.log(res);
         this.menuItems = JSON.parse(JSON.stringify(res.data));
         this.menuItems.forEach((a: any) => a.submenus = []);
         let _menuItems: any = []
