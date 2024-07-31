@@ -38,7 +38,7 @@ export class LeadStageListComponent {
   }
 
   getapi(): void {
-    this.http.getapi('api/Common/GetStage').subscribe((res) => {
+    this.http.getapi('api/Common/GetStages').subscribe((res) => {
       this.stagelist = res.data;
     }, (error) => {
       console.error('Error fetching stages', error);
