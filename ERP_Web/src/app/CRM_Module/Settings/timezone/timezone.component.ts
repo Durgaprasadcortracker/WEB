@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router'
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-timezone',
   templateUrl: './timezone.component.html',
@@ -22,7 +23,8 @@ throw new Error('Method not implemented.');
     private fb: FormBuilder, 
     private http: BackendService, 
     private router: Router, 
-    private ActivatedRoute: ActivatedRoute
+    private ActivatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {
     this.ActivatedRoute.queryParamMap.subscribe((params) => {
       this.timezoneId = params.get('timezoneId');
@@ -33,7 +35,6 @@ throw new Error('Method not implemented.');
     });
   }
   submitForm(): void {
-    debugger;
     this.submitted = true;
     console.log(this.timezoneForm.value);
     const _ID = this.timezoneForm.value.id
@@ -42,23 +43,32 @@ throw new Error('Method not implemented.');
     }
     if (_ID > 0) {
       this.http.putapi(`api/Common/UpdateTimezone`, this.timezoneForm.getRawValue()).subscribe((res) => { 
+        this.snackBar.open('Time Zone Updated successfully!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.clear();
       }, (error) => {
         console.error('Error updating Timezone', error);
       });
     } else {
       this.http.postapi('api/Common/AddTimezone', this.timezoneForm.getRawValue()).subscribe(() => { 
+        console.log();
+        this.snackBar.open('Time Zone Added successfully!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.clear();
+
       }, (error) => {
-        console.error('Error adding quotetype', error);
+        console.error('Error adding AddTimezone', error);
       });
     }
+    this.router.navigate(['/CRM/Settings/timezonelist']);
   }
   clear(): void {
     this.submitted = false;
     this.timezoneForm.reset();
     this.ngOnInit()
-    this.router.navigate (['/CRM/Settings/timezone']);
+    this.router.navigate (['/CRM/Settings/timezonelist']);
   }
 
   getTimezoneById(id : any) {
@@ -68,10 +78,14 @@ throw new Error('Method not implemented.');
     });
   }
   ngOnInit(){
-    this.timezoneForm = this.fb.group({
-      id: [0],
-      description: [null, Validators.required]
-    });
+    this.timezoneForm=new FormGroup({
+      id:new FormControl<number>(0),
+      description:new FormControl(null)
+    })
+    // this.timezoneForm = this.fb.group({
+    //   id: [0],
+    //   description: [null, Validators.required]
+    // });
     this.gettimezonelist();
   }
   deleteTimezone(id: number): void {
@@ -89,6 +103,7 @@ throw new Error('Method not implemented.');
     }, (error) => {
       console.error('Error fetching timezones', error);
     });
+    
   }
   get f(): { [key: string]: AbstractControl } {
     return this.timezoneForm.controls;

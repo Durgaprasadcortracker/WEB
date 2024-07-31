@@ -3,6 +3,7 @@ import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { error } from 'console';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-industrytype',
   templateUrl: './industrytype.component.html',
@@ -21,7 +22,9 @@ throw new Error('Method not implemented.');
     private fb: FormBuilder, 
     private http: BackendService, 
     private router: Router, 
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
+  ) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       this.industrytypeId = params.get('industrytypeid'); 
       console.log(this.industrytypeId);
@@ -51,6 +54,9 @@ throw new Error('Method not implemented.');
     if (_ID > 0){
       this.http.putapi(`api/Common/UpdateIndustryTypes`, this.industrytypeForm.value).subscribe((res) => {
         this.clear();
+        this.snackBar.open('Industry Type Updated successfully!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.router.navigate(['/CRM/Settings/industrytypelist'])
       },(error)=> {
         console.error('Error updating Industry Type', error);
@@ -58,6 +64,9 @@ throw new Error('Method not implemented.');
     }else {
       this.http.postapi('api/Common/AddIndustryType', this.industrytypeForm.value).subscribe(()=>{
         this.clear();
+        this.snackBar.open('Industry Type Added successfully!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.router.navigate(['/CRM/Settings/industrytypelist'])
       },(error) => {
         console.error('Error adding quotetype', error);
@@ -79,6 +88,6 @@ throw new Error('Method not implemented.');
     this.submitted = false;
     this.industrytypeForm.reset();
     this.ngOnInit()
-    this.router.navigate(['/CRM/Settings/industrytype'])
+    this.router.navigate(['/CRM/Settings/industrytypelist'])
   }
 }

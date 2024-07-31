@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-probability',
   templateUrl: './probability.component.html',
@@ -19,7 +20,8 @@ throw new Error('Method not implemented.');
     private fb: FormBuilder,
     private http: BackendService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {
     this.activatedRoute.queryParamMap.subscribe((params) => {
       const param = params.get('id');
@@ -56,7 +58,6 @@ throw new Error('Method not implemented.');
     });
   }
   submitForm(): void {
-    debugger;
     const formData = this.probabilityForm.value;
     formData.id = this.currentProbabilityId;
 
@@ -74,6 +75,9 @@ throw new Error('Method not implemented.');
         console.log('Probability added successfully');
         this.router.navigate(['/CRM/Settings/probabilitylist'])
         this.resetForm();
+        this.snackBar.open('Probability Added successfully!', 'Close', {
+               duration: 3000, // Snackbar stays open for 3 seconds
+           });
       }, (error) => {
         console.error('Error adding probability', error);
       });

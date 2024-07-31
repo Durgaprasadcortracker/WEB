@@ -280,7 +280,6 @@ createId:any=0;
   }
 
   addcompany() {
-    debugger;
     this.submitted=true;
     if(this.myForm.invalid){
       return;
