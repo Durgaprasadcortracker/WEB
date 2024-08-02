@@ -27,7 +27,7 @@
                   currentPage: page,
                   totalItems: count
                 }; let i=index">
-            <td>
+            <td class="text-center">
 
               <button routerLink="/CRM/Settings/leadstage" [queryParams]="{stageid:s.id}"
                 class="btn btn-sm btn-outline-primary">
@@ -37,8 +37,8 @@
                 <i class="fa fa-trash"></i>
               </button>
             </td>
-            <td scope="row">{{i+1}}</td>
-            <td>{{s.description}}</td>
+            <td scope="row" class="text-center">{{i+1}}</td>
+            <td class="text-center">{{s.description}}</td>
 
           </tr>
         </tbody>

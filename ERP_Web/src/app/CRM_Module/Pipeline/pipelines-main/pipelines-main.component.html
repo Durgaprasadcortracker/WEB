@@ -24,7 +24,6 @@
         <div class="col-md-3" style="float: right;padding-top: 30px;padding-left: 100px;">
           <button type="submit" style="width: 200px; background-color: #8D0000;"
             class="btn btn-danger  mr-4">Submit</button>
-          <!-- <button type="submit" class="btn btn-danger mr-2" style="background-color: #8d0000;">Search</button> -->
         </div>
       </div>
     </form>
@@ -52,4 +51,138 @@
       </div>
     </div>
   </div>
+</div> 
+<div class="container mt-5" *ngIf="showListing">
+  <div class="row mb-3">
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>Deal Listing</h2>
+    </div>
+    <div class="card-body">
+      <div class="col-md-12 text-right">
+        <button class="btn btn-primary" (click)="togglePage()">Create New Deal</button>
+      </div>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Actions</th>
+            <th>Deal Owner</th>
+            <th>Deal Name</th>
+            <th>Contact Name</th>
+            <th>Lead Source</th>
+            <th>Closing Date</th>
+            <th>Expected Revenue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="btn btn-sm btn-outline-primary">
+                  <i class="fa fa-pencil-alt"></i>
+              </span>
+              <span class="btn btn-sm btn-outline-danger ml-4">
+                  <i class="fa fa-trash"></i>
+              </span>
+          </td>
+            <td>comes from loginId</td>
+            <td>Deal name</td>
+            <td>comes from lead</td>
+            <td>lead source</td>
+            <td>closing date</td>
+            <td>amount of deal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+<!-- 
+<div class="container mt-5" *ngIf="!showListing">
+  <div class="card">
+    <div class="card-header">
+      <h2>Create Deal</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="dealForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="dealOwner">Deal Owner</label>
+            <input type="text" class="form-control" id="dealOwner" formControlName="dealOwner" readonly>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="dealName">Deal Name</label>
+            <input type="text" class="form-control" id="dealName" formControlName="dealName">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="accountName">Account Name</label>
+            <input type="text" class="form-control" id="accountName" formControlName="accountName">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="type">Type</label>
+            <select class="form-control" id="type" formControlName="type">
+              <option value="">-None-</option>
+          
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="nextStep">Next Step</label>
+            <input type="text" class="form-control" id="nextStep" formControlName="nextStep">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="leadSource">Lead Source</label>
+            <select class="form-control" id="leadSource" formControlName="leadSource">
+              <option value="">-None-</option>
+             
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="contactName">Contact Name</label>
+            <input type="text" class="form-control" id="contactName" formControlName="contactName">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" id="amount" formControlName="amount">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="closingDate">Closing Date</label>
+            <input type="date" class="form-control" id="closingDate" formControlName="closingDate">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="stage">Stage</label>
+            <select class="form-control" id="stage" formControlName="stage">
+              <option value="Qualification">Qualification</option>
+           
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="probability">Probability (%)</label>
+            <input type="number" class="form-control" id="probability" formControlName="probability">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="expectedRevenue">Expected Revenue</label>
+            <input type="number" class="form-control" id="expectedRevenue" formControlName="expectedRevenue">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="campaignSource">Campaign Source</label>
+            <input type="text" class="form-control" id="campaignSource" formControlName="campaignSource">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="d-flex justify-content-left">
+          <button type="reset" class="btn btn-secondary">Save</button>
+          <button type="button" class="btn btn-danger" (click)="togglePage()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->

@@ -15,6 +15,7 @@ export class PipelinesMainComponent {
   selectedTab = 0
   // public tabs = ['New','Prospect','Contacted','Qualified','Opportunitity','Proposalsent','Nuturing','Won'];
   piplineData: any;
+showListing: any;
   
 
  
@@ -62,5 +63,41 @@ export class PipelinesMainComponent {
       });
   }
 
-  
+
+
+
+  togglePage() {
+    this.showListing = !this.showListing;
+  }
+
 }
+
+
+  // dealForm: FormGroup;
+  // showListing: boolean = true;
+
+  // constructor(private fb: FormBuilder) {
+  //   this.dealForm = this.fb.group({
+  //     dealOwner: ['Ravi Chandra'],
+  //     dealName: [''],
+  //     accountName: [''],
+  //     type: [''],
+  //     nextStep: [''],
+  //     leadSource: [''],
+  //     contactName: [''],
+  //     amount: [''],
+  //     closingDate: [''],
+  //     stage: ['Qualification'],
+  //     probability: ['10'],
+  //     expectedRevenue: [''],
+  //     campaignSource: [''],
+  //     description: ['']
+  //   });
+  // }
+  
+
+
+   // onSubmit() {
+  //   // Handle form submission logic here
+  //   console.log(this.dealForm.value);
+  // }

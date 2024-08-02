@@ -1,12 +1,12 @@
 <div class="card">
-    <div class="card-header">
+    <div class="card-header h4">
       City
     </div>
 <div class="card-body">
     <form [formGroup]="cityForm" (ngSubmit)="submitForm()">
       <div class="row">
         <div class="col-md-6">
-          <label>Country</label>
+          <label class="h6">Country</label>
           <select class="form-select" formControlName="countryId" (change)="getstatesbycountrycity()"  [ngClass]="{ 'is-invalid': submited && f['countryId'].errors }">
             <option value="null">--Select Country--</option>
             <option *ngFor="let country of countrylist" value="{{country.id}}">{{country.description}}</option>
@@ -20,7 +20,7 @@
           </select> -->
         </div>
         <div class="col-md-6">
-          <label>State</label>
+          <label class="h6">State</label>
           <select class="form-select" formControlName="stateId"  [ngClass]="{ 'is-invalid': submited && f['stateId'].errors }">
             <option value="null">--Select State --</option>
             <option *ngFor="let state of stateList" value="{{state.id}}">{{state.description}}</option>
@@ -37,7 +37,7 @@
       </div>
       <div class="row mt-3">
         <div class="col-md-6">
-          <label for="description" class="form-label">City<span class="text-danger">*</span></label>
+          <label for="description" class="form-label h6">City<span class="text-danger">*</span></label>
           <div data-mdb-input-init class="form-outline">
             <input type="text" class="form-control"  id="description" formControlName="description"
               placeholder="Enter description" [ngClass]="{ 'is-invalid': submited && f['description'].errors }" />
