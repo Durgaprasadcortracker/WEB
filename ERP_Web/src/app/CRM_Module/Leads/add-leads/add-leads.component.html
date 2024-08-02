@@ -92,8 +92,8 @@
                         <option value="null">--Select Source--</option>
                         <option *ngFor="let source of sourcelist" value="{{source.id}}">{{source.description}}</option>
                     </select>
-                    <div *ngIf="submitted && f['source'].errors" class="invalid-feedback">
-                        <div *ngIf="f['source'].errors['required']">Lead Source is required.</div>
+                    <div *ngIf="submitted && f['leadSource'].errors" class="invalid-feedback">
+                        <div *ngIf="f['leadSource'].errors['required']">Lead Source is required.</div>
                     </div>
                 </div>
                 <div class="col-md-3">
