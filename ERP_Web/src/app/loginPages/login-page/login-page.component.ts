@@ -10,113 +10,232 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent {
-  ShowHide:boolean=true;
-openForgotPassword: any;
-  
-  signup(){
-    this.ShowHide=false
+  ShowHide: boolean = true;
+  openForgotPassword: any;
+
+  signup() {
+    this.ShowHide = false;
   }
-    
-  login(){
-  this.ShowHide=true
+
+  login() {
+    this.ShowHide = true;
   }
 
   submitted = false;
   constructor(private fb: FormBuilder,
-    private router:Router ,
-    private backendservice:BackendService,
+    private router: Router,
+    private backendservice: BackendService,
     private snackBar: MatSnackBar,
-  ){}
-  loginform:FormGroup=new FormGroup({
-    email:new FormControl(''),
-    password:new FormControl('')
-  })  
+  ) { }
+
+  loginform: FormGroup = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  });
+
   signupform: FormGroup = new FormGroup({
     firstname: new FormControl(''),
     lastname: new FormControl(''),
     company: new FormControl(''),
-    designation:new FormControl(''),
-    phonenumber:new FormControl(''),
-    gender:new FormControl(<number>(0)),
-    email:new FormControl(''),
-    password:new FormControl('')
+    designation: new FormControl(''),
+    phonenumber: new FormControl(''),
+    gender: new FormControl(<number>(0)),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    exp_date: new FormControl('')  // Add exp_date to the form
   });
-  
-  formBuilder: any;
 
-  ngOnInit():void{
-    this.loginform=this.fb.group({
-      email:new FormControl('',Validators.required),
-      password:new FormControl('',Validators.required)
-    })
-    this.signupform = this.fb.group(
-      {
-        firstname: ['', Validators.required],
-        lastname: ['',Validators.required],
-        company: ['',Validators.required],
-        designation: ['',Validators.required],
-        phonenumber: ['',Validators.required],
-        gender:[0],
-        email: ['', [Validators.required]],
-        password: ['',[Validators.required,Validators.minLength(6),
-            Validators.maxLength(40)]],
-      });
-  
+  ngOnInit(): void {
+    this.loginform = this.fb.group({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
+    this.signupform = this.fb.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      company: ['', Validators.required],
+      designation: ['', Validators.required],
+      phonenumber: ['', Validators.required],
+      gender: [0],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
+      exp_date: ['']  // Initialize exp_date field
+    });
+
+       // Automatically set exp_date to current date + 7 days when form is initialized
+       this.signupform.controls['exp_date'].setValue(this.calculateExpDate());
   }
+
+  calculateExpDate() {
+    const signupDate = new Date();
+    const expDate = new Date(signupDate.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days from signup
+    sessionStorage.setItem('expDate', expDate.toISOString());
+    return expDate.toISOString().split('T')[0]; // Return the date in YYYY-MM-DD format
+  }
+
+
   get f(): { [key: string]: AbstractControl } {
     return this.loginform.controls;
   }
+
   get fg(): { [key: string]: AbstractControl } {
     return this.signupform.controls;
   }
-  errormsg:any;
-  onSubmit(): void {
- 
-   this.submitted = true;
 
+  errormsg: any;
+
+  onSubmit(): void {
+    this.submitted = true;
     if (this.loginform.invalid) {
       return;
     }
- 
     console.log(this.loginform.getRawValue());
-    this.backendservice.putapi('api/Login/authenticate',this.loginform.getRawValue()).subscribe(response=>{
-    
-      if(response.status==false){
-         this.errormsg=response.message;
-         return;
-      }
-      else{
-        this.snackBar.open('Logged in Successfully,Well Come !', 'Close', {
+    this.backendservice.putapi('api/Login/authenticate', this.loginform.getRawValue()).subscribe(response => {
+      if (response.status == false) {
+        this.errormsg = response.message;
+        return;
+      } else {
+        this.snackBar.open('Logged in Successfully, Welcome!', 'Close', {
           duration: 3000, // Snackbar stays open for 3 seconds
         });
-        sessionStorage.setItem("FullName",response.data.firstName+" "+response.data.lastName)
-        sessionStorage.setItem("Designation",response.data.designation)
-        sessionStorage.setItem("id",response.data.id)
-      this.router.navigate(['/CRM/Home'])
+        sessionStorage.setItem("FullName", response.data.firstName + " " + response.data.lastName);
+        sessionStorage.setItem("Designation", response.data.designation);
+        sessionStorage.setItem("id", response.data.id);
+        this.router.navigate(['/CRM/Home']);
       }
-    })
-    
+    });
   }
-  successmsg:any;
-  OnSignUp(){
-    console.log(this.signupform.value)
-    this.submitted = true;
 
-    // if (this.signupform.invalid) {
-    //   return;
-    // }
+  successmsg: any;
+
+  OnSignUp() {
+    console.log(this.signupform.value);
+    this.submitted = true;
+    if (this.signupform.invalid) {
+      return;
+    }
     console.log(this.signupform.getRawValue());
-    this.backendservice.postapi('api/Login/AddLogins',this.signupform.getRawValue()).subscribe(response=>{
-      this.snackBar.open('SignUp Successfully Completed!', 'LogIn Now', {
+    this.backendservice.postapi('api/Login/AddLogins', this.signupform.getRawValue()).subscribe(response => {
+      this.snackBar.open('SignUp Successfully Completed!', 'Log In Now', {
         duration: 3000, // Snackbar stays open for 3 seconds
       });
-      this.router.navigate(['/login']);
     });
-    this.successmsg="Saved Successfully";
   }
-   onReset(): void {
+
+  onReset(): void {
     this.submitted = false;
+    this.loginform.reset();
     this.signupform.reset();
   }
 
 }
+
+
+  //   ShowHide:boolean=true;
+  // openForgotPassword: any;
+
+  //   signup(){
+  //     this.ShowHide=false
+  //   }
+
+  //   login(){
+  //   this.ShowHide=true
+  //   }
+
+  //   submitted = false;
+  //   constructor(private fb: FormBuilder,
+  //     private router:Router ,
+  //     private backendservice:BackendService,
+  //     private snackBar: MatSnackBar,
+  //   ){}
+  //   loginform:FormGroup=new FormGroup({
+  //     email:new FormControl(''),
+  //     password:new FormControl('')
+  //   })  
+  //   signupform: FormGroup = new FormGroup({
+  //     firstname: new FormControl(''),
+  //     lastname: new FormControl(''),
+  //     company: new FormControl(''),
+  //     designation:new FormControl(''),
+  //     phonenumber:new FormControl(''),
+  //     gender:new FormControl(<number>(0)),
+  //     email:new FormControl(''),
+  //     password:new FormControl('')
+  //   });
+
+  //   formBuilder: any;
+
+  //   ngOnInit():void{
+  //     this.loginform=this.fb.group({
+  //       email:new FormControl('',Validators.required),
+  //       password:new FormControl('',Validators.required)
+  //     })
+  //     this.signupform = this.fb.group(
+  //       {
+  //         firstname: ['', Validators.required],
+  //         lastname: ['',Validators.required],
+  //         company: ['',Validators.required],
+  //         designation: ['',Validators.required],
+  //         phonenumber: ['',Validators.required],
+  //         gender:[0],
+  //         email: ['', [Validators.required]],
+  //         password: ['',[Validators.required,Validators.minLength(6),
+  //             Validators.maxLength(40)]],
+  //       });
+
+  //   }
+  //   get f(): { [key: string]: AbstractControl } {
+  //     return this.loginform.controls;
+  //   }
+  //   get fg(): { [key: string]: AbstractControl } {
+  //     return this.signupform.controls;
+  //   }
+  //   errormsg:any;
+  //   onSubmit(): void {
+
+  //    this.submitted = true;
+
+  //     if (this.loginform.invalid) {
+  //       return;
+  //     }
+
+  //     console.log(this.loginform.getRawValue());
+  //     this.backendservice.putapi('api/Login/authenticate',this.loginform.getRawValue()).subscribe(response=>{
+
+  //       if(response.status==false){
+  //          this.errormsg=response.message;
+  //          return;
+  //       }
+  //       else{
+  //         this.snackBar.open('Logged in Successfully,Well Come !', 'Close', {
+  //           duration: 3000, // Snackbar stays open for 3 seconds
+  //         });
+  //         sessionStorage.setItem("FullName",response.data.firstName+" "+response.data.lastName)
+  //         sessionStorage.setItem("Designation",response.data.designation)
+  //         sessionStorage.setItem("id",response.data.id)
+  //       this.router.navigate(['/CRM/Home'])
+  //       }
+  //     })
+
+  //   }
+  //   successmsg:any;
+  //   OnSignUp(){
+  //     console.log(this.signupform.value)
+  //     this.submitted = true;
+
+  //     // if (this.signupform.invalid) {
+  //     //   return;
+  //     // }
+  //     console.log(this.signupform.getRawValue());
+  //     this.backendservice.postapi('api/Login/AddLogins',this.signupform.getRawValue()).subscribe(response=>{
+  //       this.snackBar.open('SignUp Successfully Completed!', 'LogIn Now', {
+  //         duration: 3000, // Snackbar stays open for 3 seconds
+  //       });
+  //       this.router.navigate(['/login']);
+  //     });
+  //     this.successmsg="Saved Successfully";
+  //   }
+  //    onReset(): void {
+  //     this.submitted = false;
+  //     this.signupform.reset();
+  //   }

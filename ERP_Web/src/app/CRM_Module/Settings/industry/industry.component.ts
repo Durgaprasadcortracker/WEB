@@ -74,7 +74,7 @@ export class IndustryComponent {
     this.industryForm.reset();
     this.submited = false;
     this.ngOnInit()
-    this.router.navigate(['/CRM/Settings/industry']);
+    this.router.navigate(['/CRM/Settings/industrylist']);
   }
 
 

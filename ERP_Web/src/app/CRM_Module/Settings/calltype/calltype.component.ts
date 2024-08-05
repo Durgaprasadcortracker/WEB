@@ -72,7 +72,7 @@ export class CalltypeComponent {
     this.calltypeForm.reset();
     this.submited = false;
     this.ngOnInit()
-    this.router.navigate(['/CRM/Settings/calltype']);
+    this.router.navigate(['/CRM/Settings/calltypelist']);
   }
 
 }

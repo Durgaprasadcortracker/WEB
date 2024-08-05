@@ -1,22 +1,22 @@
 <div class="container-fluid">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header h4">
         Call Type 
       </div>
       <div class="card-body">
         <div class="row" >
             <div class="col-md-9"></div>
-            <div class="col-md-3">
-                <a class="btn  btn-outline-primary" routerLink="/CRM/Settings/calltype" style="background-color: #8D0000;color: white;">Add Call Type</a>
+            <div class="col-md-3" style="padding-top: 20px;">
+                <a class="btn  btn-outline-primary" routerLink="/CRM/Settings/calltype" style="background-color: #8D0000;color: white;float: right;">Add Call Type</a>
             </div>
           
         </div>
-        <table class="rwd-table mt-4" style="width: 100%;">
+        <table class="rwd-table table-bordered mt-4 text-center" style="width: 100%;">
             <thead>
               <tr>
-                <th scope="col-2">S.No</th>
-                <th scope="col-5">Call Type</th> 
-                <th scope="col-5">Actions</th>
+                <th scope="col-5" class="text-center" style="width: 25%;">Actions</th>
+                <th scope="col-2" class="text-center" style="width: 25%;">S.No</th>
+                <th scope="col-5" class="text-center" style="width: 50%;">Call Type</th> 
               </tr>
             </thead>
             <tbody>
@@ -26,9 +26,7 @@
                   currentPage: page,
                   totalItems: count
                 }; let i=index"> 
-                <td scope="row">{{i+1}}</td>
-                <td>{{c.description}}</td> 
-                <td>
+                <td class="text-center">
                   <button routerLink="/CRM/Settings/calltype" [queryParams]="{calltypeid: c.id}" 
                     class="btn btn-sm btn-outline-primary">
                     <i class="fa fa-pencil-alt"></i>
@@ -37,10 +35,12 @@
                     <i class="fa fa-trash"></i>
                   </button>
                 </td>
+                <td scope="row" class="text-center">{{i+1}}</td>
+                <td class="text-center">{{c.description}}</td> 
               </tr>
             </tbody>
           </table>
-          <div class="pagination-container">
+          <div class="pagination-container" style="float: right;">
             <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
         </div>
 </div>

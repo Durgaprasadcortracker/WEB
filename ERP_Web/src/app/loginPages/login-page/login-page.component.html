@@ -1,4 +1,4 @@
-<div class="container" [ngClass]="ShowHide==false ? 'right-panel-active':''" id="container">
+<!-- <div class="container" [ngClass]="ShowHide==false ? 'right-panel-active':''" id="container">
   <div class="form-container sign-up-container">
     <form [formGroup]="signupform" (ngSubmit)="OnSignUp()">
       <div class="social-container">
@@ -75,22 +75,110 @@
         </div>
       </div>
     </form>
+  </div> -->
+
+<div class="container" [ngClass]="ShowHide == false ? 'right-panel-active' : ''" id="container">
+  <div class="form-container sign-up-container">
+    <form [formGroup]="signupform" (ngSubmit)="OnSignUp()">
+      <!-- Existing form fields -->
+      <h4>Create Your Account</h4>
+      <div class="row">
+        <!-- First Name -->
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="firstname" placeholder="First Name"
+            [ngClass]="{ 'is-invalid': submitted && fg['firstname'].errors }" />
+          <div *ngIf="submitted && fg['firstname'].errors" class="invalid-feedback">
+            <div *ngIf="fg['firstname'].errors['required']">First name is required.</div>
+          </div>
+        </div>
+        <!-- Last Name -->
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="lastname" placeholder="Last Name"
+            [ngClass]="{ 'is-invalid': submitted && fg['lastname'].errors }" />
+          <div *ngIf="submitted && fg['lastname'].errors" class="invalid-feedback">
+            <small *ngIf="fg['lastname'].errors['required']">Last name is required.</small>
+          </div>
+        </div>
+        <!-- Company -->
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="company" placeholder="Company"
+            [ngClass]="{ 'is-invalid': submitted && fg['company'].errors }" />
+        </div>
+        <!-- Designation -->
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="designation"
+            placeholder="Designation" [ngClass]="{ 'is-invalid': submitted && fg['designation'].errors }" />
+        </div>
+        <!-- Phone Number -->
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="phonenumber"
+            placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && fg['phonenumber'].errors }" />
+          <div *ngIf="submitted && fg['phonenumber'].errors" class="invalid-feedback">
+            <small *ngIf="fg['phonenumber'].errors['required']">Phone Number is required.</small>
+          </div>
+        </div>
+        <!-- Gender -->
+        <div class="col-6" style="padding-top: 15px;">
+          <div class="col-6 d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3">
+              <input type="radio" name="gender" formControlName="gender" value="2" />
+              <label class="square-radio--content mt-2" for="gender">Female</label>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <input class="square-radio" type="radio" name="gender" formControlName="gender" value="1" />
+              <label class="square-radio--content mt-2" for="gender">Male</label>
+            </div>
+          </div>
+        </div>
+        <!-- Email -->
+        <div class="row">
+          <div data-mdb-input-init class="form-outline">
+            <input type="text" class="form-control form-control-lg" formControlName="email"
+              placeholder="Enter your Email" [ngClass]="{ 'is-invalid': submitted && fg['email'].errors }" />
+            <div *ngIf="submitted && fg['email'].errors" class="invalid-feedback">
+              <small *ngIf="fg['email'].errors['required']">Email is required.</small>
+            </div>
+          </div>
+        </div>
+        <!-- Password -->
+        <div class="row">
+          <div data-mdb-input-init class="form-outline">
+            <input type="password" class="form-control form-control-lg" formControlName="password"
+              placeholder="Enter your Password" [ngClass]="{ 'is-invalid': submitted && fg['password'].errors }" />
+            <div *ngIf="submitted && fg['password'].errors" class="invalid-feedback">
+              <small *ngIf="fg['password'].errors['required']">Password is required.</small>
+            </div>
+          </div>
+        </div>
+        <!-- Submit Button -->
+        <div class="row">
+          <div class="d-flex justify-content-start pt-3">
+            <button type="button" (click)="onReset()" data-mdb-button-init data-mdb-ripple-init
+              class="btn btn-light btn-lg">Reset all</button>
+            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-lg ms-2"
+              (click)="login()">Submit form</button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
+
   <div class="form-container sign-in-container">
     <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
       <img class="text-center" style="width: 250px;" src="https://migration.cortracker.com/_client/images/ct_small.gif">
       <div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="https://cortracker.com/" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="https://www.linkedin.com/company/cortracker-inc" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
+        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://cortracker.com/" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="https://www.linkedin.com/company/cortracker-inc" class="social"><i class="fab fa-linkedin-in"></i></a>
+      </div>
       <div class="row">
         <div class="row mb-3 align-items-center">
           <label class="form-group col-sm-2 col-form-label" for="name">
             <h6><strong>Email</strong></h6>
           </label>
-          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
-            class="form-control" placeholder="Please enter your email" required>
+          <input type="text" formControlName="email" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" class="form-control"
+            placeholder="Please enter your email" required>
           <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
             <div *ngIf="f['email'].errors['required']">Email is required.</div>
           </div>
@@ -112,7 +200,8 @@
         </div>
         <div class="row mb-3">
           <div class="col-sm-9 text-start">
-            <a routerLink="/Changepassword"><strong style="font-size: large; color: darkred;">Forgot Password ?</strong></a>
+            <a routerLink="/Changepassword"><strong style="font-size: large; color: darkred;">Forgot Password
+                ?</strong></a>
           </div>
         </div>
         <div class="row mb-3">
@@ -142,3 +231,5 @@
     </div>
   </div>
 </div>
+
+

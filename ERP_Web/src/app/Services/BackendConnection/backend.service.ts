@@ -34,4 +34,10 @@ export class BackendService {
   sendSms(phoneNumber: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { phoneNumber });
   }
+
+  // getLoginDetails(): Observable<any> {
+  //   return this.http.get(`${this.baseUrl}/api/Login/GetLogins`);
+  // }
+
+
 }
