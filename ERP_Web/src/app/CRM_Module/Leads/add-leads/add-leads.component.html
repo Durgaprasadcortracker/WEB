@@ -9,26 +9,26 @@
             <div class="">
                 <div class="row"style="margin-top: 20px !important;">
                 <div  class="col-md-3">
-                    <label for="LeadOwner" class="form-label">Lead Owner<span class="text-danger">*</span></label>
+                    <label for="leadOwner" class="form-label">Lead Owner<span class="text-danger">*</span></label>
                     <div data-mdb-input-init class="form-outline"> 
-                      <select type="text" class="form-control" formControlName="LeadOwner" 
-                      [ngClass]="{ 'is-invalid': submitted && f['LeadOwner'].errors }">
-                      <option value="null">--Select leadowner--</option>
+                      <select type="text" class="form-control" formControlName="leadOwner" 
+                      [ngClass]="{ 'is-invalid': submitted && f['leadOwner'].errors }">
+                      <option value="null">--Select leadOwner--</option>
                       <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
                     </select>
-                        <div *ngIf="submitted && f['LeadOwner'].errors" class="invalid-feedback">
-                          <div *ngIf="f['LeadOwner'].errors['required']">Lead Owner is required.</div>
+                        <div *ngIf="submitted && f['leadOwner'].errors" class="invalid-feedback">
+                          <div *ngIf="f['leadOwner'].errors['required']">Lead Owner is required.</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <label>Company<span class="required">*</span></label>
-                    <select class="form-control"   formControlName="CompanyId" [ngClass]="{ 'is-invalid': submitted && f['CompanyId'].errors }" (change)="getcompanydetails($event)" >
+                    <select class="form-control"   formControlName="companyId" [ngClass]="{ 'is-invalid': submitted && f['companyId'].errors }" (change)="getcompanydetails($event)" >
                         <option value="null">--Select Company--</option>
                         <option *ngFor="let company of companylist" value="{{company.id}}">{{company.companyName}}</option>
                     </select>
-                    <div *ngIf="submitted && f['CompanyId'].errors" class="invalid-feedback">
-                        <div *ngIf="f['CompanyId'].errors['required']">Company is required.</div>
+                    <div *ngIf="submitted && f['companyId'].errors" class="invalid-feedback">
+                        <div *ngIf="f['companyId'].errors['required']">Company is required.</div>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -110,7 +110,7 @@
              <div class="row"style="margin-top: 20px !important;">
                 <div class="col-md-3">
                     <label>Website </label>
-                    <input type="text" class="form-control" formControlName="website">
+                    <input type="text" class="form-control" formControlName="wbsite">
                 </div>
                 <div class="col-md-3">
                     <label>Industry<span class="required">*</span> </label>

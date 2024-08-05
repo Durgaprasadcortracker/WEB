@@ -25,7 +25,7 @@ export class AddLeadsComponent {
   p: number = 1;
   Id: any;
   industrylist: any;
-  lostReasonlist:any;
+  lostReasonlist: any;
   companylist: any;
   statuslist: any;
   sourcelist: any;
@@ -33,13 +33,13 @@ export class AddLeadsComponent {
   _loginlist: any;
 
 
-  
+
 
   constructor(
     private http: BackendService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-   
+
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -61,27 +61,27 @@ export class AddLeadsComponent {
   ngOnInit() {
     this.myForm = this.fb.group({
       id: new FormControl(0),
-      LeadOwner: [null, Validators.required],
-      CompanyId: [null, Validators.required],
-      firstName: [{value:null,disabled:true}],
+      leadOwner: [null, Validators.required],
+      companyId: [null, Validators.required],
+      firstName: [{ value: null, disabled: true }],
       lastName: [null, Validators.required],
       description: [null, Validators.required],
       email: [null, Validators.required],
-      secondaryEmail:[null],
+      secondaryEmail: [null],
       mobileNumber: [null, Validators.required],
-      alternateNumber:[null],
-      website:[null],
-      skypeId:[null],
-      linkedIn:[null],
+      alternateNumber: [null],
+      wbsite: [null],
+      skypeId: [null],
+      linkedIn: [null],
       leadStatus: [null, Validators.required],
       leadSource: [null, Validators.required],
       leadStage: [null, Validators.required],
       industryType: [null, Validators.required],
-      headCount:[null, Validators.required],
-      lostReason:[null],
-      emailOutput:[null],
-      rating:[null],
-      annualRevenue:[null],
+      headCount: [null, Validators.required],
+      lostReason: [null],
+      emailOutput: [null],
+      rating: [null],
+      annualRevenue: [null],
     });
     this.getCompany();
     this.getStages();
@@ -89,13 +89,20 @@ export class AddLeadsComponent {
     this.getIndustry();
     this.getLostreason();
     console.log(this.Id);
-   
+
     if (this.Id) {
       this.http
         .getapi('api/Lead/GetLeadsby/' + this.Id)
         .subscribe((res) => {
           console.log(res);
           this.myForm.patchValue(res.data);
+          const mockEvent = {
+            target: {
+              value: this.myForm.value.companyId
+            }
+          };
+          this.getcompanydetails(mockEvent)
+          console.log(this.myForm.value)
         });
     }
   }
@@ -103,7 +110,7 @@ export class AddLeadsComponent {
   submitted: any;
 
   addlead(): void {
-    
+
     this.submitted = true;
     if (this.myForm.invalid) {
       return;
@@ -113,7 +120,7 @@ export class AddLeadsComponent {
       if (this.myForm.value.id === 0) {
         console.log('Adding new Lead:', this.myForm.value);
         this.http.postapi('api/Lead/AddLeads', this.myForm.getRawValue()).subscribe(
-          
+
           () => {
             this.snackBar.open('Lead successfully Added!', 'Close', {
               duration: 3000, // Snackbar stays open for 3 seconds
@@ -124,20 +131,21 @@ export class AddLeadsComponent {
             console.error('Error adding lead:', error);
           }
         );
-      } else if (this.myForm.value.Id > 0) {
+      } else if (this.myForm.value.id > 0) {
+        debugger;
         console.log('Editing lead:', this.myForm.value);
         console.log("edit")
         this.http.putapi('api/Lead/UpdateLeads', this.myForm.getRawValue()).subscribe(() => {
-            this.snackBar.open('Lead successfully Updated!', 'Close', {
-              duration: 3000, // Snackbar stays open for 3 seconds
-            });
-        
-              this.router.navigate(['/CRM/Leads']);
-            },
-            (error) => {
-              console.error('Error updating lead:', error);
-            }
-          );
+          this.snackBar.open('Lead successfully Updated!', 'Close', {
+            duration: 3000, // Snackbar stays open for 3 seconds
+          });
+
+          this.router.navigate(['/CRM/Leads']);
+        },
+          (error) => {
+            console.error('Error updating lead:', error);
+          }
+        );
       }
     } else {
       console.log('Form is invalid');
@@ -146,8 +154,7 @@ export class AddLeadsComponent {
   get f(): { [key: string]: AbstractControl } {
     return this.myForm.controls;
   }
-  getcompanydetails(event:any){
-    debugger;
+  getcompanydetails(event: any) {
     console.log(event);
     this.http.getapi(`api/Contacts/GetContactsbycompanyId/${event.target.value}`).subscribe((res) => {
       console.log(res);
@@ -155,7 +162,7 @@ export class AddLeadsComponent {
       this.myForm.get("lastName")?.setValue(res.data.lastName);
       this.myForm.get("email")?.setValue(res.data.email);
       this.myForm.get("mobileNumber")?.setValue(res.data.mobileNumber);
-     
+
     });
     this.http.getapi(`api/Company/GetCompaniesby/${event.target.value}`).subscribe((res) => {
       console.log(res);
@@ -167,7 +174,7 @@ export class AddLeadsComponent {
   getCompany() {
     this.http.getapi('api/Company/GetCompany').subscribe((res) => {
       console.log(res);
-      
+
       this.companylist = res.data;
     });
   }
@@ -180,7 +187,7 @@ export class AddLeadsComponent {
   getLostreason() {
     this.http.getapi('api/Common/GetLostReason').subscribe((res) => {
       console.log(res);
-      
+
       this.lostReasonlist = res.data;
     });
   }
@@ -188,7 +195,7 @@ export class AddLeadsComponent {
   getStatus() {
     this.http.getapi('api/Common/GetStatus').subscribe((res) => {
       console.log(res);
-      
+
       this.statuslist = res.data;
     });
   }
