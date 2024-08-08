@@ -49,7 +49,7 @@ export class AddContactsComponent {
     city: new FormControl(''),
     state: new FormControl(null),
     country: new FormControl(null),
-    postalCode: new FormControl(null),
+    postalCode: new FormControl(''),
     timeZone: new FormControl(null),
     source: new FormControl(''),
     address1: new FormControl(null),
@@ -65,13 +65,16 @@ export class AddContactsComponent {
       email: [null, Validators.required],
       designation: [null, Validators.required],
       mobileNumber: [null, Validators.required],
+      alternateNumber: [null, Validators.required],
       CompanyId: [this.companyid, Validators.required],
       country: [null, Validators.required],
       city: [null, Validators.required],
       state: [null, Validators.required],
       postalCode: [null, Validators.required],
+      timeZone: [null],
       source: [null, Validators.required],
       address1: [null, Validators.required],
+      address2: [null]
     });
     this.getCompany();
     this.getCity();

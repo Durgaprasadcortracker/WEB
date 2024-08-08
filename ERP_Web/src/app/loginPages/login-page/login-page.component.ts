@@ -63,15 +63,15 @@ export class LoginPageComponent {
     });
 
        // Automatically set exp_date to current date + 7 days when form is initialized
-       this.signupform.controls['exp_date'].setValue(this.calculateExpDate());
+      //  this.signupform.controls['exp_date'].setValue(this.calculateExpDate());
   }
 
-  calculateExpDate() {
-    const signupDate = new Date();
-    const expDate = new Date(signupDate.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days from signup
-    sessionStorage.setItem('expDate', expDate.toISOString());
-    return expDate.toISOString().split('T')[0]; // Return the date in YYYY-MM-DD format
-  }
+  // calculateExpDate() {
+  //   const signupDate = new Date();
+  //   const expDate = new Date(signupDate.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days from signup
+  //   sessionStorage.setItem('expDate', expDate.toISOString());
+  //   return expDate.toISOString().split('T')[0]; // Return the date in YYYY-MM-DD format
+  // }
 
 
   get f(): { [key: string]: AbstractControl } {
@@ -87,24 +87,33 @@ export class LoginPageComponent {
   onSubmit(): void {
     this.submitted = true;
     if (this.loginform.invalid) {
-      return;
+        return;
     }
     console.log(this.loginform.getRawValue());
     this.backendservice.putapi('api/Login/authenticate', this.loginform.getRawValue()).subscribe(response => {
-      if (response.status == false) {
-        this.errormsg = response.message;
-        return;
-      } else {
-        this.snackBar.open('Logged in Successfully, Welcome!', 'Close', {
-          duration: 3000, // Snackbar stays open for 3 seconds
-        });
-        sessionStorage.setItem("FullName", response.data.firstName + " " + response.data.lastName);
-        sessionStorage.setItem("Designation", response.data.designation);
-        sessionStorage.setItem("id", response.data.id);
-        this.router.navigate(['/CRM/Home']);
-      }
+        if (response.status == false) {
+            this.errormsg = response.message;
+            return;
+        } else {
+            this.snackBar.open('Logged in Successfully, Welcome!', 'Close', {
+                duration: 3000, // Snackbar stays open for 3 seconds
+            });
+            sessionStorage.setItem("FullName", response.data.firstName + " " + response.data.lastName);
+            sessionStorage.setItem("Designation", response.data.designation);
+            sessionStorage.setItem("id", response.data.id);
+            sessionStorage.setItem("expDate", response.data.expDate);
+            this.router.navigate(['/CRM/Home']);
+        }
+    }, error => {
+        // Handle expired account error
+        if (error.status === 401 && error.error.message === "Your account has expired. Please contact support.") {
+            this.snackBar.open('Your account has expired. Please contact support.', 'Close', {
+                duration: 5000, // Snackbar stays open for 5 seconds
+            });
+        }
     });
-  }
+}
+
 
   successmsg: any;
 

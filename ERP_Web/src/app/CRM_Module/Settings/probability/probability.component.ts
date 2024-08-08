@@ -72,7 +72,6 @@ throw new Error('Method not implemented.');
       });
     } else {
       this.http.postapi('api/Common/AddProbality', formData).subscribe(() => {
-        console.log('Probability added successfully');
         this.router.navigate(['/CRM/Settings/probabilitylist'])
         this.resetForm();
         this.snackBar.open('Probability Added successfully!', 'Close', {

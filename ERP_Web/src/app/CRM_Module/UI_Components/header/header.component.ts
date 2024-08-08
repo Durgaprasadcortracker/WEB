@@ -11,14 +11,14 @@ import { BackendService } from '../../../Services/BackendConnection/backend.serv
 })
 export class HeaderComponent {
 
+
   currentTime: any;
   expDate: any;
   @Output() _sideBar = new EventEmitter<boolean>();
   private subscription: any;
   username: string | null = sessionStorage.getItem("FullName");
   _sideBarValue = true;
-
-  
+  remainingDays: number = 0;
 
   constructor(
     private router: Router,
@@ -41,13 +41,15 @@ export class HeaderComponent {
 
   calculateExpDate() {
     const expDateStr = sessionStorage.getItem("expDate");
+    console.log(expDateStr)
     if (expDateStr) {
-      const expDate = new Date(expDateStr);
+      let expDate:any = new Date(expDateStr);
       const today = new Date();
-      this.expDate = Math.ceil((expDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
+      this.remainingDays = Math.ceil((expDate - today.getTime()) / (1000 * 3600 * 24));
     } else {
-      this.expDate = 0; // Default value if no expiration date is found
+      this.remainingDays = 0; // Default value if no expiration date is found
     }
+    console.log(this.remainingDays)
   }
 
   OnClick() {

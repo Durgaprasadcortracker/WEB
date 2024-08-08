@@ -27,7 +27,6 @@ export class LeadStatusListComponent {
       this.statusId = params.get('statusid');
      
     });
-    debugger;
     if(this.statusId>0){
       this.http.getapi('api/Common/GetStatusById/'+this.statusId).subscribe((res) => {
         console.log(res);
@@ -74,8 +73,6 @@ export class LeadStatusListComponent {
       this.resetvalues();
       this.getstatusList();
     });
-    debugger;
-  
   }
   }
   resetvalues(){

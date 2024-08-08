@@ -1,62 +1,299 @@
-<!-- <div *ngIf="!quotePage" class="Container cor-Contact">
-  <div class="cor-flex justify-content-sb">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-2" style="
-              display: flex;
-              justify-content: end;
-              width: 90%;
-              margin-bottom: 20px;
-            ">
-          <button class="btn btn-danger mr-2" routerLink="/CRM/Companies/add-quotes/{{id}}">Create Quote</button>
+<!-- <div>
+
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  </head>
+
+  <body>
+    <div class="container-fluid mt-4 p-4 border rounded custom-margin-border">
+      <h3>Quote Information</h3>
+      <hr>
+      <ul class="nav nav-tabs" id="quoteTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="quote-info-tab" data-bs-toggle="tab" href="#quote-info" role="tab"
+            aria-controls="quote-info" aria-selected="true">Quote Info</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="quote-items-tab" data-bs-toggle="tab" href="#quote-items" role="tab"
+            aria-controls="quote-items" aria-selected="false">Quote Items</a>
+        </li>
+      </ul>
+      <div class="tab-content mt-4" id="quoteTabContent">
+        <div class="tab-pane fade" id="quote-info" role="tabpanel" aria-labelledby="quote-info-tab">
+
+          <div class="card-body">
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="quote-information" role="tabpanel"
+                aria-labelledby="quote-information-tab">
+                <form #quoteForm="ngForm" (ngSubmit)="onSubmit()">
+                  <div class="form-row">
+
+                    <div class="form-group">
+                      <label for="companyName">Company Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="companyName" [(ngModel)]="quote.companyName"
+                        name="companyName" placeholder="Enter Company Name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="validUntil">Valid Until <span class="text-danger">*</span></label>
+                      <input type="date" class="form-control" id="validUntil" [(ngModel)]="quote.validUntil"
+                        name="validUntil" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="quoteType">Quote Type <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="quoteType" [(ngModel)]="quote.quoteType"
+                      name="quoteType" placeholder="Enter Quote Type" required>
+                  </div>
+
+                  <div class="container mt-3">
+                    <h5>Address Information</h5>
+                    <div class="container p-3 border rounded">
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="billingFromCompanyName">Billing From Company Name <span
+                              class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="billingFromCompanyName"
+                            [(ngModel)]="quote.billingFromCompanyName" name="billingFromCompanyName"
+                            placeholder="Enter Company Name" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="billingFromCompanyAddress">Billing From Company Address <span
+                              class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="billingFromCompanyAddress"
+                            [(ngModel)]="quote.billingFromCompanyAddress" name="billingFromCompanyAddress"
+                            placeholder="Enter Company Address" required>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="billingFromEmail">Billing From Email <span class="text-danger">*</span></label>
+                          <input type="email" class="form-control" id="billingFromEmail"
+                            [(ngModel)]="quote.billingFromEmail" name="billingFromEmail" placeholder="Enter Email"
+                            required>
+                        </div>
+                        <div class="form-group">
+                          <label for="billingFromPhoneNumber">Billing From Phone Number <span
+                              class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="billingFromPhoneNumber"
+                            [(ngModel)]="quote.billingFromPhoneNumber" name="billingFromPhoneNumber"
+                            placeholder="Enter Phone Number" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="container mt-3">
+                    <h5>Billing To</h5>
+                    <div class="container p-3 border rounded">
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="billingToCompanyName">Billing To Company Name <span
+                              class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="billingToCompanyName"
+                            [(ngModel)]="quote.billingToCompanyName" name="billingToCompanyName"
+                            placeholder="Enter Company Name" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="billingToCompanyAddress">Billing To Company Address <span
+                              class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="billingToCompanyAddress"
+                            [(ngModel)]="quote.billingToCompanyAddress" name="billingToCompanyAddress"
+                            placeholder="Enter Company Address" required>
+                        </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="billingToEmail">Billing To Email <span class="text-danger">*</span></label>
+                          <input type="email" class="form-control" id="billingToEmail"
+                            [(ngModel)]="quote.billingToEmail" name="billingToEmail" placeholder="Enter Email" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="billingToPhoneNumber">Billing To Phone Number <span
+                              class="text-danger">*</span></label>
+                          <input type="text" class="form-control" id="billingToPhoneNumber"
+                            [(ngModel)]="quote.billingToPhoneNumber" name="billingToPhoneNumber"
+                            placeholder="Enter Phone Number" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="container mt-3">
+                    <h5>Terms and Conditions</h5>
+                    <div class="container p-3 border">
+                      <div class="form-row">
+                        <div class="form-group">
+                          <label for="termsConditions">Terms and Conditions <span class="text-danger">*</span></label>
+                          <textarea class="form-control" id="termsConditions" [(ngModel)]="quote.termsConditions"
+                            name="termsConditions" placeholder="Enter Terms and Conditions" required></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="descriptionInformation">Description Information <span
+                              class="text-danger">*</span></label>
+                          <textarea class="form-control" id="descriptionInformation"
+                            [(ngModel)]="quote.descriptionInformation" name="descriptionInformation"
+                            placeholder="Enter Description Information" required></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-end mt-3">
+
+                    <button type="submit" class="btn btn-primary">Next</button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="child2">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Actions</th>
-                <th>Quote Number</th>
-                <th>Quote Type</th>
-                <th>Valid Until</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let a of listOfQuotations | paginate: 
-                { itemsPerPage: tableSize, 
-                currentPage: page,
-                totalItems: count }; 
-                let i = index">
+      </div>
+      <div class="tab-pane fade show" id="quote-items" role="tabpanel" aria-labelledby="quote-items-tab">
+        <div class="d-flex justify-content-end mb-3">
+          <button type="button" class="btn custom-button" data-bs-toggle="modal" data-bs-target="#addProductModal">Add
+            New
+            Product</button>
+        </div>
+        <table class="table table-striped table-bordered table-rounded mt-3">
+          <thead>
+            <tr>
 
-                <td>
+              <th>Quote Id</th>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Amount</th>
+              <th>Discount</th>
+              <th>Tax</th>
+              <th>Total</th>
 
-                  <span (click)="edit(quotation.id)" routerLink="/CRM/editquotes/{{a.id}}" class="fa fa-pencil-alt"
-                    style="color: blue;">
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
 
-                  </span>
-                  <a routerLink="/CRM/quotes-invoice"><i class="fa-solid fa-download"
-                      style="padding-right: 10px"></i></a>
-                  <span (click)="deleteQuotation(a.id)" class="fa fa-trash" style="padding-left: 25px;color: red;">
+              <td>{{ product.quoteId }}</td>
+              <td>{{ product.productName }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>{{ product.price | currency }}</td>
+              <td>{{ product.amount | currency }}</td>
+              <td>{{ product.discount | currency }}</td>
+              <td>{{ product.tax | currency }}</td>
+              <td>{{ product.total | currency }}</td>
 
-                  </span>
-
-
-
-                </td>
-                <td>{{a.quoteId}}</td>
-                <td>{{a.quoteTypeName}}</td>
-                <td>{{a.validUntil}}</td>
-
-              </tr>
-            </tbody>
-          </table>
+            </tr>
+          </tbody>
+        </table>
+        <div class="container">
+          <div class="row justify-content-end">
+            <div class="col-md-4 summary-grid">
+              <h5>Summary</h5>
+              <div class="container p-3 border rounded">
+                <div class="summary-input">
+                  <label for="subTotal">Sub Total ($)</label>
+                  <input type="number" class="form-control" id="subTotal" [(ngModel)]="summary.subTotal"
+                    name="subTotal">
+                </div>
+                <div class="summary-input">
+                  <label for="discount">Discount ($)</label>
+                  <input type="number" class="form-control" id="subDiscount" [(ngModel)]="summary.subDiscount"
+                    name="subDiscount">
+                </div>
+                <div class="summary-input">
+                  <label for="tax">Tax ($)</label>
+                  <input type="number" class="form-control" id="subTax" [(ngModel)]="summary.subTax" name="subTax">
+                </div>
+                <div class="summary-input">
+                  <label for="adjustment">Adjustment ($)</label>
+                  <input type="number" class="form-control" id="adjustment" [(ngModel)]="summary.adjustment"
+                    name="adjustment">
+                </div>
+                <div class="summary-input">
+                  <label for="grandTotal">Grand Total ($)</label>
+                  <input type="number" class="form-control" id="grandTotal" [(ngModel)]="summary.grandTotal"
+                    name="grandTotal">
+                </div>
+              </div>
+              <div class="d-flex justify-content-end mb-3">
+                <button type="button" class="btn btn-danger me-2" (click)="submitSummary()">Submit</button>
+                <button type="button" class="btn btn-dark">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="d-flex justify-content-left">
-  <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
-  </pagination-controls>
+
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+
+              <input type="hidden" class="form-control" id="id" [(ngModel)]="newProduct.id" name="id" required>
+              <div class="mb-3">
+                <label for="quoteId" class="form-label">Quote ID:</label>
+                <input type="hidden" class="form-control" id="quoteId" [(ngModel)]="newProduct.quoteId" name="quoteId">
+                {{
+                quote.quoteId}}
+              </div>
+              <div class="mb-3">
+                <label for="productName" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="productName" [(ngModel)]="newProduct.productName"
+                  name="productName" required>
+              </div>
+              <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="text" class="form-control" id="quantity" [(ngModel)]="newProduct.quantity" name="quantity"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" step="0.01" class="form-control" id="price" [(ngModel)]="newProduct.price"
+                  name="price" required>
+              </div>
+              <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="number" step="0.01" class="form-control" id="amount" [(ngModel)]="newProduct.amount"
+                  name="amount" required>
+              </div>
+              <div class="mb-3">
+                <label for="discount" class="form-label">Discount</label>
+                <input type="number" step="0.01" class="form-control" id="discount" [(ngModel)]="newProduct.discount"
+                  name="discount" required>
+              </div>
+              <div class="mb-3">
+                <label for="tax" class="form-label">Tax</label>
+                <input type="number" step="0.01" class="form-control" id="tax" [(ngModel)]="newProduct.tax" name="tax"
+                  required>
+              </div>
+              <div class="mb-3">
+                <label for="total" class="form-label">Total</label>
+                <input type="number" step="0.01" class="form-control" id="total" [(ngModel)]="newProduct.total"
+                  name="total" required>
+              </div>
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="saveProduct()">Save Product</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+  </body>
 </div> -->
 
 
@@ -125,4 +362,3 @@
     </div>
   </div>
 </div>
-

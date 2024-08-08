@@ -14,6 +14,7 @@ export class ProbabilityListComponent {
   count: number = 0;
   tableSize: number = 5;
   Probabilitylist: any = [];
+  Stagelist: any;
 
   constructor(private http:BackendService,
     private router: Router,
@@ -76,6 +77,11 @@ export class ProbabilityListComponent {
 
   getSerialNumber(index: number): number {
     return (this.page - 1) * this.tableSize + index + 1;
+  }
+  getSatage() {
+    this.http.getapi('api/Common/GetStages').subscribe((res) => {
+      this.Stagelist = res.data;
+    });
   }
 }
 

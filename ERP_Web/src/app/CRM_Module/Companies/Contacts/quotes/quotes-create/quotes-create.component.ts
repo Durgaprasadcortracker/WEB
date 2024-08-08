@@ -13,73 +13,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class QuotesCreateComponent {
 
-  // quoteForm: any
-  // submitted: any;
-  // id: any;
-  // quoteItems: any;
-  // listOfCompanys: any;
-  // lineItem:any=[]
-  // companyid: any;
-  // constructor(private route: ActivatedRoute,
-  //   private http: BackendService,
-  //   private fb: FormBuilder,
-  //   private ActivatedRoute: ActivatedRoute,
-  //   private router: Router
-
-  // ) {
-  //   this.companyid = this.route.snapshot.params['companyid'];
-  //   this.id = this.route.snapshot.params['id'];
-  //   this.getRequiredData()
-  // }
-
-
-  // ngOnInit() {
-  //   this.quoteForm = this.fb.group({
-  //     id: [null],
-  //     companyId: [this.companyid],
-  //     quoteId: ['', Validators.required],
-  //     validUntil: [null, Validators.required],
-  //     quoteType: [null, Validators.required],
-  //     quoteTypeName: [''],
-  //     billingFromCompanyName: ['', Validators.required],
-  //     billingFromCompanyAddress: ['', Validators.required],
-  //     billingFromEmail: ['', [Validators.required, Validators.email]],
-  //     billingFromPhoneNumber: ['', Validators.required],
-  //     billingToCompanyName: ['', Validators.required],
-  //     billingToCompanyAddress: ['', Validators.required],
-  //     billingToEmail: ['', [Validators.required, Validators.email]],
-  //     billingToPhoneNumber: ['', Validators.required],
-  //     termsandconditions: ['', Validators.required],
-  //     descriptionInformation: ['', Validators.required],
-  //     createdBy: [null],
-  //     createdAt: [null],
-  //     modifiedBy: [null],
-  //     modifiedAt: [null],
-  //     companyNewid: [null]
-  //   });
-  // }
-  // addQuote() {
-  // }
-  // getRequiredData() {
-  //   this.http.getapi('api/Company/GetCompany').subscribe((res) => {
-  //     console.log(res);
-  //     this.listOfCompanys = res.data;
-  //   });
-  //   this.http.getapi('api/Common/GetQuoteType').subscribe((res) => {
-  //     console.log(res);
-  //     if (res) {
-  //       this.quoteItems = res.data
-  //     }
-  //   });
-  // }
-  // edit(_id: any) {
-  // }
-  // get f(): { [key: string]: AbstractControl } {
-  //   return this.quoteForm.controls;
-  // }
-  // AddNewLine(){
-    
-  // }
   companylist: any;
   selectedTab: number = 0;  // Ensure selectedTab is initialized as a number
   QuotedItems = false;
@@ -95,7 +28,7 @@ export class QuotesCreateComponent {
 
   myForm: FormGroup = new FormGroup({
     id: new FormControl(0),
-    quoteid:new FormControl(''),
+    quoteId:new FormControl(''),
      companyId:new FormControl(''),
     validuntil: new FormControl('', Validators.required),
     quotetype: new FormControl('', Validators.required),
@@ -111,6 +44,7 @@ export class QuotesCreateComponent {
     descriptioninformation: new FormControl(''),
   });
 companyId:any;
+f: any;
   constructor(
     private http: BackendService,
     private route: ActivatedRoute,
@@ -121,61 +55,86 @@ companyId:any;
   }
 
 
-  
+  getGeneratedQuoteId() {
+    this.http.getapi('api/Quotation/GenerateQuoteId').subscribe((quoteId) => {
+      console.log(quoteId)
+      this.myForm.get("quoteId")?.setValue(quoteId);
+    });
+  }
  
 
   ngOnInit() {
     this.AddNewLine();
-
+  
+   // Check if editing or adding a new quote
+    this.Id = this.route.snapshot.paramMap.get('id');  // Get the Id from route parameters
+  
     if (this.Id) {
-      this.http.getapi(`api/Quotation/GetQuotationsbyid/${this.Id}`).subscribe((res) => {
-        console.log(res);
-        debugger;
-        this.myForm.get("quoteid")?.setValue(res.data.quoteId)        
-        this.myForm.get("validuntil")?.setValue(new Date(res.data.validuntil))
-        this.myForm.get("quotetype")?.setValue(res.data.quoteType==1?"1":"2")
-        this.myForm.get("billingfromcompanyaddress")?.setValue(res.data.billingFromCompanyAddress)        
-        this.myForm.get("billingfromcompanyname")?.setValue(res.data.billingFromCompanyName)
-        this.myForm.get("billingfromphonenumber")?.setValue(res.data.billingFromPhoneNumber)
-        this.myForm.get("billingtocompanyaddress")?.setValue(res.data.billingToCompanyAddress)
-        this.myForm.get("billingfromemail")?.setValue(res.data.billingFromEmail)
-        this.myForm.get("billingfromcompanyaddress")?.setValue(res.data.billingFromCompanyAddress)        
-        this.myForm.get("billingtocompanyname")?.setValue(res.data.billingToCompanyName)
-        this.myForm.get("billingtophonenumber")?.setValue(res.data.billingToPhoneNumber)
-        this.myForm.get("billingtocompanyaddress")?.setValue(res.data.billingToCompanyAddress)
-        this.myForm.get("billingtoemail")?.setValue(res.data.billingToEmail)
-        this.myForm.get("termsandconditions")?.setValue(res.data.termsandconditions)
-        this.myForm.get("descriptioninformation")?.setValue(res.data.descriptionInformation)
-        //this.myForm.patchValue(res.data);
-      });
+      // Existing quote: Load the data
+      this.loadExistingQuote();
+    } else {
+      // New quote: Generate a new QuoteId
+      this.getGeneratedQuoteId();
     }
 
+    if (this.Id) {
+      // Existing quote: Load the data
+      this.http.getapi(`api/Quotation/GetQuotationsbyid/${this.Id}`).subscribe((res) => {
+        console.log(res);
+        this.myForm.get("quoteId")?.setValue(res.data.quoteId);
+        this.myForm.get("validuntil")?.setValue(new Date(res.data.validuntil));
+        this.myForm.get("quotetype")?.setValue(res.data.quoteType == 1 ? "1" : "2");
+        this.myForm.get("billingfromcompanyaddress")?.setValue(res.data.billingFromCompanyAddress);
+        this.myForm.get("billingfromcompanyname")?.setValue(res.data.billingFromCompanyName);
+        this.myForm.get("billingfromphonenumber")?.setValue(res.data.billingFromPhoneNumber);
+        this.myForm.get("billingtocompanyaddress")?.setValue(res.data.billingToCompanyAddress);
+        this.myForm.get("billingfromemail")?.setValue(res.data.billingFromEmail);
+        this.myForm.get("billingfromcompanyaddress")?.setValue(res.data.billingFromCompanyAddress);
+        this.myForm.get("billingtocompanyname")?.setValue(res.data.billingToCompanyName);
+        this.myForm.get("billingtophonenumber")?.setValue(res.data.billingToPhoneNumber);
+        this.myForm.get("billingtocompanyaddress")?.setValue(res.data.billingToCompanyAddress);
+        this.myForm.get("billingtoemail")?.setValue(res.data.billingToEmail);
+        this.myForm.get("termsandconditions")?.setValue(res.data.termsandconditions);
+        this.myForm.get("descriptioninformation")?.setValue(res.data.descriptionInformation);
+      });
+    } else {
+      // New quote: Generate a new QuoteId
+      this.getGeneratedQuoteId();
+    }
+  
     this.getCompany();
   }
+  loadExistingQuote() {
+    throw new Error('Method not implemented.');
+  }
+  
 
   selectTab(tab: any, index: number) {
     this.selectedTab = index;
   }
 
   addquotes(): void {
-    debugger;
     this.submited = true;
     if (this.myForm.invalid) {
       return;
     }
-
+  
     const quote = this.myForm.value;
     this.myForm.get("companyId")?.setValue(this.companyId);
+  
     if (quote.id === 0) {
+      // Adding a new quote
       this.http.postapi('api/Quotation/AddQuotations', quote).subscribe(() => {
         this.router.navigate(['/CRM/companiesinfo']);
       });
     } else {
+      // Updating an existing quote
       this.http.putapi('api/Quotation/UpdateQuotations', this.myForm.getRawValue()).subscribe(() => {
         this.router.navigate(['/CRM/quotes-create']);
       });
     }
   }
+  
 
   next() {
     this.selectedTab = 1;
@@ -232,6 +191,9 @@ companyId:any;
     });
   }
 
+
+  
+
   getCompany() {
     this.http.getapi('api/Company/GetCompany').subscribe((res) => {
       console.log(res);
@@ -239,6 +201,4 @@ companyId:any;
     });
   }
 }
-
-
 

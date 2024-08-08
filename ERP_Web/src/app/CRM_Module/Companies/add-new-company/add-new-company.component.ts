@@ -255,7 +255,7 @@ createId:any=0;
       businessEmail: [null, [Validators.required, Validators.email]],
       website: [null, [Validators.required]],
       companyAddress1: [null, Validators.required],
-      companyAddress2: [null]
+      campanyAddress2: [null]
     });
    
     if (this.Id) {
