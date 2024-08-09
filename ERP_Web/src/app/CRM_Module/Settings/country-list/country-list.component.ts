@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {AbstractControl,FormBuilder,FormGroup,Validators,} from '@angular/forms';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
-  selector: 'app-city-list',
-  templateUrl: './city-list.component.html',
-  styleUrl: './city-list.component.css'
+  selector: 'app-country-list',
+  templateUrl: './country-list.component.html',
+  styleUrl: './country-list.component.css'
 })
-export class CityListComponent {
+export class CountryListComponent {
   page: number = 1;
   count: number = 0;
   tableSize: number = 5;
@@ -37,42 +38,32 @@ export class CityListComponent {
   }
 
   ngOnInit(): void {
-    this.getCities();
+    this.getCountries();
    
     
   }
-  getCities(): void {
-    this.http.getapi('api/Common/GetCitydetails').subscribe(
+  getCountries(): void {
+    this.http.getapi('api/Common/GetCountries').subscribe(
       (res) => {
         console.log(res);
-        this.citylist = res;
+        this.countrylist = res.data;
       },
       (error) => {
-        console.error('Error fetching cities', error);
+        console.error('Error fetching Countries', error);
       }
     );
   }
   onTableDataChange(event: any) {
     this.page = event;
-    this.getCities();
+    this.getCountries();
   }
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.getCities();
+    this.getCountries();
   }
 
-  getCountry() {
-    this.http.getapi('api/Common/GetCountries').subscribe((res) => {
-      this.countrylist = res.data;
-    });
-  }
-  getstates() {
-    this.http.getapi('api/Common/GetStates').subscribe((res) => {
-      console.log(res);
-      this.states = res.data;
-    });
-  }
+
 
   submitForm(): void {
     const formData = this.cityForm.getRawValue();
@@ -81,7 +72,7 @@ export class CityListComponent {
         () => {
           // Updated API endpoint
           console.log('City updated successfully');
-          this.getCities();
+          this.getCountries();
           this.resetForm();
         },
         (error) => {
@@ -95,8 +86,8 @@ export class CityListComponent {
           () => {
             // Updated API endpoint
             console.log('City added successfully');
-            // debugger
-            this.getCities();
+            
+            this.getCountries();
             this.resetForm();
           },
           (error) => {
@@ -118,12 +109,12 @@ export class CityListComponent {
     return this.cityForm.controls;
   }
 
-  deleteCity(id: number): void {
-    this.http.deleteapi(`api/Common/DeleteCity/${id}`).subscribe(
+  deleteCountry(id: number): void {
+    this.http.deleteapi(`api/Common/DeleteCountry/${id}`).subscribe(
       () => {
-        console.log('City deleted successfully');
+        console.log('Country deleted successfully');
         this.ngOnInit();
-        this.getCities();
+        this.getCountries();
       },
       (error) => {
         console.error(
@@ -138,4 +129,5 @@ export class CityListComponent {
     this.cityForm.reset({ id: 0, description: '' });
     this.currentCityId = 0;
   }
+
 }

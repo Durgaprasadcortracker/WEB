@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { BackendService } from '../../../Services/BackendConnection/backend.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Chart } from 'chart.js/auto';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 @Component({
   selector: 'app-dashboard-main',
@@ -21,66 +26,163 @@ export class DashboardMainComponent implements OnInit {
     { title: 'Reminder 3', content: 'Etiam eget justo quis velit fermentum dictum. Integer convallis consectetur felis vel efficitur.' },
   ];
 
+  leads: any;
+  chart: any;
+
+  constructor(
+    private http: BackendService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
-    this.initializeCharts();
+    this.getData();
   }
 
-  initializeCharts(): void {
-    // Revenue Chart
-    // new Chart('revenueChart', {
-    //   type: 'bar',
-    //   data: {
-    //     labels: ['January', 'February', 'March', 'April'],
-    //     datasets: [{
-    //       label: 'Sales',
-    //       data: [30000, 45000, 28000, 60000],
-    //       backgroundColor: 'orange',
-    //     }]
-    //   },
-    //   options: {
-    //     responsive: true,
-    //     scales: {
-    //       y: {
-    //         beginAtZero: true
-    //       }
-    //     }
-    //   }
-    // });
-
-    // Deals Chart
-    // new Chart('dealsChart', {
-    //   type: 'pie',
-    //   data: {
-    //     labels: ['Active Deals', 'Inactive Deals'],
-    //     datasets: [{
-    //       data: [70, 30],
-    //       backgroundColor: ['blue', 'red'],
-    //     }]
-    //   },
-    //   options: {
-    //     responsive: true
-    //   }
-    // });
-
-    // Stage Chart
-    // new Chart('stageChart', {
-    //   type: 'bar',
-    //   data: {
-    //     labels: ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4', 'Stage 5', 'Stage 6'],
-    //     datasets: [{
-    //       label: 'Sales',
-    //       data: [300000, 450000, 280000, 600000, 350000, 500000],
-    //       backgroundColor: 'blue',
-    //     }]
-    //   },
-    //   options: {
-    //     responsive: true,
-    //     scales: {
-    //       y: {
-    //         beginAtZero: true
-    //       }
-    //     }
-    //   }
-    // });
+  getData(): void {
+    this.http.getapi('api/Common/Revenue').subscribe(
+      (res: any) => {
+        this.leads = res; // Assuming the API returns an array of leads
+        this.createChart();
+      },
+      (error) => {
+        console.error('Error fetching data', error);
+        // this.snackBar.open('Failed to load data', 'Close', {
+        //   duration: 3000,
+        // });
+      }
+    );
   }
+
+  createChart(): void {
+    const groupedData = this.groupBy(this.leads, 'leadStage');
+    const stages = Object.keys(groupedData);
+    const totalRevenues = stages.map(stage => {
+      return groupedData[stage].reduce((sum, lead) => sum + (lead.annualRevenue || 0), 0);
+    });
+
+    this.chart = new Chart('canvas', {
+      type: 'bar',
+      data: {
+        labels: stages,
+        datasets: [
+          {
+            label: 'Total Annual Revenue',
+            data: totalRevenues,
+            backgroundColor: '#3071D6',
+            borderColor: '#3071D6',
+            borderWidth: 1,
+          }
+        ]
+      },
+      options: {
+        scales: {
+          x: {
+            ticks: {
+              font: {
+                size: 15
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: {
+              font: {
+                size: 15
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  groupBy(array: any[], key: string): { [key: string]: any[] } {
+    return array.reduce((result, currentValue) => {
+      const groupKey = currentValue[key];
+      if (!result[groupKey]) {
+        result[groupKey] = [];
+      }
+      result[groupKey].push(currentValue);
+      return result;
+    }, {} as { [key: string]: any[] });
+  }
+  
 }
+
+
+  // ngOnInit(): void {
+  //   this.initializeCharts();
+  //   this.fetchStatusCounts();
+  // }
+
+  // initializeCharts(): void {
+   
+  // }
+  // @ViewChild('statusPieChart') statusPieChart!: ElementRef<HTMLCanvasElement>;
+  // activeCount: number = 0;
+  // inactiveCount: number = 0;
+  // isLoading: boolean = false;
+  // error: string | null = null;
+
+
+  // constructor(private http: BackendService,
+  //   private snackBar: MatSnackBar,
+  //   private router: Router) { }
+
+
+ 
+
+  // fetchStatusCounts(): void {
+  //   this.isLoading = true;
+  //   const activeCountRequest = this.http.getapi(`${this.apiUrl}/GetActiveStatusCount`);
+  //   const inactiveCountRequest = this.http.getapi(`${this.apiUrl}/GetInactiveStatusCount`);
+
+  //   forkJoin([activeCountRequest, inactiveCountRequest]).subscribe({
+  //     next: ([activeCount, inactiveCount]) => {
+  //       this.activeCount = activeCount;
+  //       this.inactiveCount = inactiveCount;
+  //       this.updateChart();
+  //     },
+  //     error: (error) => {
+  //       this.handleError(error);
+  //     }
+  //   });
+  // }
+
+  // updateChart(): void {
+  //   this.isLoading = false;
+  //   const ctx = this.statusPieChart.nativeElement.getContext('2d');
+  //   if (ctx) {
+  //     new Chart(ctx, {
+  //       type: 'pie',
+  //       data: {
+  //         labels: ['Active', 'Inactive'],
+  //         datasets: [{
+  //           label: 'Status Counts',
+  //           data: [this.activeCount, this.inactiveCount],
+  //           backgroundColor: ['#2C81C5', '#E55374']
+  //         }]
+  //       }
+  //     });
+  //   }
+  // }
+
+  // handleError(error: any): void {
+  //   this.isLoading = false;
+  //   console.error('An error occurred:', error);
+  //   switch (error.status) {
+  //     case 0:
+  //       this.error = 'Unable to reach server. Please try again later.';
+  //       break;
+  //     case 404:
+  //       this.error = 'Data not found.';
+  //       break;
+  //     case 500:
+  //       this.error = 'Server error. Please try again later.';
+  //       break;
+  //     default:
+  //       this.error = 'An unexpected error occurred. Please try again later.';
+  //       break;
+  //   }
+  // }

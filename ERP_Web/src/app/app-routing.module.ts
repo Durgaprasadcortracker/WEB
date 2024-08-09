@@ -59,6 +59,10 @@ import { IndustryListComponent } from './CRM_Module/Settings/industry-list/indus
 import { IndustryComponent } from './CRM_Module/Settings/industry/industry.component';
 import { CityListComponent } from './CRM_Module/Settings/city-list/city-list.component';
 import { CityComponent } from './CRM_Module/Settings/city/city.component';
+import { StateListComponent } from './CRM_Module/Settings/state-list/state-list.component';
+import { AddStateComponent } from './CRM_Module/Settings/add-state/add-state.component';
+import { CountryListComponent } from './CRM_Module/Settings/country-list/country-list.component';
+import { AdCountryComponent } from './CRM_Module/Settings/ad-country/ad-country.component';
 
 
 
@@ -75,7 +79,7 @@ const routes: Routes = [
           { path: 'listing', component: CompanyMainComponent },
           { path: 'add', component: AddNewCompanyComponent },
           { path: 'edit/:id', component: AddNewCompanyComponent },
-          { path: 'companiesinfo/:id', component: CompaniesInfoComponent},
+          { path: 'companiesinfo/:id', component: CompaniesInfoComponent },
           { path: 'add-contacts/:companyid', component: AddContactsComponent },
           { path: 'edit-contacts/:companyid/:id', component: AddContactsComponent },
           { path: 'add-quotes/:companyid', component: QuotesCreateComponent },
@@ -154,10 +158,16 @@ const routes: Routes = [
           { path: 'industrylist', component: IndustryListComponent },
           { path: 'industry', component: IndustryComponent },
           { path: 'citylist', component: CityListComponent },
-          { path: 'city', component: CityComponent }
+          { path: 'city', component: CityComponent },
+          { path: 'statelist', component: StateListComponent },
+          { path: 'AddState', component: AddStateComponent },
+          { path: 'countrylist', component: CountryListComponent },
+          { path: 'AddCountry', component: AdCountryComponent },
+          { path: 'quote-typelist', component: CountryListComponent },
+          { path: 'Addquotetype', component: AdCountryComponent },
 
         ]
-      }, 
+      },
 
       { path: 'add-contacts', component: AddContactsComponent },
       { path: 'edit-contacts/:id', component: AddContactsComponent },
@@ -165,18 +175,20 @@ const routes: Routes = [
       // { path: 'add-leads', component: AddLeadsComponent },
       // { path: 'contacts', component: ContactsMainComponent },
       { path: 'Leads', component: LeadsMainComponent },
-     // { path: 'add-leads', component: AddLeadsComponent },
-     // { path: 'edit-leads/:id', component: AddLeadsComponent },
+      // { path: 'add-leads', component: AddLeadsComponent },
+      // { path: 'edit-leads/:id', component: AddLeadsComponent },
       // { path: 'Campagins', component: CampaginsMainComponent },
 
       { path: 'Pipeline', component: PipelinesMainComponent },
-      { path: 'Reports', component: ReportsMainComponent,
+      {
+        path: 'Reports', component: ReportsMainComponent,
         children: [
           { path: 'deal-created-vs-lost', component: DealCreatedVsLostComponent },
           { path: 'churn-overview', component: ChurnOverviewComponent },
           { path: 'revenue-by-month-year-quoter', component: RevenuebyMonthuarterearComponent },
           { path: 'sales-team-permonance', component: SalesTeamPermonanceComponent },
-        ] },
+        ]
+      },
       { path: 'events', component: EventsComponent },
       { path: 'quoteslisting', component: QuoteslistingComponent },
       { path: 'userprofile', component: UserProfileComponent },
@@ -185,7 +197,7 @@ const routes: Routes = [
       {
         path: 'Settings', component: SettingsMainComponent,
         children: [
-          
+
           { path: 'user-view', component: UserProfileComponent },
           { path: '**', redirectTo: '/CRM/Settings/user-view' }
         ]

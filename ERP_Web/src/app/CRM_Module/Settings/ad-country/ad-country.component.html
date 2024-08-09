@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header h4">
+        Country
+    </div>
+    <div class="card-body">
+        <form [formGroup]="cityForm" (ngSubmit)="submitForm()">
+            <div class="row">
+                <div class="mb-2">
+                    <label for="description" class="form-label h6">Enter Country Name<span class="text-danger">*</span></label>
+                    <div data-mdb-input-init class="form-outline">
+                        <textarea type="text" class="form-control" id="description" formControlName="description"
+                            rows="4" cols="3" placeholder="Enter description"
+                            [ngClass]="{ 'is-invalid': submited && f['description'].errors }"></textarea>
+                        <div *ngIf="submited && f['description'].errors" class="invalid-feedback">
+                            <div *ngIf="f['description'].errors['required']">Description is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6 mt-4 d-flex g-3 ">
+                  <input type="submit" style="width: 200px; background-color: #8D0000;" class="btn btn-danger  mr-4" value="Save" />
+                  <div style="width: 200px;" type="button" class="btn btn-dark"
+                  (click)="clear()">Close</div>
+                </div>
+              </div>
+        </form>
+    </div>
+</div>

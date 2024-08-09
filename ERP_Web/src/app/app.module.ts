@@ -71,6 +71,13 @@ import { TimezoneComponent } from './CRM_Module/Settings/timezone/timezone.compo
 import { TimezoneListComponent } from './CRM_Module/Settings/timezone-list/timezone-list.component';
 import { IndustrytypeComponent } from './CRM_Module/Settings/industrytype/industrytype.component';
 import { IndustrytypeListComponent } from './CRM_Module/Settings/industrytype-list/industrytype-list.component';
+import { StateListComponent } from './CRM_Module/Settings/state-list/state-list.component';
+import { AddStateComponent } from './CRM_Module/Settings/add-state/add-state.component';
+import { CountryListComponent } from './CRM_Module/Settings/country-list/country-list.component';
+import { AdCountryComponent } from './CRM_Module/Settings/ad-country/ad-country.component';
+import { QuotetypelistComponent } from './CRM_Module/Settings/quotetypelist/quotetypelist.component';
+import { AddQuotetypeComponent } from './CRM_Module/Settings/add-quotetype/add-quotetype.component';
+
 
 @NgModule({
   declarations: [
@@ -141,7 +148,13 @@ import { IndustrytypeListComponent } from './CRM_Module/Settings/industrytype-li
     TimezoneListComponent,
     UserProfileComponent,
     IndustrytypeComponent,
-    IndustrytypeListComponent
+    IndustrytypeListComponent,
+    StateListComponent,
+    AddStateComponent,
+    CountryListComponent,
+    AdCountryComponent,
+    QuotetypelistComponent,
+    AddQuotetypeComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,0 +1,46 @@
+<div class="container-fluid mt-5">
+    <div class="card">
+      <div class="card-header h4">
+        Country
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-10"></div>
+          <div class="col-md-2" style="padding-top: 20px;">
+            <a class="btn  btn-outline-primary" routerLink="/CRM/Settings/AddCountry"
+              style="background-color: #8D0000;color: white;float: right;">Add Country</a>
+          </div>
+        </div>
+        <table class="rwd-table table-bordered mt-4" style="width: 100%;">
+          <thead>
+            <tr>
+              <th scope="col" class="text-center" style="width: 25%;">Actions</th>
+              <th scope="col" class="text-center" style="width: 25%;">S.No</th>
+              <th scope="col" class="text-center" style="width: 50%;">Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of countrylist| paginate
+          : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            }; let i=index">
+              <td class="text-center">
+                <button routerLink="/CRM/Settings/edit-city/{{c.id}}" class="btn btn-sm btn-outline-primary">
+                  <i class="fa fa-pencil-alt"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteCountry(c.id)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+              <td scope="row" class="text-center">{{ i + 1 }}</td>
+              <td class="text-center">{{ c.description }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pagination-container" style="float: right;">
+          <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+        </div>
+      </div>
+    </div>
