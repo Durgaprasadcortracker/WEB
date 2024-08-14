@@ -1,19 +1,15 @@
 <div class="dashboard-container">
-    <!-- Widgets/Charts Section -->
-    <div class="widgets-container">
-      <!-- Actual Revenue by Month/Quarter/Year -->
-      <div class="widget">
-        <div class="widget-header">
-          <h3>Actual Revenue by Month/Quarter/Year</h3>
-          <select>
-            <option>Month</option>
-            <option>Quarter</option>
-            <option>Year</option>
-          </select>
-        </div>
-        <div class="widget-content">
-          <canvas id="revenueChart"></canvas>
-        </div>
+  <!-- Widgets/Charts Section -->
+  <div class="widgets-container">
+    <!-- Actual Revenue by Month/Quarter/Year -->
+    <div class="widget">
+      <div class="widget-header">
+        <h3>Actual Revenue by Month/Quarter/Year</h3>
+        <select>
+          <option>Month</option>
+          <option>Quarter</option>
+          <option>Year</option>
+        </select>
       </div>
   
  
@@ -51,14 +47,28 @@
           </tr>
         </tbody>
       </table>
+      <div class="widget-content">
+        <canvas id="revenueChart"></canvas>
+      </div>
     </div>
-  
-    <!-- Reminders -->
-    <div class="reminders">
-      <h3>Reminders</h3>
-      <div *ngFor="let reminder of reminders" class="reminder">
-        <h4>{{reminder.title}}</h4>
-        <p>{{reminder.content}}</p>
+
+    <!-- Active/Inactive Deals -->
+    <div class="widget">
+      <div class="widget-header">
+        <h3>Active/Inactive Deals</h3>
+      </div>
+      <div class="widget-content">
+        <canvas id="dealsChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Revenue by Stage -->
+    <div class="widget">
+      <div class="widget-header">
+        <h3>Revenue by Stage</h3>
+      </div>
+      <div class="widget-content">
+        <canvas id="stageChart"></canvas>
       </div>
     </div>
   </div>
@@ -78,3 +88,35 @@
           {{ error }}
         </div>
       </div> -->
+
+  <!-- Deal Stage by Salesperson Table -->
+  <div class="table-container">
+    <h3>Deal Stage by Salesperson</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Team Member</th>
+          <th>Stage 1</th>
+          <th>Stage 2</th>
+          <th>Stage 3</th>
+          <th>Stage 4</th>
+          <th>Stage 5</th>
+          <th>Stage 6</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of tableData">
+          <td>{{row.name}}</td>
+          <td>{{row.stage1}}</td>
+          <td>{{row.stage2}}</td>
+          <td>{{row.stage3}}</td>
+          <td>{{row.stage4}}</td>
+          <td>{{row.stage5}}</td>
+          <td>{{row.stage6}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-events></app-events>
+
+  <!-- Reminders -->

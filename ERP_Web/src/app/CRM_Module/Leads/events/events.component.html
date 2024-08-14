@@ -17,7 +17,7 @@
             <div class="date">{{ day.date }}</div>
             <div class="events">
               <div *ngFor="let event of day.events" class="event">
-                <div class="event-title">{{ event.title }}</div>
+                <div class="event-title">{{ event.EventTitle }}</div>
                 <button (click)="editEvent(event, $event)" class="material-symbols-outlined">Edit</button>
                 <button (click)="deleteEvent(event, $event)" class="material-symbols-outlined">Delete</button>
               </div>
@@ -35,26 +35,26 @@
               <div class="fields">
                 <div class="input-field">
                   <label>Event Title</label>
-                  <input type="text" class="form-control" [(ngModel)]="currentEvent.title" name="title" required>
+                  <input type="text" class="form-control" [(ngModel)]="currentEvent.EventTitle" name="EventTitle" required>
                 </div>
                 <div class="input-field">
                   <label>Event time</label>
-                  <input type="time" class="form-control" [(ngModel)]="currentEvent.time" name="time" required>
+                  <input type="date" class="form-control" [(ngModel)]="currentEvent.EventTime" name="EventTime" required>
                 </div>
                 <div class="input-field">
                   <label>Add guests</label>
-                  <select class="form-select" [(ngModel)]="currentEvent.guests" name="guests" required>
+                  <select class="form-select" [(ngModel)]="currentEvent.EventQuests" name="EventQuests" required>
                     <option value="">Select guests</option>
-                    <option *ngFor="let guest of guests" [value]="guest">{{ guest }}</option>
+                    <option *ngFor="let guest of guests" [value]="1">{{ guest }}</option>
                   </select>
                 </div>
                 <div class="input-field">
                   <label>Meeting Link</label>
-                  <input type="text" class="form-control" [(ngModel)]="currentEvent.meetingLink" name="meetingLink">
+                  <input type="text" class="form-control" [(ngModel)]="currentEvent.MeetingLink" name="MeetingLink">
                 </div>
                 <div class="input-field">
                   <label>Add Location</label>
-                  <input type="text" class="form-control" [(ngModel)]="currentEvent.location" name="location">
+                  <input type="text" class="form-control" [(ngModel)]="currentEvent.MeetingLocation" name="MeetingLocation">
                 </div>
                 <div class="emp-buttons">
                   <button type="submit" class="btn submit-btn btn-danger">Submit</button>
@@ -67,7 +67,6 @@
     </div>
   </div>
 </form>
-
 <!-- 
 <div class="main-container">
   <div class="calendar">

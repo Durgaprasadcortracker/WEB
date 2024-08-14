@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { Meeting } from './meeting.model';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 // import * as moment from 'moment';
 
 interface Event {
-  title: string;
-  time: string;
-  guests: string;
-  meetingLink: string;
-  location: string;
+  EventTitle: string;
+  EventTime: string;
+  EventQuests: string;
+  MeetingLink: string;
+  MeetingLocation: string;
   date: string;
+  LeadId:number
 }
 
 interface CalendarDay {
@@ -62,9 +64,11 @@ export class EventsComponent implements OnInit {
   guests: string[] = ['Alice', 'Bob', 'Charlie'];  // Example guest list
   isEditing = false;
   meetingDetails: Meeting | undefined;
+  lead_id:any
 
 
-  constructor(private http: BackendService,
+  constructor(private http: BackendService,    
+    private route: ActivatedRoute,
   ) {
     const today = new Date();
     this.currentMonth = today.getMonth();
@@ -73,6 +77,7 @@ export class EventsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.lead_id = this.route.snapshot.params['id'];
     this.generateCalendarDays();
     this.getEvents();
   }
@@ -137,39 +142,43 @@ export class EventsComponent implements OnInit {
     const staticEvents: Event[] = [];
     this.http.getapi('api/Lead/GetEvents').subscribe((res) => {
       console.log(res.data);
-      for(let a of res.data){
-        staticEvents.push(
-          this.meetingDetails = new Meeting(
-            a.eventTitle,
-            '5:00 PM', // a.eventTime
-            a.eventQuests,
-            a.meetingLink,
-            a.meetingLocation,
-            '12 July 2024'
-          )
-        )
-      }
+      // for (let a of res.data) {
+      //   staticEvents.push(
+      //     this.meetingDetails = new Meeting(
+      //       a.eventTitle,
+      //       '5:00 PM', // a.eventTime
+      //       a.eventQuests,
+      //       a.meetingLink,
+      //       a.meetingLocation,
+      //       '12 July 2024'
+      //     )
+      //   )
+      // }
       console.log(staticEvents)
       this.allEvents = staticEvents;
       this.calendarDays.forEach(day => {
         day.events = this.allEvents.filter(event => {
           const eventDate = new Date(event.date);
           return eventDate.getDate() === day.date &&
-                 eventDate.getMonth() === this.currentMonth &&
-                 eventDate.getFullYear() === this.currentYear;
+            eventDate.getMonth() === this.currentMonth &&
+            eventDate.getFullYear() === this.currentYear;
         });
       });
     });
   }
 
   addEvent(event: Event): void {
+    console.log(event)
     const eventDate = new Date(event.date);
     if (eventDate.getMonth() === this.currentMonth && eventDate.getFullYear() === this.currentYear) {
       const day = this.calendarDays.find(d => d.date === eventDate.getDate() && d.isCurrent);
       if (day) {
-        day.events.push(event);
+        day.events.push(event);   
       }
     }
+    this.http.postapi('api/Lead/events', event).subscribe((res) => {
+      console.log(res)
+    });
     this.allEvents.push(event);
   }
 
@@ -202,27 +211,28 @@ export class EventsComponent implements OnInit {
   }
 
   submitEvent(): void {
-    if (this.currentEvent.title && this.currentEvent.time) {
+    if (this.currentEvent.EventTitle && this.currentEvent.EventTime) {
       const eventDate = this.selectedDay ? `${this.selectedDay.date} ${this.months[this.currentMonth]} ${this.currentYear}` : this.currentEvent.date || '';
       const event: Event = {
-        title: this.currentEvent.title,
-        time: this.currentEvent.time,
-        guests: this.currentEvent.guests || '',
-        meetingLink: this.currentEvent.meetingLink || '',
-        location: this.currentEvent.location || '',
-        date: eventDate
+        EventTitle: this.currentEvent.EventTitle,
+        EventTime: this.currentEvent.EventTime,
+        EventQuests: this.currentEvent.EventQuests || '',
+        MeetingLink: this.currentEvent.MeetingLink || '',
+        MeetingLocation: this.currentEvent.MeetingLocation || '',
+        date: eventDate,
+        LeadId:this.lead_id
       };
 
       if (this.isEditing) {
         // Find and update the event in allEvents
-        const index = this.allEvents.findIndex(e => e.date === this.currentEvent.date && e.title === this.currentEvent.title && e.time === this.currentEvent.time);
+        const index = this.allEvents.findIndex(e => e.date === this.currentEvent.date && e.EventTitle === this.currentEvent.EventTitle && e.EventTime === this.currentEvent.EventTime);
         if (index !== -1) {
           this.allEvents[index] = event;
         }
         // Update the event in the calendar day
         this.calendarDays.forEach(day => {
           if (day.date === this.selectedDay?.date && day.isCurrent) {
-            const eventIndex = day.events.findIndex(e => e.title === this.currentEvent.title && e.time === this.currentEvent.time);
+            const eventIndex = day.events.findIndex(e => e.EventTitle === this.currentEvent.EventTitle && e.EventTime === this.currentEvent.EventTime);
             if (eventIndex !== -1) {
               day.events[eventIndex] = event;
             }
@@ -418,13 +428,13 @@ export class EventsComponent implements OnInit {
 
   // submitEvent(): void {
   //   console.log('Selected Day at submit start:', this.selectedDay); // Log initial state
-  
+
   //   // Check if event title and time are provided
   //   if (!this.currentEvent.eventTitle || !this.currentEvent.eventTime) {
   //     console.error('Event title and time are required');
   //     return;
   //   }
-  
+
   //   // Infer the selected day if not available
   //   if (!this.selectedDay || !this.selectedDay.isCurrent) {
   //     console.warn('No valid date selected, inferring from eventTime');
@@ -437,38 +447,38 @@ export class EventsComponent implements OnInit {
   //     };
   //     console.log('Inferred Selected Day:', this.selectedDay);
   //   }
-  
+
   //   try {
   //     console.log('Original Event Time:', this.currentEvent.eventTime);
-  
+
   //     // Validate time format
   //     const timeString = this.currentEvent.eventTime as string;
   //     const timeParts = timeString.split(':');
   //     if (timeParts.length !== 2) {
   //       throw new Error('Invalid time format. Expected format is HH:MM');
   //     }
-  
+
   //     const [hours, minutes] = timeParts;
   //     if (isNaN(parseInt(hours)) || isNaN(parseInt(minutes))) {
   //       throw new Error('Invalid time format. Hours and minutes should be numbers');
   //     }
-  
+
   //     const seconds = '00';
-  
+
   //     // Log the selected date details
   //     const selectedDate = new Date(this.currentYear, this.currentMonth, this.selectedDay.date);
   //     console.log('Selected Date:', selectedDate); // Log the selected date
-  
+
   //     // Format date and time into ISO 8601 string
   //     const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
   //     const eventDateTime = `${formattedDate}T${hours}:${minutes}:${seconds}Z`;
-  
+
   //     // Validate the ISO 8601 date string
   //     const eventTime = moment(eventDateTime, moment.ISO_8601, true);
   //     if (!eventTime.isValid()) {
   //       throw new Error('Invalid ISO 8601 date format');
   //     }
-  
+
   //     // Create the event object
   //     const event: Event = {
   //       id: this.currentEvent.id,
@@ -483,17 +493,17 @@ export class EventsComponent implements OnInit {
   //       modifiedBy: this.currentEvent.modifiedBy,
   //       modifiedAt: this.currentEvent.modifiedAt
   //     };
-  
+
   //     // Log the event details before submitting
   //     console.log('Event to be submitted:', event);
-  
+
   //     // Update or add the event
   //     if (this.isEditing) {
   //       this.updateEvent(event);
   //     } else {
   //       this.addEvent(event);
   //     }
-  
+
   //     // Reset form and state
   //     this.currentEvent = {};
   //     this.showModal = false;
@@ -502,12 +512,12 @@ export class EventsComponent implements OnInit {
   //     console.error('Error submitting event:', error);
   //   }
   // }
-   
-  
-  
+
+
+
   // deleteEvent(event: Event, eventClick: MouseEvent): void {
   //   eventClick.stopPropagation();
-    
+
   //   if (confirm(`Are you sure you want to delete the event "${event.id}"?`)) {
   //     this.http.deleteapi(`api/Events/DeleteEvents/${event.id}`).subscribe(() => {
   //       this.allEvents = this.allEvents.filter(e => e.id !== event.id);
@@ -515,7 +525,7 @@ export class EventsComponent implements OnInit {
   //     });
   //   }
   // }
-  
+
 
   // closeModal(): void {
   //   this.showModal = false;

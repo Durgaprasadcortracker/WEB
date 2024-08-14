@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js/auto';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard-main',
@@ -186,3 +187,4 @@ export class DashboardMainComponent implements OnInit {
   //       break;
   //   }
   // }
+}

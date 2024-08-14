@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../../../Services/BackendConnection/backend.service';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -31,15 +31,14 @@ export class CallLogsComponent {
   callsLogs: any;
 
 
-  constructor(private route: ActivatedRoute,
-    private http: BackendService,
+  constructor(private route: ActivatedRoute,   private http: BackendService,
     private fb: FormBuilder,
     private ActivatedRoute: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
 
   ) {
-    this.id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
     this.getRequiredData()
     this.ActivatedRoute.queryParamMap.subscribe((params) => {
@@ -59,11 +58,11 @@ export class CallLogsComponent {
     });
   }
 
-
+  myform:any;
   ngOnInit() {
     
     this.myForm = this.fb.group({
-      id: [0],
+      id: new FormControl(0),
       leadId: [this.id, Validators.required],
       contactId: [null, Validators.required],
       callTypes: [null, Validators.required],
