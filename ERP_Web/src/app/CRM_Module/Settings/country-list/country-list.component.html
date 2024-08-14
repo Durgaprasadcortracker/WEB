@@ -27,9 +27,10 @@
               totalItems: count
             }; let i=index">
               <td class="text-center">
-                <button routerLink="/CRM/Settings/edit-city/{{c.id}}" class="btn btn-sm btn-outline-primary">
+                <div routerLink="/CRM/Settings/AddCountry" [queryParams]="{countryid: c.id}"
+                 class="btn btn-sm btn-outline-primary">
                   <i class="fa fa-pencil-alt"></i>
-                </button>
+                </div>
                 <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteCountry(c.id)">
                   <i class="fa fa-trash"></i>
                 </button>

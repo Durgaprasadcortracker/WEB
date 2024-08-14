@@ -48,8 +48,15 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary mt-3" style="background-color: #8d0000;">Submit</button>
-      <button type="button" class="btn btn-secondary ml-2 mt-3" (click)="clear()">Close</button>
+      <!-- <button type="submit" class="btn btn-primary mt-3" style="background-color: #8d0000;">Submit</button>
+      <button type="button" class="btn btn-secondary ml-2 mt-3" (click)="clear()">Close</button> -->
+      <div class="d-flex flex-wrap" style="padding-top: 20px;">
+        <div class="col-md-6 mt-4 d-flex g-3 ">
+          <input type="submit" style="width: 200px; background-color: #8D0000;" class="btn btn-danger  mr-4" value="Save" />
+          <div style="width: 200px;" type="button" class="btn btn-dark"
+            (click)="clear()">Close</div>
+        </div>
+      </div>
     </form>
   </div>
   </div>

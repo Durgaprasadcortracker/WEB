@@ -329,7 +329,7 @@ createId:any=0;
   }
 
   getCity() {
-    this.http.getapi('api/Common/GetCitiesDetails').subscribe((res) => {
+    this.http.getapi('api/Common/GetCitydetails').subscribe((res) => {
       this.citylist = res;
     });
   }
@@ -341,7 +341,7 @@ createId:any=0;
   }
 
   getCountry() {
-    this.http.getapi('api/Common/GetCountry').subscribe((res) => {
+    this.http.getapi('api/Common/GetCountries').subscribe((res) => {
       this.countrylist = res.data;
     });
   }

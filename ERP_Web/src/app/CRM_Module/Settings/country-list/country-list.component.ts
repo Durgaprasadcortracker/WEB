@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AbstractControl,FormBuilder,FormGroup,Validators,} from '@angular/forms';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-country-list',
@@ -14,25 +15,22 @@ export class CountryListComponent {
   tableSize: number = 5;
   tableSizes: any = [20, 40, 60, 80];
   p: number = 1;
-
-  cityForm: any;
-  citylist: any;
-  stateList: any;
   submited: any;
-  cityId: any;
 
   cities: any;
   states: any;
 
   countrylist: any;
-  currentCityId: any;
+  countryid: any;
   country: any;
+  countryForm: any;
 
   constructor(
     private fb: FormBuilder,
     private http: BackendService,
     private router: Router,
-    private ActivatedRoute: ActivatedRoute
+    private ActivatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {
     
   }
@@ -65,48 +63,8 @@ export class CountryListComponent {
 
 
 
-  submitForm(): void {
-    const formData = this.cityForm.getRawValue();
-    if (this.currentCityId > 0) {
-      this.http.putapi('api/Common/UpdateCity', formData).subscribe(
-        () => {
-          // Updated API endpoint
-          console.log('City updated successfully');
-          this.getCountries();
-          this.resetForm();
-        },
-        (error) => {
-          console.error('Error updating city', error);
-        }
-      );
-    } else {
-      this.http
-        .postapi('api/Common/cities', { description: formData.description })
-        .subscribe(
-          () => {
-            // Updated API endpoint
-            console.log('City added successfully');
-            
-            this.getCountries();
-            this.resetForm();
-          },
-          (error) => {
-            console.error('Error adding city', error);
-          }
-        );
-    }
-  }
-
-  getCityById(id: any) {
-    this.http.getapi('api/Common/UpdateCity' + id).subscribe((res: any) => {
-      const cityData = res.data;
-      console.log(res);
-
-      this.cityForm.patchValue(res.data);
-    });
-  }
   get f(): { [key: string]: AbstractControl } {
-    return this.cityForm.controls;
+    return this.countryForm.controls;
   }
 
   deleteCountry(id: number): void {
@@ -115,6 +73,9 @@ export class CountryListComponent {
         console.log('Country deleted successfully');
         this.ngOnInit();
         this.getCountries();
+        this.snackBar.open('Country Deleted successfully!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
       },
       (error) => {
         console.error(
@@ -126,8 +87,10 @@ export class CountryListComponent {
     );
   }
   resetForm(): void {
-    this.cityForm.reset({ id: 0, description: '' });
-    this.currentCityId = 0;
+    this.countryForm.reset({ id: 0, description: '' });
+    this.countryid = 0;
   }
-
+  edit(Id: any) {
+    this.router.navigate(['/CRM/edit country', Id]);
+  }
 }

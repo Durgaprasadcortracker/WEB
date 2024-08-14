@@ -165,7 +165,7 @@ export class CityComponent {
     this.cityForm.reset();
     this.submited = false;
     this.ngOnInit();
-    this.router.navigate(['/CRM/Settings/city']);
+    this.router.navigate(['/CRM/Settings/citylist']);
   }
 
 }

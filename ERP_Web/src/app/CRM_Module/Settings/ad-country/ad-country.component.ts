@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-
+import { AbstractControl, FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ad-country',
@@ -15,133 +10,71 @@ import { BackendService } from '../../../Services/BackendConnection/backend.serv
   styleUrl: './ad-country.component.css'
 })
 export class AdCountryComponent {
-  cityForm: any;
-  citylist: any;
-  stateList: any;
-  submited: any;
-  cityId: any;
-
-  cities: any;
-  states: any;
-
+  countryForm: any;
   countrylist: any;
   Id = 0;
-  cityData: any;
   countryId: any;
+  submited: any;
 
   constructor(
     private fb: FormBuilder,
     private http: BackendService,
     private router: Router,
-    private ActivatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private ActivatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {
-    this.cityForm = this.fb.group({
-      id: [0],
-      description: [null, Validators.required],
-      countryId: [null, Validators.required],
-      stateId: [null, Validators.required],
+    this.activatedRoute.queryParamMap.subscribe((params) => {
+      this.countryId = params.get('countryid'); 
+      console.log(this.countryId);
+      if (this.countryId > 0) {
+        this.getCountryById(this.countryId)
+      }
     });
-    this.Id = this.ActivatedRoute.snapshot.params['id'];
-    console.log(this.Id);
-    if (this.Id) {
-      this.http.getapi('api/Common/GetCityby/' + this.Id).subscribe((res) => {
-        console.log(res);
-        this.cityData = res.data;
-        console.log(this.cityData);
-        this.cityForm.get('countryId').setValue(this.cityData.countryId);
-        this.getstatesbycountrycity()
-        this.cityForm.get('id').setValue(this.cityData.id);
-        this.cityForm.get('stateId').setValue(this.cityData.stateId);
-        this.cityForm.get('description').setValue(this.cityData.description);
-        console.log(this.cityForm.value);
-      });
-    }
+  }
+  // getCountryById(countryId: any) {
+  //   throw new Error('Method not implemented.');
+  // }
+  getCountryById(id: any) {
+    this.http.getapi('api/Common/GetCountryById/' + id).subscribe((res) => {
+      console.log(res);
+      this.countryForm.patchValue(res.data);
+    });
   }
   ngOnInit(): void {
-    this.getapi();
-    this.getCountry();
-    this.getCity();
-  }
-
-  getCity(): void {
-    this.http.getapi('api/Common/GetCities').subscribe((res: any) => {
-      console.log(res);
-      this.cities = res.data;
+    this.countryForm = this.fb.group({
+      id: [0],
+      description:[null, Validators.required]
     });
   }
 
-  getapi(): void {
-    this.http.getapi('api/Common/GetCities').subscribe(
-      (res) => {
-        console.log(res);
-        this.citylist = res.data;
-      },
-      (error) => {
-        console.error('Error fetching cities', error);
-      }
-    );
-  }
-  getCitybycountry() {
-    this.countryId = this.cityForm.get('country')?.value;
-    this.http.getapi('api/Common/cities/' + this.countryId).subscribe((res) => {
-      this.citylist = res;
-    });
-  }
-
-  getstatesbycountrycity() {
-    this.countryId = this.cityForm.get('countryId')?.value;
-    this.http
-      .getapi(`api/Common/GetCountryByStates/${this.countryId}`)
-      .subscribe((res) => {
-        this.stateList = res.data;
-      });
-  }
-
-  getState() {
-    this.http.getapi('api/Common/GetStates').subscribe((res) => {
-      this.stateList = res.data;
-    });
-  }
-
-  getCountry() {
-    this.http.getapi('api/Common/GetCountry').subscribe((res) => {
-      this.countrylist = res.data;
-    });
-  }
-  // getCountry() {
-  //   this.http.getapi('api/Common/GetCountries').subscribe((res) => {
-  //     this.countrylist = res.data;
-  //   });
-  // }
-  // getStates() {
-  //   let countryId= this.cityForm.get("countryId")?.value;
-  //   console.log(countryId)
-  //   this.http.getapi('api/Common/GetStates/'+countryId).subscribe((res)=> {
-  //     console.log(res);
-  //     this.states = res.data
-  //   });
-  // }
 
   submitForm(): void {
     this.submited = true;
-    console.log(this.cityForm.value);
-    const _ID = this.cityForm.value.id;
-    if (this.cityForm.invalid) {
+    console.log(this.countryForm.value);
+    const _ID = this.countryForm.value.id;
+    if (this.countryForm.invalid) {
       return;
     }
     if (_ID > 0) {
-      this.http.putapi('api/Common/UpdateCity', this.cityForm.value).subscribe(
+      this.http.putapi('api/Common/UpdateCountry', this.countryForm.value).subscribe(
         (res) => {
           this.clear();
+          this.snackBar.open('Country Updated successfully!', 'Close', {
+            duration: 3000, // Snackbar stays open for 3 seconds
+          });
         },
         (error) => {
           console.error('Error updating state', error);
         }
       );
     } else {
-      this.http.postapi('api/Common/cities', this.cityForm.value).subscribe(
+      this.http.postapi('api/Common/AddCountry', this.countryForm.value).subscribe(
         () => {
           this.clear();
+          this.snackBar.open('Country Added successfully!', 'Close', {
+            duration: 3000, // Snackbar stays open for 3 seconds
+          });
         },
         (error) => {
           console.error('Error adding state', error);
@@ -150,20 +83,13 @@ export class AdCountryComponent {
     }
   }
 
-  // getCityById(id: any) {
-  //   this.http.getapi('/api/Common/GetCityby' + id).subscribe((res: any) => {
-  //     const cityData = res.data;
-  //     console.log(res);
-  //     this.cityForm.patchValue(res.data);
-  //   });
-  // }
 
   get f(): { [key: string]: AbstractControl } {
-    return this.cityForm.controls;
+    return this.countryForm.controls;
   }
 
   clear(): void {
-    this.cityForm.reset();
+    this.countryForm.reset();
     this.submited = false;
     this.ngOnInit();
     this.router.navigate(['/CRM/Settings/countrylist']);

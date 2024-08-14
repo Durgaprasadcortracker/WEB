@@ -113,4 +113,5 @@ export class LeadStatusListComponent {
         this.Stagelist = res;
       });
     }
+    
 }
