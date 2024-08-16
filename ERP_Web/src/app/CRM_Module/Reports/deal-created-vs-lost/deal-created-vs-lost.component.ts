@@ -19,10 +19,11 @@ export class DealCreatedVsLostComponent implements OnInit {
   Id: any;
   deals: any;
   _loginlist: any;
-  _LostReason: string[] = ['Pricing', 'Product-Requirement', 'Lost to Competition', 'Prospecting'];
-
+  _lostReasons: any[] = [];
   myForm: FormGroup;
   submitted = false;
+  noDataAvailable: boolean = false;
+  
 
   constructor(
     private http: BackendService,
@@ -35,12 +36,13 @@ export class DealCreatedVsLostComponent implements OnInit {
       SalesOwnerName: new FormControl(null, Validators.required),
       fromDate: new FormControl(null, Validators.required),
       toDate: new FormControl(null, Validators.required),
-      LostReason : new FormControl(null, Validators.required)
+      LostReason: new FormControl(null, Validators.required)
     });
   }
 
   ngOnInit() {
     this.getLogin();
+    this.getLostReasons();
 
     if (this.Id) {
       this.http.getapi('api/Lead/GetLeadsby/' + this.Id).subscribe((res) => {
@@ -55,6 +57,7 @@ export class DealCreatedVsLostComponent implements OnInit {
 
   onTableDataChange(event: any) {
     this.page = event;
+    this.onSearch(); // Re-run the search with the new page
   }
 
   getLogin() {
@@ -63,22 +66,43 @@ export class DealCreatedVsLostComponent implements OnInit {
     });
   }
 
+  getLostReasons() {
+    this.http.getapi('api/Common/GetLostReasons').subscribe((res) => {
+      this._lostReasons = res;
+    });
+  }
+
   clear() {
     this.myForm.reset();
+    this.deals = []; // Clear the displayed deals when the form is reset
   }
 
   downloadReport() {
-    this.excelRead.exportAsExcelFile(this.deals, 'Deal-created-vs-lost');
+    this.excelRead.exportAsExcelFile(this.deals, 'Deal-Created-vs-Lost');
   }
 
   onSearch() {
     console.log(this.myForm.value)
     this.submitted = true;
-    // if (this.myForm.invalid) {
-    //   return;
-    // }
-    this.http.postapi('api/Common/GetDealLostReports', this.myForm.getRawValue()).subscribe((res) => {
-      this.deals = res; 
-    });
+    if (this.myForm.invalid) {
+      console.warn('Form is invalid. Please fill out all required fields.');
+      return;
+    }
+    
+    this.http.postapi('api/Common/GetDealLostReports', this.myForm.getRawValue()).subscribe(
+      (res) => {
+        if (res && res.length > 0) {
+          this.deals = res;
+          console.log('Received data:', res);
+        } else {
+          console.warn('No data received from the API.');
+          this.deals = []; // Ensure deals array is empty if no data is returned
+        }
+      },
+      (error) => {
+        console.error('Error fetching deal lost reports:', error);
+        this.deals = []; // Clear the deals on error
+      }
+    );
   }
 }
