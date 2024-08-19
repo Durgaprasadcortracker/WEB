@@ -15,6 +15,16 @@ export class DashboardMainComponent implements OnInit {
     { name: 'Jordan', stage1: 7, stage2: 10, stage3: 4, stage4: 14, stage5: 7, stage6: 8 },
   ];
 
+  dropdownVisible = false;
+
+  toggleDropdown() {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
+
+  closeDropdown() {
+    this.dropdownVisible = false;
+  }
+
   reminders = [
     { title: 'Reminder 1', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget purus eu urna tempor placerat.' },
     { title: 'Reminder 2', content: 'Nulla facilisi. Proin vitae justo non nunc lacinia congue sed sit amet libero.' },
