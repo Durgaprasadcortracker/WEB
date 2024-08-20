@@ -65,7 +65,6 @@ throw new Error('Method not implemented.');
       this.http.putapi('api/Common/UpdateProbability', formData).subscribe(() => {
         console.log('Probability updated successfully');
         this.router.navigate(['/CRM/Settings/probabilitylist'])
-       
         this.resetForm();
       }, (error) => {
         console.error('Error updating probability', error);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl,FormBuilder,FormGroup,Validators,} from '@angular/forms';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-city-list',
   templateUrl: './city-list.component.html',
@@ -31,15 +32,14 @@ export class CityListComponent {
     private fb: FormBuilder,
     private http: BackendService,
     private router: Router,
-    private ActivatedRoute: ActivatedRoute
+    private ActivatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar,
   ) {
     
   }
 
   ngOnInit(): void {
     this.getCities();
-   
-    
   }
   getCities(): void {
     this.http.getapi('api/Common/GetCitydetails').subscribe(
@@ -122,6 +122,9 @@ export class CityListComponent {
     this.http.deleteapi(`api/Common/DeleteCity/${id}`).subscribe(
       () => {
         console.log('City deleted successfully');
+        this.snackBar.open('City deleted successfully!', 'Close', {
+          duration: 3000, // Snackbar stays open for 3 seconds
+        });
         this.ngOnInit();
         this.getCities();
       },
@@ -137,5 +140,8 @@ export class CityListComponent {
   resetForm(): void {
     this.cityForm.reset({ id: 0, description: '' });
     this.currentCityId = 0;
+  }
+  edit(Id: any) {
+    this.router.navigate(['/CRM/Settings/city', Id]);
   }
 }

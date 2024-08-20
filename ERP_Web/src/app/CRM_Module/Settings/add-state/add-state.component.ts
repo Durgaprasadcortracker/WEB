@@ -29,7 +29,6 @@ export class AddStateComponent {
     if (this.stateId > 0) {
       this.http.getapi('api/Common/GetState/' + this.stateId).subscribe((res) => {
         console.log(res);
-        debugger;
         this.myForm.patchValue(res.data);
         // this.myForm.get("stageId")?.setValue(res.data.stageId);
 

@@ -87,7 +87,6 @@
                         <th>Lead Stage</th>
                         <th>Lead Status</th>
                         <th>Probability</th>
-                       
                     </tr>
                 </thead>
                 <tbody>
@@ -106,7 +105,7 @@
                     </td>
             
                         <td> <a routerLink="/CRM/Leads/leadView/{{a.leadId}}/ContactView/{{a.leadId}}"> {{a.companyName}}</a></td>
-                        <td>{{a.companyOwner}}</td>
+                        <td>{{a.leadownerFname +" "+ a.leadownerLname}}</td>
                         <td>{{a.email}}</td>
                         <td>{{a.leadStage}}</td>
                         <td>{{a.leadStatus}}</td>

@@ -8,7 +8,6 @@
         <div class="col-md-3">
           <label class="h6">Deal Owner</label>
           <select type="text" class="form-control" formControlName="DealOwnerName">
-
             <option value="null">--Select Deal owner--</option>
             <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
           </select>
@@ -52,7 +51,7 @@
     </div>
   </div>
 </div> 
-<div class="container mt-5" *ngIf="showListing">
+<!-- <div class="container mt-5" *ngIf="showListing">
   <div class="row mb-3">
   </div>
   <div class="card">
@@ -94,95 +93,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
-</div>
-<!-- 
-<div class="container mt-5" *ngIf="!showListing">
-  <div class="card">
-    <div class="card-header">
-      <h2>Create Deal</h2>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="dealForm" (ngSubmit)="onSubmit()">
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="dealOwner">Deal Owner</label>
-            <input type="text" class="form-control" id="dealOwner" formControlName="dealOwner" readonly>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="dealName">Deal Name</label>
-            <input type="text" class="form-control" id="dealName" formControlName="dealName">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="accountName">Account Name</label>
-            <input type="text" class="form-control" id="accountName" formControlName="accountName">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="type">Type</label>
-            <select class="form-control" id="type" formControlName="type">
-              <option value="">-None-</option>
-          
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="nextStep">Next Step</label>
-            <input type="text" class="form-control" id="nextStep" formControlName="nextStep">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="leadSource">Lead Source</label>
-            <select class="form-control" id="leadSource" formControlName="leadSource">
-              <option value="">-None-</option>
-             
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="contactName">Contact Name</label>
-            <input type="text" class="form-control" id="contactName" formControlName="contactName">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="amount">Amount</label>
-            <input type="number" class="form-control" id="amount" formControlName="amount">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="closingDate">Closing Date</label>
-            <input type="date" class="form-control" id="closingDate" formControlName="closingDate">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="stage">Stage</label>
-            <select class="form-control" id="stage" formControlName="stage">
-              <option value="Qualification">Qualification</option>
-           
-            </select>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="probability">Probability (%)</label>
-            <input type="number" class="form-control" id="probability" formControlName="probability">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="expectedRevenue">Expected Revenue</label>
-            <input type="number" class="form-control" id="expectedRevenue" formControlName="expectedRevenue">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="campaignSource">Campaign Source</label>
-            <input type="text" class="form-control" id="campaignSource" formControlName="campaignSource">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="description">Description</label>
-            <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
-          </div>
-        </div>
-        <div class="d-flex justify-content-left">
-          <button type="reset" class="btn btn-secondary">Save</button>
-          <button type="button" class="btn btn-danger" (click)="togglePage()">Cancel</button>
-        </div>
-      </form>
     </div>
   </div>
 </div> -->

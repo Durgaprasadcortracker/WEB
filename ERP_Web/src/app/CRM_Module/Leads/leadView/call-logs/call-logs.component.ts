@@ -102,22 +102,57 @@ export class CallLogsComponent {
       });
     }
   }
+  // getRequiredData() {
+  //   this.http.getapi('api/Lead/GetCallLog/' + this.id).subscribe((res) => {
+  //     if (res) {
+  //       this.calllogsList = res
+  //       console.log(this.calllogsList);
+  //     }
+  //   });
+  //   this.http.getapi('api/Contacts/GetAllContacts').subscribe((res) => {
+  //     console.log(res.data);
+  //     if (res) {
+  //       this.contactsList = res.data
+  //       console.log(this.contactsList);
+  //     }
+  //   });
+  //   this.http.getapi('api/Common/GetCallTypes').subscribe((res) => {
+  //     console.log(res.data);
+  //     if (res) {
+  //       this.calltypeslist = res.data
+  //       console.log(this.calltypeslist);
+  //     }
+  //   });
+  // }
   getRequiredData() {
     this.http.getapi('api/Lead/GetCallLog/' + this.id).subscribe((res) => {
       if (res) {
-        this.calllogsList = res
+        // Join the contact name with the call log
+        this.calllogsList = res.map((log: any) => {
+          const contact = this.contactsList.find((c: any) => c.id === log.contactId);
+          const callType = this.calltypeslist.find((ct: any) => ct.id === log.callTypes);
+          return {
+            ...log,
+            firstName: contact ? contact.firstName : '',
+            lastName: contact ? contact.lastName : '',
+            callTypesDescription: callType ? callType.description : ''
+          };
+        });
         console.log(this.calllogsList);
       }
     });
     this.http.getapi('api/Contacts/GetAllContacts').subscribe((res) => {
+      console.log(res.data);
       if (res) {
-        this.contactsList = res.data
+        this.contactsList = res.data;
         console.log(this.contactsList);
       }
     });
+  
     this.http.getapi('api/Common/GetCallTypes').subscribe((res) => {
+      console.log(res.data);
       if (res) {
-        this.calltypeslist = res.data
+        this.calltypeslist = res.data;
         console.log(this.calltypeslist);
       }
     });

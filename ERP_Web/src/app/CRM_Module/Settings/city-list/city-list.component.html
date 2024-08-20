@@ -29,7 +29,7 @@
             totalItems: count
           }; let i=index">
             <td class="text-center">
-              <button routerLink="/CRM/Settings/edit-city/{{c.id}}" class="btn btn-sm btn-outline-primary">
+              <button routerLink="/CRM/Settings/city" [queryParams]="{cityId: c.id}" class="btn btn-sm btn-outline-primary">
                 <i class="fa fa-pencil-alt"></i>
               </button>
               <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteCity(c.id)">
@@ -39,7 +39,7 @@
             <td scope="row" class="text-center">{{ i + 1 }}</td>
             <td class="text-center">{{ c.countryName }}</td>
             <td class="text-center">{{ c.stateName }}</td>
-            <td class="text-center">{{ c.cityName }}</td>
+            <td class="text-center">{{ c.description }}</td>
           </tr>
         </tbody>
       </table>

@@ -266,6 +266,7 @@ createId:any=0;
       this.getCitybycountry();
       this.cityId=res.data.cityId;
       this.getstatesbycountrycity();
+      
       });
       
     }
@@ -347,7 +348,6 @@ createId:any=0;
   }
   countryId:any;
   getCitybycountry(){
-    
     this.countryId= this.myForm.get("country")?.value;
     this.http.getapi('api/Common/cities/'+this.countryId).subscribe((res) => {
       this.citylist = res;
@@ -356,11 +356,9 @@ createId:any=0;
   cityId:any;
 
   getstatesbycountrycity(){
-    debugger;
     this.countryId= this.myForm.get("country")?.value;
     this.cityId=this.myForm.get("city")?.value;
     this.http.getapi('api/Common/GetCountryByState/'+this.cityId+"/"+this.countryId).subscribe((res) => {
-      
       this.statelist = res.data;
     });
   }
