@@ -55,6 +55,7 @@ export class DashboardMainComponent implements OnInit {
     );
   }
 
+
   createChart(): void {
     const groupedData = this.groupBy(this.leads, 'leadStage');
     const stages = Object.keys(groupedData);
@@ -187,3 +188,4 @@ export class DashboardMainComponent implements OnInit {
   //       break;
   //   }
   // }
+// }

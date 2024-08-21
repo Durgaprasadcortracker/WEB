@@ -42,7 +42,7 @@ import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/chur
 import { SalesTeamPermonanceComponent } from './CRM_Module/Reports/sales-team-permonance/sales-team-permonance.component';
 import { RevenuebyMonthuarterearComponent } from './CRM_Module/Reports/revenueby-monthuarterear/revenueby-monthuarterear.component';
 import { CompanyProfileComponent } from './CRM_Module/Companies/company-profile/company-profile.component';
-import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
+
 import { LeadStatusComponent } from './CRM_Module/Settings/lead-status/lead-status.component';
 import { LeadStatusListComponent } from './CRM_Module/Settings/lead-status-list/lead-status-list.component';
 import { LeadStageComponent } from './CRM_Module/Settings/lead-stage/lead-stage.component';
@@ -64,6 +64,7 @@ import { AddStateComponent } from './CRM_Module/Settings/add-state/add-state.com
 import { CountryListComponent } from './CRM_Module/Settings/country-list/country-list.component';
 import { AdCountryComponent } from './CRM_Module/Settings/ad-country/ad-country.component';
 import { QuotetypeListComponent } from './CRM_Module/Settings/quotetype-list/quotetype-list.component';
+import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
 
 
 

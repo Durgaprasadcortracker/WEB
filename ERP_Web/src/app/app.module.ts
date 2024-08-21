@@ -77,6 +77,7 @@ import { CountryListComponent } from './CRM_Module/Settings/country-list/country
 import { AdCountryComponent } from './CRM_Module/Settings/ad-country/ad-country.component';
 import { QuotetypelistComponent } from './CRM_Module/Settings/quotetypelist/quotetypelist.component';
 import { AddQuotetypeComponent } from './CRM_Module/Settings/add-quotetype/add-quotetype.component';
+import { RemindersDashboardComponent } from './CRM_Module/Dashboard/reminders-dashboard/reminders-dashboard.component';
 
 
 @NgModule({
@@ -154,7 +155,8 @@ import { AddQuotetypeComponent } from './CRM_Module/Settings/add-quotetype/add-q
     CountryListComponent,
     AdCountryComponent,
     QuotetypelistComponent,
-    AddQuotetypeComponent
+    AddQuotetypeComponent,
+    RemindersDashboardComponent
   ],
   imports: [
     HttpClientModule,

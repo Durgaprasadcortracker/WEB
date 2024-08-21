@@ -1,0 +1,64 @@
+<!-- <div class="form first">
+    <div class="row mt-2">
+        <table class="rwd-table table-bordered" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Notes</th>
+                    <th>Reminder Name</th>
+                    <th>Reminder Date</th>
+                    <th>Reminder Time </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of remindersList;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{a.notes}}</td>
+                    <td>{{a.reminderName}}</td>
+                    <td>{{a.reminderDate | date}}</td>
+                    <td>{{a.reminderTime | date: 'shortTime'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> -->
+
+
+
+
+
+<div class="form first">
+    <div class="row mt-2">
+        <div class="col-md-3">
+            <input type="date" class="form-control" [(ngModel)]="selectedDate" (change)="filterByDate()" placeholder="Select Date">
+        </div>
+        <!-- <div class="col-md-3">
+            <input type="time" class="form-control" [(ngModel)]="selectedTime" (change)="filterByTime()" placeholder="Select Time">
+        </div> -->
+        <div class="col-md-2">
+            <button class="btn btn-primary" (click)="showTodayReminders()">Show Today's Reminders</button>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <table class="rwd-table table-bordered" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Notes</th>
+                    <th>Reminder Name</th>
+                    <th>Reminder Date</th>
+                    <th>Reminder Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of filteredRemindersList; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>{{a.notes}}</td>
+                    <td>{{a.reminderName}}</td>
+                    <td>{{a.reminderDate | date}}</td>
+                    <td>{{a.reminderTime | date: 'shortTime'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
