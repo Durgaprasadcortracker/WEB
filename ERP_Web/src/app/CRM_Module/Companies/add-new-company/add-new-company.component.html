@@ -84,7 +84,7 @@
           </div>
           <div class="col-md-3">
             <label>Country <span class="required">*</span></label>
-            <select class="form-select" formControlName="country" (change)="getCitybycountry()"
+            <select class="form-select" formControlName="country" (change)="getStatesbycountry()"
               [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
               <option value="null">--Select Country--</option>
               <option *ngFor="let country of countrylist" value="{{country.id}}">{{country.description}}</option>
@@ -96,25 +96,25 @@
         </div>
         <div class="row" style="margin-top: 20px !important;">
           <div class="col-md-3">
-            <label>City <span class="required">*</span></label>
-            <select class="form-select" formControlName="city" (change)="getstatesbycountrycity()"
-              [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
-              <option value="null">--Select City--</option>
-              <option *ngFor="let city of citylist" value="{{city.id}}">{{city.description}}</option>
-            </select>
-            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
-              <div *ngIf="f['city'].errors['required']">City is required.</div>
-            </div>
-          </div>
-          <div class="col-md-3">
             <label>State <span class="required">*</span></label>
-            <select class="form-select" formControlName="state"
+            <select class="form-select" formControlName="state" (change)="getCitybyState()"
               [ngClass]="{ 'is-invalid': submitted && f['state'].errors }">
               <option value="null">--Select State --</option>
               <option *ngFor="let state of statelist" value="{{state.id}}">{{state.description}}</option>
             </select>
             <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
               <div *ngIf="f['state'].errors['required']">State is required.</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label>City <span class="required">*</span></label>
+            <select class="form-select" formControlName="city" 
+              [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
+              <option value="null">--Select City--</option>
+              <option *ngFor="let city of citylist" value="{{city.id}}">{{city.description}}</option>
+            </select>
+            <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+              <div *ngIf="f['city'].errors['required']">City is required.</div>
             </div>
           </div>
           <div class="col-md-3">

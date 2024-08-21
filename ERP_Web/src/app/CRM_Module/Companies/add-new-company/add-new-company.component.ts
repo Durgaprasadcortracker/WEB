@@ -221,6 +221,7 @@ export class AddNewCompanyComponent {
   });
 
 createId:any=0;
+  stateId: any;
   constructor(
     private fb: FormBuilder,
     private http: BackendService,
@@ -263,10 +264,9 @@ createId:any=0;
         console.log(res)
         this.myForm.patchValue(res.data);
         this.countryId= res.data.countryId;
-      this.getCitybycountry();
+      // this.getCitybycountry();
       this.cityId=res.data.cityId;
-      this.getstatesbycountrycity();
-      
+      this.getCitybyState();
       });
       
     }
@@ -347,19 +347,19 @@ createId:any=0;
     });
   }
   countryId:any;
-  getCitybycountry(){
+  getStatesbycountry(){
     this.countryId= this.myForm.get("country")?.value;
-    this.http.getapi('api/Common/cities/'+this.countryId).subscribe((res) => {
-      this.citylist = res;
+    this.http.getapi('api/Common/GetCountryByState/'+this.countryId).subscribe((res) => {
+      this.statelist = res.data;
     });
   }
   cityId:any;
 
-  getstatesbycountrycity(){
-    this.countryId= this.myForm.get("country")?.value;
+  getCitybyState(){
+    this.stateId= this.myForm.get("state")?.value;
     this.cityId=this.myForm.get("city")?.value;
-    this.http.getapi('api/Common/GetCountryByState/'+this.cityId+"/"+this.countryId).subscribe((res) => {
-      this.statelist = res.data;
+    this.http.getapi('api/Common/GetCityByState/'+this.stateId).subscribe((res) => {
+      this.citylist = res.data;
     });
   }
   get f(): { [key: string]: AbstractControl } {

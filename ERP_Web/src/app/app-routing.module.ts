@@ -63,6 +63,7 @@ import { StateListComponent } from './CRM_Module/Settings/state-list/state-list.
 import { AddStateComponent } from './CRM_Module/Settings/add-state/add-state.component';
 import { CountryListComponent } from './CRM_Module/Settings/country-list/country-list.component';
 import { AdCountryComponent } from './CRM_Module/Settings/ad-country/ad-country.component';
+import { QuotetypeListComponent } from './CRM_Module/Settings/quotetype-list/quotetype-list.component';
 
 
 
@@ -163,7 +164,7 @@ const routes: Routes = [
           { path: 'AddState', component: AddStateComponent },
           { path: 'countrylist', component: CountryListComponent },
           { path: 'AddCountry', component: AdCountryComponent },
-          { path: 'quote-typelist', component: CountryListComponent },
+          { path: 'quote-typelist', component: QuotetypeListComponent },
           { path: 'Addquotetype', component: AdCountryComponent },
 
         ]
