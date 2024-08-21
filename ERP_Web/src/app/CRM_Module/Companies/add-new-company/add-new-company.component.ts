@@ -274,7 +274,6 @@ createId:any=0;
 
     this.getIndustry();
     this.getIndustrytype();
-    this.getCity();
     this.getState();
     this.getCountry();
     this.getTimeZone();
@@ -329,11 +328,11 @@ createId:any=0;
     });
   }
 
-  getCity() {
-    this.http.getapi('api/Common/GetCitydetails').subscribe((res) => {
-      this.citylist = res;
-    });
-  }
+  // getCity() {
+  //   this.http.getapi('api/Common/GetCitydetails').subscribe((res) => {
+  //     this.citylist = res;
+  //   });
+  // }
 
   getState() {
     this.http.getapi('api/Common/GetStates').subscribe((res) => {
@@ -357,7 +356,7 @@ createId:any=0;
 
   getCitybyState(){
     this.stateId= this.myForm.get("state")?.value;
-    this.cityId=this.myForm.get("city")?.value;
+    // this.cityId=this.myForm.get("city")?.value;
     this.http.getapi('api/Common/GetCityByState/'+this.stateId).subscribe((res) => {
       this.citylist = res.data;
     });
