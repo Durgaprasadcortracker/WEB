@@ -1,1 +1,55 @@
-<p>pipelines-main works!</p>
+<div class="card m-3">
+  <div class="card-header h4">
+    Pipelines
+  </div>
+  <div class="card-body">
+    <form [formGroup]="myForm" (ngSubmit)="onSearch()">
+      <div class="d-flex flex-wrap">
+        <div class="col-md-3">
+          <label class="h6">Deal Owner</label>
+          <select type="text" class="form-control" formControlName="DealOwnerName">
+
+            <option value="null">--Select Deal owner--</option>
+            <option *ngFor="let a of _loginlist" value="{{a.id}}">{{a.firstName+''+a.lastName}}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="h6">Create Date</label>
+          <input type="date" class="form-control" formControlName="DealCreateDate">
+        </div>
+        <div class="col-md-3">
+          <label class="h6">Close Date</label>
+          <input type="date" class="form-control" formControlName="CloseDate">
+        </div>
+        <div class="col-md-3" style="float: right;padding-top: 30px;padding-left: 100px;">
+          <button type="submit" style="width: 200px; background-color: #8D0000;"
+            class="btn btn-danger  mr-4">Submit</button>
+          <!-- <button type="submit" class="btn btn-danger mr-2" style="background-color: #8d0000;">Search</button> -->
+        </div>
+      </div>
+    </form>
+    <div>
+      <div *ngIf="piplineData" class="tabs">
+        <div class="tab-header">
+          <div class="tab" *ngFor="let a of piplineData; let i = index" [class.active]="selectedTab === i"
+            (click)="selectTab(i)">
+            {{ a.name }}
+          </div>
+        </div>
+        <div class="tab-content">
+          <div *ngIf="selectedTab !== null">
+            <div *ngFor="let k of piplineData[selectedTab].stagevalues">
+              <div>
+                <span>Stage Name : </span>
+                <span>{{k.stageName}}</span>
+                <span> | </span>
+                <span>Stage Date : </span>
+                <span>{{k.stageDate | date}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

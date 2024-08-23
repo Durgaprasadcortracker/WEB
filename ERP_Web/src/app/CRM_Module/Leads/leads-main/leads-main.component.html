@@ -1,1 +1,126 @@
-<p>leads-main works!</p>
+<!-- <div *ngIf="!contactPage " class="container mt-4">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Leads</h3>
+        </div>
+        <div class="card-body">
+            <div style="float: right;">
+                <button routerLink="/CRM/Leads/add-leads" class="btn btn-primary">Add Leads</button>
+            </div>
+        </div>
+        <hr />
+        <div class="table-responsive mt-4" style="padding: 20px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Lead Name</th>
+                        <th>Lead Owner</th>
+                        <th>Email</th>
+                        <th>Lead Stage</th>
+                        <th>Lead Status</th>
+                        <th>Propability</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of listOfleads  | paginate
+                    : {
+                        itemsPerPage: tableSize,
+                        currentPage: page,
+                        totalItems: count
+                      };
+                let i = index">
+                        <td>
+                            <span routerLink="/CRM/Leads/add-leads" [queryParams]="{leadid:a.leadId}"
+                                class="btn btn-sm">
+                                <i class="fa fa-pencil-alt"></i>
+                            </span>
+                         
+                            <span (click)="deleteLead(a.leadId)" class="fa fa-trash"
+                                style="padding-left: 25px;color:red ;">
+
+                            </span>
+                        </td>
+
+                        <td> <a routerLink="/CRM/Leads/leadView/{{a.leadId}}/ContactView/{{a.leadId}}">
+                                {{a.companyName}}</a></td>
+                        <td>{{a.leadownerFname +" "+ a.leadownerLname }}</td>
+                        <td>{{a.email}}</td>
+                        <td>{{a.leadStage}}</td>
+                        <td>{{a.leadStatus}}</td>
+                        <td>{{a.probility}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="pagination">
+        <pagination-controls (pageChange)="onTableDataChange($event)"></pagination-controls>
+    </div>
+</div> -->
+
+
+<div *ngIf="!contactPage " class="container mt-4">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center h4">
+            Leads
+        </div>
+        <div class="card-body">
+            <div style="float: right;">
+                <button routerLink="/CRM/Leads/add-leads" style="background-color: #8d0000;" class="btn btn-primary">Create Leads</button>
+                
+            </div>
+        </div>
+        <hr />
+
+        <div class="table-responsive mt-4" style="padding: 20px;">
+            <table class="rwd-table table-bordered" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Lead Name</th>
+                        <th>Lead Owner</th>
+                        <th>Email</th>
+                        <th>Lead Stage</th>
+                        <th>Lead Status</th>
+                        <th>Probability</th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of listOfleads | paginate: 
+                    { itemsPerPage: tableSize, 
+                    currentPage: page,
+                    totalItems: count }; 
+                    let i = index">
+                      <td>
+                        <span  routerLink="/CRM/Leads/edit-leads/{{a.leadId}}" class="fa fa-pencil-alt" style="color:blue">
+                            
+                        </span>
+                        <span (click)="deleteLead(a.leadId)" class="fa fa-trash" style="padding-left: 25px;color:red ;">
+                            
+                        </span>
+                    </td>
+            
+                        <td> <a routerLink="/CRM/Leads/leadView/{{a.leadId}}/ContactView/{{a.leadId}}"> {{a.companyName}}</a></td>
+                        <td>{{a.companyOwner}}</td>
+                        <td>{{a.email}}</td>
+                        <td>{{a.leadStage}}</td>
+                        <td>{{a.leadStatus}}</td>
+                        <td>{{a.probility}}</td>
+                      
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-left mt-4" style="justify-content: end;">
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+            </div>
+        </div>
+
+    </div>
+  
+</div>

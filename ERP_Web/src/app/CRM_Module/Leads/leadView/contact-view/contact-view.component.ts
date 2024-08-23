@@ -24,9 +24,9 @@ export class ContactViewComponent {
     this.getRequiredData()
   }
   getRequiredData() {
-    this.http.getapi('api/Contacts/GetContactsby/' + this.id).subscribe((res) => {
+    this.http.getapi('api/Lead/GetLeadInformation/' + this.id).subscribe((res) => {
       if (res.status) {
-        this.contactView = res.data
+        this.contactView = res.data[0]
         console.log(this.contactView);
       }
     });
@@ -37,6 +37,17 @@ export class ContactViewComponent {
       if (res.status) {
         this.allstatus = res.data
       }
+    });
+  }
+  update(){
+    let obj = {
+      Id : this.id,
+      LeadStatus : this.contactView.leadStatus,
+      LeadStage : this.contactView.leadStage
+    }
+    this.http.putapi('api/Lead/updatestagestatue', obj).subscribe((res) => {
+      console.log(res);
+      this.ngOnInit()
     });
   }
 }

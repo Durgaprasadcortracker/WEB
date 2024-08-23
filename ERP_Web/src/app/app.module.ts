@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './loginPages/login-page/login-page.component';
@@ -17,25 +16,65 @@ import { PipelinesMainComponent } from './CRM_Module/Pipeline/pipelines-main/pip
 import { ReportsMainComponent } from './CRM_Module/Reports/reports-main/reports-main.component';
 import { SettingsMainComponent } from './CRM_Module/Settings/settings-main/settings-main.component';
 import { UserProfileComponent } from './CRM_Module/Settings/user-profile/user-profile.component';
-import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
+
 import { CommonModule } from '@angular/common';
 import { ChangePasswordComponent } from './loginPages/change-password/change-password.component';
-import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddContactsComponent } from './CRM_Module/Companies/Contacts/add-contacts/add-contacts.component';
 import { ContactsMainComponent } from './CRM_Module/Companies/Contacts/contacts-main/contacts-main.component';
-import { NgxPaginationModule, PaginatePipe } from 'ngx-pagination';
 import { LeadsViewComponent } from './CRM_Module/Leads/leadView/leads-view/leads-view.component';
 import { ContactViewComponent } from './CRM_Module/Leads/leadView/contact-view/contact-view.component';
 import { EmailConversionComponent } from './CRM_Module/Leads/leadView/email-conversion/email-conversion.component';
 import { CallLogsComponent } from './CRM_Module/Leads/leadView/call-logs/call-logs.component';
-import { EventsComponent } from './CRM_Module/Leads/leadView/events/events.component';
+
 import { RemindersComponent } from './CRM_Module/Leads/leadView/reminders/reminders.component';
 import { SourcedesignComponent } from './CRM_Module/Settings/Configration/sourcedesign/sourcedesign.component';
 import { StagedesignComponent } from './CRM_Module/Settings/Configration/stagedesign/stagedesign.component';
 import { ConfigrationComponent } from './CRM_Module/Settings/Configration/configration/configration.component';
 import { StatusdesignComponent } from './CRM_Module/Settings/Configration/statusdesign/statusdesign.component';
 import { ProfileComponent } from './CRM_Module/Companies/profile/profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddNewCompanyComponent } from './CRM_Module/Companies/add-new-company/add-new-company.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BulkUploadMainComponent } from './CRM_Module/Companies/BulkUpload/bulk-upload-main/bulk-upload-main.component';
+
+import { TimezoneComponent } from './CRM_Module/Settings/Configration/timezone/timezone.component';
+import { CityComponent } from './CRM_Module/Settings/Configration/city/city.component';
+import { IndustrytypeComponent } from './CRM_Module/Settings/Configration/industrytype/industrytype.component';
+import { IndustryComponent } from './CRM_Module/Settings/Configration/industry/industry.component';
+import { ProbabilityComponent } from './CRM_Module/Settings/Configration/probability/probability.component';
+
+import { EventsComponent } from './CRM_Module/Leads/events/events.component';
+import { QuotesCreateComponent } from './CRM_Module/Companies/Contacts/quotes/quotes-create/quotes-create.component';
+import { QuoteslistingComponent } from './CRM_Module/Companies/Contacts/quotes/quoteslisting/quoteslisting.component';
+
+
+import { StateComponent } from './CRM_Module/Settings/Configration/state/state.component';
+import { CompaniesInfoComponent } from './CRM_Module/Companies/companies-info/companies-info.component';
+import { SmsCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/sms-campagins/sms-campagins.component';
+import { SocialMediaCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/social-media-campagins/social-media-campagins.component';
+import { EmailCampaginsComponent } from './CRM_Module/Campagins/Campagins-View/email-campagins/email-campagins.component';
+import { CampaginsComponent } from './CRM_Module/Campagins/Campagins-View/campagins/campagins.component';
+
+
+import { CountryComponent } from './CRM_Module/Settings/Configration/country/country.component';
+import { CalltypeComponent } from './CRM_Module/Settings/Configration/calltype/calltype.component';
+import { QuotetypeComponent } from './CRM_Module/Settings/Configration/quotetype/quotetype.component';
+import { AddSocialmediaComponent } from './CRM_Module/Campagins/add-socialmedia/add-socialmedia.component';
+import { AddLeadsComponent } from './CRM_module/leads/add-leads/add-leads.component';
+import { AddCampaginComponent } from './CRM_Module/Campagins/add-campagin/add-campagin.component';
+import { CompainesRouteComponent } from './CRM_Module/Companies/compaines-route/compaines-route.component';
+import { LeadsRouterComponent } from './CRM_Module/Leads/leads-router/leads-router.component';
+import { CampaginsRouteComponent } from './CRM_Module/Campagins/campagins-route/campagins-route.component';
+import { AddStateComponent } from './CRM_Module/Settings/Configration/state/add-state/add-state.component';
+import { AddCityComponent } from './CRM_Module/Settings/Configration/city/add-city/add-city.component';
+import { DealCreatedVsLostComponent } from './CRM_Module/Reports/deal-created-vs-lost/deal-created-vs-lost.component';
+import { ChurnOverviewComponent } from './CRM_Module/Reports/churn-overview/churn-overview.component';
+import { RevenuebyMonthuarterearComponent } from './CRM_Module/Reports/revenueby-monthuarterear/revenueby-monthuarterear.component';
+import { SalesTeamPermonanceComponent } from './CRM_Module/Reports/sales-team-permonance/sales-team-permonance.component';
+import { CompanyProfileComponent } from './CRM_Module/Companies/company-profile/company-profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +97,7 @@ import { ProfileComponent } from './CRM_Module/Companies/profile/profile.compone
     ContactsMainComponent,
     AddNewCompanyComponent,
     LeadsViewComponent,
+    CountryComponent,
     ContactViewComponent,
     EmailConversionComponent,
     CallLogsComponent,
@@ -68,22 +108,61 @@ import { ProfileComponent } from './CRM_Module/Companies/profile/profile.compone
     ConfigrationComponent,
     StagedesignComponent,
     StatusdesignComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddNewCompanyComponent,
+    BulkUploadMainComponent,
+    TimezoneComponent,
+    CityComponent,
+    IndustrytypeComponent,
+    IndustryComponent,
+    ProbabilityComponent,
+    StateComponent,
+    CompaniesInfoComponent,
+    SocialMediaCampaginsComponent,
+    EmailCampaginsComponent,
+    CampaginsComponent,
+    ConfigrationComponent,
+    QuoteslistingComponent,
+    ProbabilityComponent,
+    QuotesCreateComponent,
+    QuoteslistingComponent,
+    SignUpComponent,
+    StateComponent,
+    CompaniesInfoComponent,
+    StateComponent,
+    CalltypeComponent,
+    QuotetypeComponent,
+    AddSocialmediaComponent,
+    AddLeadsComponent,
+    CompainesRouteComponent,
+    LeadsRouterComponent,
+    CampaginsRouteComponent,
+    AddStateComponent,
+    AddCityComponent,
+    DealCreatedVsLostComponent,
+    ChurnOverviewComponent,
+    DealCreatedVsLostComponent,
+    RevenuebyMonthuarterearComponent,
+    SalesTeamPermonanceComponent,
+    CompanyProfileComponent
   ],
   imports: [
-    AppRoutingModule,
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
     NgxPaginationModule,
     FormsModule,
+    BrowserModule,
+    NgxPaginationModule,
+    MatSnackBarModule,
+    AppRoutingModule
+  ],
+  exports: [
     BrowserModule
   ],
-  exports:[
-    BrowserModule 
-  ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

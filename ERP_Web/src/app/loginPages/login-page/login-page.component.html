@@ -1,72 +1,144 @@
-
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center mb-5">
-            
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-10">
-            <div class="wrap d-md-flex">
-                <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
-                    <div class="text w-100">
-                        <h2>Welcome to Cortracker</h2>
-                        <p>Don't have an account?</p>
-                        <a href="#" routerLink="/SignUp" class="btn btn-white btn-outline-white">Sign Up</a>
-                    </div>
+<div class="container" [ngClass]="ShowHide==false ? 'right-panel-active':''" id="container">
+  <div class="form-container sign-up-container">
+    <form [formGroup]="signupform" (ngSubmit)="OnSignUp()">
+      <div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="https://cortracker.com/" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="https://www.linkedin.com/company/cortracker-inc" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+      <h4>Create Your Account</h4>
+      <div class="row">
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="firstname" placeholder="First Name"
+            [ngClass]="{ 'is-invalid': submitted && fg['firstname'].errors }" />
+          <div *ngIf="submitted && fg['firstname'].errors" class="invalid-feedback">
+            <div *ngIf="fg['firstname'].errors['required']">First name is required.</div>
           </div>
-                <div class="login-wrap p-4 p-lg-6">
-              <div class="d-flex">
-                  <div class="w-100">
-                    <img src="/logo/logo.png" width="200px" />
-                  </div>
-                        <div class="w-100">
-                            <p class="social-media d-flex justify-content-end">
-                                <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fas-facebook"></span></a>
-                                <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fas-twitter"></span></a>
-                            </p>
-                        </div>
-              </div>
-                    <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
-                  <div class="form-group mb-3 " data-mdb-input-init>
-                      <label class="label" for="name">Email</label>
-                      <input type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" class="form-control"   placeholder="Username" required >
-                      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-                        <div *ngIf="f['email'].errors['required']">Email is required.</div>
-                      </div>
-
-                  </div>
-            <div class="form-group mb-3">
-                <label class="label" for="password">Password</label>
-              <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" class="form-control" placeholder="Password" required>
-              <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-                <div *ngIf="f['password'].errors['required']">Password is required.</div>
-              </div>
+        </div>
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="lastname" placeholder="Last Name"
+            [ngClass]="{ 'is-invalid': submitted && fg['lastname'].errors }" />
+          <div *ngIf="submitted && fg['lastname'].errors" class="invalid-feedback">
+            <small *ngIf="fg['lastname'].errors['required']">Last name is required.</small>
+          </div>
+        </div>
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="company" placeholder="Company"
+            [ngClass]="{ 'is-invalid': submitted && fg['company'].errors }" />
+        </div>
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="designation"
+            placeholder="Designation" [ngClass]="{ 'is-invalid': submitted && fg['designation'].errors }" />
+        </div>
+        <div class="col-6">
+          <input type="text" class="form-control form-control-lg" formControlName="phonenumber"
+            placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && fg['phonenumber'].errors }" />
+          <div *ngIf="submitted && fg['phonenumber'].errors" class="invalid-feedback">
+            <small *ngIf="fg['phonenumber'].errors['required']">Phone Number is required.</small>
+          </div>
+        </div>
+        <div class="col-6" style="padding-top: 15px;">
+          <div class="col-6 d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3">
+              <input type="radio" name="gender" formControlName="gender" value="2" />
+              <label class="square-radio--content mt-2" for="gender">Female</label>
             </div>
-            <div class="form-group">
-                <button type="submit"  class="form-control btn btn-primary submit px-3" >
-                    <span class="button__text">Log In Now</span>
-                    <i class="button__icon fas fa-chevron-right"></i>
-                </button>
-                
+            <div class="d-flex align-items-center gap-3">
+              <input class="square-radio" type="radio" name="gender" formControlName="gender" value="1" />
+              <label class="square-radio--content mt-2" for="gender">Male</label>
             </div>
-            <label class="form-label text-center" style="color: red;font-size: 25px;">{{errormsg}}</label>
-            <div class="form-group d-md-flex">
-                <div class="w-50 text-left">
-                    <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-                              <input type="checkbox" checked>
-                              <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="w-50 text-md-right">
-                                <a href="#">Forgot Password</a>
-                            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div data-mdb-input-init class="form-outline">
+            <input type="text" class="form-control form-control-lg" formControlName="email" placeholder="Enter your Email"
+              [ngClass]="{ 'is-invalid': submitted && fg['email'].errors }" />
+            <div *ngIf="submitted && fg['email'].errors" class="invalid-feedback">
+              <small *ngIf="fg['email'].errors['required']">Email is required.</small>
             </div>
-          </form>
+          </div>
+        </div>
+        <div class="row">
+          <div data-mdb-input-init class="form-outline">
+            <input type="password" class="form-control form-control-lg" formControlName="password" placeholder="Enter your Password"
+              [ngClass]="{ 'is-invalid': submitted && fg['password'].errors }" />
+            <div *ngIf="submitted && fg['password'].errors" class="invalid-feedback">
+              <small *ngIf="fg['password'].errors['required']">Password is required.</small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="d-flex justify-content-start pt-3">
+            <button  type="button" (click)="onReset()" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg">Reset all</button>
+            <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-lg ms-2" (click)="login()">Submit form</button>
+        </div>
         </div>
       </div>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+      <img class="text-center" style="width: 250px;" src="https://migration.cortracker.com/_client/images/ct_small.gif">
+      <div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="https://cortracker.com/" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="https://www.linkedin.com/company/cortracker-inc" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+      <div class="row">
+        <div class="row mb-3 align-items-center">
+          <label class="form-group col-sm-2 col-form-label" for="name">
+            <h6><strong>Email</strong></h6>
+          </label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+            class="form-control" placeholder="Please enter your email" required>
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">Email is required.</div>
+          </div>
         </div>
+        <div class="row mb-3 align-items-center">
+          <label class="col-sm-2 form-label" for="password">
+            <h6><strong>Password</strong></h6>
+          </label>
+          <input type="password" formControlName="password" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" class="form-control" placeholder="Password"
+            required>
+          <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['required']">Password is required.</div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10 text-danger text-center">{{errormsg}}</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-9 text-start">
+            <a routerLink="/Changepassword"><strong style="font-size: large; color: darkred;">Forgot Password ?</strong></a>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary w-100">
+              <span class="button__text">Log In Now</span>
+              <i class="button__icon fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left" style="background-color:#f6586a !important;">
+        <h3>Welcome Back!</h3>
+        <h6>To keep connected with us please login with your personal info</h6>
+        <button class="ghost" id="signIn" (click)="login()">Back To LogIn</button>
+      </div>
+      <div class="overlay-panel overlay-right" style="background-color: #f6586a !important;">
+        <h3>Welcome To Cortracker360*</h3>
+        <h5>Best CRM Solutions are here!</h5>
+        <h6>Don't have an account?</h6>
+        <button class="ghost" id="signUp" (click)="signup()">Sign Up</button>
+      </div>
     </div>
+  </div>
 </div>
-
-

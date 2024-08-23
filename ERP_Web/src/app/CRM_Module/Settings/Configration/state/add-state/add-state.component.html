@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="card-header">
+      State
+    </div>
+    <div class="card-body">
+      <form [formGroup]="stateForm" (ngSubmit)="submitForm()">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Country</label>
+            <select type="text" class="form-control form-control-lg" formControlName="countryId">
+              <option value="">--Select Country--</option>
+              <option *ngFor="let Country of CountryList" value="{{Country.id}}">
+                {{Country.description}}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="col-md-6">
+            <label>City</label>
+            <select type="text" class="form-control form-control-lg" formControlName="cityId">
+              <option value="">--Select City--</option>
+              <option *ngFor="let city of cityList" value="{{city.id}}">
+                {{city.description}}
+              </option>
+            </select>
+          </div> -->
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <label for="description" class="form-label">State<span class="text-danger">*</span></label>
+            <div data-mdb-input-init class="form-outline">
+              <input type="text" class="form-control" id="description" formControlName="description"
+                placeholder="Enter description" [ngClass]="{ 'is-invalid': submited && f['description'].errors }" />
+              <div *ngIf="submited && f['description'].errors" class="invalid-feedback">
+                <div *ngIf="f['description'].errors['required']">Description is required.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button type="button" class="btn btn-secondary ml-2 mt-3" (click)="clear()">Close</button>
+      </form>
+    </div>
+  </div>

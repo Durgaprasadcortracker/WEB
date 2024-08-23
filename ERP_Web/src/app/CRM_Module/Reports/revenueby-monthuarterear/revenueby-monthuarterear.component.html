@@ -1,0 +1,78 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Report</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container, form {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<div class="container">
+    <h6>Revenue by Month /Quarter/year</h6>
+    <form class="row d-flex ">
+        <div class="col-md-3">
+            <label for="from-date">From Date</label>
+            <input type="date" class="form-control" id="from-date" name="from-date">
+        </div>
+        <div class="col-md-3">
+            <label for="to-date">To Date</label>
+            <input type="date" class="form-control" id="to-date" name="to-date">
+        </div>
+        <div class="col-md-6 gap-2 pt-4">
+            <button type="submit" class="btn btn-danger col-2 p-2">Search</button>
+
+            <button type="button" class=" btn bg-dark text-light col-2 ms-2">Clear</button>
+            <button type="button" (click)="downloadReport()"
+                class=" btn x1x1col-3 btn-danger p-2 ms-2">DownloadReport</button>
+
+        </div>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Sales Owner</th>
+                <th>Product/Service</th>
+                <th>Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Acme Corp</td>
+                <td>AcmeCorp</td>
+                <td>John Doe</td>
+                <td>Industrial Equipment</td>
+                <td>$150,000</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Beta Inc</td>
+                <td>BetaInc</td>
+                <td>Jane Smith</td>
+                <td>Software Solutions</td>
+                <td>$200,000</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Gamma LLC</td>
+                <td>GammaLLC</td>
+                <td>Emily Johnson</td>
+                <td>Consulting Services</td>
+                <td>$100,000</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Delta Co</td>
+                <td>DeltaCo</td>
+                <td>Michael Brown</td>
+                <td>Hardware Supplies</td>
+                <td>$250,000</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

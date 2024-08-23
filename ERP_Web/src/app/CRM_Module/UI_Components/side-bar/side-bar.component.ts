@@ -13,8 +13,8 @@ export class SideBarComponent {
   currentIndex = 0
   subCurrentIndex=0
   constructor(private http: BackendService) {
-    console.log("object");
     this.http.getapi('api/Menu/GetMenus').subscribe((res) => {
+      console.log(res);
       if (res.status) {
         this.menuItems = JSON.parse(JSON.stringify(res.data));
         this.menuItems.forEach((a: any) => a.submenus = []);

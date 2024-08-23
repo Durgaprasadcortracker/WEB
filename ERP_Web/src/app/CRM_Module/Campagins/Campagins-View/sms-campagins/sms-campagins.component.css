@@ -1,0 +1,19 @@
+/* Add this CSS to style the custom checkboxes and hover effect */
+.sms-icon {
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sms-icon i {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sms-icon:hover i {
+    transform: scale(1.3);
+  }
+  
+  .sms-icon input {
+    display: none;
+  }
+  

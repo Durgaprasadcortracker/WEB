@@ -1,0 +1,21 @@
+<div class="card m-3 w-100 card-main-list">
+  <div class="card-header h4">
+    Company info
+  </div>
+  <div class="card-body">
+      <div class="container">
+          <div class="tabs">
+              <div class="tab-header">
+                  <div class="tab" routerLink="/CRM/Companies/companiesinfo/{{id}}/profile/{{id}}" routerLinkActive="active">Company Profile</div>
+                  <div class="tab" routerLink="/CRM/Companies/companiesinfo/{{id}}/contact/{{id}}" routerLinkActive="active">Contacts</div>
+                  <div class="tab" routerLink="/CRM/Companies/companiesinfo/{{id}}/quotation/{{id}}" routerLinkActive="active">Quotation</div>
+              </div>
+              <div class="tab-content">
+                  <div>
+                      <router-outlet></router-outlet>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

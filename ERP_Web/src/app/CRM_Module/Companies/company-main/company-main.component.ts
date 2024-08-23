@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../../Services/BackendConnection/backend.service';
 import { Router } from '@angular/router';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-company-main',
@@ -12,20 +12,20 @@ export class CompanyMainComponent {
   page: number = 1;
   count: number = 0;
   tableSize: number = 5;
-  tableSizes: any = [3, 6, 9, 12];
-  p:number=1;
-  router: any;
+  tableSizes: any = [5, 10, 15, 20];
+  p: number = 1;
+
+  listOfCompanys: any[] = [];
+  filteredCompanies: any[] = [];
+  editData: any;
+  searchTerm: string = '';
 company: any;
-  
-  constructor(private http: BackendService) { }
 
+  constructor(private http: BackendService,
+    private snackBar: MatSnackBar,
+    private router: Router) { }
 
-  data = {
-    records: 0
-  }
   companyPage = 0
-  listOfCompanys:any;
-  editData:any;
 
   ngOnInit() {
     this.getData()
@@ -37,114 +37,44 @@ company: any;
     this.editData = null;
     this.ngOnInit()
   }
-  getData(){
+
+  getData() {
     this.http.getapi('api/Company/GetCompany').subscribe((res) => {
-        console.log(res);
-        console.log
-        this.listOfCompanys=res.data
-      }
-    );
+      console.log(res);
+      this.listOfCompanys = res.data;
+      this.filterCompanies(); // Filter the data initially
+    });
   }
+
   onTableDataChange(event: any) {
     this.page = event;
     this.getData();
   }
+
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
     this.getData();
   }
-  deleteCompany(ID:any){
-    this.http.deleteapi('api/Company/DeleteCompanies/'+ID).subscribe((res) => {
-        console.log(res);
-        this.listOfCompanys=res
-        this.ngOnInit()
-      }
-    );
+
+  deleteCompany(ID: any) {
+    this.http.deleteapi('api/Company/DeleteCompanies/' + ID).subscribe((res) => {
+      this.snackBar.open('Company successfully Deleted!', 'Close', {
+        duration: 3000, // Snackbar stays open for 3 seconds
+      });
+      console.log(res);
+      this.getData(); // Refresh the data after deletion
+    });
   }
+
   edit(Id: any) {
     this.router.navigate(['/CRM/editcompany', Id]);
   }
-  // edit(any:ID){
-  //   this.http.getapi('api/Company/UpdateCompanies/'+ID).subscribe((res) => {
-  //       console.log(res);
-  //       console.log
-  //       this.editData = res.data
-  //     }
-  //   );
-  // }
-  // edit(data:any){
-  //   this.companyPage = 1;
-  //   this.editData = data
-  // }
 
-  // edit(Id: any) {
-  //   this.router.navigate('api/Company/UpdateCompanies/'+ Id).subscribe((res) => {
-  //     console.log(res);
-  //     // this.listOfCompanys=res
-  //     // this.ngOnInit()
-  //     console.log
-  //     this.listOfCompanys=res.data
-  //    }
-  //   );
-  // }
-
-
-
-  // page: number = 1;
-  // count: number = 0;
-  // tableSize: number = 5;
-  // tableSizes: any = [3, 6, 9, 12];
-  // p: number = 1;
-  
-  // constructor(private http: BackendService, private router: Router) { }
-
-  // data = {
-  //   records: 0
-  // };
-  // companyPage = 0;
-  // listOfCompanys: any;
-  // editData: any;
-
-  // ngOnInit() {
-  //   this.getData();
-  // }
-
-  // addCompany(message: any) {
-  //   console.log(message);
-  //   this.companyPage = 0;
-  //   this.editData = null;
-  //   this.ngOnInit();
-  // }
-
-  // getData(){
-  //   this.http.getapi('api/Company/GetCompany').subscribe((res) => {
-  //     console.log(res);
-  //     this.listOfCompanys = res.data;
-  //   });
-  // }
-
-  // onTableDataChange(event: any) {
-  //   this.page = event;
-  //   this.getData();
-  // }
-
-  // onTableSizeChange(event: any): void {
-  //   this.tableSize = event.target.value;
-  //   this.page = 1;
-  //   this.getData();
-  // }
-
-  // deleteCompany(ID: any){
-  //   this.http.deleteapi('api/Company/DeleteCompanies/' + ID).subscribe((res) => {
-  //     console.log(res);
-  //     this.listOfCompanys = res;
-  //     this.ngOnInit();
-  //   });
-  // }
-
-  // edit(companyId: any) {
-  //   this.router.navigate(['/CRM/editcompany', companyId]);
-  // }
-
+  filterCompanies() {
+    const searchTermLower = this.searchTerm.toLowerCase();
+    this.filteredCompanies = this.listOfCompanys.filter(company => {
+      return company.companyName.toLowerCase().includes(searchTermLower);
+    });
+  }
 }

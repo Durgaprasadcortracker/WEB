@@ -1,0 +1,79 @@
+<!-- <div class="container">
+    <div class="invoice-box">
+        <table>
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <h2><img src="https://cortracker.com/assets/img/logo.png.789.png"> </h2>
+                            </td>
+                            <td>
+                                <h6>Invoice Details</h6>
+                                Date: {{ invoiceDate }}<br>
+                                Payment Terms: {{ paymentTerms }}<br>
+                                Due Date: {{ dueDate }}<br>
+                                PO Number: {{ poNumber }}<br>
+                                Quotation Number: {{ quotationNumber }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                Bill To:<br>
+                                {{ billTo }}<br>
+                                Ship To:<br>
+                                {{ shipTo }}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="heading">
+                <th>S.No</th>
+                <th>Item</th>
+                <th>Amount</th>
+            </tr>
+            <tr *ngFor="let item of items; let i= index">
+                <td scope="row">{{i+1}}</td>
+                <td>
+                    {{ item.name }}
+                </td>
+                <td>
+                    {{ item.amount }}
+                </td>
+            </tr>
+            <div>
+                <tr class="total">
+                    
+                     <td>
+                         Subtotal: {{ subtotal  }}<br>
+                         Discount ({{ discountPercentage }}%): -{{ discountAmount}}<br>
+                         Tax ({{ taxPercentage }}%): {{ taxAmount }}<br>
+                         <strong>Total: {{ total  }}</strong>
+                     </td>
+                 </tr>
+            </div>
+            
+        </table>
+        <br>
+        <p>Notes:<br>
+            {{ notes }}
+        </p>
+        <p>Terms:<br>
+            {{ terms }}
+        </p>
+    </div>
+</div>
+<div>
+    <div class="buttons" style="display: flex; gap: 10px;">
+        <button routerLink="/quoteslisting" class="btn btn-primary" style="width: 200px;" type="button">Back To Quotes</button>
+        <button routerLink="/" class="btn btn-danger" style="width: 200px;" type="button">Close</button>
+        <button (click)="generatePDF()" class="btn btn-primary" style="width: 200px;" type="button">Download</button>
+    </div>
+</div> -->

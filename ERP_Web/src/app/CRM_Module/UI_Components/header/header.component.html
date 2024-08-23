@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="hover-content">
-                    <div class="item">
+                    <div routerLink="/CRM/Profileview" class="item">
                         <i class="fa-regular fa-user"></i>
                         <span>My Profile</span>
                     </div>
@@ -61,7 +61,7 @@
                         <i class="fa-solid fa-gear"></i>
                         <span>Settings</span>
                     </div>
-                    <div routerLink="/login" class="item">
+                    <div routerLink="/login" class="item" (click)="OnClick()">
                         <i class="fa-solid fa-right-from-bracket"></i>
                         <span>Logout</span>
                     </div>

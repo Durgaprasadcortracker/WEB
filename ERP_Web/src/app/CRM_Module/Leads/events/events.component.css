@@ -1,0 +1,125 @@
+.main-container {
+  padding: 20px;
+}
+
+.calendar {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background-color: #ddd;
+}
+
+.calendar-weekday {
+  background-color: #f8f8f8;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.calendar-day {
+  background-color: #fff;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.calendar-day.current {
+  background-color: #f0f0f0;
+}
+
+.calendar-day.today {
+  background-color: #ffe0b2;
+}
+
+.events {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.event {
+  background-color: #3ab4ad;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event .event-title {
+  flex-grow: 1;
+}
+
+.event .material-symbols-outlined {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-field label {
+  font-weight: bold;
+}
+
+.emp-buttons {
+  text-align: right;
+}

@@ -1,0 +1,57 @@
+<div class="churn-overview-container">
+    <h2>Churn Overview</h2>
+    <form [formGroup]="myForm" (ngSubmit)="onSearch()">
+      <div class="d-flex flex-wrap">
+        <div class="col-md-3">
+          <label>Sales Owner <span class="required">*</span></label>
+          <select class="form-select" formControlName="salesOwner" [ngClass]="{ 'is-invalid': submitted && f['salesOwner'].errors }">
+            <option value="">Select</option>
+            <option *ngFor="let owner of salesOwners" [value]="owner">{{ owner.firstName+" "+owner.lastName }}</option>
+          </select>
+          <div *ngIf="submitted && f['salesOwner'].errors" class="invalid-feedback">
+            <div *ngIf="f['salesOwner'].errors['required']">Sales Owner is required.</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label>From Date <span class="required">*</span></label>
+          <input type="date" class="form-control" formControlName="fromDate" />
+        </div>
+        <div class="col-md-3">
+          <label>To Date <span class="required">*</span></label>
+          <input type="date" class="form-control" formControlName="toDate" />
+        </div>
+        <div class="col-md-6 mt-3 d-flex g-1">
+          <button type="submit" style="width: 200px; margin-right: 10px;" class="btn btn-danger">Search</button>
+          <button type="button" style="width: 200px; margin-right: 10px;" class="btn btn-dark" (click)="clear()">Clear</button>
+          <button  style="width: 200px;" class="btn btn-danger" (click)="downloadReport()">Download Report</button>
+        </div>
+      </div>
+      <div class="table-responsive mt-4" style="padding: 20px;">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Sales Owner</th>
+              <th>Revenue</th>
+              <th>Deal Start Date</th>
+              <th>Deal End Date</th>
+              <th>Churn Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of churnData; let i = index">
+              <td>{{ record.company }}</td>
+              <td>{{ record.salesOwner }}</td>
+              <td>{{ record.revenue }}</td>
+              <td>{{ record.dealStartDate }}</td>
+              <td>{{ record.dealEndDate }}</td>
+              <td>{{ record.churnReason }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-left mt-4">
+      </div>
+    <!-- </form> -->
+  <!-- </div> -->
+  

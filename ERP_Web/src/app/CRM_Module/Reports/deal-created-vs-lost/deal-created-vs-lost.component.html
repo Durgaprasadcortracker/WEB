@@ -1,0 +1,78 @@
+<div class="card m-3">
+  <div class="card-header">
+    <h4>DEAL CREATED VS LOST</h4>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="myForm" (ngSubmit)="onSearch()">
+      <div class="d-flex flex-wrap">
+        <div class="col-md-3">
+          <label for="salesOwner">Sales Owner <span class="required">*</span></label>
+          <select
+            id="salesOwner"
+            class="form-select"
+            formControlName="SalesOwnerId">
+            <option value="0">--Select lead owner--</option>
+            <option *ngFor="let a of _loginlist" [value]="a.id">{{ a.firstName + ' ' + a.lastName }}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label for="fromDate">From date <span class="required">*</span></label>
+          <input type="date" id="fromDate" class="form-control" formControlName="fromDate" />
+        </div>
+        <div class="col-md-3">
+          <label for="toDate">To date <span class="required">*</span></label>
+          <input type="date" id="toDate" class="form-control" formControlName="toDate" />
+        </div>
+        <div class="col-md-3">
+          <label for="lostReason">Lost Reason <span class="required">*</span></label>
+          <select
+            id="lostReason"
+            class="form-select"
+            formControlName="LostReasonId">
+            <option value="">--Select Lost Reason--</option>
+            <option *ngFor="let reason of _lostReasons" [value]="reason.id">{{ reason.description }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex mt-3">
+        <input type="submit" class="btn btn-danger me-2" value="Search"/>
+        <button type="button" class="btn btn-dark me-2" (click)="clear()">Clear</button>
+        <button *ngIf="deals.length" class="btn btn-primary" (click)="downloadReport()">Download Report</button>
+      </div>
+      <div class="table-responsive mt-4" *ngIf="deals.length > 0">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Email</th>
+              <th>Sales Owner</th>
+              <th>Proposed Deal Value</th>
+              <th>Lost Reason</th>
+              <th>Call Logs</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let a of deals; let i = index">
+                <td>{{ a.companiesName }}</td>
+                <td>{{ a.businessEmail }}</td>
+                <td>{{ a.salesOwnerName }}</td>
+                <td>{{ a.proposedDealValue | currency }}</td>
+                <td>{{ a.lostReason }}</td>
+                <td>{{ a.callLog }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="noDataAvailable" class="mt-4 text-center text-danger">
+        No Data Available
+      </div>
+      <div class="d-flex justify-content-left mt-4">
+        <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+      ></pagination-controls>
+      </div>
+    </form>
+  </div>
+</div>

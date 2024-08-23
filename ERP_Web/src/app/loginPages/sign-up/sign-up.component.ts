@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BackendService } from '../../Services/BackendConnection/backend.service';
 
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -46,7 +47,6 @@ export class SignUpComponent {
   onSubmit(): void {
   
    this.submitted = true;
-
     if (this.signupform.invalid) {
       return;
     }
