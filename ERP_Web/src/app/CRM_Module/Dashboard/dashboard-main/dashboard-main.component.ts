@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard-main',
   templateUrl: './dashboard-main.component.html',
-  styleUrl: './dashboard-main.component.css'
+  styleUrls: ['./dashboard-main.component.css']
 })
-export class DashboardMainComponent implements OnInit {
+export class DashboardMainComponent implements OnInit, OnDestroy {
   tableData = [
     { name: 'Tailor', stage1: 6, stage2: 9, stage3: 0, stage4: 16, stage5: 4, stage6: 14 },
     { name: 'Jamie', stage1: 12, stage2: 8, stage3: 7, stage4: 10, stage5: 5, stage6: 11 },
@@ -31,66 +32,102 @@ export class DashboardMainComponent implements OnInit {
     { title: 'Reminder 3', content: 'Etiam eget justo quis velit fermentum dictum. Integer convallis consectetur felis vel efficitur.' },
   ];
 
-  ngOnInit(): void {
-    this.initializeCharts();
+  selectedPeriod: string = 'month';
+  chart: any;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      // Only run in the browser
+      this.loadApexCharts();
+    }
   }
 
-  initializeCharts(): void {
-    // Revenue Chart
-    // new Chart('revenueChart', {
-    //   type: 'bar',
-    //   data: {
-    //     labels: ['January', 'February', 'March', 'April'],
-    //     datasets: [{
-    //       label: 'Sales',
-    //       data: [30000, 45000, 28000, 60000],
-    //       backgroundColor: 'orange',
-    //     }]
-    //   },
-    //   options: {
-    //     responsive: true,
-    //     scales: {
-    //       y: {
-    //         beginAtZero: true
-    //       }
-    //     }
-    //   }
-    // });
+  ngOnDestroy() {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
 
-    // Deals Chart
-    // new Chart('dealsChart', {
-    //   type: 'pie',
-    //   data: {
-    //     labels: ['Active Deals', 'Inactive Deals'],
-    //     datasets: [{
-    //       data: [70, 30],
-    //       backgroundColor: ['blue', 'red'],
-    //     }]
-    //   },
-    //   options: {
-    //     responsive: true
-    //   }
-    // });
+  loadApexCharts() {
+    import('apexcharts').then((ApexCharts) => {
+      this.renderChart(ApexCharts.default);
+    });
+  }
 
-    // Stage Chart
-    // new Chart('stageChart', {
-    //   type: 'bar',
-    //   data: {
-    //     labels: ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4', 'Stage 5', 'Stage 6'],
-    //     datasets: [{
-    //       label: 'Sales',
-    //       data: [300000, 450000, 280000, 600000, 350000, 500000],
-    //       backgroundColor: 'blue',
-    //     }]
-    //   },
-    //   options: {
-    //     responsive: true,
-    //     scales: {
-    //       y: {
-    //         beginAtZero: true
-    //       }
-    //     }
-    //   }
-    // });
+  renderChart(ApexCharts: any, data: number[] = [35000, 45000, 25000], categories: string[] = ['Jan', 'Feb', 'Mar']) {
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
+    const options = {
+      chart: {
+        type: 'bar',
+        height: 400,
+        width: '100%',
+        toolbar: {
+          show: false 
+        }
+      },
+      series: [
+        {
+          name: 'Sales',
+          data: data
+        }
+      ],
+      xaxis: {
+        categories: categories
+      },
+      colors: ['#FFA500'],
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'left', 
+        markers: {
+          width: 12,
+          height: 12,
+          radius: 12
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      tooltip: {
+        y: {
+          formatter: function (val: number) {
+            return `Sales: ${val.toLocaleString()}`;
+          },
+          title: {
+            formatter: function (seriesName: string, opts: any) {
+              return categories[opts.dataPointIndex] + ' 2024';
+            }
+          }
+        }
+      }
+    };
+
+    this.chart = new ApexCharts(document.querySelector('#chart'), options);
+    this.chart.render();
+  }
+
+  updateChart() {
+    let data: number[] = [];
+    let categories: string[] = [];
+
+    if (this.selectedPeriod === 'month') {
+      data = [35820, 45820, 25820];
+      categories = ['Mar', 'May', 'Jun'];
+    } else if (this.selectedPeriod === 'quarter') {
+      data = [350000, 450000, 250000];
+      categories = ['Q1', 'Q2', 'Q3'];
+    } else if (this.selectedPeriod === 'year') {
+      data = [1200000, 1500000, 900000];
+      categories = ['2021', '2022', '2023'];
+    }
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadApexCharts();
+    }
   }
 }

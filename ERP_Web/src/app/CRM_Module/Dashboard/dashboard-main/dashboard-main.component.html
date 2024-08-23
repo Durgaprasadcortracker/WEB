@@ -2,18 +2,17 @@
   <!-- Widgets/Charts Section -->
   <div class="widgets-container">
     <!-- Actual Revenue by Month/Quarter/Year -->
-    <div class="widget">
-      <div class="widget-header">
-        <h3>Actual Revenue by Month/Quarter/Year</h3>
-        <select>
-          <option>Month</option>
-          <option>Quarter</option>
-          <option>Year</option>
+    <div>
+      <h2>Actual Revenue by Month/Quarter/Year</h2>
+      <div style="text-align: center">
+        <select id="time-period" [(ngModel)]="selectedPeriod" (change)="updateChart()">
+          <option value="month">Month</option>
+          <option value="quarter">Quarter</option>
+          <option value="year">Year</option>
         </select>
       </div>
-      <div class="widget-content">
-        <canvas id="revenueChart"></canvas>
-      </div>
+      <div id="chart"></div>
+    </div>
     </div>
 
     <!-- Active/Inactive Deals -->
@@ -94,9 +93,4 @@
         <a routerLink="/CRM/Settings/industry" (click)="closeDropdown()">Industry</a>
         <a routerLink="/CRM/Settings/quote-type" (click)="closeDropdown()">Quote Type</a>
     </div>
-</div>
-
-
-
-
 </div>
